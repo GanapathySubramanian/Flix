@@ -1,0 +1,74 @@
+<div class="movies-section">
+    <nav class="navbar navbar-expand mt-4 navbar-light" aria-label="Second navbar example">
+        <div class="container-fluid">
+          <div class="collapse navbar-collapse" id="navbarsExample02">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle " style="color:#fff"href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  GENRE
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li *ngFor="let genre of genreList"><a class="dropdown-item link" (click)="getGenreContent(genre.id,genre.name)">{{genre.name}}</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle"style="color:#fff" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  SORT BY
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li *ngFor="let order of orderList"><a class="dropdown-item link" (click)="getOrderContent(order.order,order.desc)">{{order.desc}}</a></li>
+                </ul>
+            </li>
+            </ul>
+            <form id="form" [formGroup]="searchForm" (ngSubmit)="getSearchContent()"> 
+                <input type="text" placeholder="Search Movies" formControlName="movieName"  class="search form-control">
+            </form>
+          </div>
+        </div>
+      </nav>
+    
+
+    <h1 class="text-center text-warning">{{sortby_value}}</h1>
+    <h1 class="text-center text-warning">{{genre_value}}</h1>
+
+    <main id="main">
+        
+        <div id="movie" class="movie" *ngFor="let movie of movieList">
+            <div *ngIf="movie.poster_path==null;then thenBlock else elseBlock"></div>
+
+            <ng-template #thenBlock>
+                <figure>
+                    <img src="assets/images/no-image.png" class="figure">
+                </figure>
+            </ng-template>
+            <ng-template #elseBlock>
+                <figure>
+                    <img src="{{imgUrl+movie.poster_path}}" alt="figure">
+                </figure>
+            </ng-template>
+
+            <div class="movie-info">
+                <h4>{{movie.title}}</h4>
+                <span [ngClass]="{'red':movie.vote_average<=5,'orange':movie.vote_average>=5&&movie.vote_average<8,'green':movie.vote_average>=8}">{{float2int(((movie.vote_average/10)*100)) + '%'}}</span>
+            </div>
+
+            <div class="movie-info">
+                <ngb-rating [max]="10" [(rate)]="movie.vote_average" [readonly]="false"></ngb-rating>
+            </div>
+            <div class="date">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <p>{{movie.release_date}}</p> 
+            </div>
+        </div>
+
+    </main>
+
+    <div class="pagination" id="pagination">
+        <button class="btn" id="prev" [disabled]="isdisableprev" (click)="handlePagination(2)">Prev</button>
+        <button class="btn"  id="home" (click)="handlePagination(1)" style="border-radius: 100%;">{{page_no}}</button>
+        <button class="btn"  id="next" [disabled]="isdisablenext" (click)="handlePagination(3)">Next</button>
+    </div>
+    <div id="no-record" class="d-none">
+        <h1 class="text-warning text-center">No Movies Found</h1>
+    </div>
+</div>

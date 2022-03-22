@@ -1,0 +1,28 @@
+nav{
+    padding: 1rem;
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--secondary-color);
+    color:#eee;
+}
+ 
+.logo{
+    color: red;
+}
+.nav-link{
+    cursor: pointer;
+}
+.nav-link:hover{
+    color: red;
+}
+
+nav a{
+    float: left;
+}
+.navbar-nav {
+    margin-left: auto;
+}
+.main-content{
+    margin-top: 10px;
+}
+

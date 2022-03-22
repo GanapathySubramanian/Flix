@@ -1,0 +1,157 @@
+
+main{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.movie{
+    width:250px;
+    margin: 1rem;
+    border-radius: 3px;
+    box-shadow: 0.2px 4px 5px rgba(0,0,0,0.1);
+    background-color: var(--secondary-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.movie img{
+    width:100%; 
+}
+
+
+.movie-info{
+    color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 00.5rem 1rem 1rem;
+    letter-spacing: 0.5px;
+}
+
+.movie-info h4{
+    margin-top: 0;
+}
+
+.movie-info span{
+    background-color: var(--primary-color);
+    padding: 0.25rem;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.movie:hover{
+    cursor: pointer;
+}
+
+figure {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    overflow: hidden;
+}
+
+ /* Shine */
+ .movie figure {
+    position: relative;
+}
+.movie figure::before {
+    position: absolute;
+    top: 0;
+    left: -85%;
+    z-index: 2;
+    display: block;
+    content: '';
+    width: 50%;
+    height: 100%;
+    background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,.3) 100%);
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,.3) 100%);
+    -webkit-transform: skewX(-25deg);
+    transform: skewX(-25deg);
+}
+.movie figure:hover::before {
+    -webkit-animation: shine 1.5s;
+    animation: shine 1.5s;
+}
+@-webkit-keyframes shine {
+    100% {
+        left: 125%;
+    }
+}
+@keyframes shine {
+    100% {
+        left: 125%;
+    }
+}
+
+.green{
+    color: lightgreen;
+}
+.orange{
+    color: orange;
+}
+.red{
+    color: red;
+}
+
+ngb-rating {
+    color: #FFC107;
+    font-size: 20px;
+}
+
+.date{
+    color: #eee;
+    display: flex;
+    justify-content:start;
+    margin: 5px;
+    padding: 5px;
+}
+.date i{
+    margin: 5px;
+}
+.date p{
+    /* margin: 5px; */
+}
+
+
+
+.btn {
+    color: #ffffff;
+    padding: 0.25rem 1.5rem;
+    text-transform: uppercase;
+    margin: 15px;
+    background-color: red;
+}
+
+.btn:hover {
+    background-color: orange;
+    transition: 0.3s ease-in-out;
+}
+.pagination{
+    justify-content: center;
+    
+}
+
+
+.link{
+    cursor: pointer;
+}
+
+.search{
+    background-color: transparent;
+    border:2px solid var(--secondary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    color: #fff;
+    font-family: inherit;
+}
+
+.search:focus{
+    outline: none;
+    background-color: var(--primary-color);
+}
+.search::placeholder{
+    color: #7378c5;
+}
+

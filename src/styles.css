@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
+*{
+    box-sizing: border-box;
+}
+html, body {width: auto!important; overflow-x: hidden!important} 
+:root{
+    --primary-color:#22254b;
+    --secondary-color:#373b69;
+}
+body{
+    background-color: var(--primary-color);
+    font-family: 'Poppins',sans-serif;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+}
