@@ -210,5 +210,7 @@ export class MoviesComponent implements OnInit {
 
 
 
-
+  scrollToTop(el:any) {
+    el.scrollTop = 0;
+  }
 }

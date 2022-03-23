@@ -10,6 +10,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TvshowsComponent } from './components/tvshows/tvshows.component';
 import { UpcomingMoviesComponent } from './components/upcoming-movies/upcoming-movies.component';
+import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
+import { IvyCarouselModule } from 'angular-responsive-carousel';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import { UpcomingMoviesComponent } from './components/upcoming-movies/upcoming-m
     NavBarComponent,
     MoviesComponent,
     TvshowsComponent,
-    UpcomingMoviesComponent
+    UpcomingMoviesComponent,
+    MovieDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,7 @@ import { UpcomingMoviesComponent } from './components/upcoming-movies/upcoming-m
     HttpClientModule,
     NgbModule,
     ReactiveFormsModule,
-
+    IvyCarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]

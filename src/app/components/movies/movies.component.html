@@ -33,7 +33,7 @@
 
     <main id="main">
         
-        <div id="movie" class="movie" *ngFor="let movie of movieList">
+        <div id="movie" class="movie" *ngFor="let movie of movieList" [routerLink]="['/moviedetails',movie.id]">
             <div *ngIf="movie.poster_path==null;then thenBlock else elseBlock"></div>
 
             <ng-template #thenBlock>
