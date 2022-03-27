@@ -41,7 +41,7 @@
 
     <main id="main">
 
-        <div class="tvshows" *ngFor="let tvshow of tvshowList">
+        <div class="tvshows" *ngFor="let tvshow of tvshowList" [routerLink]="['/tvshowdetails', tvshow.id]">
             
             <div *ngIf="tvshow.poster_path==null;then thenBlock else elseBlock"></div>
 

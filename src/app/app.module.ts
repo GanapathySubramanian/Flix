@@ -12,6 +12,7 @@ import { TvshowsComponent } from './components/tvshows/tvshows.component';
 import { UpcomingMoviesComponent } from './components/upcoming-movies/upcoming-movies.component';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
+import { TvshowDetailsComponent } from './components/tvshow-details/tvshow-details.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
     MoviesComponent,
     TvshowsComponent,
     UpcomingMoviesComponent,
-    MovieDetailsComponent
+    MovieDetailsComponent,
+    TvshowDetailsComponent
   ],
   imports: [
     BrowserModule,

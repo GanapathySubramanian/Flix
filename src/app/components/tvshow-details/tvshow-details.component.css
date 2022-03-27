@@ -17,7 +17,7 @@ ngb-rating {
     color: #FFC107;
     font-size: 20px;
 }
-.movie-content{
+.tvshow-content{
     margin-left: 2%;
     margin-right:2%;
     color:#fff;
@@ -46,29 +46,28 @@ ngb-rating {
 }
 
 
-.movie-heading{
+.tvshow-heading{
     display: block;
     text-transform:uppercase;
     color:red;
     text-align: center;
 }
-.movie{
+.tvshow{
     width:250px;
-    margin: 0.5rem;
+    margin: 1rem;
     border-radius: 3px;
     box-shadow: 0.2px 4px 5px rgba(0,0,0,0.1);
     background-color: var(--secondary-color);
     position: relative;
     overflow: hidden;
-    transition: all 1.5s ease-in-out;
     cursor: pointer;
 }
 
-.movie img{
+.tvshow img{
     width:100%;
 }
 
-.movie-info{
+.tvshow-info{
     color: #eee;
     display: flex;
     align-items: center;
@@ -76,16 +75,31 @@ ngb-rating {
     padding: 00.5rem 1rem 1rem;
     letter-spacing: 0.5px;
 }
-.movie-info-cast,.movie-info-crew{
+.overview{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    padding: 1rem;
+    max-height: 100%;
+    transform: translateY(101%);
+    transition: all 1s ease-in-out;
+}
+
+.tvshow:hover .overview{
+    transform: translateY(0);
+}
+.tvshow-info-cast,.tvshow-info-crew{
     color: #eee;
     padding: 00.5rem 1rem 1rem;
     letter-spacing: 0.5px;
 }
-.movie-info h4{
+.tvshow-info h4{
     margin-top: 0;
 }
 
-.movie-info span{
+.tvshow-info span{
     background-color: var(--primary-color);
     padding: 0.25rem;
     border-radius: 3px;
@@ -103,7 +117,10 @@ ngb-rating {
 }
  
 
-
+.network-img{
+    width: 80px;
+    height:50px;
+}
 .pagination{
     justify-content: center;
     padding: 10px;
@@ -113,7 +130,7 @@ ngb-rating {
     border-radius: 100%;
     position: fixed;
     bottom: 560px;
-    margin-left: 95%;
+    margin-left: 96%;
     z-index: 10;
 }
 
@@ -171,25 +188,25 @@ ngb-rating {
     font-size: 60px;
   } */
 
-  #movie-logo{
+  #tvshow-logo{
       width: 20%;
       height: 20%;
 
   }
  
 
-.sim-movies:hover{
+.sim-tvshows:hover{
     /* top:-10px; */
     cursor: pointer;
     /* opacity: 0.8; */
 }
-.rec-movies:hover{
+.rec-tvshows:hover{
     /* top: -10px; */
     cursor: pointer;
     /* opacity: 0.8; */
 }
  @media only screen and (max-width: 500px) {
-         #movie-logo{
+         #tvshow-logo{
         width: 70%;
         height: 100%;
     }
@@ -277,10 +294,10 @@ figure {
 
 
 /* Circle */
-.sim-movies figure {
+.sim-tvshows figure {
 	position: relative;
 }
-.sim-movies figure::before {
+.sim-tvshows figure::before {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -295,7 +312,7 @@ figure {
 	transform: translate(-50%, -50%);
 	opacity: 0;
 }
-.sim-movies figure:hover::before {
+.sim-tvshows figure:hover::before {
 	-webkit-animation: circle 1.5s;
 	animation: circle 1.5s;
 }
@@ -327,10 +344,10 @@ figure {
 }
 
 /* Shine */
-.rec-movies figure {
+.rec-tvshows figure {
     position: relative;
 }
-.rec-movies figure::before {
+.rec-tvshows figure::before {
     position: absolute;
     top: 0;
     left: -85%;
@@ -344,7 +361,7 @@ figure {
     -webkit-transform: skewX(-25deg);
     transform: skewX(-25deg);
 }
-.rec-movies figure:hover::before {
+.rec-tvshows figure:hover::before {
     -webkit-animation: shine 1.5s;
     animation: shine 1.5s;
 }
@@ -447,7 +464,7 @@ path.two {
 /* system and tab */
 @media only screen and (min-width: 600px) {
     
-        .movie-img{
+        .tvshow-img{
             width:470px;
             /* height: 100%; */
             top: 1rem;
@@ -461,7 +478,7 @@ path.two {
             vertical-align: middle;
         }
 
-        .movie-img img{
+        .tvshow-img img{
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -469,7 +486,7 @@ path.two {
             transition: all 1.5s ease-in-out;
         } 
 
-        .movie-img img:hover{
+        .tvshow-img img:hover{
             transform: scale(1.35) rotateZ(5deg);
         }
 
@@ -563,7 +580,7 @@ path.two {
               width: 60%;
               float: left;
           }
-          .left-img .movie-img{
+          .left-img .tvshow-img{
               margin-left: 50px;
           }
           .right-content{
@@ -574,27 +591,27 @@ path.two {
               float: right;
               position: relative;
            }
-        .movie-detail {
+        .tvshow-detail {
             display: flex;
             align-items: center;
             flex-wrap: wrap;
             margin-top: 10px;
         }
 
-        .movie-info {
+        .tvshow-info {
             display: flex;
             align-items: center;
             font-size: 1rem;
             font-weight: 600;
         }
 
-        .movie-info span {
+        .tvshow-info span {
             margin-left: 5px;
             color: orange;
 
         }
 
-        .movie-info i {
+        .tvshow-info i {
             color: rgb(85, 82, 82);
             background-color: red;
             font-size: 1rem;
@@ -618,7 +635,7 @@ path.two {
             margin-top: 5px;
         }
 
-        .movie-poster-img{
+        .tvshow-poster-img{
             display: none;
         }
         .tr-overview{
@@ -644,7 +661,7 @@ path.two {
     .header{
         display: none;
     }
-    .movie-img{
+    .tvshow-img{
         display: none;
     }
     .overlay{
@@ -666,7 +683,7 @@ path.two {
         display: flex;
         justify-content: center;
     }
-    .movie-poster-img{
+    .tvshow-poster-img{
         display: block;
         width:400px;
         margin: 0.5rem;
@@ -678,7 +695,7 @@ path.two {
         justify-content: center;
     }
     
-    .movie-poster-img img{
+    .tvshow-poster-img img{
         width: 100%;
         height: 100%;
         /* height: 100%; */
@@ -687,7 +704,7 @@ path.two {
         transition: all 1.5s ease-in-out;
     }
     
-    .movie-poster-img img:hover{
+    .tvshow-poster-img img:hover{
         transform: scale(1.35) rotateZ(5deg);
     }
     

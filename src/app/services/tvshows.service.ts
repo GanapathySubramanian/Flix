@@ -14,6 +14,38 @@ export class TvshowsService {
   private tvshowSource = new Subject();
   tvshowsData = this.tvshowSource.asObservable();
 
+  //Particular tvshow details
+  private tvshowdetailSource=new Subject();
+  tvshowdetailsData=this.tvshowdetailSource.asObservable();
+
+  //backdrop image
+  private tvshowallImagesSource=new Subject();
+  tvshowallImageData=this.tvshowallImagesSource.asObservable();
+
+  //tvshow review
+  private tvshowreviewSource=new Subject();
+  tvshowreviewData=this.tvshowreviewSource.asObservable();
+
+  //tvshow credit
+  private tvshowcreditSource=new Subject();
+  tvshowcreditData=this.tvshowcreditSource.asObservable();
+
+  //similar tvshow
+  private similartvshowSource=new Subject();
+  similartvshowData=this.similartvshowSource.asObservable();
+
+  //Recommended tvshow
+  private rectvshowSource=new Subject();
+  rectvshowData=this.rectvshowSource.asObservable();
+  
+  //Videos
+  private videoSource=new Subject();
+  videoData=this.videoSource.asObservable();
+
+  //Watch providers
+  private watchSource=new Subject();
+  watchData=this.watchSource.asObservable();
+
   constructor(private http:HttpClient) { }
 
   getGenreList():Observable<any[]>{
@@ -29,6 +61,73 @@ export class TvshowsService {
     this.http.get(url).subscribe((res)=>{
       tvshow=res;
       this.tvshowSource.next(tvshow)
+    })
+  }
+
+  gettvshowDetails(url:any){
+    let tvshowdetails:any;
+    this.http.get(url).subscribe((res)=>{
+      tvshowdetails=res;
+      this.tvshowdetailSource.next(tvshowdetails);
+    })
+  }
+
+  getAllImages(url:any){
+    let tvshowimage:any;
+    this.http.get(url).subscribe((res)=>{
+      tvshowimage=res;
+      this.tvshowallImagesSource.next(tvshowimage);
+    })
+  }
+
+
+  gettvshowReviews(url:any){
+    let tvshowreview:any;
+    this.http.get(url).subscribe((res)=>{
+      tvshowreview=res;
+      this.tvshowreviewSource.next(tvshowreview);
+    })
+  }
+
+  gettvshowCredits(url:any){
+    let tvshowcredit:any;
+    this.http.get(url).subscribe((res)=>{
+      tvshowcredit=res;
+      this.tvshowcreditSource.next(tvshowcredit);
+    })
+  }
+
+  getSimilartvshows(url:any){
+    let similartvshow:any;
+    this.http.get(url).subscribe((res)=>{
+      similartvshow=res;
+      this.similartvshowSource.next(similartvshow);
+    })
+  }
+
+  getRecommendedtvshows(url:any){
+    let rectvshow:any;
+    this.http.get(url).subscribe((res)=>{
+        rectvshow=res;
+        this.rectvshowSource.next(rectvshow);
+    })
+  }
+
+  getVideos(url:any){
+    let videos:any;
+    this.http.get(url).subscribe((res)=>{
+      videos=res;
+      this.videoSource.next(videos);
+      
+    })
+  }
+
+  getWatchProviders(url:any){
+    let watchprovider:any;
+    this.http.get(url).subscribe((res)=>{
+      console.log(res);
+      watchprovider=res;
+      this.watchSource.next(watchprovider);
     })
   }
 }

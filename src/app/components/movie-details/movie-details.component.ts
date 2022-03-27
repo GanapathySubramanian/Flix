@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, HostListener } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 import { MovieDetails } from 'src/app/common/movie-details';
 import myAppConfig from 'src/app/config/my-app-config';
 import { MoviesService } from 'src/app/services/movies.service';
-
 
 var movie_id=0;
 @Component({
@@ -41,6 +40,7 @@ export class MovieDetailsComponent implements OnInit {
   nocrewdata:boolean=false;
   norecmoviedata:boolean=false;
   nosimmoviedata:boolean=false;
+  windowScrolled: boolean=false;
 
   constructor(private route:ActivatedRoute,private router:Router,private movieservice:MoviesService,private _sanitizer:DomSanitizer) { 
     let id=this.route.snapshot.params['id'];
@@ -51,7 +51,11 @@ export class MovieDetailsComponent implements OnInit {
     this.router.navigateByUrl('/moviedetails/'+movie_id);
 
     this.getMovieDetails(movie_id);
+
   }
+
+
+ 
 
 
   getMovieDetails(id:number) {
@@ -127,8 +131,13 @@ export class MovieDetailsComponent implements OnInit {
           recmovie=data;
           console.log(recmovie);
           
+          for(let i=0;i<recmovie.results.length;i++){
+            if(recmovie.results[i].poster_path==null){
+              recmovie.results[i].poster_path="Empty";
+            }
+          }
           if(recmovie.total_results==0){
-            this.norecmoviedata=false;
+            this.norecmoviedata=true;
           }else{
             this.norecmoviedata=false;
             this.recmovieList=recmovie.results;
@@ -142,6 +151,12 @@ export class MovieDetailsComponent implements OnInit {
       let similarmovie:any;
       this.movieservice.similarmovieData.subscribe((data)=>{
         similarmovie=data;
+
+        for(let i=0;i<similarmovie.results.length;i++){
+          if(similarmovie.results[i].poster_path==null){
+            similarmovie.results[i].poster_path="Empty";
+          }
+        }
         if(similarmovie.total_results==0){
           this.nosimmoviedata=true;
         }else{
@@ -207,10 +222,12 @@ export class MovieDetailsComponent implements OnInit {
           this.nobackdrop=false;
           this.backdropList=tempimagesData.backdrops;
 
-          this.background_image='https://image.tmdb.org/t/p/original/'+tempimagesData.backdrops[0].file_path;
+          this.background_image=myAppConfig.tmdb.highQualityImgUrl+tempimagesData.backdrops[0].file_path;
+          
+          
           setInterval(() =>{
             const random = Math.floor(Math.random() * tempimagesData.backdrops.length);
-            this.background_image='https://image.tmdb.org/t/p/original/'+tempimagesData.backdrops[random].file_path;
+            this.background_image=myAppConfig.tmdb.highQualityImgUrl+tempimagesData.backdrops[random].file_path;
           },5000);
 
         }
@@ -281,6 +298,28 @@ export class MovieDetailsComponent implements OnInit {
   float2int (value:any) {
     return value | 0;
   }
+
+ 
+  
+  @HostListener('window:scroll',[])
+  onWindowScroll() {
+      if (window.scrollY> 1000) {        
+          this.windowScrolled = true;
+      } 
+     else if (this.windowScrolled && window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop < 10) {
+          this.windowScrolled = false;
+      }
+  }
+
+    scrollToTop(){
+      window.scroll({ 
+            top: 0, 
+            left: 0, 
+            behavior: 'smooth' 
+      });
+  }
+
+
 
 
 }

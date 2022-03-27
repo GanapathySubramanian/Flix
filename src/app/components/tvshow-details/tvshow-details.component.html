@@ -1,0 +1,467 @@
+<div class="tvshow-details">
+    
+    <section class="header" >
+        
+        <div class="bg" [style.backgroundImage]="'url('+background_image+')'">
+
+        </div>
+        <div class="header-content">
+                <div class="left-img">
+                    <div class="tvshow-img">
+                        <div *ngIf="tvshowDetails.poster_path==null;then thenBlock else elseBlock"></div>
+                        <ng-template #thenBlock><img src="assets/images/no-image.png"></ng-template>
+                        <ng-template #elseBlock><img [attr.src]="imgUrl+tvshowDetails.poster_path" alt="{{tvshowDetails.original_title}}"></ng-template>    
+                    </div>
+                </div>
+                <div class="overlay"></div>
+                <div class="right-content">
+                    <div class="home-slide-item-content">
+                        <div class="items">
+                            <div class="item-title">
+                                {{tvshowDetails.original_title}}
+                            </div>
+                            <div class="tvshow-detail">
+                                <div class="tvshow-info">
+                                    <i class="far fa-star"></i>
+                                    <span>{{tvshowDetails.vote_average}}</span>
+                                </div>
+                                <div class="tvshow-info">
+                                    <i class="fas fa-clock"></i>
+                                    <span>{{tvshowDetails.avg_run_time + ' min'}}</span>
+                                </div>
+                                <div class="tvshow-info">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>{{tvshowDetails.first_air_date}}</span>
+                                </div>
+                            </div>
+                            <div class="item-overview">
+                                {{tvshowDetails.overview}}
+                            </div>
+                            <div class="wrapper-watchnow">
+                                <a class="cta" href="{{watchprovider}}">
+                                  <span class="span-watchnow">WATCH NOW</span>
+                                  <span class="span-watchnow">
+                                    <svg width="66px" height="43px" viewBox="0 0 66 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                      <g id="arrow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <path class="one" d="M40.1543933,3.89485454 L43.9763149,0.139296592 C44.1708311,-0.0518420739 44.4826329,-0.0518571125 44.6771675,0.139262789 L65.6916134,20.7848311 C66.0855801,21.1718824 66.0911863,21.8050225 65.704135,22.1989893 C65.7000188,22.2031791 65.6958657,22.2073326 65.6916762,22.2114492 L44.677098,42.8607841 C44.4825957,43.0519059 44.1708242,43.0519358 43.9762853,42.8608513 L40.1545186,39.1069479 C39.9575152,38.9134427 39.9546793,38.5968729 40.1481845,38.3998695 C40.1502893,38.3977268 40.1524132,38.395603 40.1545562,38.3934985 L56.9937789,21.8567812 C57.1908028,21.6632968 57.193672,21.3467273 57.0001876,21.1497035 C56.9980647,21.1475418 56.9959223,21.1453995 56.9937605,21.1432767 L40.1545208,4.60825197 C39.9574869,4.41477773 39.9546013,4.09820839 40.1480756,3.90117456 C40.1501626,3.89904911 40.1522686,3.89694235 40.1543933,3.89485454 Z" fill="#FFFFFF"></path>
+                                        <path class="two" d="M20.1543933,3.89485454 L23.9763149,0.139296592 C24.1708311,-0.0518420739 24.4826329,-0.0518571125 24.6771675,0.139262789 L45.6916134,20.7848311 C46.0855801,21.1718824 46.0911863,21.8050225 45.704135,22.1989893 C45.7000188,22.2031791 45.6958657,22.2073326 45.6916762,22.2114492 L24.677098,42.8607841 C24.4825957,43.0519059 24.1708242,43.0519358 23.9762853,42.8608513 L20.1545186,39.1069479 C19.9575152,38.9134427 19.9546793,38.5968729 20.1481845,38.3998695 C20.1502893,38.3977268 20.1524132,38.395603 20.1545562,38.3934985 L36.9937789,21.8567812 C37.1908028,21.6632968 37.193672,21.3467273 37.0001876,21.1497035 C36.9980647,21.1475418 36.9959223,21.1453995 36.9937605,21.1432767 L20.1545208,4.60825197 C19.9574869,4.41477773 19.9546013,4.09820839 20.1480756,3.90117456 C20.1501626,3.89904911 20.1522686,3.89694235 20.1543933,3.89485454 Z" fill="#FFFFFF"></path>
+                                        <path class="three" d="M0.154393339,3.89485454 L3.97631488,0.139296592 C4.17083111,-0.0518420739 4.48263286,-0.0518571125 4.67716753,0.139262789 L25.6916134,20.7848311 C26.0855801,21.1718824 26.0911863,21.8050225 25.704135,22.1989893 C25.7000188,22.2031791 25.6958657,22.2073326 25.6916762,22.2114492 L4.67709797,42.8607841 C4.48259567,43.0519059 4.17082418,43.0519358 3.97628526,42.8608513 L0.154518591,39.1069479 C-0.0424848215,38.9134427 -0.0453206733,38.5968729 0.148184538,38.3998695 C0.150289256,38.3977268 0.152413239,38.395603 0.154556228,38.3934985 L16.9937789,21.8567812 C17.1908028,21.6632968 17.193672,21.3467273 17.0001876,21.1497035 C16.9980647,21.1475418 16.9959223,21.1453995 16.9937605,21.1432767 L0.15452076,4.60825197 C-0.0425130651,4.41477773 -0.0453986756,4.09820839 0.148075568,3.90117456 C0.150162624,3.89904911 0.152268631,3.89694235 0.154393339,3.89485454 Z" fill="#FFFFFF"></path>
+                                      </g>
+                                    </svg>
+                                  </span> 
+                                </a>
+                              </div>
+                        </div>
+                    
+                    
+                    </div>
+                </div>    
+        </div>
+    
+    </section>
+
+
+    <main id="main">
+        <div class="tvshow-poster-img">
+            <div *ngIf="tvshowDetails.poster_path==null; then NoImg else Img"></div>
+            <ng-template #NoImg><img src="assets/images/no-image.png"></ng-template>
+            <ng-template #Img><img [attr.src]="imgUrl+tvshowDetails.poster_path"></ng-template>
+
+        </div>
+    </main>
+
+    <div class="text-center mt-5" *ngIf="logoList!=null">
+        <img id="tvshow-logo" src="{{imgUrl+logoList.file_path}}">
+    </div>
+
+    <h1 class="tvshow-heading mt-5">More About ({{tvshowDetails.original_title}})</h1>
+
+    <div class="tvshow-content">
+        <table class="details-table">
+            <tbody>
+                <tr>
+                    <td class="details-name">Original Name</td>
+                    <td  class="colon"> : </td>
+                    <td class="details-value">{{tvshowDetails.original_title}}</td>
+                </tr>
+                <tr>
+                    <td class="details-name">First Air Date</td>
+                    <td  class="colon"> : </td>
+                    <td class="details-value">{{tvshowDetails.first_air_date}}</td>
+                </tr>
+                <tr>
+                    <td class="details-name">Status</td>
+                    <td  class="colon"> : </td>
+                    <td class="details-value">{{tvshowDetails.status}}</td>
+                </tr>
+                <tr>
+                    <td class="details-name">Episode Run times</td>
+                    <td  class="colon"> : </td>
+                    <td class="details-value">
+                        <span  *ngFor="let avg of tvshowDetails.episode_run_time;let i=index" class="pl-2">
+                            {{avg+"min "}}
+                            <span *ngIf='tvshowDetails.episode_run_time.length != i+1'> , </span>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="details-name">Average Run times</td>
+                    <td  class="colon"> : </td>
+                    <td class="details-value">{{tvshowDetails.avg_run_time + " min"}}</td>
+                </tr>
+                <tr>
+                    <td class="details-name">Rating</td>
+                    <td  class="colon"> : </td>
+                    <td class="details-value" > {{'( '+tvshowDetails.vote_average+' / 10 )'}}
+                        <ngb-rating [max]="10" [(rate)]="tvshowDetails.vote_average" [readonly]="true"></ngb-rating>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="details-name">Original Language</td>
+                    <td  class="colon"> : </td>
+                    <td class="details-value" >{{tvshowDetails.original_lan}}</td>
+                </tr>
+                <tr>
+                    <td class="details-name">Last Air Date</td>
+                    <td  class="colon"> : </td>
+                    <td class="details-value">{{tvshowDetails.last_air_date}}</td>
+                </tr>
+                <tr>
+                    <td class="details-name">Number of Episodes</td>
+                    <td  class="colon"> : </td>
+                    <td class="details-value" >{{tvshowDetails.no_of_episodes}}</td>
+                </tr>
+                <tr>
+                    <td class="details-name">Number of Season</td>
+                    <td  class="colon"> : </td>
+                    <td class="details-value" >{{tvshowDetails.no_of_seasons}}</td>
+                </tr>
+                
+                <tr class="tr-overview">
+                    <td class="details-name">Overview</td>
+                    <td  class="colon"> : </td>
+                    <td class="details-value" >{{tvshowDetails.overview}}</td>
+                </tr>
+                <tr>
+                    <td class="details-name">Streaming On</td>
+                    <td  class="colon"> : </td>
+                    <td  >
+                        <span *ngFor="let stream of tvshowDetails.networks;let i=index" class="pl-2">
+                            <span>
+                                <img src="{{imgUrl+stream.logo_path}}" class="network-img" alt={{stream.name}}>
+                                <span *ngIf='tvshowDetails.networks.length!=i+1'> , </span>
+                            </span>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="details-name">Production Companies</td>
+                    <td  class="colon"> : </td>
+                    <td class="details-value" >
+                        <span *ngFor="let pro_comp of tvshowDetails.production_companies; let i=index;" class="pl-2">
+                                <span>{{pro_comp.name}}<span *ngIf='tvshowDetails.production_companies.length!=i+1'> , </span></span>
+                        </span>
+                    </td>  
+                </tr>
+                <tr>
+                    <td class="details-name">Genres</td>
+                    <td  class="colon"> : </td>
+                    <td class="details-value">
+                        <span *ngFor="let genre of tvshowDetails.genre;let i=index;">
+                            {{genre.name}}
+                            <span *ngIf='tvshowDetails.genre.length != i+1'> , </span>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                </tr>
+            </tbody>
+        </table>
+        <div class="watchnow-btn text-center">
+            <div class="wrapper-watchnow">
+                <a class="cta" href="{{watchprovider}}">
+                    <span class="span-watchnow">WATCH NOW</span>
+                    <span class="span-watchnow">
+                    <svg width="66px" height="43px" viewBox="0 0 66 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <g id="arrow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <path class="one" d="M40.1543933,3.89485454 L43.9763149,0.139296592 C44.1708311,-0.0518420739 44.4826329,-0.0518571125 44.6771675,0.139262789 L65.6916134,20.7848311 C66.0855801,21.1718824 66.0911863,21.8050225 65.704135,22.1989893 C65.7000188,22.2031791 65.6958657,22.2073326 65.6916762,22.2114492 L44.677098,42.8607841 C44.4825957,43.0519059 44.1708242,43.0519358 43.9762853,42.8608513 L40.1545186,39.1069479 C39.9575152,38.9134427 39.9546793,38.5968729 40.1481845,38.3998695 C40.1502893,38.3977268 40.1524132,38.395603 40.1545562,38.3934985 L56.9937789,21.8567812 C57.1908028,21.6632968 57.193672,21.3467273 57.0001876,21.1497035 C56.9980647,21.1475418 56.9959223,21.1453995 56.9937605,21.1432767 L40.1545208,4.60825197 C39.9574869,4.41477773 39.9546013,4.09820839 40.1480756,3.90117456 C40.1501626,3.89904911 40.1522686,3.89694235 40.1543933,3.89485454 Z" fill="#FFFFFF"></path>
+                        <path class="two" d="M20.1543933,3.89485454 L23.9763149,0.139296592 C24.1708311,-0.0518420739 24.4826329,-0.0518571125 24.6771675,0.139262789 L45.6916134,20.7848311 C46.0855801,21.1718824 46.0911863,21.8050225 45.704135,22.1989893 C45.7000188,22.2031791 45.6958657,22.2073326 45.6916762,22.2114492 L24.677098,42.8607841 C24.4825957,43.0519059 24.1708242,43.0519358 23.9762853,42.8608513 L20.1545186,39.1069479 C19.9575152,38.9134427 19.9546793,38.5968729 20.1481845,38.3998695 C20.1502893,38.3977268 20.1524132,38.395603 20.1545562,38.3934985 L36.9937789,21.8567812 C37.1908028,21.6632968 37.193672,21.3467273 37.0001876,21.1497035 C36.9980647,21.1475418 36.9959223,21.1453995 36.9937605,21.1432767 L20.1545208,4.60825197 C19.9574869,4.41477773 19.9546013,4.09820839 20.1480756,3.90117456 C20.1501626,3.89904911 20.1522686,3.89694235 20.1543933,3.89485454 Z" fill="#FFFFFF"></path>
+                        <path class="three" d="M0.154393339,3.89485454 L3.97631488,0.139296592 C4.17083111,-0.0518420739 4.48263286,-0.0518571125 4.67716753,0.139262789 L25.6916134,20.7848311 C26.0855801,21.1718824 26.0911863,21.8050225 25.704135,22.1989893 C25.7000188,22.2031791 25.6958657,22.2073326 25.6916762,22.2114492 L4.67709797,42.8607841 C4.48259567,43.0519059 4.17082418,43.0519358 3.97628526,42.8608513 L0.154518591,39.1069479 C-0.0424848215,38.9134427 -0.0453206733,38.5968729 0.148184538,38.3998695 C0.150289256,38.3977268 0.152413239,38.395603 0.154556228,38.3934985 L16.9937789,21.8567812 C17.1908028,21.6632968 17.193672,21.3467273 17.0001876,21.1497035 C16.9980647,21.1475418 16.9959223,21.1453995 16.9937605,21.1432767 L0.15452076,4.60825197 C-0.0425130651,4.41477773 -0.0453986756,4.09820839 0.148075568,3.90117456 C0.150162624,3.89904911 0.152268631,3.89694235 0.154393339,3.89485454 Z" fill="#FFFFFF"></path>
+                        </g>
+                    </svg>
+                    </span> 
+                </a>
+             </div>
+        </div>
+
+
+        <div class="reviews-section">
+            <h2 class="tvshow-heading mt-5">REVIEWS FOR {{'('+tvshowDetails.original_title+')'}}</h2> 
+            <div *ngIf="noreview; then noreviewBlock else reviewBlock"></div> 
+                <ng-template #reviewBlock>
+                    <table class="table-review table-responsive">
+                        <thead class="table-review-head">
+                            <td>SNO</td>
+                            <td>REVIEWS</td>
+                        </thead>
+                        <tbody class="table-review-body">
+                            <tr *ngFor="let rev of reviewList;let i=index;">
+                                <td>{{i+1}}</td>
+                                <td>{{rev.content}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ng-template>               
+                <ng-template #noreviewBlock>
+                <div id="no-record_images">
+                    <h1 class="text-warning text-center">Reviews Not available For {{tvshowDetails.original_title}}</h1>
+                </div>
+            </ng-template> 
+        </div>
+        <hr>
+
+        <div class="Backdropimages">
+
+            <h2 class="tvshow-heading mt-5">BACKDROP IMAGES OF {{'('+tvshowDetails.original_title+')'}}</h2>
+                <div *ngIf="nobackdrop; then nobackdropBlock else backdropBlock"></div>                
+                <ng-template #backdropBlock>
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-12 col-md-12 mt-5" *ngFor="let back_path of backdropList">
+                            <span><img src="{{imgUrl+back_path.file_path}}" width="100%" height="100%"></span>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template #nobackdropBlock>
+                <div id="no-record_images">
+                    <h1 class="text-warning text-center">Backdrops not available for {{tvshowDetails.original_title}}</h1>
+                </div>
+            </ng-template> 
+        </div>
+        <hr>
+
+
+        <div class="seasons-section">
+            <h2 class="tvshow-heading mt-5">{{tvshowDetails.original_title}} SEASONS</h2>
+        <p class="text-white h4 text-center">Click the Seasons to know more</p>
+        <main>         
+            <div class="tvshow" *ngFor="let e of tvshowDetails.seasons;let i=index;" [routerLink]="['/tvshow-episode',tvshowDetails.id,i+1,tvshowDetails.original_title]">
+
+                <div *ngIf="e.poster_path==null; then thenBlock else elseBlock"></div>
+                <ng-template #thenBlock><img src="assets/images/no-image.png"></ng-template>
+                <ng-template #elseBlock><img src="{{imgUrl+e.poster_path}}"></ng-template>
+
+                <div class="tvshow-info">
+                    <h3>{{e.name}}</h3>    
+                </div>
+                <div class="tvshow-info">
+                    <h4>air date</h4>{{e.air_date}}
+                    </div>
+                    <div class="tvshow-info">
+                    <h4>Episode counts</h4>{{e.episode_count}}
+                    </div>
+                
+                
+                <div class="overview">
+                    <h3 class="text-warning">Overview</h3>
+                    <span class="text-secondary">{{e.overview}}</span>
+                    <br>
+                    <button class="btn btn-warning">Know More</button>
+                </div>
+            </div>
+        </main>
+        </div>
+      <hr>
+
+      <div class="posterImages">
+        <h2 class="tvshow-heading mt-5">{{tvshowDetails.original_title}} POSTERS</h2>
+        <div *ngIf="nopost; then noposters else posters"></div>
+        <ng-template #posters>
+            <carousel class="text-center" [autoplay]=true [autoplayInterval]=3000 [pauseOnHover]=true [height]=300 [margin]=30>
+                <div class="carousel-cell" *ngFor="let post of posterList">
+                    <img src="{{imgUrl+post.file_path}}" width="100%" height="100%">
+                </div>
+            </carousel>
+        </ng-template>
+
+        <ng-template #noposters>
+            <div id="no-record_poster">
+                <h1 class="text-warning text-center">Posters not available for {{tvshowDetails.original_title}}</h1>
+            </div>
+        </ng-template>
+    </div>
+    <hr>
+
+    <div class="videos">
+        <h2 class="tvshow-heading mt-5">{{tvshowDetails.original_title}} VIDEOS</h2>
+        <div *ngIf="novideos; then novideo else video"></div>
+        <ng-template #video>
+            <carousel class="text-center"  [cellWidth]=400 [height]=300 [margin]=50>
+                <div class="carousel-cell" *ngFor="let video of videoList" >
+                    <iframe height="100%" width="100%" id="stop-video" class="youtube-video" [src]="video.key" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </carousel>
+        </ng-template>
+        <ng-template #novideo> 
+            <div id="no-record_images" >
+                <h1 class="text-warning text-center">Videos not available for {{tvshowDetails.original_title}}</h1>
+            </div>
+        </ng-template>
+    </div>
+    <hr>
+ 
+    <div class="cast-section">
+        <h2 class="tvshow-heading mt-5">CAST</h2>
+        <p class="h4 text-center">Click the Person to know more</p>
+        <div *ngIf="nocastdata; then nocast else castdata"></div>
+        <ng-template #castdata>       
+                <main class="cast">   
+                    <div class="tvshow btn-container" *ngFor="let cast_data of castList" [routerLink]="['/persondetails', cast_data.id]" >
+                        <div *ngIf="cast_data.profile_path==null; then thenBlock else elseBlock"></div>
+                        <ng-template #thenBlock><img class="btn-image" src="assets/images/no-image.png"></ng-template>
+                        <ng-template #elseBlock><img class="btn-image" src="{{imgUrl+cast_data.profile_path}}"></ng-template>
+                        <div class="btn-middle">
+                            <div class="text btn-info">Know More</div>
+                        </div>
+                        <div class="tvshow-info-cast">
+                            <h4>{{cast_data.original_name}}</h4>
+                            <span>AS {{cast_data.character}}</span>
+                        </div>
+                    
+                    </div>
+                </main>
+        </ng-template>
+        <ng-template #nocast> 
+            <div id="no-record_cast">
+                <h1 class="text-warning text-center">Cast not available for {{tvshowDetails.original_title}}</h1>
+            </div>
+        </ng-template>
+    </div>
+
+    <hr>
+
+    
+    <div class="crew-section">
+        <h2 class="tvshow-heading mt-5">CREW</h2>
+        <p class="h4 text-center">Click the Person to know more</p>
+        <div *ngIf="nocrewdata; then nocrew else crewdata"></div>
+        <ng-template #crewdata>
+            <main class="cast">
+                <div class="tvshow btn-container" *ngFor="let crew_data of crewList" [routerLink]="['/persondetails', crew_data.id]" >
+    
+                    <div *ngIf="crew_data.profile_path==null; then thenBlock else elseBlock"></div>
+                    <ng-template #thenBlock><img class="btn-image"src="assets/images/no-image.png"></ng-template>
+                    <ng-template #elseBlock><img class="btn-image" src="{{imgUrl+crew_data.profile_path}}"></ng-template>
+                    <div class="btn-middle">
+                        <div class="text btn-info">Know More</div>
+                    </div>
+                    <div class="tvshow-info-crew">
+                        <h4>{{crew_data.original_name}}</h4>
+                        <span>Job :  {{crew_data.job}}</span>
+                    </div>
+                </div>
+            </main>
+        </ng-template>
+        <ng-template #nocrew> 
+            <div id="no-record_crew">
+                <h1 class="text-warning text-center">Crew not available for {{tvshowDetails.original_title}}</h1>
+            </div>
+        </ng-template>
+    </div>
+    <hr>
+
+
+    <div class="sim_tvshows">
+        <h2 class="tvshow-heading mt-5">RECOMMENDED tvshowS</h2>
+        <p class="h4 text-center">Click the tvshow to know more</p>
+        <div *ngIf="norectvshowdata; then norectvshow else rectvshow"></div>
+        <ng-template #rectvshow>
+            <main class="s_tvshows">
+                <div class="tvshow rec-tvshows" *ngFor="let s_tvshows of rectvshowList" [routerLink]="['/similartvshowsdetails', s_tvshows.id]">
+                  
+                <div *ngIf="s_tvshows.poster_path==null; then thenBlock else elseBlock"></div>
+                    <ng-template #thenBlock>
+                        <figure>
+                            <img src="assets/images/no-image.png">
+                        </figure>
+                    </ng-template>
+                    <ng-template #elseBlock>  
+                        <figure>
+                            <img src="{{imgUrl+s_tvshows.poster_path}}">
+                        </figure>
+                    </ng-template>
+            
+                    <div class="tvshow-info">
+                        <h4>{{s_tvshows.name}}</h4>
+                        <span [ngClass]="{'red':s_tvshows.vote_average<=5,'orange':s_tvshows.vote_average>=5&&s_tvshows.vote_average<8,'green':s_tvshows.vote_average>=8}">{{float2int((s_tvshows.vote_average/10)*100) +'%'}}</span>
+                    </div>
+                    <div class="tvshow-info">
+                        <ngb-rating [max]="10" [(rate)]="s_tvshows.vote_average" [readonly]="false"></ngb-rating>
+                    </div>
+                    <div class="date">
+                        <p><i class="fas fa-calendar-alt"></i> {{s_tvshows.first_air_date}}</p>
+                      </div>
+                </div>
+            </main>
+        </ng-template>
+        <ng-template #norectvshow> 
+            <div id="no-record_recommended_tvshows">
+                <h1 class="text-warning text-center">Recommeded tvshows not available for {{tvshowDetails.original_title}}</h1>
+              </div>
+        </ng-template>    
+    </div>
+    <hr>
+
+
+
+    <div class="sim_tvshows-section">
+        <h2 class="tvshow-heading mt-5">SIMILAR tvshowS</h2>
+        <p class="h4 text-center">Click the tvshow to know more</p>
+
+        <div *ngIf="nosimtvshowdata; then nosimtvshow else simtvshowdata"></div>
+        <ng-template #simtvshowdata>
+            <main class="s_tvshows">
+                <div class="tvshow sim-tvshows" *ngFor="let s_tvshows of similartvshowList" [routerLink]="['/similartvshowsdetails', s_tvshows.id]">
+                  
+                <div *ngIf="s_tvshows.poster_path==null; then thenBlock else elseBlock"></div>
+                    <ng-template #thenBlock>
+                        <figure>
+                        <img src="assets/images/no-image.png">
+                        </figure>
+                    </ng-template>
+                    <ng-template #elseBlock>  
+                        <figure>
+                            <img src="{{imgUrl+s_tvshows.poster_path}}">
+                        </figure>
+                    </ng-template>
+            
+                    <div class="tvshow-info">
+                        <h4>{{s_tvshows.name}}</h4>
+                        <span [ngClass]="{'red':s_tvshows.vote_average<=5,'orange':s_tvshows.vote_average>=5&&s_tvshows.vote_average<8,'green':s_tvshows.vote_average>=8}">{{float2int((s_tvshows.vote_average/10)*100)+'%'}}</span>
+                    </div>
+                    <div class="tvshow-info">
+                        <ngb-rating [max]="10" [(rate)]="s_tvshows.vote_average" [readonly]="false"></ngb-rating>
+                    </div>
+                    <div class="date">
+                        <p><i class="fas fa-calendar-alt"></i> {{s_tvshows.first_air_date}}</p>
+                      </div>
+                </div>
+            </main>
+        </ng-template>
+        <ng-template #nosimtvshow> 
+            <div id="no-record_similar_tvshows" >
+                <h1 class="text-warning text-center">Similar tvshows not avilable for {{tvshowDetails.original_title}}</h1>
+              </div>
+        </ng-template>
+    </div>
+
+
+
+</div>
+
+<div class="move-top" [ngStyle]="{'display':windowScrolled? 'block' : 'none' }">
+    <button class="btn" (click)="scrollToTop()">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+</div>
+
+</div>

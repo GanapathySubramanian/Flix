@@ -23,7 +23,7 @@
       <h2 class="text-center text-warning">{{genre_value}}</h2> 
     <main id="main">
 
-        <div class="movie" *ngFor="let up of upcomingList">
+        <div class="movie" *ngFor="let up of upcomingList" [routerLink]="['/moviedetails',up.id]">
 
             <div *ngIf="up.poster_path==null;then thenBlock else elseBlock"></div>
             <ng-template #thenBlock>
