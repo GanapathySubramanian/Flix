@@ -45,6 +45,10 @@ export class TvshowsService {
   //Watch providers
   private watchSource=new Subject();
   watchData=this.watchSource.asObservable();
+  
+  //Episodes
+  private episodeSource=new Subject();
+  episodeData=this.episodeSource.asObservable();
 
   constructor(private http:HttpClient) { }
 
@@ -129,5 +133,14 @@ export class TvshowsService {
       watchprovider=res;
       this.watchSource.next(watchprovider);
     })
+  }
+
+  getEpisodes(url:any){
+      let epi:any;
+      this.http.get(url).subscribe((res)=>{
+        console.log(res);
+        epi=res;
+        this.episodeSource.next(epi);
+      })
   }
 }

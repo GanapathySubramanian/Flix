@@ -376,7 +376,7 @@
         <div *ngIf="norectvshowdata; then norectvshow else rectvshow"></div>
         <ng-template #rectvshow>
             <main class="s_tvshows">
-                <div class="tvshow rec-tvshows" *ngFor="let s_tvshows of rectvshowList" [routerLink]="['/similartvshowsdetails', s_tvshows.id]">
+                <div class="tvshow rec-tvshows" *ngFor="let s_tvshows of rectvshowList" [routerLink]="['/similartvshowdetails', s_tvshows.id]">
                   
                 <div *ngIf="s_tvshows.poster_path==null; then thenBlock else elseBlock"></div>
                     <ng-template #thenBlock>
@@ -420,7 +420,7 @@
         <div *ngIf="nosimtvshowdata; then nosimtvshow else simtvshowdata"></div>
         <ng-template #simtvshowdata>
             <main class="s_tvshows">
-                <div class="tvshow sim-tvshows" *ngFor="let s_tvshows of similartvshowList" [routerLink]="['/similartvshowsdetails', s_tvshows.id]">
+                <div class="tvshow sim-tvshows" *ngFor="let s_tvshows of similartvshowList" [routerLink]="['/similartvshowdetails', s_tvshows.id]">
                   
                 <div *ngIf="s_tvshows.poster_path==null; then thenBlock else elseBlock"></div>
                     <ng-template #thenBlock>

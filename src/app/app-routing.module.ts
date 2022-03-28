@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 import { MoviesComponent } from './components/movies/movies.component';
+import { PersonDetailsComponent } from './components/person-details/person-details.component';
 import { TvshowDetailsComponent } from './components/tvshow-details/tvshow-details.component';
+import { TvshowEpisodesComponent } from './components/tvshow-episodes/tvshow-episodes.component';
 import { TvshowsComponent } from './components/tvshows/tvshows.component';
 import { UpcomingMoviesComponent } from './components/upcoming-movies/upcoming-movies.component';
 
@@ -27,6 +29,12 @@ const routes: Routes = [
   },
   {
     path:'similartvshowdetails/:id',component:TvshowDetailsComponent
+  },
+  {
+    path:'persondetails/:id',component:PersonDetailsComponent
+  },
+  {
+    path:'tvshow-episode/:tvshowid/:season/:tvshow_name',component:TvshowEpisodesComponent
   },
   {
     path:'**',

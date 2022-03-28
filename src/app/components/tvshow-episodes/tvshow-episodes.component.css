@@ -1,0 +1,114 @@
+main{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+ngb-rating {
+    color: #FFC107;
+    font-size: 20px;
+}
+.tvshows-heading{
+    color:red;
+    text-align: center;
+}
+
+main{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.tvshows-season{
+    width:350px;
+    margin: 0.5rem;
+    border-radius: 3px;
+    box-shadow: 0.2px 4px 5px rgba(0,0,0,0.1);
+    background-color: var(--secondary-color);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.tvshows-season img{
+    transition: all 0.5s ease-in-out;
+    width:100%;
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+}
+
+.tvshows-season img:hover{
+    -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(0%);
+}
+
+.tvshows-season-info{
+    color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 00.5rem 1rem 1rem;
+    letter-spacing: 0.5px;
+}
+.tvshows-season-infos{
+    color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 00.5rem 1rem 1rem;
+    letter-spacing: 0.5px;
+}
+.tvshows-season-info h3{
+    margin-top: 0;
+}
+
+.tvshows-season-infos span{
+    background-color: var(--primary-color);
+    padding: 0.25rem;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.green{
+    color: lightgreen;
+}
+.orange{
+    color: orange;
+}
+.red{
+    color: red;
+}
+ 
+.season-overview{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    padding: 1rem;
+    max-height: 100%;
+    transform: translateY(101%);
+    transition: all 1s ease-in-out;
+}
+
+.tvshows-season:hover .season-overview{
+    transform: translateY(0);
+}
+
+
+  @media screen and (max-height: 450px) {
+    .overlay a {font-size: 20px}
+    .overlay .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+    }
+  }
+  #movie-logo{
+    width: 20%;
+    height: 20%;
+}
+@media only screen and (max-width: 500px) {
+    #movie-logo{
+   width: 70%;
+   height: 100%;
+}
+}  

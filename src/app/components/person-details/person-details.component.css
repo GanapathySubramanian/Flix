@@ -1,0 +1,370 @@
+main{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* text-align: justify; */
+    /* text-justify: inter-word; */
+}
+ngb-rating {
+    color: #FFC107;
+    font-size: 20px;
+}
+.person-content{
+    margin-left: 2%;
+    margin-right:2%;
+    color:#fff;
+    margin-top: 10px;
+    
+}
+.move-top .btn{
+    border-radius: 100%;
+    position: fixed;
+    bottom: 560px;
+    margin-left: 96%;
+    z-index: 10;
+}
+.date{
+    color: #eee;
+    margin-left: 7%;
+}
+.details-table{
+    margin-left: 10%;
+    margin-right:5%;
+    
+}
+.details-name{
+    text-align: justify;
+    padding: 5px 15px;
+    /* font-weight:bold; */
+    color:orange;
+}
+.colon{
+    text-align: justify;
+    padding: 5px 15px;
+    color: #fff;
+}
+.details-value{
+    text-align: justify;
+    padding: 5px 15px;
+    color: #fff;
+}
+.details-value.person-description{
+    line-height: 24px;
+}
+.person-img{
+    width:400px;
+    margin: 1rem;
+    border-radius: 3px;
+    box-shadow: 0.2px 4px 5px rgba(0,0,0,0.1);
+    background-color: var(--secondary-color);
+    position: relative;
+    overflow: hidden;
+    justify-content: center;
+}
+
+.person-img img{
+    width: 100%;
+    height: 100%;
+    /* height: 100%; */
+    object-fit: cover;
+    overflow: hidden;
+    transition: all 1.5s ease-in-out;
+}
+
+.person-img img:hover{
+    transform: scale(1.35) rotateZ(5deg);
+}
+hr{
+    color: #fff;
+    height: 2px;
+}
+.person-heading{
+    /* text-decoration: underline; */
+    color:red;
+    text-align: center;
+}
+
+main{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* align-items: center; */
+}
+.person{
+    width:250px;
+    margin: 1rem;
+    border-radius: 3px;
+    box-shadow: 0.2px 4px 5px rgba(0,0,0,0.1);
+    background-color: var(--secondary-color);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+
+}
+
+.person img{
+    width:100%;
+    transition: all 1.5s ease-in-out;
+}
+
+.person:hover{
+    /* top:-10px; */
+    cursor: pointer;
+}
+.person-info{
+    color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 00.5rem 1rem 1rem;
+    letter-spacing: 0.5px;
+}
+.person-info-cast,.person-info-crew{
+    color: #eee;
+    padding: 00.5rem 1rem 1rem;
+    letter-spacing: 0.5px;
+}
+.person-info h3{
+    margin-top: 0;
+}
+
+.person-info span{
+    background-color: var(--primary-color);
+    padding: 0.25rem;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.green{
+    color: lightgreen;
+}
+.orange{
+    color: orange;
+}
+.red{
+    color: red;
+}
+ 
+
+
+.pagination{
+    justify-content: center;
+    padding: 10px;
+}
+
+.btn {
+    color: #ffffff;
+    padding: 0.7rem;
+    text-transform: uppercase;
+    font-size: 1rem;
+    text-align: center;
+    background-color: red;
+}
+.btn:hover{
+    background-color: orange;
+    color: white;
+}
+
+.overlay {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    /* background-color: white; */
+    background-color: rgba(0,0,0, 0.9);
+    overflow-x: hidden;
+    transition: 0.4s;
+  }
+  
+  .overlay-content {
+    position: relative;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+  }
+  
+  .overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+  }
+  
+  .overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+  }
+
+  #person-logo{
+      width: 20%;
+      height: 20%;
+  }
+  
+  @media screen and (max-height: 450px) {
+    .overlay a {font-size: 20px}
+    .overlay .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+    }
+   
+  }
+
+  @media screen and (max-height:700px){
+    #person-logo{
+        width: 70%;
+        height: 70%;
+    }
+   
+  }  
+ 
+/*   
+  ul {
+    display: flex;
+  }
+  
+  ul li {
+    list-style: none;
+    margin: 10px 10px;
+  }
+  
+  ul li a {
+    display: block;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    line-height: 63px;
+    background: #FFC107;
+    border-radius: 50%;
+    font-size: 30px;
+    color: #fff;
+    transition: .5s;
+  }
+  
+  ul li a::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: red;
+    transition: .5s;
+    transform: scale(.9);
+    
+  }
+  
+  ul li a:hover::before {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px #FFC107;
+  }
+  
+  ul li a:hover {
+    color: red;
+    box-shadow: 0 0 15px #FFC107;
+    text-shadow: 0 0 15px #FFC107;
+  } */
+
+
+
+  figure {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    overflow: hidden;
+}
+
+
+ 
+    /* Shine */
+    .person figure {
+        position: relative;
+    }
+    .person figure::before {
+        position: absolute;
+        top: 0;
+        left: -85%;
+        z-index: 2;
+        display: block;
+        content: '';
+        width: 50%;
+        height: 100%;
+        background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,.3) 100%);
+        background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,.3) 100%);
+        -webkit-transform: skewX(-25deg);
+        transform: skewX(-25deg);
+    }
+    .person figure:hover::before {
+        -webkit-animation: shine 1.5s;
+        animation: shine 1.5s;
+    }
+    @-webkit-keyframes shine {
+        100% {
+            left: 125%;
+        }
+    }
+    @keyframes shine {
+        100% {
+            left: 125%;
+        }
+    }
+    
+
+    /* Circle */
+.person.crew-tvshow figure {
+	position: relative;
+}
+.person.crew-tvshow figure::before {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 2;
+	display: block;
+	content: '';
+	width: 0;
+	height: 0;
+	background: rgba(255,255,255,.2);
+	border-radius: 100%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	opacity: 0;
+}
+.person.crew-tvshow figure:hover::before {
+	-webkit-animation: circle 1.5s;
+	animation: circle 1.5s;
+}
+@-webkit-keyframes circle {
+	0% {
+		opacity: 1;
+	}
+	40% {
+		opacity: 1;
+	}
+	100% {
+		width: 200%;
+		height: 200%;
+		opacity: 0;
+	}
+}
+@keyframes circle {
+	0% {
+		opacity: 1;
+	}
+	40% {
+		opacity: 1;
+	}
+	100% {
+		width: 200%;
+		height: 200%;
+		opacity: 0;
+	}
+}

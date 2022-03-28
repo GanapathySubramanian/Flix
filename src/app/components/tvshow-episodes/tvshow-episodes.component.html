@@ -1,0 +1,49 @@
+<div class="tvshow-season">
+
+    <div class="logo text-center mt-5">
+        <div *ngIf="noLogos; then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock>
+            <h2 class="text-center text-warning">{{tvshow_name}}</h2>
+        </ng-template>
+        <ng-template #elseBlock>
+            <img id="movie-logo" src="{{imgUrl+logos.file_path}}">
+        </ng-template>
+    </div>
+
+    <h2 class="text-center text-warning mt-5">SEASON {{season_no}}</h2>
+
+
+
+    <h2 class="tvshows-heading mt-5">EPISODES</h2>
+        <!-- <p class="text-white h4 text-center">Click the Seasons to know more</p> -->
+        <main>         
+            <div class="tvshows-season" *ngFor="let e of episodes">
+
+                <div *ngIf="e.still_path==null; then thenBlock else elseBlock"></div>
+                <ng-template #thenBlock><img src="assets/images/no-image.png"></ng-template>
+                <ng-template #elseBlock><img src="{{imgUrl+e.still_path}}"></ng-template>
+
+                <div class="tvshows-season-info">
+                    <h4><span class="text-warning">Episode Number : </span>{{e.episode_number}}</h4>
+                </div>
+                <div class="tvshows-season-info">
+                    <h4><span class="text-warning font-weight-normal">Episode Name  : </span> {{e.name}}</h4>
+                </div>
+                    <div class="tvshows-season-infos">
+                        <ngb-rating [max]="10" [(rate)]="e.vote_average" [readonly]="false"></ngb-rating>
+                        <span [ngClass]="{'red':e.vote_average<=5,'orange':e.vote_average>=5&&e.vote_average<8,'green':e.vote_average>=8}">{{float2int((e.vote_average/10)*100)+'%'}}</span>
+                    </div>
+                    <div class="tvshows-season-infos">
+                        <h4><i class="fas fa-calendar-alt"></i> {{e.air_date}}</h4>
+                    </div>
+                <div class="season-overview">
+                    <h3 class="text-warning">Overview</h3>
+                    <span class="text-secondary">{{e.overview}}</span>
+                </div>
+            </div>
+        </main>
+     
+</div>
+   
+    
+               

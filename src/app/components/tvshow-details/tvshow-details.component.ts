@@ -62,7 +62,7 @@ export class TvshowDetailsComponent implements OnInit {
 
     //To get the Tvshow images
     let backdrop_url=myAppConfig.tmdb.tvshowDetailsBaseUrl+tvshow_id+"/images?"+myAppConfig.tmdb.apikey;
-    this.getMovieImages(backdrop_url)
+    this.gettvshowImages(backdrop_url)
 
      //To get the reviews
      let reviews_url=myAppConfig.tmdb.tvshowDetailsBaseUrl+tvshow_id+"/reviews?"+myAppConfig.tmdb.apikey;
@@ -72,13 +72,13 @@ export class TvshowDetailsComponent implements OnInit {
       let credits_url=myAppConfig.tmdb.tvshowDetailsBaseUrl+tvshow_id+"/credits?"+myAppConfig.tmdb.apikey;
       this.getCredits(credits_url);
 
-    //To get the similar movies details
+    //To get the similar tvshows details
     let similar_url=myAppConfig.tmdb.tvshowDetailsBaseUrl+tvshow_id+"/similar?"+myAppConfig.tmdb.apikey;
-    this.getSimilarMovie(similar_url);
+    this.getSimilartvshow(similar_url);
 
-    //To get the Recommended movies details
-    let recmovie_url=myAppConfig.tmdb.tvshowDetailsBaseUrl+tvshow_id+"/recommendations?"+myAppConfig.tmdb.apikey;
-    this.getRecMovies(recmovie_url);
+    //To get the Recommended tvshows details
+    let rectvshow_url=myAppConfig.tmdb.tvshowDetailsBaseUrl+tvshow_id+"/recommendations?"+myAppConfig.tmdb.apikey;
+    this.getRectvshows(rectvshow_url);
 
     //To get the videos
     let video_url=myAppConfig.tmdb.tvshowDetailsBaseUrl+tvshow_id+"/videos?"+myAppConfig.tmdb.apikey;
@@ -110,8 +110,8 @@ export class TvshowDetailsComponent implements OnInit {
     })
   }
 
-  getRecMovies(recmovie_url: string) {
-    this.tvshowservice.getRecommendedtvshows(recmovie_url);
+  getRectvshows(rectvshow_url: string) {
+    this.tvshowservice.getRecommendedtvshows(rectvshow_url);
 
       let rectvshow:any;
       this.tvshowservice.rectvshowData.subscribe((data)=>{
@@ -129,7 +129,7 @@ export class TvshowDetailsComponent implements OnInit {
           }
       })
   }
-  getSimilarMovie(similar_url: string) {
+  getSimilartvshow(similar_url: string) {
     this.tvshowservice.getSimilartvshows(similar_url);
 
     let similartvshow:any;
@@ -191,7 +191,7 @@ export class TvshowDetailsComponent implements OnInit {
   }
 
 
-  getMovieImages(backdrop_url: string) {
+  gettvshowImages(backdrop_url: string) {
 
       this.tvshowservice.getAllImages(backdrop_url);
 
