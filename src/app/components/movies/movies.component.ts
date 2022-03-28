@@ -42,7 +42,7 @@ export class MoviesComponent implements OnInit {
   getOrder() {
     this.movieservice.getOrderList().subscribe((data)=>{
       this.orderList=data;
-      console.log(this.orderList);
+     
       
     })
   }
@@ -174,8 +174,7 @@ export class MoviesComponent implements OnInit {
     this.movieservice.moviesData.subscribe((data)=>{
        tempMoviesList=data;
        this.movieList=tempMoviesList.results;
-       console.log(this.movieList);
-  
+     
 
        if(tempMoviesList.total_results==0){
         const Ele= window.document.getElementById("no-record");

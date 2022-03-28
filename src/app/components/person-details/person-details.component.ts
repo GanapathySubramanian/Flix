@@ -55,7 +55,7 @@ export class PersonDetailsComponent implements OnInit {
     let tempsociallinks:any;
     this.peopleservice.socialData.subscribe((data)=>{
       tempsociallinks=data;
-      console.log(tempsociallinks);
+      
       
       this.personDetails.facebook_id=tempsociallinks.facebook_id;
       this.personDetails.freebase_id=tempsociallinks.freebase_id;
@@ -73,7 +73,7 @@ export class PersonDetailsComponent implements OnInit {
     let tempcredit:any;
     this.peopleservice.creditData.subscribe((data)=>{
       tempcredit=data;
-      console.log(tempcredit);
+      
       // this.castMovieList=tempcredit.cast;
       // this.crewTvList=tempcredit.crew;
 
@@ -138,14 +138,14 @@ export class PersonDetailsComponent implements OnInit {
     let temppersondetails:any;
     this.peopleservice.personData.subscribe((data)=>{
       temppersondetails=data;
-      console.log(temppersondetails);
+      
 
       this.personDetails.biography=temppersondetails.biography;
       this.personDetails.birthday=temppersondetails.birthday;
         
       if(temppersondetails.deathday==null){
         this.personDetails.deathday='Nil';
-        // console.log(this.notyetdead);
+      
         
       }else{
         this.personDetails.deathday=temppersondetails.deathday;

@@ -77,7 +77,6 @@ export class UpcomingMoviesComponent implements OnInit {
 
       let tempUpcomings:any;
       this.movieservice.upcomingData.subscribe((data)=>{
-      console.log(data);
       tempUpcomings=data;
       this.upcomingList=tempUpcomings.results;
 

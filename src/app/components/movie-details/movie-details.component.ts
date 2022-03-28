@@ -40,6 +40,7 @@ export class MovieDetailsComponent implements OnInit {
   nocrewdata:boolean=false;
   norecmoviedata:boolean=false;
   nosimmoviedata:boolean=false;
+  nowatchprovider:boolean=false;
   windowScrolled: boolean=false;
 
   constructor(private route:ActivatedRoute,private router:Router,private movieservice:MoviesService,private _sanitizer:DomSanitizer) { 
@@ -119,7 +120,14 @@ export class MovieDetailsComponent implements OnInit {
     let watch:any;
     this.movieservice.watchData.subscribe((data)=>{
       watch=data;
-      this.watchprovider=watch.results.IN.link;
+      this.watchprovider=watch.results.IN[0].link;
+      
+      if(this.watchprovider.length==0){
+        this.nowatchprovider=true;
+      }else{
+        this.nowatchprovider=false;
+      }
+      
     })
   }
 
@@ -129,8 +137,7 @@ export class MovieDetailsComponent implements OnInit {
       let recmovie:any;
       this.movieservice.recmovieData.subscribe((data)=>{
           recmovie=data;
-          console.log(recmovie);
-          
+
           for(let i=0;i<recmovie.results.length;i++){
             if(recmovie.results[i].poster_path==null){
               recmovie.results[i].poster_path="Empty";
@@ -260,7 +267,7 @@ export class MovieDetailsComponent implements OnInit {
 
     let tempMovieDetails:any;
     this.movieservice.moviedetailsData.subscribe((data)=>{
-      console.log(data);
+    
       tempMovieDetails=data;
 
       //Default Movie Details 
@@ -286,7 +293,7 @@ export class MovieDetailsComponent implements OnInit {
     
       if(tempMovieDetails.homepage==""){
         var watch_provider=myAppConfig.tmdb.movieBaseUrl+'/movie/'+movie_id+"/watch/providers?"+myAppConfig.tmdb.apikey;
-        this.getWatchprovider(watch_provider)
+        this.getWatchprovider(watch_provider);
       }else{
         this.watchprovider=tempMovieDetails.homepage;
       }

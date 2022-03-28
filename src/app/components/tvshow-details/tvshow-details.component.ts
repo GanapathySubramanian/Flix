@@ -44,7 +44,7 @@ export class TvshowDetailsComponent implements OnInit {
   constructor(private route:ActivatedRoute,private router:Router,private tvshowservice:TvshowsService,private _sanitizer:DomSanitizer) { 
       let id=this.route.snapshot.params['id'];
       tvshow_id=id;
-      console.log(tvshow_id);
+     
   }
 
 
@@ -247,7 +247,7 @@ export class TvshowDetailsComponent implements OnInit {
 
     let tempTvshowDetails:any;
     this.tvshowservice.tvshowdetailsData.subscribe((data)=>{
-      // console.log(data);
+     
       tempTvshowDetails=data;
 
 

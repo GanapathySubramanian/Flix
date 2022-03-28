@@ -60,7 +60,7 @@ export class TvshowsComponent implements OnInit {
   getOrder() {
     this.tvshowservice.getOrderList().subscribe((data)=>{
       this.orderList=data;
-      console.log(this.orderList);
+     
       
     })
   }
@@ -174,7 +174,7 @@ export class TvshowsComponent implements OnInit {
     let tempTvshowList:any;
     this.tvshowservice.tvshowsData.subscribe((data)=>{
       tempTvshowList=data;
-      console.log(tempTvshowList);
+   
       this.tvshowList=tempTvshowList.results;
       
       if(tempTvshowList.total_results==0){
