@@ -4,7 +4,7 @@
     <nav class="navbar navbar-expand mt-4 navbar-light" aria-label="Second navbar example">
         <div class="container-fluid">
           <div class="collapse navbar-collapse" id="navbarsExample02">
-            <ul class="navbar-nav me-auto">
+            <ul class="navbar-nav me-auto" [ngStyle]="{'visibility': ishidedrop ? 'hidden' : 'visible'}">
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" style="color:#fff"href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   GENRE
@@ -36,8 +36,8 @@
       </nav>
    
 
-    <h1 class="text-center text-warning">{{sortby_value}}</h1>
-    <h2 class="text-center text-warning">{{genre_value}}</h2>
+    <h1 class="text-center text-warning">{{sortby_value | uppercase}}</h1>
+    <h2 class="text-center text-warning">{{genre_value | uppercase}}</h2>
 
     <main id="main">
 

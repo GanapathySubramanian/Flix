@@ -19,8 +19,19 @@ export class PeopleService {
     private creditSource = new Subject();
     creditData = this.creditSource.asObservable();
   
+    //Pepole List
+    private peopleSource = new Subject();
+    peoplesData = this.peopleSource.asObservable();
+
   constructor(private http:HttpClient) {}
    
+  getPopularPeopleDetails(url:any){
+    let peoples:any;
+    this.http.get(url).subscribe((res)=>{
+      peoples=res;
+      this.peopleSource.next(peoples);
+    })
+  }
   getPersonDetails(url:any){
     let personDetails:any;
     this.http.get(url).subscribe((res)=>{
@@ -44,4 +55,6 @@ export class PeopleService {
       this.creditSource.next(credits);
     })
   }
+
+  
 }

@@ -3,10 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 import { MoviesComponent } from './components/movies/movies.component';
 import { PersonDetailsComponent } from './components/person-details/person-details.component';
+import { PersonsComponent } from './components/persons/persons.component';
 import { TvshowDetailsComponent } from './components/tvshow-details/tvshow-details.component';
 import { TvshowEpisodesComponent } from './components/tvshow-episodes/tvshow-episodes.component';
 import { TvshowsComponent } from './components/tvshows/tvshows.component';
-import { UpcomingMoviesComponent } from './components/upcoming-movies/upcoming-movies.component';
 
 const routes: Routes = [
   {
@@ -16,7 +16,7 @@ const routes: Routes = [
     path:'tvshows',component:TvshowsComponent
   },
   {
-    path:'upcoming',component:UpcomingMoviesComponent
+    path:'peoples',component:PersonsComponent
   },
   {
     path:'moviedetails/:id',component:MovieDetailsComponent

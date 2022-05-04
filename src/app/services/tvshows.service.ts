@@ -8,7 +8,7 @@ import { Observable, of, Subject } from 'rxjs';
 export class TvshowsService {
 
   genre:Observable<any[]> = of([{id:10759,name:'Action & Adventures'},{id:16,name:'Animation'},{id:35,name:'Comedy'},{id:80,name:'Crime'},{id:99,name:'Documentary'},{id:18,name:'Drama'},{id:10751,name:'Family'},{id:10762,name:'Kids'},{id:9648,name:'Mystery'},{id:10763,name:'News'},{id:10764,name:'Reality'},{id:10765,name:'Science-Fiction & Fantacy'},{id:10766,name:'Soap'},{id:10767,name:'Talk'},{id:10768,name:'War & Politics'},{id:37,name:'Western'}]);  
-  sortBy:Observable<any[]> = of([{  order:'popularity.desc',  desc:'Tvshows Trending Now'},{  order:'popularity.asc',  desc:'Old Trend Tvshows'},{  order:'vote_average.desc',  desc:'Top Rated Tvshows'},{  order:'vote_average.asc',  desc:'Low Rated Tvshows'},{  order:'first_air_date.desc',  desc:'Tvshows - Release Date Descending'},{  order:'first_air_date.asc',  desc:'Tvshows - Release Date Ascending'}]);
+  sortBy:Observable<any[]> = of([{order:'airingtoday.desc',desc:'Airing Today'},{order:'ontheair.desc',desc:'On The Air'},{  order:'popularity.desc',  desc:'Trending Now'},{  order:'popularity.asc',  desc:'Old Low Trend'},{  order:'vote_average.desc',  desc:'Top Rated'},{  order:'vote_average.asc',  desc:'Low Rated'},{  order:'first_air_date.desc',  desc:'Release Date Des'},{  order:'first_air_date.asc',  desc:'Release Date Asc'}]);
   
   
   private tvshowSource = new Subject();
