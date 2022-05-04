@@ -1,0 +1,80 @@
+<div class="persons-section">
+    <nav class="navbar navbar-expand mt-4 navbar-light" aria-label="Second navbar example">
+        <div class="container-fluid">
+          <div class="collapse navbar-collapse" id="navbarsExample02">
+            <ul class="navbar-nav me-auto" [ngStyle]="{'visibility': 'hidden'}">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle " style="color:#fff"href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  GENRE
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle"style="color:#fff" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  SORT BY
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                </ul>
+            </li>
+            </ul>
+            <form id="form" [formGroup]="searchForm" (ngSubmit)="getSearchContent()"> 
+                <input type="text" placeholder="Search person" formControlName="personName"  class="search form-control">
+            </form>
+           </div>
+        </div>
+      </nav>
+    
+
+    <h1 class="text-center text-warning">{{sortby_value | uppercase}}</h1>
+
+
+    <main id="main">
+        
+        <div id="person" class="person" *ngFor="let person of peopleList" [routerLink]="['/persondetails',person.id]">
+            <div *ngIf="person.profile_path==null;then thenBlock else elseBlock"></div>
+
+            <ng-template #thenBlock>
+                <figure>
+                    <img src="assets/images/no-image.png" class="figure">
+                </figure>
+            </ng-template>
+            <ng-template #elseBlock>
+                <figure>
+                    <img src="{{imgUrl+person.profile_path}}" alt="figure">
+                </figure>
+            </ng-template>
+
+            <div class="person-info">
+                <h4>{{person.name}}</h4>
+                
+                <!-- <span [ngClass]="{'red':person.popularity<=5,'orange':person.popularity>=5&&person.popularity<8,'green':person.popularity>=8}">{{float2int(((person.popularity/10)*100)) + '%'}}</span> -->
+            </div>
+            <div class="person-info">
+               <div *ngIf="person.known_for[0].title;then titleBlock else nameBlock"></div>
+
+                <ng-template #titleBlock>
+                    <p>{{person.known_for[0].title}}</p>
+                </ng-template>
+                <ng-template #nameBlock>
+                    <p>{{person.known_for[0].name}}</p>
+                </ng-template>
+            </div>
+                      
+            <div class="person-info">
+                <span>Popularity : <span [ngClass]="{'red':person.popularity<50,'orange':person.popularity>=50&&person.popularity<80,'green':person.popularity>=80}"> <i class="fa-solid fa-thumbs-up"></i> {{float2int(person.popularity)}}</span> </span>
+            </div>
+        </div>
+
+    </main>
+
+    <div class="pagination" id="pagination">
+        <button class="btn" id="prev" [disabled]="isdisableprev" (click)="handlePagination(2)">Prev</button>
+        <button class="btn"  id="home" (click)="handlePagination(1)" style="border-radius: 100%;">{{page_no}}</button>
+        <button class="btn"  id="next" [disabled]="isdisablenext" (click)="handlePagination(3)">Next</button>
+    </div>
+    <div id="no-record" class="d-none">
+        <h1 class="text-warning text-center">No persons Found</h1>
+    </div>
+</div>
