@@ -87,10 +87,9 @@ export class MoviesComponent implements OnInit {
       else{
         this.ishidedrop=false;
         sort_by_desc="popularity.desc";
-        this.sortby_value='Movies Trending Now';
+        this.sortby_value='Trending Now';
         let  api_url=myAppConfig.tmdb.movieBaseUrl+'/discover/movie?sort_by='+sort_by_desc+'&'+myAppConfig.tmdb.apikey+'&page='+page;
         this.getMoviesData(api_url)  
-       
       }
   }
 
