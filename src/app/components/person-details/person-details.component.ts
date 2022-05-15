@@ -1,10 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 import { PersonDetails } from 'src/app/common/person-details';
 import myAppConfig from 'src/app/config/my-app-config';
 import { PeopleService } from 'src/app/services/people.service';
-import { TvshowDetailsComponent } from '../tvshow-details/tvshow-details.component';
 
 var person_id='';
 @Component({
@@ -121,17 +119,60 @@ export class PersonDetailsComponent implements OnInit {
         this.nocrewMovie=true;
       }else{
         this.nocrewMovie=false;
+
+        let data=this.filterCrewData(this.crewMovieList);
+        this.crewMovieList=data;
       }
 
       if(crewTvcount==0){
         this.nocrewTv=true;
       }else{
         this.nocrewTv=false;
+
+        let data=this.filterCrewData(this.crewTvList);
+        this.crewTvList=data;
       }
       
     })
   }
 
+
+  filterCrewData(arr:any):any{
+    console.log(arr);
+    
+    let clientImages:any=[];
+    var c_data:any  =[];
+    c_data= arr;
+          for(var i=0;i<c_data.length;i++){
+                if(clientImages[c_data[i].id]){
+                clientImages[c_data[i].id]= clientImages[c_data[i].id] +', '+c_data[i].job
+                }else{
+              clientImages[c_data[i].id] =c_data[i].job
+          }
+        }
+
+        clientImages.forEach((element:any) => {
+          console.log(element);
+          
+        });
+        
+          //remove duplicate entries
+          c_data = c_data.filter((obj:any, pos:any, arr:any) => {
+            return arr
+              .map((mapObj:any)=> mapObj.id)
+              .indexOf(obj.id) == pos;
+          });
+        
+          clientImages.forEach((res:any)=> {
+            for(let i=0;i<c_data.length;i++){
+              if(clientImages[c_data[i].id]){
+                c_data[i].job=clientImages[c_data[i].id];
+              }
+            }
+            
+          });
+      return c_data;
+  }
   getPersonDetailsData(api_url: string) {
     this.peopleservice.getPersonDetails(api_url);
 
@@ -194,3 +235,4 @@ export class PersonDetailsComponent implements OnInit {
       });
   }
 }
+

@@ -2,8 +2,6 @@ main{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    /* text-align: justify; */
-    /* text-justify: inter-word; */
 }
 ngb-rating {
     color: #FFC107;
@@ -35,7 +33,6 @@ ngb-rating {
 .details-name{
     text-align: justify;
     padding: 5px 15px;
-    /* font-weight:bold; */
     color:orange;
 }
 .colon{
@@ -65,7 +62,6 @@ ngb-rating {
 .person-img img{
     width: 100%;
     height: 100%;
-    /* height: 100%; */
     object-fit: cover;
     overflow: hidden;
     transition: all 1.5s ease-in-out;
@@ -107,6 +103,7 @@ main{
     transition: all 1.5s ease-in-out;
 }
 
+
 .person:hover{
     /* top:-10px; */
     cursor: pointer;
@@ -126,6 +123,8 @@ main{
 }
 .person-info h3{
     margin-top: 0;
+    width: 80%;
+    font-size: 20px;
 }
 
 .person-info span{
@@ -133,6 +132,17 @@ main{
     padding: 0.25rem;
     border-radius: 3px;
     font-weight: bold;
+}
+
+.no-image{
+    object-fit: cover;
+    height: 376px;
+}
+
+    
+.person-rating{
+    margin: 5px;
+    width: 20%;
 }
 
 .green{

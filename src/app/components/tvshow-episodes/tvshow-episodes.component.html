@@ -20,7 +20,7 @@
             <div class="tvshows-season" *ngFor="let e of episodes">
 
                 <div *ngIf="e.still_path==null; then thenBlock else elseBlock"></div>
-                <ng-template #thenBlock><img src="assets/images/no-image.png"></ng-template>
+                <ng-template #thenBlock><img src="assets/images/no-image.png" class="no-image"></ng-template>
                 <ng-template #elseBlock><img src="{{imgUrl+e.still_path}}"></ng-template>
 
                 <div class="tvshows-season-info">
@@ -38,7 +38,13 @@
                     </div>
                 <div class="season-overview">
                     <h3 class="text-warning">Overview</h3>
-                    <span class="text-secondary">{{e.overview}}</span>
+                    <span class="text-secondary">
+                        <span *ngIf="e.overview!=null">
+                            <span *ngIf="e.overview?.length<=300">{{e.overview}}</span>
+                            <span *ngIf="e.overview?.length>300">{{e.overview.substring(0,300)+"..."}}</span>
+                        </span>
+                        <span *ngIf="e.overview==null || e.overview==''">Overview not available for episode {{e.episode_number}}</span>
+                    </span>
                 </div>
             </div>
         </main>

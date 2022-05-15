@@ -31,8 +31,17 @@ main{
 
 .tvshows-info h4{
     margin-top: 0;
+    width: 80%;
+    font-size: 20px;
 }
-
+.tvshow-rating{
+    margin: 5px;
+    width: 20%;
+}
+.no-image{
+    object-fit: cover;
+    height: 376px;
+}
 .tvshows-info span{
     background-color: var(--primary-color);
     padding: 0.25rem;

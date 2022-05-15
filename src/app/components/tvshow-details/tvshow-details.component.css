@@ -67,7 +67,7 @@ ngb-rating {
     width:100%;
 }
 
-.tvshow-info{
+.tvshow-info, .tvshow-info-sea{
     color: #eee;
     display: flex;
     align-items: center;
@@ -75,6 +75,7 @@ ngb-rating {
     padding: 00.5rem 1rem 1rem;
     letter-spacing: 0.5px;
 }
+
 .overview{
     position: absolute;
     left: 0;
@@ -97,8 +98,24 @@ ngb-rating {
 }
 .tvshow-info h4{
     margin-top: 0;
+    width: 80%;
+    font-size: 20px;
 }
 
+.tvshow-info-sea h4{
+    margin-top: 0;
+    width: 50%;
+    font-size: 20px;
+}
+.tvshow-rating{
+    margin: 5px;
+    width: 20%;
+}
+
+.no-image{
+    object-fit: cover;
+    height: 376px;
+}
 .tvshow-info span{
     background-color: var(--primary-color);
     padding: 0.25rem;

@@ -166,8 +166,8 @@ export class TvshowDetailsComponent implements OnInit {
         this.nocrewdata=true;
       }else{
         this.nocrewdata=false;
-      this.crewList=tempcreditData.crew;
-
+        this.crewList=tempcreditData.crew;
+        this.crewList=this.filterCrewData(this.crewList);
       }
       
     })
@@ -316,7 +316,37 @@ export class TvshowDetailsComponent implements OnInit {
     return value | 0;
   }
 
- 
+   filterCrewData(arr:any):any{
+    console.log(arr);
+    
+    let clientImages:any=[];
+    var c_data:any  =[];
+    c_data= arr;
+          for(var i=0;i<c_data.length;i++){
+                if(clientImages[c_data[i].id]){
+                clientImages[c_data[i].id]= clientImages[c_data[i].id] +', '+c_data[i].job
+                }else{
+              clientImages[c_data[i].id] =c_data[i].job
+          }
+        }
+
+          //remove duplicate entries
+          c_data = c_data.filter((obj:any, pos:any, arr:any) => {
+            return arr
+              .map((mapObj:any)=> mapObj.id)
+              .indexOf(obj.id) == pos;
+          });
+        
+          clientImages.forEach((res:any)=> {
+            for(let i=0;i<c_data.length;i++){
+              if(clientImages[c_data[i].id]){
+                c_data[i].job=clientImages[c_data[i].id];
+              }
+            }
+          });
+
+      return c_data;
+  }
   
   @HostListener('window:scroll',[])
   onWindowScroll() {
@@ -336,4 +366,6 @@ export class TvshowDetailsComponent implements OnInit {
       });
 
     }
+
+
 }

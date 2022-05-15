@@ -83,8 +83,13 @@ ngb-rating {
 }
 .movie-info h4{
     margin-top: 0;
+    width: 80%;
+    font-size: 20px;
 }
-
+.movie-rating{
+    margin: 5px;
+    width: 20%;
+}
 .movie-info span{
     background-color: var(--primary-color);
     padding: 0.25rem;
@@ -177,6 +182,29 @@ ngb-rating {
 
   }
  
+.person-info{
+    color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 00.5rem 1rem 1rem;
+    letter-spacing: 0.5px;
+}
+
+.person-info h4{
+    margin-top: 0;
+}
+
+.no-image{
+    object-fit: cover;
+    height: 376px;
+}
+.person-info span{
+    background-color: var(--primary-color);
+    padding: 0.25rem;
+    border-radius: 3px;
+    font-weight: bold;
+}
 
 .sim-movies:hover{
     /* top:-10px; */

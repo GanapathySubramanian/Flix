@@ -10,7 +10,7 @@
                 <div class="left-img">
                     <div class="movie-img">
                         <div *ngIf="movieDetails.poster_path==null;then thenBlock else elseBlock"></div>
-                        <ng-template #thenBlock><img src="assets/images/no-image.png"></ng-template>
+                        <ng-template #thenBlock><img src="assets/images/no-image.png" alt="figure" class="no-image"></ng-template>
                         <ng-template #elseBlock><img [attr.src]="imgUrl+movieDetails.poster_path" alt="{{movieDetails.original_title}}"></ng-template>    
                     </div>
                 </div>
@@ -64,7 +64,7 @@
     <main id="main">
         <div class="movie-poster-img">
             <div *ngIf="movieDetails.poster_path==null;then thenBlock else elseBlock"></div>
-            <ng-template #thenBlock><img src="assets/images/no-image.png"></ng-template>
+            <ng-template #thenBlock><img src="assets/images/no-image.png" alt="figure" class="no-image"></ng-template>
             <ng-template #elseBlock><img [attr.src]="imgUrl+movieDetails.poster_path" alt="{{movieDetails.original_title}}"></ng-template>
         </div>
     </main>
@@ -268,7 +268,7 @@
                     <main class="cast">   
                         <div class="movie btn-container" *ngFor="let cast_data of castList" [routerLink]="['/persondetails', cast_data.id]" >
                             <div *ngIf="cast_data.profile_path==null; then thenBlock else elseBlock"></div>
-                            <ng-template #thenBlock><img class="btn-image" src="assets/images/no-image.png"></ng-template>
+                            <ng-template #thenBlock><img class="btn-image" src="assets/images/no-image.png" alt="figure" class="no-image"></ng-template>
                             <ng-template #elseBlock><img class="btn-image" src="{{imgUrl+cast_data.profile_path}}"></ng-template>
                             <div class="btn-middle">
                                 <div class="text btn-info">Know More</div>
@@ -277,7 +277,9 @@
                                 <h4>{{cast_data.original_name}}</h4>
                                 <span>AS {{cast_data.character}}</span>
                             </div>
-                        
+                            <div class="person-info">
+                                <span>Popularity : <span [ngClass]="{'red':cast_data.popularity<50,'orange':cast_data.popularity>=50&&cast_data.popularity<80,'green':cast_data.popularity>=80}"> <i class="fa-solid fa-thumbs-up"></i> {{float2int(cast_data.popularity)}}</span> </span>
+                            </div>
                         </div>
                     </main>
             </ng-template>
@@ -300,14 +302,17 @@
                     <div class="movie btn-container" *ngFor="let crew_data of crewList" [routerLink]="['/persondetails', crew_data.id]" >
         
                         <div *ngIf="crew_data.profile_path==null; then thenBlock else elseBlock"></div>
-                        <ng-template #thenBlock><img class="btn-image"src="assets/images/no-image.png"></ng-template>
+                        <ng-template #thenBlock><img class="btn-image"src="assets/images/no-image.png" alt="figure" class="no-image"></ng-template>
                         <ng-template #elseBlock><img class="btn-image" src="{{imgUrl+crew_data.profile_path}}"></ng-template>
                         <div class="btn-middle">
                             <div class="text btn-info">Know More</div>
                         </div>
                         <div class="movie-info-crew">
                             <h4>{{crew_data.original_name}}</h4>
-                            <span>Job :  {{crew_data.job}}</span>
+                            <span>Job : {{crew_data.job}}</span>
+                        </div>
+                        <div class="person-info">
+                            <span >Popularity : <span [ngClass]="{'red':crew_data.popularity<50,'orange':crew_data.popularity>=50&&crew_data.popularity<80,'green':crew_data.popularity>=80}"> <i class="fa-solid fa-thumbs-up"></i> {{float2int(crew_data.popularity)}}</span> </span>
                         </div>
                     </div>
                 </main>
@@ -332,7 +337,7 @@
                     <div *ngIf="s_movies.poster_path==null; then thenBlock else elseBlock"></div>
                         <ng-template #thenBlock>
                             <figure>
-                                <img src="assets/images/no-image.png">
+                                <img src="assets/images/no-image.png" alt="figure" class="no-image">
                             </figure>
                         </ng-template>
                         <ng-template #elseBlock>  
@@ -343,7 +348,7 @@
                 
                         <div class="movie-info">
                             <h4>{{s_movies.title}}</h4>
-                            <span [ngClass]="{'red':s_movies.vote_average<=5,'orange':s_movies.vote_average>=5&&s_movies.vote_average<8,'green':s_movies.vote_average>=8}">{{float2int((s_movies.vote_average/10)*100) +'%'}}</span>
+                            <span class="movie-rating" [ngClass]="{'red':s_movies.vote_average<=5,'orange':s_movies.vote_average>=5&&s_movies.vote_average<8,'green':s_movies.vote_average>=8}">{{float2int((s_movies.vote_average/10)*100) +'%'}}</span>
                         </div>
                         <div class="movie-info">
                             <ngb-rating [max]="10" [(rate)]="s_movies.vote_average" [readonly]="false"></ngb-rating>
@@ -376,7 +381,7 @@
                     <div *ngIf="s_movies.poster_path==null; then thenBlock else elseBlock"></div>
                         <ng-template #thenBlock>
                             <figure>
-                            <img src="assets/images/no-image.png">
+                            <img src="assets/images/no-image.png" alt="figure" class="no-image">
                             </figure>
                         </ng-template>
                         <ng-template #elseBlock>  
@@ -387,7 +392,7 @@
                 
                         <div class="movie-info">
                             <h4>{{s_movies.title}}</h4>
-                            <span [ngClass]="{'red':s_movies.vote_average<=5,'orange':s_movies.vote_average>=5&&s_movies.vote_average<8,'green':s_movies.vote_average>=8}">{{float2int((s_movies.vote_average/10)*100)+'%'}}</span>
+                            <span class="movie-rating" [ngClass]="{'red':s_movies.vote_average<=5,'orange':s_movies.vote_average>=5&&s_movies.vote_average<8,'green':s_movies.vote_average>=8}">{{float2int((s_movies.vote_average/10)*100)+'%'}}</span>
                         </div>
                         <div class="movie-info">
                             <ngb-rating [max]="10" [(rate)]="s_movies.vote_average" [readonly]="false"></ngb-rating>

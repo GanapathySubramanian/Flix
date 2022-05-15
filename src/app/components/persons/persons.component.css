@@ -31,6 +31,12 @@ main{
 
 .person-info h4{
     margin-top: 0;
+    width: 80%;
+    font-size: 20px;
+}
+.no-image{
+    object-fit: cover;
+    height: 376px;
 }
 
 .person-info span{

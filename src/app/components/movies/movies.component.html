@@ -38,7 +38,7 @@
 
             <ng-template #thenBlock>
                 <figure>
-                    <img src="assets/images/no-image.png" class="figure">
+                    <img src="assets/images/no-image.png" alt="figure" class="no-image">
                 </figure>
             </ng-template>
             <ng-template #elseBlock>
@@ -48,11 +48,11 @@
             </ng-template>
 
             <div class="movie-info">
-                <h4>{{movie.title}}</h4>
-                <span [ngClass]="{'red':movie.vote_average<=5,'orange':movie.vote_average>=5&&movie.vote_average<8,'green':movie.vote_average>=8}">{{float2int(((movie.vote_average/10)*100)) + '%'}}</span>
+                <h4 class="movie-name">{{movie.title}}</h4>
+                <span class="movie-rating" [ngClass]="{'red':movie.vote_average<=5,'orange':movie.vote_average>=5&&movie.vote_average<8,'green':movie.vote_average>=8}">{{float2int(((movie.vote_average/10)*100)) + '%'}}</span>
             </div>
 
-            <div class="movie-info">
+            <div class="movie-info star-rating">
                 <ngb-rating [max]="10" [(rate)]="movie.vote_average" [readonly]="false"></ngb-rating>
             </div>
             <div class="date">

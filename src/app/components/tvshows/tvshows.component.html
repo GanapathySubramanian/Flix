@@ -47,7 +47,7 @@
 
             <ng-template #thenBlock>
                 <figure>
-                    <img src="assets/images/no-image.png">
+                    <img src="assets/images/no-image.png" class="no-image">
                 </figure>
             </ng-template>
             <ng-template #elseBlock>
@@ -58,7 +58,7 @@
 
             <div class="tvshows-info">
                 <h4>{{tvshow.name}}</h4>
-                <span [ngClass]="{'red':tvshow.vote_average<=5,'orange':tvshow.vote_average>=5&&tvshow.vote_average<8,'green':tvshow.vote_average>=8}">{{float2int((tvshow.vote_average/10)*100)+'%'}}</span>
+                <span class="tvshow-rating" [ngClass]="{'red':tvshow.vote_average<=5,'orange':tvshow.vote_average>=5&&tvshow.vote_average<8,'green':tvshow.vote_average>=8}">{{float2int((tvshow.vote_average/10)*100)+'%'}}</span>
             </div>
 
             <div class="tvshows-info">

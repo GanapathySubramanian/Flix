@@ -120,9 +120,9 @@ export class MovieDetailsComponent implements OnInit {
     let watch:any;
     this.movieservice.watchData.subscribe((data)=>{
       watch=data;
-      this.watchprovider=watch.results.IN[0].link;
+      this.watchprovider=watch.results.IN[0]?.link;
       
-      if(this.watchprovider.length==0){
+      if(this.watchprovider?.length==0){
         this.nowatchprovider=true;
       }else{
         this.nowatchprovider=false;
@@ -140,7 +140,7 @@ export class MovieDetailsComponent implements OnInit {
 
           for(let i=0;i<recmovie.results.length;i++){
             if(recmovie.results[i].poster_path==null){
-              recmovie.results[i].poster_path="Empty";
+              recmovie.results[i].poster_path=null;
             }
           }
           if(recmovie.total_results==0){
@@ -161,7 +161,7 @@ export class MovieDetailsComponent implements OnInit {
 
         for(let i=0;i<similarmovie.results.length;i++){
           if(similarmovie.results[i].poster_path==null){
-            similarmovie.results[i].poster_path="Empty";
+            similarmovie.results[i].poster_path=null;
           }
         }
         if(similarmovie.total_results==0){
@@ -189,12 +189,46 @@ export class MovieDetailsComponent implements OnInit {
         this.nocrewdata=true;
       }else{
         this.nocrewdata=false;
-      this.crewList=tempcreditData.crew;
 
-      }
+              var c_data:any  = tempcreditData.crew;
+
+              
+              var clientImages:any =[]
+
+              for(var i=0;i<c_data.length;i++){
+                    if(clientImages[c_data[i].id]){
+                    clientImages[c_data[i].id]= clientImages[c_data[i].id] +', '+c_data[i].job
+
+                    }else{
+                    clientImages[c_data[i].id] =c_data[i].job
+                    }
+              }
+
+              //remove duplicate entries
+              c_data = c_data.filter((obj:any, pos:any, arr:any) => {
+                return arr
+                  .map((mapObj:any)=> mapObj.id)
+                  .indexOf(obj.id) == pos;
+              });
+            
+              clientImages.forEach((res:any)=> {
+                for(let i=0;i<c_data.length;i++){
+                  if(clientImages[c_data[i].id]){
+                    c_data[i].job=clientImages[c_data[i].id];
+                  }
+                }
+                
+              });
+
+              this.crewList=c_data;
+              console.log(c_data);
+              
+
+          }
     })
   }
 
+  
   getReviews(reviews_url: string) {
     this.movieservice.getMovieReviews(reviews_url);
     
@@ -253,6 +287,7 @@ export class MovieDetailsComponent implements OnInit {
         if(tempimagesData.logos.length<0){
           this.logoList.file_path=null;
         }else{
+          
           this.logoList=tempimagesData.logos[0];
         }
        
@@ -330,3 +365,4 @@ export class MovieDetailsComponent implements OnInit {
 
 
 }
+
