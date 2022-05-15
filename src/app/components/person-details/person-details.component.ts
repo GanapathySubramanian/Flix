@@ -138,8 +138,7 @@ export class PersonDetailsComponent implements OnInit {
 
 
   filterCrewData(arr:any):any{
-    console.log(arr);
-    
+
     let clientImages:any=[];
     var c_data:any  =[];
     c_data= arr;
@@ -151,11 +150,7 @@ export class PersonDetailsComponent implements OnInit {
           }
         }
 
-        clientImages.forEach((element:any) => {
-          console.log(element);
-          
-        });
-        
+
           //remove duplicate entries
           c_data = c_data.filter((obj:any, pos:any, arr:any) => {
             return arr

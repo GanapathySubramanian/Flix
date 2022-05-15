@@ -109,9 +109,6 @@ export class PersonsComponent implements OnInit {
     this.peopleservice.peoplesData.subscribe((data)=>{
        temppeopleList=data;
        this.peopleList=temppeopleList.results;
-      console.log(this.peopleList);
-      
-
        if(temppeopleList.total_results==0){
         const Ele= window.document.getElementById("no-record");
         Ele?.classList.remove('d-none');

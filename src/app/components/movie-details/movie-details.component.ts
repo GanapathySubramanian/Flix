@@ -44,12 +44,12 @@ export class MovieDetailsComponent implements OnInit {
   windowScrolled: boolean=false;
 
   constructor(private route:ActivatedRoute,private router:Router,private movieservice:MoviesService,private _sanitizer:DomSanitizer) { 
-    let id=this.route.snapshot.params['id'];
+    let id=this.route.snapshot?.params['id'];
     movie_id=id;
   }
 
   ngOnInit(): void {
-    this.router.navigateByUrl('/moviedetails/'+movie_id);
+    this.router?.navigateByUrl('/moviedetails/'+movie_id);
 
     this.getMovieDetails(movie_id);
 
@@ -221,8 +221,6 @@ export class MovieDetailsComponent implements OnInit {
               });
 
               this.crewList=c_data;
-              console.log(c_data);
-              
 
           }
     })
