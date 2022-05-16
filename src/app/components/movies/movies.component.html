@@ -1,33 +1,48 @@
 <div class="movies-section">
-    <nav class="navbar navbar-expand mt-4 navbar-light" aria-label="Second navbar example">
-        <div class="container-fluid">
-          <div class="collapse navbar-collapse" id="navbarsExample02">
-            <ul class="navbar-nav me-auto" [ngStyle]="{'visibility': ishidedrop ? 'hidden' : 'visible'}">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle " style="color:#fff"href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  GENRE
-                </a>
+   
+      
+  <nav class="navbar navbar-expand mt-4 navbar-light" aria-label="Second navbar example">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarsExample02">
+        <ul class="navbar-nav me-auto" [ngStyle]="{'visibility': ishidedrop ? 'hidden' : 'visible'}">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" style="color:#fff"href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              GENRE
+            </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li *ngFor="let genre of genreList"><a class="dropdown-item link" (click)="getGenreContent(genre.id,genre.name)">{{genre.name}}</a></li>
                 </ul>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle"style="color:#fff" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  SORT BY
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              </li>
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" style="color:#fff"href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    SORT BY
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li *ngFor="let order of orderList"><a class="dropdown-item link" (click)="getOrderContent(order.order,order.desc)">{{order.desc}}</a></li>
                 </ul>
             </li>
             </ul>
-            <form id="form" [formGroup]="searchForm" (ngSubmit)="getSearchContent()"> 
+            <form id="form" [formGroup]="searchForm" (ngSubmit)="getSearchContent()" class="lg-search"> 
                 <input type="text" placeholder="Search Movie" formControlName="movieName"  class="search form-control">
             </form>
+            
            </div>
         </div>
       </nav>
-    
 
+
+      <form id="form" [formGroup]="searchForm" (ngSubmit)="getSearchContent()" class="sm-search"> 
+        <input type="text" placeholder="Search Movie" formControlName="movieName"  class="search form-control">
+    </form>
+
+
+
+
+
+
+
+
+    
     <h1 class="text-center text-warning">{{sortby_value | uppercase}}</h1>
     <h1 class="text-center text-warning">{{genre_value | uppercase}}</h1>
 

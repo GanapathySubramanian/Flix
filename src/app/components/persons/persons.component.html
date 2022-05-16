@@ -2,31 +2,16 @@
     <nav class="navbar navbar-expand mt-4 navbar-light" aria-label="Second navbar example">
         <div class="container-fluid">
           <div class="collapse navbar-collapse" id="navbarsExample02">
-            <ul class="navbar-nav me-auto" [ngStyle]="{'visibility': 'hidden'}">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle " style="color:#fff"href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  GENRE
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                
-                </ul>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle"style="color:#fff" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  SORT BY
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                </ul>
-            </li>
-            </ul>
-            <form id="form" [formGroup]="searchForm" (ngSubmit)="getSearchContent()"> 
+            <form id="form" [formGroup]="searchForm" (ngSubmit)="getSearchContent()" class="lg-search"> 
                 <input type="text" placeholder="Search person" formControlName="personName"  class="search form-control">
             </form>
            </div>
         </div>
       </nav>
     
-
+      <form id="form" [formGroup]="searchForm" (ngSubmit)="getSearchContent()" class="sm-search"> 
+        <input type="text" placeholder="Search person" formControlName="personName"  class="search form-control">
+    </form>
     <h1 class="text-center text-warning">{{sortby_value | uppercase}}</h1>
 
 

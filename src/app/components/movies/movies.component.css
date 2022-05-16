@@ -159,6 +159,13 @@ ngb-rating {
     color: #7378c5;
 }
 
+
+@media only screen and (min-width: 600px) {
+    .sm-search{
+        display: none;
+    }
+
+}
 @media only screen and (max-width: 600px) {
     .movie{
         width:500px;
@@ -178,4 +185,35 @@ ngb-rating {
         margin: 5px;
         width: auto;
     }
+    .search{
+        background-color: transparent;
+        border:2px solid var(--secondary-color);
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        font-size: 1rem;
+        color: #fff;
+        font-family: inherit;
+        height: 60px;
+    }
+    .sm-search{
+        margin-left: 50px;
+        margin-right: 50px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        display: block;
+    }
+    .lg-search{
+        display: none;
+    }
+    .navbar-nav{
+        display: flex;
+        justify-content: center;
+        /* margin-left: 180px; */
+    }   
+    .navbar-nav{
+        width: 100%;
+        margin: auto;
+      }
+      /* Style the links inside the navigation bar */
+     
   }

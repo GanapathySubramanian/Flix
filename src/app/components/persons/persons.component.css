@@ -157,3 +157,57 @@ ngb-rating {
     color: #7378c5;
 }
 
+
+@media only screen and (min-width: 600px) {
+    .sm-search{
+        display: none;
+    }
+    .lg-search{
+        width: 30%;
+        margin: auto;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .person{
+        width:500px;
+        margin: 1rem;
+        border-radius: 3px;
+        box-shadow: 0.2px 4px 5px rgba(0,0,0,0.1);
+        background-color: var(--secondary-color);
+        position: relative;
+        overflow: hidden;
+    }
+    .person-info h4{
+        margin-top: 0;
+        width: 80%;
+        font-size: 30px;
+    }
+    .person-rating{
+        margin: 5px;
+        width: auto;
+    }
+    .search{
+        background-color: transparent;
+        border:2px solid var(--secondary-color);
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        font-size: 1rem;
+        color: #fff;
+        font-family: inherit;
+        height: 60px;
+    }
+    .sm-search{
+        margin-left: 50px;
+        margin-right: 50px;
+        /* margin-top: 10px; */
+        margin-bottom: 20px;
+        display: block;
+    }
+    .lg-search{
+        display: none;
+    }
+    .navbar-nav{
+        width: 100%;
+        margin: auto;
+      }
+  }
