@@ -24,3 +24,18 @@
 <div class="main-content">
      <router-outlet  (activate)="onActivate($event)"></router-outlet>
 </div>
+
+<nav class="navbar navbar-expand navbar-dark footer" aria-label="Second navbar example">
+  <div class="container-fluid">
+      <div class="container text-center">
+        <p class="mb-0 py-2" >Done By Ganapathy Subramanian ❤️</p>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <div class="move-top" [ngStyle]="{'display':windowScrolled? 'block' : 'none' }">
+          <button class="btn" (click)="scrollToTop()">
+              <i class="fa-solid fa-arrow-up"></i>
+          </button>
+        </div>
+      </div>
+  </div>
+</nav>

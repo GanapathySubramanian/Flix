@@ -4,6 +4,12 @@
     height: 100%;
     background-color: black;
 }
+.lg-carousel{
+    display: block;
+}
+.sm-carousel{
+    display: none;
+}
 main{
     display: flex;
     flex-wrap: wrap;
@@ -24,7 +30,10 @@ ngb-rating {
 }
 .date{
     color: #eee;
-    margin-left: 7%;
+    display: flex;
+    justify-content:start;
+    margin: 6px;
+    padding: 5px;
 }
 .details-table{
     margin-left: 10%;
@@ -216,12 +225,6 @@ ngb-rating {
     cursor: pointer;
     /* opacity: 0.8; */
 }
- @media only screen and (max-width: 500px) {
-         #movie-logo{
-        width: 70%;
-        height: 100%;
-    }
-  }  
 
 
   
@@ -472,6 +475,7 @@ path.two {
         fill: white;
     }
 }
+
 /* system and tab */
 @media only screen and (min-width: 600px) {
     
@@ -634,7 +638,10 @@ path.two {
             line-height: 1.5rem;
             color: #fff;
         }
-
+        .youtube-video{
+            height: 100%;
+            width: 100%;
+        }
         .item-title{
             color:orange;
             font-size: 50px;
@@ -663,12 +670,48 @@ path.two {
        .watchnow-btn{
            display: none;
        }
+
+
+
+}
+
+@media only screen and (max-width:600px) {
+        
+    #movie-logo{
+        width: 70%;
+        height: 100%;
+     }
+    .movie{
+        width:500px;
+        margin: 1rem;
+        border-radius: 3px;
+        box-shadow: 0.2px 4px 5px rgba(0,0,0,0.1);
+        background-color: var(--secondary-color);
+        position: relative;
+        overflow: hidden;
+    }
+    .movie-info h4{
+        margin-top: 0;
+        width: 80%;
+        font-size: 30px;
+    }
+    .movie-rating{
+        margin: 5px;
+        width: auto;
+    }
+    .lg-carousel{
+        display: none;
+    }
+    .sm-carousel{
+        display: block;
+    }
 }
 
 
 /* for mobile */
 @media only screen and (max-width: 800px) {
 
+   
     .header{
         display: none;
     }
@@ -727,9 +770,16 @@ path.two {
         z-index: 10;
     }
     
+
 }
 
 @media only screen and (max-width: 1000px) {
+    .lg-carousel{
+        display: none;
+    }
+    .sm-carousel{
+        display: block;
+    }
     .left-img{
         width: 50%;
         float: left;

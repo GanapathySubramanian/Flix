@@ -26,3 +26,41 @@ nav a{
     margin-top: 10px;
 }
 
+
+  
+.copyright {
+margin-top:15px;
+text-align:center;
+font-size:13px;
+color:#aaa;
+margin-bottom:0;
+}
+
+
+ .footer .container-fluid{
+    display: flex;
+    margin-left: 5%;
+    color: #fff;
+}
+
+.move-top .btn{
+    border-radius: 100%;
+    bottom: 560px;
+    /* margin-left: 85%; */
+}
+
+ .btn {
+    color: #ffffff;
+}
+.btn:hover{
+    background-color: red;
+    color: white;
+} 
+@media only screen and (max-width:600px) {
+    .footer .container-fluid{
+       width: 100%;
+       color: #fff;
+       margin-left:0%;
+
+   }
+}

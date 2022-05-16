@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-nav-bar',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
+  windowScrolled: boolean=false;
 
   constructor() { }
 
@@ -25,4 +26,24 @@ export class NavBarComponent implements OnInit {
      //or document.querySelector('body').scrollTo(0,0)
 
  }
+
+
+ @HostListener('window:scroll',[])
+ onWindowScroll() {
+     if (window.scrollY> 1000) {        
+         this.windowScrolled = true;
+     } 
+    else if (this.windowScrolled && window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop < 10) {
+         this.windowScrolled = false;
+     }
+ }
+
+   scrollToTop(){
+     window.scroll({ 
+           top: 0, 
+           left: 0, 
+           behavior: 'smooth' 
+     });
+ }
+
 }

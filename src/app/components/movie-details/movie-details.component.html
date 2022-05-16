@@ -223,7 +223,7 @@
             <h2 class="movie-heading mt-5">{{movieDetails.original_title}} POSTERS</h2>
             <div *ngIf="nopost; then noposters else posters"></div>
             <ng-template #posters>
-                <carousel class="text-center" [autoplay]=true [autoplayInterval]=3000 [pauseOnHover]=true [height]=300 [margin]=30>
+                <carousel class="text-center" [autoplay]=true [autoplayInterval]=3000 [pauseOnHover]=true [height]=300 [margin]=30 arrowsTheme="dark">
                     <div class="carousel-cell" *ngFor="let post of posterList">
                         <img src="{{imgUrl+post.file_path}}" width="100%" height="100%">
                     </div>
@@ -245,11 +245,21 @@
             <h2 class="movie-heading mt-5">{{movieDetails.original_title}} VIDEOS</h2>
             <div *ngIf="novideos; then novideo else video"></div>
             <ng-template #video>
-                <carousel class="text-center"  [cellWidth]=400 [height]=300 [margin]=50>
-                    <div class="carousel-cell" *ngFor="let video of videoList" >
-                        <iframe height="100%" width="100%" id="stop-video" class="youtube-video" [src]="video.key" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
-                </carousel>
+                <div class="lg-carousel">
+                    <carousel class="text-center "  [cellWidth]=1460 [height]=640 [margin]=20 arrowsTheme="dark">
+                        <div class="carousel-cell video" *ngFor="let video of videoList" >
+                            <iframe  id="stop-video" class="youtube-video" [src]="video.key" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </carousel>
+                </div>
+                <div class="sm-carousel">
+                    <carousel class="text-center " [cellWidth]=400 [height]=300 [margin]=50  arrowsTheme="dark">
+                        <div class="carousel-cell video" *ngFor="let video of videoList" >
+                            <iframe height="100%" width="100%" id="stop-video" class="youtube-video" [src]="video.key" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </carousel>
+                </div>
+            
             </ng-template>
             <ng-template #novideo> 
                 <div id="no-record_images" >
@@ -265,6 +275,7 @@
             <p class="h4 text-center">Click the Person to know more</p>
             <div *ngIf="nocastdata; then nocast else castdata"></div>
             <ng-template #castdata>       
+
                     <main class="cast">   
                         <div class="movie btn-container" *ngFor="let cast_data of castList" [routerLink]="['/persondetails', cast_data.id]" >
                             <div *ngIf="cast_data.profile_path==null; then thenBlock else elseBlock"></div>
@@ -277,9 +288,9 @@
                                 <h4>{{cast_data.original_name}}</h4>
                                 <span>AS {{cast_data.character}}</span>
                             </div>
-                            <div class="person-info">
+                            <!-- <div class="person-info">
                                 <span>Popularity : <span [ngClass]="{'red':cast_data.popularity<50,'orange':cast_data.popularity>=50&&cast_data.popularity<80,'green':cast_data.popularity>=80}"> <i class="fa-solid fa-thumbs-up"></i> {{float2int(cast_data.popularity)}}</span> </span>
-                            </div>
+                            </div> -->
                         </div>
                     </main>
             </ng-template>
@@ -311,9 +322,9 @@
                             <h4>{{crew_data.original_name}}</h4>
                             <span>Job : {{crew_data.job}}</span>
                         </div>
-                        <div class="person-info">
+                        <!-- <div class="person-info">
                             <span >Popularity : <span [ngClass]="{'red':crew_data.popularity<50,'orange':crew_data.popularity>=50&&crew_data.popularity<80,'green':crew_data.popularity>=80}"> <i class="fa-solid fa-thumbs-up"></i> {{float2int(crew_data.popularity)}}</span> </span>
-                        </div>
+                        </div> -->
                     </div>
                 </main>
             </ng-template>
@@ -414,10 +425,5 @@
 
     </div>
     
-    <div class="move-top" [ngStyle]="{'display':windowScrolled? 'block' : 'none' }">
-        <button class="btn" (click)="scrollToTop()">
-            <i class="fa-solid fa-arrow-up"></i>
-        </button>
-    </div>
    
 </div>
