@@ -96,25 +96,27 @@
             <div *ngIf="nocastMovie; then nocastmovie else castmoviedata"></div>
              <ng-template #castmoviedata>
                 <div class="person" *ngFor="let temp of castMovieList" [routerLink]="['/moviedetails', temp.id]">
-                                <div *ngIf="temp.poster_path==null; then thenBlock else elseBlock"></div>
-                                <ng-template #thenBlock>
-                                    <figure>
-                                    <img src="assets/images/no-image.png" class="no-image">
-                                    </figure>
-                                </ng-template>
-                                <ng-template #elseBlock>
-                                    <figure>
-                                        <img src="{{imgUrl+temp.poster_path}}">
-                                    </figure>
-                                </ng-template>
-                                <div class="person-info">
-                                    <h4>{{temp.title}}</h4>
-                                    <span class="person-rating"[ngClass]="{'red':temp.vote_average<=5,'orange':temp.vote_average>=5&&temp.vote_average<8,'green':temp.vote_average>=8}">{{float2int((temp.vote_average/10)*100) + '%'}}</span>
-                                </div>
-                                <div class="date">
-                                <ngb-rating [max]="10" [(rate)]="temp.vote_average" [readonly]="false"></ngb-rating>
-                                <p><i class="fas fa-calendar-alt"></i> {{temp.release_date}}</p>
-                                </div>
+                        <div *ngIf="temp.poster_path==null; then thenBlock else elseBlock"></div>
+                        <ng-template #thenBlock>
+                            <figure>
+                            <img src="assets/images/no-image.png" class="no-image">
+                            </figure>
+                        </ng-template>
+                        <ng-template #elseBlock>
+                            <figure>
+                                <img src="{{imgUrl+temp.poster_path}}">
+                            </figure>
+                        </ng-template>
+                        <div class="person-info">
+                            <h4>{{temp.title}}</h4>
+                            <span class="person-rating" [ngClass]="{'red':temp.vote_average<=5,'orange':temp.vote_average>=5&&temp.vote_average<8,'green':temp.vote_average>=8}">{{float2int((temp.vote_average/10)*100) +'%'}}</span>
+                        </div>
+                        <div class="person-info">
+                            <ngb-rating [max]="10" [(rate)]="temp.vote_average" [readonly]="false"></ngb-rating>
+                        </div>
+                        <div class="date">
+                            <p><i class="fas fa-calendar-alt"></i> {{temp.release_date}}</p>
+                        </div>
                     </div>
                 
             </ng-template>
@@ -136,31 +138,29 @@
             <div *ngIf="nocastTv; then nocasttv else casttvdata"></div>
             <ng-template #casttvdata>
                 <div class="person" *ngFor="let temp1 of castTvList" [routerLink]="['/tvshowdetails', temp1.id]">
-                   
-                                    <div *ngIf="temp1.poster_path==null; then thenBlock else elseBlock"></div>
-                                    <ng-template #thenBlock>
-                                        <figure>
-                                            <img src="assets/images/no-image.png" class="no-image">
-                                        </figure>
-                                    </ng-template>
-                                    <ng-template #elseBlock>
-                                        <figure>
-                                            <img src="{{imgUrl+temp1.poster_path}}">
-                                        </figure>
-                                    </ng-template>
+        
+                        <div *ngIf="temp1.poster_path==null; then thenBlock else elseBlock"></div>
+                        <ng-template #thenBlock>
+                            <figure>
+                                <img src="assets/images/no-image.png" class="no-image">
+                            </figure>
+                        </ng-template>
+                        <ng-template #elseBlock>
+                            <figure>
+                                <img src="{{imgUrl+temp1.poster_path}}">
+                            </figure>
+                        </ng-template>
 
-                                    <div class="person-info">
-                                        <h4>{{temp1.original_name}}</h4>
-                                        <span class="person-rating"[ngClass]="{'red':temp1.vote_average<=5,'orange':temp1.vote_average>=5&&temp1.vote_average<8,'green':temp1.vote_average>=8}">{{float2int((temp1.vote_average/10)*100)+'%'}}</span>
-                                    </div>
-                    
-                
-                                    <div class="date">
-                                    <ngb-rating [max]="10" [(rate)]="temp1.vote_average" [readonly]="false"></ngb-rating>
-                                    <p><i class="fas fa-calendar-alt"></i> {{temp1.first_air_date}}</p>
-                                    </div>
-                            
-                    
+                        <div class="person-info">
+                            <h4>{{temp1.original_name}}</h4>
+                            <span class="person-rating"[ngClass]="{'red':temp1.vote_average<=5,'orange':temp1.vote_average>=5&&temp1.vote_average<8,'green':temp1.vote_average>=8}">{{float2int((temp1.vote_average/10)*100)+'%'}}</span>
+                        </div>
+                        <div class="person-info">
+                            <ngb-rating [max]="10" [(rate)]="temp1.vote_average" [readonly]="false"></ngb-rating>
+                        </div>
+                        <div class="date">
+                            <p><i class="fas fa-calendar-alt"></i> {{temp1.first_air_date}}</p>
+                        </div>
                 </div>
         </ng-template>
             <ng-template #nocasttv>
@@ -192,13 +192,11 @@
                                                 <img src="{{imgUrl+crew_data.poster_path}}">
                                             </figure>    
                                         </ng-template>
-                                        <div class="person-info">
+                                        <div class="person-info-crew">
                                             <h4>{{crew_data.title}}</h4>
-                                            
-                                        </div>
-                                        <div class="date">
                                             <p>AS {{crew_data.job}}</p>
                                         </div>
+                                        
                     
             </div>
             </ng-template>
@@ -231,14 +229,10 @@
                                             <img src="{{imgUrl+crew_data.poster_path}}">
                                         </figure>
                                     </ng-template>
-                                    <div class="person-info">
-                                        <h4>{{crew_data.title}}</h4>
-                                        
-                                    </div>
-                                    <div class="date">
+                                    <div class="person-info-crew">
+                                        <h4>{{crew_data.name}}</h4>
                                         <p>AS {{crew_data.job}}</p>
                                     </div>
-                         
                         </div>
                 </ng-template>
               <ng-template #nocrewtv>

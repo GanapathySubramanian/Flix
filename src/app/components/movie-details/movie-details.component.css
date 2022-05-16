@@ -705,13 +705,19 @@ path.two {
     .sm-carousel{
         display: block;
     }
+    
 }
 
 
 /* for mobile */
 @media only screen and (max-width: 800px) {
 
-   
+    .lg-carousel{
+        display: block;
+    }
+    .sm-carousel{
+        display: none;
+    }
     .header{
         display: none;
     }

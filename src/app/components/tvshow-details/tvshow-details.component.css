@@ -9,6 +9,12 @@ main{
     flex-wrap: wrap;
     justify-content: center;
 }
+.lg-carousel{
+    display: block;
+}
+.sm-carousel{
+    display: none;
+}
 hr{
     color: #fff;
     height: 2px;
@@ -24,7 +30,10 @@ ngb-rating {
 }
 .date{
     color: #eee;
-    margin-left: 7%;
+    display: flex;
+    justify-content:start;
+    margin: 10px;
+    padding: 5px;
 }
 .details-table{
     margin-left: 10%;
@@ -135,7 +144,7 @@ ngb-rating {
  
 
 .network-img{
-    width: 80px;
+    width: 100px;
     height:50px;
 }
 .pagination{
@@ -208,7 +217,6 @@ ngb-rating {
   #tvshow-logo{
       width: 20%;
       height: 20%;
-
   }
  
 
@@ -222,13 +230,7 @@ ngb-rating {
     cursor: pointer;
     /* opacity: 0.8; */
 }
- @media only screen and (max-width: 500px) {
-         #tvshow-logo{
-        width: 70%;
-        height: 100%;
-    }
-  }  
-
+ 
 
   
   .table-review-head{
@@ -478,6 +480,8 @@ path.two {
         fill: white;
     }
 }
+
+
 /* system and tab */
 @media only screen and (min-width: 600px) {
     
@@ -669,12 +673,51 @@ path.two {
        .watchnow-btn{
            display: none;
        }
+       
+}
+
+@media only screen and (max-width:600px) {
+        
+    #tvshow-logo{
+        width: 70%;
+        height: 100%;
+     }
+    .tvshow{
+        width:500px;
+        margin: 1rem;
+        border-radius: 3px;
+        box-shadow: 0.2px 4px 5px rgba(0,0,0,0.1);
+        background-color: var(--secondary-color);
+        position: relative;
+        overflow: hidden;
+    }
+    .tvshow-info h4{
+        margin-top: 0;
+        width: 80%;
+        font-size: 30px;
+    }
+    .tvshow-rating{
+        margin: 5px;
+        width: auto;
+    }
+    .lg-carousel{
+        display: none;
+    }
+    .sm-carousel{
+        display: block;
+    }
+    
 }
 
 
 /* for mobile */
 @media only screen and (max-width: 800px) {
-
+    .lg-carousel{
+        display: block;
+    }
+    .sm-carousel{
+        display: none;
+    }
     .header{
         display: none;
     }
@@ -736,6 +779,12 @@ path.two {
 }
 
 @media only screen and (max-width: 1000px) {
+    .lg-carousel{
+        display: none;
+    }
+    .sm-carousel{
+        display: block;
+    }
     .left-img{
         width: 50%;
         float: left;

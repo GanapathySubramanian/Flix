@@ -23,7 +23,14 @@ ngb-rating {
 }
 .date{
     color: #eee;
-    margin-left: 7%;
+    justify-content:start;
+    margin: 6px;
+    padding: 5px;
+}
+.person-info-crew{
+    color: #eee;
+    padding: 00.5rem 1rem 1rem;
+    letter-spacing: 0.5px;
 }
 .details-table{
     margin-left: 10%;
@@ -231,6 +238,8 @@ main{
    
   }
 
+  
+
   @media screen and (max-height:700px){
     #person-logo{
         width: 70%;
@@ -377,4 +386,42 @@ main{
 		height: 200%;
 		opacity: 0;
 	}
+}
+
+
+@media only screen and (max-width:600px) {
+    .no-image{
+        object-fit: cover;
+        height: auto;
+    }
+    
+    #person-logo{
+        width: 70%;
+        height: 100%;
+     }
+    .person{
+        width:500px;
+        margin: 1rem;
+        border-radius: 3px;
+        box-shadow: 0.2px 4px 5px rgba(0,0,0,0.1);
+        background-color: var(--secondary-color);
+        position: relative;
+        overflow: hidden;
+    }
+    .person-info h4{
+        margin-top: 0;
+        width: 80%;
+        font-size: 30px;
+    }
+    .person-rating{
+        margin: 5px;
+        width: auto;
+    }
+    .lg-carousel{
+        display: none;
+    }
+    .sm-carousel{
+        display: block;
+    }
+    
 }
