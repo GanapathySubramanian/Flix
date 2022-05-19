@@ -310,6 +310,16 @@
                 </carousel>
             </div>
 
+            
+            <div class="md-carousel">
+                <carousel class="text-center"  [cellWidth]=1140 [height]=640 [margin]=20 arrowsTheme="dark">
+                    <div class="carousel-cell" *ngFor="let video of videoList" >
+                        <iframe height="100%" width="100%" id="stop-video" class="youtube-video" [src]="video.key" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </carousel>
+            </div>
+
+
             <div class="sm-carousel">
                 <carousel class="text-center" [cellWidth]=400 [height]=300 [margin]=50  arrowsTheme="dark">
                     <div class="carousel-cell" *ngFor="let video of videoList" >
@@ -387,15 +397,15 @@
     <hr>
 
 
-    <div class="sim_tvshows">
-        <h2 class="tvshow-heading mt-5">RECOMMENDED tvshowS</h2>
+    <div class="sim_tvshow">
+        <h2 class="tvshow-heading mt-5">RECOMMENDED tvshow</h2>
         <p class="h4 text-center">Click the tvshow to know more</p>
         <div *ngIf="norectvshowdata; then norectvshow else rectvshow"></div>
         <ng-template #rectvshow>
-            <main class="s_tvshows">
-                <div class="tvshow rec-tvshows" *ngFor="let s_tvshows of rectvshowList" [routerLink]="['/similartvshowdetails', s_tvshows.id]">
+            <main class="s_tvshow">
+                <div class="tvshow rec-tvshow" *ngFor="let s_tvshow of rectvshowList" [routerLink]="['/similartvshowdetails', s_tvshow.id]">
                   
-                <div *ngIf="s_tvshows.poster_path==null; then thenBlock else elseBlock"></div>
+                <div *ngIf="s_tvshow.poster_path==null; then thenBlock else elseBlock"></div>
                     <ng-template #thenBlock>
                         <figure>
                             <img src="assets/images/no-image.png" class="no-image">
@@ -403,26 +413,26 @@
                     </ng-template>
                     <ng-template #elseBlock>  
                         <figure>
-                            <img src="{{imgUrl+s_tvshows.poster_path}}">
+                            <img src="{{imgUrl+s_tvshow.poster_path}}">
                         </figure>
                     </ng-template>
             
                     <div class="tvshow-info">
-                        <h4>{{s_tvshows.name}}</h4>
-                        <span class="tvshow-rating" [ngClass]="{'red':s_tvshows.vote_average<=5,'orange':s_tvshows.vote_average>=5&&s_tvshows.vote_average<8,'green':s_tvshows.vote_average>=8}">{{float2int((s_tvshows.vote_average/10)*100) +'%'}}</span>
+                        <h4>{{s_tvshow.name}}</h4>
+                        <span class="tvshow-rating" [ngClass]="{'red':s_tvshow.vote_average<=5,'orange':s_tvshow.vote_average>=5&&s_tvshow.vote_average<8,'green':s_tvshow.vote_average>=8}">{{float2int((s_tvshow.vote_average/10)*100) +'%'}}</span>
                     </div>
                     <div class="tvshow-info">
-                        <ngb-rating [max]="10" [(rate)]="s_tvshows.vote_average" [readonly]="false"></ngb-rating>
+                        <ngb-rating [max]="10" [(rate)]="s_tvshow.vote_average" [readonly]="false"></ngb-rating>
                     </div>
                     <div class="date">
-                        <p><i class="fas fa-calendar-alt"></i> {{s_tvshows.first_air_date}}</p>
+                        <p><i class="fas fa-calendar-alt"></i> {{s_tvshow.first_air_date}}</p>
                       </div>
                 </div>
             </main>
         </ng-template>
         <ng-template #norectvshow> 
-            <div id="no-record_recommended_tvshows">
-                <h1 class="text-warning text-center">Recommeded tvshows not available for {{tvshowDetails.original_title}}</h1>
+            <div id="no-record_recommended_tvshow">
+                <h1 class="text-warning text-center">Recommeded tvshow not available for {{tvshowDetails.original_title}}</h1>
               </div>
         </ng-template>    
     </div>
@@ -430,16 +440,16 @@
 
 
 
-    <div class="sim_tvshows-section">
-        <h2 class="tvshow-heading mt-5">SIMILAR tvshowS</h2>
+    <div class="sim_tvshow-section">
+        <h2 class="tvshow-heading mt-5">SIMILAR tvshow</h2>
         <p class="h4 text-center">Click the tvshow to know more</p>
 
         <div *ngIf="nosimtvshowdata; then nosimtvshow else simtvshowdata"></div>
         <ng-template #simtvshowdata>
-            <main class="s_tvshows">
-                <div class="tvshow sim-tvshows" *ngFor="let s_tvshows of similartvshowList" [routerLink]="['/similartvshowdetails', s_tvshows.id]">
+            <main class="s_tvshow">
+                <div class="tvshow sim-tvshow" *ngFor="let s_tvshow of similartvshowList" [routerLink]="['/similartvshowdetails', s_tvshow.id]">
                   
-                <div *ngIf="s_tvshows.poster_path==null; then thenBlock else elseBlock"></div>
+                <div *ngIf="s_tvshow.poster_path==null; then thenBlock else elseBlock"></div>
                     <ng-template #thenBlock>
                         <figure>
                         <img src="assets/images/no-image.png" class="no-image">
@@ -447,26 +457,26 @@
                     </ng-template>
                     <ng-template #elseBlock>  
                         <figure>
-                            <img src="{{imgUrl+s_tvshows.poster_path}}">
+                            <img src="{{imgUrl+s_tvshow.poster_path}}">
                         </figure>
                     </ng-template>
             
                     <div class="tvshow-info">
-                        <h4>{{s_tvshows.name}}</h4>
-                        <span class="tvshow-rating" [ngClass]="{'red':s_tvshows.vote_average<=5,'orange':s_tvshows.vote_average>=5&&s_tvshows.vote_average<8,'green':s_tvshows.vote_average>=8}">{{float2int((s_tvshows.vote_average/10)*100)+'%'}}</span>
+                        <h4>{{s_tvshow.name}}</h4>
+                        <span class="tvshow-rating" [ngClass]="{'red':s_tvshow.vote_average<=5,'orange':s_tvshow.vote_average>=5&&s_tvshow.vote_average<8,'green':s_tvshow.vote_average>=8}">{{float2int((s_tvshow.vote_average/10)*100)+'%'}}</span>
                     </div>
                     <div class="tvshow-info">
-                        <ngb-rating [max]="10" [(rate)]="s_tvshows.vote_average" [readonly]="false"></ngb-rating>
+                        <ngb-rating [max]="10" [(rate)]="s_tvshow.vote_average" [readonly]="false"></ngb-rating>
                     </div>
                     <div class="date">
-                        <p><i class="fas fa-calendar-alt"></i> {{s_tvshows.first_air_date}}</p>
+                        <p><i class="fas fa-calendar-alt"></i> {{s_tvshow.first_air_date}}</p>
                       </div>
                 </div>
             </main>
         </ng-template>
         <ng-template #nosimtvshow> 
-            <div id="no-record_similar_tvshows" >
-                <h1 class="text-warning text-center">Similar tvshows not avilable for {{tvshowDetails.original_title}}</h1>
+            <div id="no-record_similar_tvshow" >
+                <h1 class="text-warning text-center">Similar tvshow not avilable for {{tvshowDetails.original_title}}</h1>
               </div>
         </ng-template>
     </div>

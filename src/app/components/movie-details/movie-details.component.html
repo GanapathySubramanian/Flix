@@ -244,18 +244,26 @@
         <div class="videos">
             <h2 class="movie-heading mt-5">{{movieDetails.original_title}} VIDEOS</h2>
             <div *ngIf="novideos; then novideo else video"></div>
-            <ng-template #video>
+            <ng-template #video >
                 <div class="lg-carousel">
-                    <carousel class="text-center"  [cellWidth]=1460 [height]=640 [margin]=20 arrowsTheme="dark">
-                        <div class="carousel-cell video" *ngFor="let video of videoList" >
-                            <iframe  id="stop-video" class="youtube-video" [src]="video.key" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <carousel class="text-center"  [cellWidth]=1470 [height]=640 [margin]=20 arrowsTheme="dark">
+                        <div class="carousel-cell video" *ngFor="let video of videoList">
+                            <iframe  height="100%" width="100%" id="stop-video" class="youtube-video" [src]="video.key" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </carousel>
+                </div>
+
+                <div class="md-carousel">
+                    <carousel class="text-center" [cellWidth]=1140 [height]=640 [margin]=20  arrowsTheme="dark">
+                        <div class="carousel-cell video" *ngFor="let video of videoList">
+                            <iframe height="100%" width="100%" id="stop-video" class="youtube-video" [src]="video.key" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                     </carousel>
                 </div>
 
                 <div class="sm-carousel">
                     <carousel class="text-center" [cellWidth]=400 [height]=300 [margin]=50  arrowsTheme="dark">
-                        <div class="carousel-cell video" *ngFor="let video of videoList" >
+                        <div class="carousel-cell video" *ngFor="let video of videoList">
                             <iframe height="100%" width="100%" id="stop-video" class="youtube-video" [src]="video.key" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                     </carousel>
@@ -344,9 +352,9 @@
             <div *ngIf="norecmoviedata; then norecmovie else recmovie"></div>
             <ng-template #recmovie>
                 <main class="s_movies">
-                    <div class="movie rec-movies" *ngFor="let s_movies of recmovieList" [routerLink]="['/similarmoviesdetails', s_movies.id]">
+                    <div class="movie rec-movies" *ngFor="let r_movies of recmovieList" [routerLink]="['/similarmoviesdetails', r_movies.id]">
                       
-                    <div *ngIf="s_movies.poster_path==null; then thenBlock else elseBlock"></div>
+                    <div *ngIf="r_movies.poster_path==null; then thenBlock else elseBlock"></div>
                         <ng-template #thenBlock>
                             <figure>
                                 <img src="assets/images/no-image.png" alt="figure" class="no-image">
@@ -354,19 +362,21 @@
                         </ng-template>
                         <ng-template #elseBlock>  
                             <figure>
-                                <img src="{{imgUrl+s_movies.poster_path}}">
+                                <img src="{{imgUrl+r_movies.poster_path}}">
                             </figure>
                         </ng-template>
                 
                         <div class="movie-info">
-                            <h4>{{s_movies.title}}</h4>
-                            <span class="movie-rating" [ngClass]="{'red':s_movies.vote_average<=5,'orange':s_movies.vote_average>=5&&s_movies.vote_average<8,'green':s_movies.vote_average>=8}">{{float2int((s_movies.vote_average/10)*100) +'%'}}</span>
+                            <h4>{{r_movies.title}}</h4>
+                            <!-- <span class="movie-rating">{{float2int(((r_movies.vote_average/10)*100)) + '%'}}</span> -->
+
+                            <span class="movie-rating" [ngClass]="{'red':r_movies.vote_average<=5,'orange':r_movies.vote_average>5&&r_movies.vote_average<8,'green':r_movies.vote_average>=8}">{{float2int(((r_movies.vote_average/10)*100)) + '%'}}</span>
                         </div>
                         <div class="movie-info">
-                            <ngb-rating [max]="10" [(rate)]="s_movies.vote_average" [readonly]="false"></ngb-rating>
+                            <ngb-rating [max]="10" [(rate)]="r_movies.vote_average" [readonly]="false"></ngb-rating>
                         </div>
                         <div class="date">
-                            <p><i class="fas fa-calendar-alt"></i> {{s_movies.release_date}}</p>
+                            <p><i class="fas fa-calendar-alt"></i> {{r_movies.release_date}}</p>
                           </div>
                     </div>
                 </main>
@@ -404,7 +414,7 @@
                 
                         <div class="movie-info">
                             <h4>{{s_movies.title}}</h4>
-                            <span class="movie-rating" [ngClass]="{'red':s_movies.vote_average<=5,'orange':s_movies.vote_average>=5&&s_movies.vote_average<8,'green':s_movies.vote_average>=8}">{{float2int((s_movies.vote_average/10)*100)+'%'}}</span>
+                            <span class="movie-rating" [ngClass]="{'red':s_movies.vote_average<=5,'orange':s_movies.vote_average>5&&s_movies.vote_average<8,'green':s_movies.vote_average>=8}">{{float2int(((s_movies.vote_average/10)*100)) + '%'}}</span>
                         </div>
                         <div class="movie-info">
                             <ngb-rating [max]="10" [(rate)]="s_movies.vote_average" [readonly]="false"></ngb-rating>

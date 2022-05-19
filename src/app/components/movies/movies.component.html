@@ -64,7 +64,7 @@
 
             <div class="movie-info">
                 <h4 class="movie-name">{{movie.title}}</h4>
-                <span class="movie-rating" [ngClass]="{'red':movie.vote_average<=5,'orange':movie.vote_average>=5&&movie.vote_average<8,'green':movie.vote_average>=8}">{{float2int(((movie.vote_average/10)*100)) + '%'}}</span>
+                <span class="movie-rating" [ngClass]="{'red':movie.vote_average<=5,'orange':movie.vote_average>5&&movie.vote_average<8,'green':movie.vote_average>=8}">{{float2int(((movie.vote_average/10)*100)) + '%'}}</span>
             </div>
 
             <div class="movie-info star-rating">

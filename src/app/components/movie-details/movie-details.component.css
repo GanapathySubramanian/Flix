@@ -10,6 +10,9 @@
 .sm-carousel{
     display: none;
 }
+.md-carousel{
+    display: none;
+}
 main{
     display: flex;
     flex-wrap: wrap;
@@ -622,8 +625,6 @@ path.two {
 
         .movie-info span {
             margin-left: 5px;
-            color: orange;
-
         }
 
         .movie-info i {
@@ -675,47 +676,46 @@ path.two {
 
 }
 
-@media only screen and (max-width:600px) {
-        
-    #movie-logo{
-        width: 70%;
-        height: 100%;
-     }
-    .movie{
-        width:500px;
-        margin: 1rem;
-        border-radius: 3px;
-        box-shadow: 0.2px 4px 5px rgba(0,0,0,0.1);
-        background-color: var(--secondary-color);
-        position: relative;
-        overflow: hidden;
+
+@media only screen and (max-width: 1500px) {
+    .lg-carousel{
+        display: none;
     }
-    .movie-info h4{
-        margin-top: 0;
-        width: 80%;
-        font-size: 30px;
+    .sm-carousel{
+        display: none;
     }
-    .movie-rating{
-        margin: 5px;
-        width: auto;
+    .md-carousel{
+        display: block;
     }
+    .left-img{
+        width: 50%;
+        float: left;
+    }
+    .right-content{
+        width: 50%;
+    }
+
+    .move-top .btn{
+        border-radius: 100%;
+        position: fixed;
+        bottom: 560px;
+        margin-left: 80%;
+        z-index: 10;
+    }
+}
+
+
+
+/* for mobile */
+@media only screen and (max-width: 900px) {
+
     .lg-carousel{
         display: none;
     }
     .sm-carousel{
         display: block;
     }
-    
-}
-
-
-/* for mobile */
-@media only screen and (max-width: 800px) {
-
-    .lg-carousel{
-        display: block;
-    }
-    .sm-carousel{
+    .md-carousel{
         display: none;
     }
     .header{
@@ -779,26 +779,41 @@ path.two {
 
 }
 
-@media only screen and (max-width: 1000px) {
+
+
+@media only screen and (max-width:600px) {
+        
+    #movie-logo{
+        width: 70%;
+        height: 100%;
+     }
+    .movie{
+        width:500px;
+        margin: 1rem;
+        border-radius: 3px;
+        box-shadow: 0.2px 4px 5px rgba(0,0,0,0.1);
+        background-color: var(--secondary-color);
+        position: relative;
+        overflow: hidden;
+    }
+    .movie-info h4{
+        margin-top: 0;
+        width: 80%;
+        font-size: 30px;
+    }
+    .movie-rating{
+        margin: 5px;
+        width: auto;
+    }
     .lg-carousel{
         display: none;
     }
     .sm-carousel{
         display: block;
     }
-    .left-img{
-        width: 50%;
-        float: left;
+    .md-carousel{
+        display: none;
     }
-    .right-content{
-        width: 50%;
-    }
-
-    .move-top .btn{
-        border-radius: 100%;
-        position: fixed;
-        bottom: 560px;
-        margin-left: 80%;
-        z-index: 10;
-    }
+    
 }
+
