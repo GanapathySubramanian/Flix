@@ -15,7 +15,7 @@ Live Demo Video : [Click Here](https://www.linkedin.com/feed/update/urn:li:activ
 2. Bootstrap
 3. TypeScript
 4. Angular
-5. TMDB Api
+5. TMDB Api - [The Movie DB](https://developers.themoviedb.org/3)
 
 ## Steps to run the project in your machine
 1. Download and install Nodejs and Angular cli in your machine
