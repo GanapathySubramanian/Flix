@@ -1,6 +1,5 @@
 # Flix - Movies & Tvshows
 
-
 Live Demo : [Flix](https://ganapathysubramanian.github.io/Flix/)
 
 Live Demo Video : [Click Here](https://www.linkedin.com/feed/update/urn:li:activity:6889587893023711232/)
@@ -14,7 +13,7 @@ Live Demo Video : [Click Here](https://www.linkedin.com/feed/update/urn:li:activ
 1. HTML5/CSS3
 2. Bootstrap
 3. TypeScript
-4. Angular
+4. Angular 
 5. TMDB Api - [The Movie DB](https://developers.themoviedb.org/3)
 
 ## Steps to run the project in your machine
