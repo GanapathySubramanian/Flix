@@ -248,7 +248,7 @@
                 <div class="lg-carousel">
                     <carousel class="text-center"  [cellWidth]=1470 [height]=640 [margin]=20 arrowsTheme="dark">
                         <div class="carousel-cell video" *ngFor="let video of videoList">
-                            <iframe  height="100%" width="100%" id="stop-video" class="youtube-video" [src]="video.key" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe  height="100%" width="100%" id="stop-video" class="youtube-video" [src]="video.key" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" donotallowfullscreen></iframe>
                         </div>
                     </carousel>
                 </div>
@@ -256,7 +256,7 @@
                 <div class="md-carousel">
                     <carousel class="text-center" [cellWidth]=1220 [height]=640 [margin]=20  arrowsTheme="dark">
                         <div class="carousel-cell video" *ngFor="let video of videoList">
-                            <iframe height="100%" width="100%" id="stop-video" class="youtube-video" [src]="video.key" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe height="100%" width="100%" id="stop-video" class="youtube-video" [src]="video.key" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" donotallowfullscreen></iframe>
                         </div>
                     </carousel>
                 </div>

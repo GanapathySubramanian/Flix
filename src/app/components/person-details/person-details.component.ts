@@ -144,7 +144,11 @@ export class PersonDetailsComponent implements OnInit {
     c_data= arr;
           for(var i=0;i<c_data.length;i++){
                 if(clientImages[c_data[i].id]){
-                clientImages[c_data[i].id]= clientImages[c_data[i].id] +', '+c_data[i].job
+                  if(clientImages[c_data[i].id].includes(c_data[i].job)){
+                    continue;
+                  }else{
+                    clientImages[c_data[i].id]= clientImages[c_data[i].id] +', '+c_data[i].job
+                  }
                 }else{
               clientImages[c_data[i].id] =c_data[i].job
           }

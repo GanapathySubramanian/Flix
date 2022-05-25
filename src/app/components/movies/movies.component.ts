@@ -223,6 +223,8 @@ export class MoviesComponent implements OnInit {
         const Element= window.document.getElementById("pagination");
         Element?.classList.add('d-none');
       }else{
+        const Ele= window.document.getElementById("no-record");
+        Ele?.classList.add('d-none');
         const Elemen= window.document.getElementById("pagination");
         Elemen?.classList.remove('d-none');
       }

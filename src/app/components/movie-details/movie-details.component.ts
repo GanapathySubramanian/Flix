@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, HostListener } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { filter } from 'rxjs';
 import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 import { MovieDetails } from 'src/app/common/movie-details';
 import myAppConfig from 'src/app/config/my-app-config';
@@ -46,8 +47,8 @@ export class MovieDetailsComponent implements OnInit {
   constructor(private route:ActivatedRoute,private router:Router,private movieservice:MoviesService,private _sanitizer:DomSanitizer) { 
     let id=this.route.snapshot?.params['id'];
     movie_id=id;
+    this.crewList=[];
   }
-
   ngOnInit(): void {
     this.router?.navigateByUrl('/moviedetails/'+movie_id);
 
@@ -194,15 +195,18 @@ export class MovieDetailsComponent implements OnInit {
 
               
               var clientImages:any =[]
-
               for(var i=0;i<c_data.length;i++){
                     if(clientImages[c_data[i].id]){
-                    clientImages[c_data[i].id]= clientImages[c_data[i].id] +', '+c_data[i].job
-
+                      if(clientImages[c_data[i].id].includes(c_data[i].job)){
+                        continue;
+                      }else{
+                        clientImages[c_data[i].id]= clientImages[c_data[i].id] +', '+c_data[i].job
+                      }
                     }else{
-                    clientImages[c_data[i].id] =c_data[i].job
+                      clientImages[c_data[i].id] =c_data[i].job
                     }
               }
+            
 
               //remove duplicate entries
               c_data = c_data.filter((obj:any, pos:any, arr:any) => {
