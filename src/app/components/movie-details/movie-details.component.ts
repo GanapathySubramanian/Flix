@@ -16,6 +16,7 @@ var movie_id=0;
 export class MovieDetailsComponent implements OnInit {
 
   imgUrl:string=myAppConfig.tmdb.imgUrl;
+  highqualityImgUrl:string=myAppConfig.tmdb.highQualityImgUrl;
   
   movieDetails:MovieDetails={} as MovieDetails;
   
@@ -265,12 +266,12 @@ export class MovieDetailsComponent implements OnInit {
           this.nobackdrop=false;
           this.backdropList=tempimagesData.backdrops;
 
-          this.background_image=myAppConfig.tmdb.highQualityImgUrl+tempimagesData.backdrops[0].file_path;
+          this.background_image=this.highqualityImgUrl+tempimagesData.backdrops[0].file_path;
           
           
           setInterval(() =>{
             const random = Math.floor(Math.random() * tempimagesData.backdrops.length);
-            this.background_image=myAppConfig.tmdb.highQualityImgUrl+tempimagesData.backdrops[random].file_path;
+            this.background_image=this.highqualityImgUrl+tempimagesData.backdrops[random].file_path;
           },5000);
 
         }

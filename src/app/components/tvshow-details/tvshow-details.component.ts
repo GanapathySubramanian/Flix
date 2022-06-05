@@ -14,6 +14,7 @@ var tvshow_id=0;
 export class TvshowDetailsComponent implements OnInit {
 
   imgUrl:string=myAppConfig.tmdb.imgUrl;
+  highqualityImgUrl:string=myAppConfig.tmdb.highQualityImgUrl;
 
   tvshowDetails:TvshowDetails={} as TvshowDetails;
 
@@ -207,12 +208,12 @@ export class TvshowDetailsComponent implements OnInit {
           this.nobackdrop=false;
           this.backdropList=tempimagesData.backdrops;
 
-          this.background_image=myAppConfig.tmdb.highQualityImgUrl+tempimagesData.backdrops[0].file_path;
+          this.background_image=this.highqualityImgUrl+tempimagesData.backdrops[0].file_path;
           
           
           setInterval(() =>{
             const random = Math.floor(Math.random() * tempimagesData.backdrops.length);
-            this.background_image=myAppConfig.tmdb.highQualityImgUrl+tempimagesData.backdrops[random].file_path;
+            this.background_image=this.highqualityImgUrl+tempimagesData.backdrops[random].file_path;
           },5000);
 
         }

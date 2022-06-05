@@ -11,7 +11,7 @@
                     <div class="movie-img">
                         <div *ngIf="movieDetails.poster_path==null;then thenBlock else elseBlock"></div>
                         <ng-template #thenBlock><img src="assets/images/no-image.png" alt="figure" class="no-image"></ng-template>
-                        <ng-template #elseBlock><img [attr.src]="imgUrl+movieDetails.poster_path" alt="{{movieDetails.original_title}}"></ng-template>    
+                        <ng-template #elseBlock><img [attr.src]="highqualityImgUrl+movieDetails.poster_path" alt="{{movieDetails.original_title}}"></ng-template>    
                     </div>
                 </div>
                 <div class="overlay"></div>
@@ -65,12 +65,12 @@
         <div class="movie-poster-img">
             <div *ngIf="movieDetails.poster_path==null;then thenBlock else elseBlock"></div>
             <ng-template #thenBlock><img src="assets/images/no-image.png" alt="figure" class="no-image"></ng-template>
-            <ng-template #elseBlock><img [attr.src]="imgUrl+movieDetails.poster_path" alt="{{movieDetails.original_title}}"></ng-template>
+            <ng-template #elseBlock><img [attr.src]="highqualityImgUrl+movieDetails.poster_path" alt="{{movieDetails.original_title}}"></ng-template>
         </div>
     </main>
 
     <div class="text-center mt-5" *ngIf="logoList!=null">
-        <img id="movie-logo" src="{{imgUrl+logoList.file_path}}">
+        <img id="movie-logo" src="{{highqualityImgUrl+logoList.file_path}}">
     </div>
     
 
@@ -207,7 +207,7 @@
                 <ng-template #backdropBlock>
                     <div class="row">
                         <div class="col-lg-3 col-sm-12 col-md-12 mt-5" *ngFor="let back_path of backdropList">
-                            <span><img src="{{imgUrl+back_path.file_path}}" width="100%" height="100%"></span>
+                            <span><img src="{{highqualityImgUrl+back_path.file_path}}" width="100%" height="100%"></span>
                         </div>
                     </div>
                 </ng-template>

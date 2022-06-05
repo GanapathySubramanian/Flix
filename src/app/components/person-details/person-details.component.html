@@ -4,7 +4,7 @@
             <div *ngIf="personDetails.profile_path==null; then thenBlock else elseBlock"></div>
             <!-- <ng-template #thenBlock><img src="../../assets/images/no-image.png"></ng-template> -->
             <ng-template #thenBlock><img src="assets/images/no-image.png" class="no-image"></ng-template>
-            <ng-template #elseBlock><img [attr.src]="imgUrl+personDetails.profile_path" alt="{{personDetails.name}}"></ng-template>
+            <ng-template #elseBlock><img [attr.src]="highqualityImgUrl+personDetails.profile_path" alt="{{personDetails.name}}"></ng-template>
         </div>
     </main>
     

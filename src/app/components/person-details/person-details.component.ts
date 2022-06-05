@@ -13,7 +13,7 @@ var person_id='';
 export class PersonDetailsComponent implements OnInit {
 
   imgUrl:any=myAppConfig.tmdb.imgUrl;
-
+  highqualityImgUrl:any=myAppConfig.tmdb.highQualityImgUrl;
   personDetails:PersonDetails={} as PersonDetails;
 
   castTvList:any=[];
