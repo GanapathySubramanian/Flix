@@ -66,8 +66,6 @@
           <input type="text" placeholder="Search Tvshow" formControlName="tvshowName"  class="search form-control" (keyup)="findTvshow()" [(ngModel)]="findthistvshow">
         </form>
         <div class = "search-list" id = "search-list-sm">
-          <!-- list here -->
-          
           <div class = "search-list-item" *ngFor="let s of searchList" [routerLink]="['/tvshowdetails',s.id]">
               <div class = "search-item-thumbnail">
                 <p *ngIf="s.poster_path==null;then thenBlock else elseBlock"></p>

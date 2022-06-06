@@ -156,8 +156,7 @@ ngb-rating {
 
 .search-list{
     position: absolute;
-    /* right: 0; */
-    top: 100%;
+    margin-top: 10px;
     max-height: 500px;
     overflow-y: scroll;
     z-index: 10;
@@ -230,7 +229,6 @@ ngb-rating {
     .search-list{
         position: absolute;
         right: 0;
-        margin-top: -730px;
         max-height: 500px;
         overflow-y: scroll;
         z-index: 10;
