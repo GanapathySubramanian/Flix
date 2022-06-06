@@ -37,6 +37,7 @@ export class MoviesComponent implements OnInit {
     }else{
       this.ishidedrop=true;
     }
+
   }
 
   ngOnInit(): void {
@@ -45,6 +46,42 @@ export class MoviesComponent implements OnInit {
     this.getMovies()
   }
 
+
+  searchList:any=[];
+  findthismovie:string='';
+  findMovies(){
+        console.log(this.findthismovie);
+        if(this.findthismovie.length > 0){
+          let Ele1= window.document.getElementById("search-list-lg");
+          Ele1?.classList.remove('d-none');
+          let Ele2= window.document.getElementById("search-list-sm");
+          Ele2?.classList.remove('d-none');
+          let SEA_URL=myAppConfig.tmdb.movieBaseUrl+"/search/movie?"+myAppConfig.tmdb.apikey+'&query='+this.findthismovie+'&page=1'+'&sort_by=popular.desc';
+
+          this.loadMovies(SEA_URL);
+          // this.ishidedrop=true;
+        }  
+      else {
+        // this.ishidedrop=false;
+        let Ele1= window.document.getElementById("search-list-lg");
+        Ele1?.classList.add('d-none');
+        const Ele2= window.document.getElementById("search-list-sm");
+        Ele2?.classList.add('d-none');
+  }
+  }
+  loadMovies(movieName:string){
+    this.movieservice.getSearchMovies(movieName);
+
+    let tempSearchList:any;
+    this.movieservice.searchmoviesData.subscribe((data)=>{
+       tempSearchList=data;
+      console.log(data);
+      this.searchList=tempSearchList.results;
+      
+    });  
+    
+    
+  }
   getOrder() {
     this.movieservice.getOrderList().subscribe((data)=>{
       this.orderList=data; 
@@ -78,10 +115,11 @@ export class MoviesComponent implements OnInit {
     this.page_no=page;
     this.genre_value="";
     Search_value=this.searchForm.value.movieName;
-      if(Search_value){
+      if(Search_value){    
         this.sortby_value=Search_value;
         let SEARCH_URL=myAppConfig.tmdb.movieBaseUrl+"/search/movie?"+myAppConfig.tmdb.apikey+'&query='+Search_value+'&page='+page;
         this.getMoviesData(SEARCH_URL)
+        this.findthismovie='';
         this.ishidedrop=true;
       }
       else{
@@ -216,7 +254,7 @@ export class MoviesComponent implements OnInit {
        tempMoviesList=data;
        this.movieList=tempMoviesList.results;
      
-
+        
        if(tempMoviesList.total_results==0){
         const Ele= window.document.getElementById("no-record");
         Ele?.classList.remove('d-none');
@@ -229,6 +267,7 @@ export class MoviesComponent implements OnInit {
         Elemen?.classList.remove('d-none');
       }
 
+  
       if(tempMoviesList.total_pages==page){
         this.isdisablenext=true;
       }else{

@@ -14,6 +14,9 @@ export class TvshowsService {
   private tvshowSource = new Subject();
   tvshowsData = this.tvshowSource.asObservable();
 
+  private searchtvshowSource = new Subject();
+  searchtvshowsData = this.searchtvshowSource.asObservable();
+
   //Particular tvshow details
   private tvshowdetailSource=new Subject();
   tvshowdetailsData=this.tvshowdetailSource.asObservable();
@@ -60,6 +63,16 @@ export class TvshowsService {
     return this.sortBy;
   }
 
+
+  
+
+  getSearchTvshows(url:any){
+    let searchtvshows:any;
+    this.http.get(url).subscribe((res)=>{
+      searchtvshows=res; 
+      this.searchtvshowSource.next(searchtvshows);
+    })
+  }
   getallTvshows(url:any){
     let  tvshow:any;
     this.http.get(url).subscribe((res)=>{

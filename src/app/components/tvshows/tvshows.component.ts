@@ -47,6 +47,42 @@ export class TvshowsComponent implements OnInit {
     this.gettvshows();
   }
   
+  
+  searchList:any=[];
+  findthistvshow:string='';
+  findTvshow(){
+        console.log(this.findthistvshow);
+        if(this.findthistvshow.length > 0){
+          let Ele1= window.document.getElementById("search-list-lg");
+          Ele1?.classList.remove('d-none');
+          let Ele2= window.document.getElementById("search-list-sm");
+          Ele2?.classList.remove('d-none');
+          let SEA_URL=SEARCH_URL+'&query='+this.findthistvshow+'&page=1';
+
+          this.loadTvshow(SEA_URL);
+          // this.ishidedrop=true;
+        }  
+      else {
+        // this.ishidedrop=false;
+        let Ele1= window.document.getElementById("search-list-lg");
+        Ele1?.classList.add('d-none');
+        const Ele2= window.document.getElementById("search-list-sm");
+        Ele2?.classList.add('d-none');
+  }
+  }
+  loadTvshow(movieName:string){
+    this.tvshowservice.getSearchTvshows(movieName);
+
+    let tempSearchList:any;
+    this.tvshowservice.searchtvshowsData.subscribe((data)=>{
+       tempSearchList=data;
+      console.log(data);
+      this.searchList=tempSearchList.results;
+      
+    });  
+    
+    
+  }
   gettvshows() {
     page=1;
     this.page_no=1;
@@ -147,14 +183,14 @@ export class TvshowsComponent implements OnInit {
     page=1;
     this.page_no=page;
     this.genre_value="";
-
     Search_value=this.searchForm.value.tvshowName;
     if(Search_value){
       this.ishidedrop=true;
       this.sortby_value=Search_value;
+      this.findthistvshow='';
       this.gettvshowsData(SEARCH_URL+'&query='+Search_value);
     }else{
-      this.ishidedrop=false;
+    this.ishidedrop=false;
     this.sortby_value='Trending Now';
     let api_url=myAppConfig.tmdb.tvshowBaseUrl+myAppConfig.tmdb.apikey+'&sort_by='+sort_by_desc+'&page='+page;
     this.gettvshowsData(api_url)

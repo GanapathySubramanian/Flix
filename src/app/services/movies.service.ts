@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, Subject } from 'rxjs';
+import { map, Observable, of, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,10 @@ export class MoviesService {
   private movieSource = new Subject();
   moviesData = this.movieSource.asObservable();
 
+  //Search Movies List
+  private searchmovieSource = new Subject();
+  searchmoviesData = this.searchmovieSource.asObservable();
+  
   //Upcoming Movies List
   private upcomingSource=new Subject();
   upcomingData=this.upcomingSource.asObservable();
@@ -52,6 +56,7 @@ export class MoviesService {
 
   
   constructor(private http:HttpClient) {}
+
   
   getGenreList():Observable<any[]>{
     return this.genre;
@@ -61,6 +66,14 @@ export class MoviesService {
     return this.sortBy;
   }
 
+  getSearchMovies(url:any){
+    let searchmovies:any;
+    this.http.get(url).subscribe((res)=>{
+      searchmovies=res; 
+      this.searchmovieSource.next(searchmovies);
+    })
+  }
+  
   getallMovies(url:any){
     let movies:any;
     this.http.get(url).subscribe((res)=>{

@@ -11,6 +11,10 @@ export class PeopleService {
     private personSource = new Subject();
     personData = this.personSource.asObservable();
   
+       //Search Person Details
+       private searchpersonSource = new Subject();
+       searchpersonData = this.searchpersonSource.asObservable();
+     
     //Social links
     private socialSource = new Subject();
     socialData = this.socialSource.asObservable();
@@ -24,7 +28,13 @@ export class PeopleService {
     peoplesData = this.peopleSource.asObservable();
 
   constructor(private http:HttpClient) {}
-   
+  getSearchPeoples(url:any){
+    let searchpersons:any;
+    this.http.get(url).subscribe((res)=>{
+      searchpersons=res; 
+      this.searchpersonSource.next(searchpersons);
+    })
+  }
   getPopularPeopleDetails(url:any){
     let peoples:any;
     this.http.get(url).subscribe((res)=>{

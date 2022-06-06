@@ -32,7 +32,7 @@
                                 </div>
                                 <div class="movie-info">
                                     <i class="fas fa-calendar"></i>
-                                    <span>{{movieDetails.release_date}}</span>
+                                    <span>{{movieDetails.release_date | date}}</span>
                                 </div>
                             </div>
                             <div class="item-overview">
@@ -86,7 +86,7 @@
                 <tr>
                     <td class="details-name">Release Date</td>
                     <td class="colon"> : </td>
-                    <td class="details-value">{{movieDetails.release_date}}</td>
+                    <td class="details-value">{{movieDetails.release_date | date}}</td>
                 </tr>
                 <tr>
                     <td class="details-name">Status</td>
@@ -376,7 +376,7 @@
                             <ngb-rating [max]="10" [(rate)]="r_movies.vote_average" [readonly]="false"></ngb-rating>
                         </div>
                         <div class="date">
-                            <p><i class="fas fa-calendar-alt"></i> {{r_movies.release_date}}</p>
+                            <p>{{r_movies.release_date | date}}</p>
                           </div>
                     </div>
                 </main>
@@ -420,7 +420,7 @@
                             <ngb-rating [max]="10" [(rate)]="s_movies.vote_average" [readonly]="false"></ngb-rating>
                         </div>
                         <div class="date">
-                            <p><i class="fas fa-calendar-alt"></i> {{s_movies.release_date}}</p>
+                            <p>{{s_movies.release_date | date}}</p>
                           </div>
                     </div>
                 </main>

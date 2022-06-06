@@ -178,6 +178,7 @@ export class PersonDetailsComponent implements OnInit {
     let temppersondetails:any;
     this.peopleservice.personData.subscribe((data)=>{
       temppersondetails=data;
+      console.log(data);
       
 
       this.personDetails.biography=temppersondetails.biography;
@@ -207,6 +208,7 @@ export class PersonDetailsComponent implements OnInit {
       this.personDetails.place_of_birth=temppersondetails.place_of_birth;
       this.personDetails.popularity=temppersondetails.popularity;
       this.personDetails.profile_path=temppersondetails.profile_path;
+console.log(this.personDetails);
 
     })
 

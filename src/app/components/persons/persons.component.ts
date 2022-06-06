@@ -32,6 +32,41 @@ export class PersonsComponent implements OnInit {
   }
 
 
+  searchList:any=[];
+  findthispeoples:string='';
+  findPeoples(){
+        console.log(this.findthispeoples);
+        if(this.findthispeoples.length > 0){
+          let Ele1= window.document.getElementById("search-list-lg");
+          Ele1?.classList.remove('d-none');
+          let Ele2= window.document.getElementById("search-list-sm");
+          Ele2?.classList.remove('d-none');
+          let SEA_URL=myAppConfig.tmdb.movieBaseUrl+'/search/person?'+myAppConfig.tmdb.apikey+'&query='+this.findthispeoples+'&page='+page;
+
+          this.loadPeoples(SEA_URL);
+          // this.ishidedrop=true;
+        }  
+      else {
+        // this.ishidedrop=false;
+        let Ele1= window.document.getElementById("search-list-lg");
+        Ele1?.classList.add('d-none');
+        const Ele2= window.document.getElementById("search-list-sm");
+        Ele2?.classList.add('d-none');
+  }
+  }
+  loadPeoples(personName:string){
+    this.peopleservice.getSearchPeoples(personName);
+
+    let tempSearchList:any;
+    this.peopleservice.searchpersonData.subscribe((data)=>{
+       tempSearchList=data;
+      console.log(data);
+      this.searchList=tempSearchList.results;
+      
+    });  
+    
+    
+  }
 
   getPeoples(){
     page=1;
@@ -51,6 +86,7 @@ export class PersonsComponent implements OnInit {
       if(Search_value){
         this.sortby_value=Search_value;
         let SEARCH_URL=myAppConfig.tmdb.movieBaseUrl+'/search/person?'+myAppConfig.tmdb.apikey+'&query='+Search_value+'&page='+page;
+        this.findthispeoples='';
         this.getPeoplesData(SEARCH_URL)
       }
       else{
