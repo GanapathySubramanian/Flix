@@ -144,7 +144,6 @@ ngb-rating {
     background-color: transparent;
     border:2px solid var(--secondary-color);
     padding: 0.5rem 1rem;
-    width: calc(350px - 8px);
     border-radius: 50px;
     font-size: 1rem;
     color: #fff;
