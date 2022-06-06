@@ -200,7 +200,10 @@ ngb-rating {
     font-size: 0.8rem;
     margin-top: 0.5rem;
     font-weight: 600;
+}
+.search-date{
     opacity: 0.6;
+
 }
 
 /* thumbnail */

@@ -158,7 +158,9 @@ ngb-rating {
 .search::placeholder{
     color: #7378c5;
 }
-
+.search-date{
+    opacity: 0.6;
+}
 .search-list{
     position: absolute;
     right: 0;
@@ -201,7 +203,6 @@ ngb-rating {
     font-size: 0.8rem;
     margin-top: 0.5rem;
     font-weight: 600;
-    opacity: 0.6;
 }
 
 /* thumbnail */

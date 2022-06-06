@@ -48,7 +48,7 @@
                     </div>
                     <div class = "search-item-info">
                         <h3>{{s.name}}</h3>
-                        <p>{{s.first_air_date | date}}</p>
+                        <p><span class="search-date"> {{s.first_air_date | date}}</span> <span class="tvshow-rating" [ngClass]="{'red':s.vote_average<=5,'orange':s.vote_average>5&&s.vote_average<8,'green':s.vote_average>=8}">{{float2int(((s.vote_average/10)*100)) + '%'}}</span></p>
                     </div>
                 </div>
               </div>
@@ -83,7 +83,8 @@
               </div>
               <div class = "search-item-info">
                   <h3>{{s.name}}</h3>
-                  <p>{{s.first_air_date | date}}</p>
+                  <p><span class="search-date"> {{s.first_air_date | date}}</span> <span class="tvshow-rating" [ngClass]="{'red':s.vote_average<=5,'orange':s.vote_average>5&&s.vote_average<8,'green':s.vote_average>=8}">{{float2int(((s.vote_average/10)*100)) + '%'}}</span></p>
+
               </div>
           </div>
         </div>
