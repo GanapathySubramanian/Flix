@@ -7,7 +7,7 @@ export default {
         personBaseUrl:"https://api.themoviedb.org/3/person/",
         imgUrl:"https://image.tmdb.org/t/p/w500/",
         highQualityImgUrl:"https://image.tmdb.org/t/p/original/",
-        videoUrl:"https://www.youtube.com/embed/"
+        videoUrl:"https://www.youtube.com/embed/",
     }
 
 }

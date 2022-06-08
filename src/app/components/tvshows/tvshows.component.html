@@ -21,6 +21,14 @@
                   <li *ngFor="let order of orderList"><a class="dropdown-item link" (click)="getOrderContent(order.order,order.desc)">{{order.desc}}</a></li>
                 </ul>
             </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" style="color:#fff"href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                COUNTRY
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li *ngFor="let country of countryList"><a class="dropdown-item link" (click)="getCountryContent(country.iso_3166_1,country.english_name)">{{country.english_name}}</a></li>
+            </ul>
+        </li>
             </ul>
           
             <div class="lg-search">
@@ -94,6 +102,7 @@
 
     <h1 class="text-center text-warning">{{sortby_value | uppercase}}</h1>
     <h2 class="text-center text-warning">{{genre_value | uppercase}}</h2>
+    <h2 class="text-center text-warning">{{country | uppercase}}</h2>
 
     <main id="main">
 

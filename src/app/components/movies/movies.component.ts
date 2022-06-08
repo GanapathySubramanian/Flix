@@ -5,7 +5,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 
 var sort_by_desc="popularity.desc",page=1,Search_value="",genre_id="";
-var sorts_by='Trending Now';
+var sorts_by='Trending Now',region='';
 
 @Component({
   selector: 'app-movies',
@@ -19,14 +19,17 @@ export class MoviesComponent implements OnInit {
   movieList:any;
   genreList:any;
   orderList:any;
+  countryList:any;
 
   page_no:number=page;
   genre_value:string="";
   sortby_value:string=sorts_by;
+  country_value:string="";
   searchForm!:FormGroup;
   isdisableprev:boolean=false;
   isdisablenext:boolean=false;
   ishidedrop:boolean=false;
+
   constructor(private movieservice:MoviesService) { 
     this.searchForm=new FormGroup({
       'movieName':new FormControl("")
@@ -44,6 +47,15 @@ export class MoviesComponent implements OnInit {
     this.getGenre()
     this.getOrder()
     this.getMovies()
+    this.getCountries()
+  }
+
+  getCountries() {
+    var country_url=myAppConfig.tmdb.movieBaseUrl+"/configuration/countries?"+myAppConfig.tmdb.apikey;
+    this.movieservice.getCountry(country_url);
+    this.movieservice.countryData.subscribe((data)=>{
+      this.countryList=data;
+    })
   }
 
 
@@ -131,6 +143,35 @@ export class MoviesComponent implements OnInit {
       }
   }
 
+  getCountryContent(id:string,name:string){
+    region=id;
+    this.country_value="IN "+name;
+    if(Search_value==""){
+      this.ishidedrop=false;
+      page=1;
+      this.page_no=page;
+      if(sort_by_desc=='upcoming.desc'){
+        let genre_api_url=myAppConfig.tmdb.movieBaseUrl+'/movie/upcoming?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region;
+        this.getMoviesData(genre_api_url);
+      }
+      else if(sort_by_desc=='nowplaying.desc'){
+        let genre_api_url=myAppConfig.tmdb.movieBaseUrl+'/movie/now_playing?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region;
+        this.getMoviesData(genre_api_url);
+      }
+      else{
+        let genre_api_url=myAppConfig.tmdb.movieBaseUrl+'/discover/movie?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&sort_by='+sort_by_desc+'&region='+region;
+        this.getMoviesData(genre_api_url);
+      }
+    }else{
+      this.ishidedrop=true;
+      page=1;
+      this.page_no=page;
+      this.sortby_value=Search_value;
+      this.genre_value="";
+      let genre_api_url=myAppConfig.tmdb.movieBaseUrl+'/search/movie?'+myAppConfig.tmdb.apikey+'&query='+Search_value+'&page='+page;
+      this.getMoviesData(genre_api_url)
+    }
+  }
   getGenreContent(id:any,name:string){
     genre_id=id;
     this.genre_value=name+' Movies';
@@ -139,15 +180,15 @@ export class MoviesComponent implements OnInit {
       page=1;
       this.page_no=page;
       if(sort_by_desc=='upcoming.desc'){
-        let genre_api_url=myAppConfig.tmdb.movieBaseUrl+'/movie/upcoming?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id;
+        let genre_api_url=myAppConfig.tmdb.movieBaseUrl+'/movie/upcoming?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region;
         this.getMoviesData(genre_api_url);
       }
       else if(sort_by_desc=='nowplaying.desc'){
-        let genre_api_url=myAppConfig.tmdb.movieBaseUrl+'/movie/now_playing?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id;
+        let genre_api_url=myAppConfig.tmdb.movieBaseUrl+'/movie/now_playing?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region;
         this.getMoviesData(genre_api_url);
       }
       else{
-        let genre_api_url=myAppConfig.tmdb.movieBaseUrl+'/discover/movie?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&sort_by='+sort_by_desc;
+        let genre_api_url=myAppConfig.tmdb.movieBaseUrl+'/discover/movie?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&sort_by='+sort_by_desc+'&region='+region;
         this.getMoviesData(genre_api_url);
       }
     }else{
@@ -170,15 +211,15 @@ export class MoviesComponent implements OnInit {
       this.ishidedrop=false;
       this.page_no=page;
       if(sortBy=='upcoming.desc'){
-        let api_url=myAppConfig.tmdb.movieBaseUrl+'/movie/upcoming?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id;
+        let api_url=myAppConfig.tmdb.movieBaseUrl+'/movie/upcoming?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region;
         this.getMoviesData(api_url);
       }
       else if(sort_by_desc=='nowplaying.desc'){
-        let api_url=myAppConfig.tmdb.movieBaseUrl+'/movie/now_playing?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id;
+        let api_url=myAppConfig.tmdb.movieBaseUrl+'/movie/now_playing?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region;
         this.getMoviesData(api_url);
       }
       else{
-        let sort_api_url=myAppConfig.tmdb.movieBaseUrl+'/discover/movie?sort_by='+sort_by_desc+'&'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id;
+        let sort_api_url=myAppConfig.tmdb.movieBaseUrl+'/discover/movie?sort_by='+sort_by_desc+'&'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region;
         this.getMoviesData(sort_api_url);
       }
     }
@@ -211,15 +252,15 @@ export class MoviesComponent implements OnInit {
         this.page_no=page;
       }
       if(sort_by_desc=='upcoming.desc'){
-        let api_url=myAppConfig.tmdb.movieBaseUrl+'/movie/upcoming?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id;;
+        let api_url=myAppConfig.tmdb.movieBaseUrl+'/movie/upcoming?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region;
         this.getMoviesData(api_url);
       }
       else if(sort_by_desc=='nowplaying.desc'){
-        let api_url=myAppConfig.tmdb.movieBaseUrl+'/movie/now_playing?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id;
+        let api_url=myAppConfig.tmdb.movieBaseUrl+'/movie/now_playing?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region;
         this.getMoviesData(api_url);
       }
       else{
-        var page_api_url=myAppConfig.tmdb.movieBaseUrl+'/discover/movie?sort_by='+sort_by_desc+'&'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id;
+        var page_api_url=myAppConfig.tmdb.movieBaseUrl+'/discover/movie?sort_by='+sort_by_desc+'&'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region;
         this.getMoviesData(page_api_url);
       }
     }

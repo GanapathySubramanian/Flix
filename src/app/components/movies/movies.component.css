@@ -225,6 +225,11 @@ ngb-rating {
     display: none;
 }
 
+.dropdown-menu {
+    max-height:400px;
+    max-width:200px;
+    overflow:scroll; 
+ }
 @media only screen and (min-width: 600px) {
     .sm-search{
         display: none;
