@@ -126,8 +126,13 @@ export class TvshowsComponent implements OnInit {
     })
   }
   getCountryContent(id:string,name:string){
-    region=id;
-    this.country="IN "+name;
+    if(id==""&&name==""){
+      region="";
+      this.country="";
+    }else{
+      region=id;
+      this.country="IN "+name;
+    }
     if(Search_value==""){
       page=1;
       this.ishidedrop=false;
@@ -156,8 +161,13 @@ export class TvshowsComponent implements OnInit {
   }
 
   getGenreContent(id:any,name:string){
-    genre_id=id;
-    this.genre_value=name+' Tvshows';
+    if(id==""&&name==""){
+      genre_id=id;
+      this.genre_value=name;
+    }else{
+      genre_id=id;
+      this.genre_value=name+' Tvshows';
+    }
     if(Search_value==""){
       page=1;
       this.ishidedrop=false;
@@ -187,8 +197,14 @@ export class TvshowsComponent implements OnInit {
 
 
   getOrderContent(sortBy:string,name:string){
-    sort_by_desc=sortBy;
-    this.sortby_value=name;
+
+    if(sortBy==""&&name==""){
+      sort_by_desc="popularity.desc";
+      this.sortby_value="Trending Now";  
+    }else{
+      sort_by_desc=sortBy;
+      this.sortby_value=name;  
+    }
     if(Search_value==""){
       page=1;
       this.page_no=page;

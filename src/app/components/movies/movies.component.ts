@@ -145,7 +145,13 @@ export class MoviesComponent implements OnInit {
 
   getCountryContent(id:string,name:string){
     region=id;
-    this.country_value="IN "+name;
+    if(id==""&&name==""){
+      this.country_value=""
+      region="";
+    }else{
+      this.country_value="IN "+name;
+
+    }
     if(Search_value==""){
       this.ishidedrop=false;
       page=1;
@@ -174,7 +180,12 @@ export class MoviesComponent implements OnInit {
   }
   getGenreContent(id:any,name:string){
     genre_id=id;
-    this.genre_value=name+' Movies';
+    if(id==""&&name==""){
+      this.genre_value=""
+    }else{
+      this.genre_value=name+' Movies';
+
+    }
     if(Search_value==""){
       this.ishidedrop=false;
       page=1;
@@ -204,8 +215,12 @@ export class MoviesComponent implements OnInit {
 
   getOrderContent(sortBy:string,name:string){
     sort_by_desc=sortBy;
-    this.sortby_value=name;
-    
+    if(sortBy==""&&name==""){
+      this.sortby_value="Trending Now";
+      sort_by_desc="popularity.desc"
+    }else{
+      this.sortby_value=name;
+    }
     if(Search_value==""){
       page=1;
       this.ishidedrop=false;

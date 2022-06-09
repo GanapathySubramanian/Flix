@@ -10,14 +10,16 @@
               GENRE
             </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li ><a class="dropdown-item link text-danger" (click)="getGenreContent('','')">CLEAR GENRE</a></li>
                   <li *ngFor="let genre of genreList"><a class="dropdown-item link" (click)="getGenreContent(genre.id,genre.name)">{{genre.name}}</a></li>
                 </ul>
               </li>
               <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" style="color:#fff"href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    FILTER BY
+                    FILTER
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li ><a class="dropdown-item link text-danger" (click)="getOrderContent('','')">CLEAR FILTER</a></li>
                   <li *ngFor="let order of orderList"><a class="dropdown-item link" (click)="getOrderContent(order.order,order.desc)">{{order.desc}}</a></li>
                 </ul>
             </li>
@@ -26,6 +28,7 @@
                 COUNTRY
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li ><a class="dropdown-item link text-danger" (click)="getCountryContent('','')">CLEAR COUNTRY</a></li>
               <li *ngFor="let country of countryList"><a class="dropdown-item link" (click)="getCountryContent(country.iso_3166_1,country.english_name)">{{country.english_name}}</a></li>
             </ul>
         </li>
@@ -126,7 +129,7 @@
                 <span class="movie-rating" [ngClass]="{'red':movie.vote_average<=5,'orange':movie.vote_average>5&&movie.vote_average<8,'green':movie.vote_average>=8}">{{float2int(((movie.vote_average/10)*100)) + '%'}}</span>
             </div>
             <div class="movie-info star-rating">
-                <ngb-rating [max]="10" [(rate)]="movie.vote_average" [readonly]="false"></ngb-rating>
+                <ngb-rating [max]="10" [(rate)]="movie.vote_average" [readonly]="true"></ngb-rating>
             </div>
             <div class="date">
                     <!-- <i class="fa-solid fa-calendar-days"></i> -->

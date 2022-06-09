@@ -230,6 +230,10 @@ ngb-rating {
     max-width:200px;
     overflow:scroll; 
  }
+ .dropdown-menu::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+}
+
 @media only screen and (min-width: 600px) {
     .sm-search{
         display: none;
