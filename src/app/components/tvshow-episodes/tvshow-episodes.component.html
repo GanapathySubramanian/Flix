@@ -29,10 +29,14 @@
                 <div class="tvshows-season-info">
                     <h4><span class="text-warning font-weight-normal">Episode Name  : </span> {{e.name}}</h4>
                 </div>
+                <div class="tvshows-season-info">
+                    <h4><span class="text-warning font-weight-normal">Episode Runtime  : </span> {{e.runtime+" min"}}</h4>
+                </div>
                     <div class="tvshows-season-infos">
                         <ngb-rating [max]="10" [(rate)]="e.vote_average" [readonly]="false"></ngb-rating>
                         <span [ngClass]="{'red':e.vote_average<=5,'orange':e.vote_average>=5&&e.vote_average<8,'green':e.vote_average>=8}">{{float2int((e.vote_average/10)*100)+'%'}}</span>
                     </div>
+                  
                     <div class="tvshows-season-infos">
                         <h4><i class="fas fa-calendar-alt"></i> {{e.air_date | date}}</h4>
                     </div>

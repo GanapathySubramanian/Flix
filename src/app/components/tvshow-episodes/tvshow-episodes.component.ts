@@ -68,6 +68,8 @@ export class TvshowEpisodesComponent implements OnInit {
       let epi:any;
       this.tvshowservice.episodeData.subscribe((data)=>{
         epi=data;
+        console.log(data);
+        
         this.episodes=epi.episodes;
       })
   }
