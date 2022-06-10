@@ -10,14 +10,14 @@
         </ng-template>
     </div>
 
-    <h2 class="text-center text-warning mt-5">SEASON {{season_no}}</h2>
+    <h2 class="text-center text-warning mt-5">{{episodes.name | uppercase}}</h2>
 
 
 
     <h2 class="tvshows-heading mt-5">EPISODES</h2>
         <!-- <p class="text-white h4 text-center">Click the Seasons to know more</p> -->
         <main>         
-            <div class="tvshows-season" *ngFor="let e of episodes">
+            <div class="tvshows-season" *ngFor="let e of episodes.episodes">
 
                 <div *ngIf="e.still_path==null; then thenBlock else elseBlock"></div>
                 <ng-template #thenBlock><img src="assets/images/no-image.png" class="no-image"></ng-template>

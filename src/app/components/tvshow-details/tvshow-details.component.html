@@ -244,7 +244,7 @@
             <h2 class="tvshow-heading mt-5">{{tvshowDetails.original_title}} SEASONS</h2>
         <p class="text-white h4 text-center">Click the Seasons to know more</p>
         <main>         
-            <div class="tvshow" *ngFor="let e of tvshowDetails.seasons;let i=index;" [routerLink]="['/tvshow-episode',tvshowDetails.id,i+1,tvshowDetails.original_title]">
+            <div class="tvshow" *ngFor="let e of tvshowDetails.seasons;let i=index;" [routerLink]="['/tvshow-episode',tvshowDetails.id,e.season_number,tvshowDetails.original_title]">
 
                 <div *ngIf="e.poster_path==null; then thenBlock else elseBlock"></div>
                 <ng-template #thenBlock><img src="assets/images/no-image.png" class="no-image"></ng-template>

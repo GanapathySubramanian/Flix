@@ -26,7 +26,7 @@ import { PersonsComponent } from './components/persons/persons.component';
     TvshowDetailsComponent,
     TvshowEpisodesComponent,
     PersonDetailsComponent,
-    PersonsComponent
+    PersonsComponent,
   ],
   imports: [
     BrowserModule,

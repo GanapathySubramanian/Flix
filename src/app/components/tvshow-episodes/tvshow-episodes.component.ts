@@ -70,7 +70,7 @@ export class TvshowEpisodesComponent implements OnInit {
         epi=data;
         console.log(data);
         
-        this.episodes=epi.episodes;
+        this.episodes=epi;
       })
   }
 

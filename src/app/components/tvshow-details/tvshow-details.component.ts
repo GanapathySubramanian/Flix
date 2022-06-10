@@ -285,11 +285,11 @@ export class TvshowDetailsComponent implements OnInit {
 
       
       // To Remove other than seasons
-      for(let i=0;i<this.tvshowDetails.seasons.length;i++){
-        if(this.tvshowDetails.seasons[i].season_number==0){
-          this.tvshowDetails.seasons.splice(i, 1);
-        }
-      }
+      // for(let i=0;i<this.tvshowDetails.seasons.length;i++){
+      //   if(this.tvshowDetails.seasons[i].season_number==0){
+      //     this.tvshowDetails.seasons.splice(i, 1);
+      //   }
+      // }
       
       if(this.tvshowDetails.homepage==""){
         var watch_provider=myAppConfig.tmdb.tvshowDetailsBaseUrl+tvshow_id+"/watch/providers?"+myAppConfig.tmdb.apikey;
