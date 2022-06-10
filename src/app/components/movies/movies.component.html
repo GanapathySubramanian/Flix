@@ -105,9 +105,9 @@
 
     
     <h1 class="text-center text-warning">{{sortby_value | uppercase}}</h1>
-    <h1 class="text-center text-warning">{{genre_value | uppercase}}</h1>
+    <h1 class="text-center text-warning h3">{{genre_value | uppercase}}</h1>
     <!-- <h1 class="text-center text-warning">IN</h1> -->
-    <h1 class="text-center text-warning">{{country_value | uppercase}}</h1>
+    <h1 class="text-center text-warning h3" *ngIf="country_value!=''"><span class="text-warning"> {{"IN "}}</span><br />{{country_value | uppercase}}</h1>
 
     <main id="main">
         

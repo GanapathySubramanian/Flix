@@ -149,7 +149,7 @@ export class MoviesComponent implements OnInit {
       this.country_value=""
       region="";
     }else{
-      this.country_value="IN "+name;
+      this.country_value=name;
 
     }
     if(Search_value==""){
