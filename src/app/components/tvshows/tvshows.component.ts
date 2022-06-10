@@ -192,7 +192,7 @@ export class TvshowsComponent implements OnInit {
       this.network_value="";
     }else{
       network=id;
-      this.network_value=name;
+      this.network_value=path;
       this.network_homepage=homepage;
       console.log(homepage);
     }
