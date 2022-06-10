@@ -156,18 +156,7 @@ export class MoviesComponent implements OnInit {
       this.ishidedrop=false;
       page=1;
       this.page_no=page;
-      if(sort_by_desc=='upcoming.desc'){
-        let genre_api_url=myAppConfig.tmdb.movieBaseUrl+'/movie/upcoming?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region;
-        this.getMoviesData(genre_api_url);
-      }
-      else if(sort_by_desc=='nowplaying.desc'){
-        let genre_api_url=myAppConfig.tmdb.movieBaseUrl+'/movie/now_playing?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region;
-        this.getMoviesData(genre_api_url);
-      }
-      else{
-        let genre_api_url=myAppConfig.tmdb.movieBaseUrl+'/discover/movie?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&sort_by='+sort_by_desc+'&region='+region;
-        this.getMoviesData(genre_api_url);
-      }
+      this.getFilterContent()
     }else{
       this.ishidedrop=true;
       page=1;
@@ -190,18 +179,7 @@ export class MoviesComponent implements OnInit {
       this.ishidedrop=false;
       page=1;
       this.page_no=page;
-      if(sort_by_desc=='upcoming.desc'){
-        let genre_api_url=myAppConfig.tmdb.movieBaseUrl+'/movie/upcoming?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region;
-        this.getMoviesData(genre_api_url);
-      }
-      else if(sort_by_desc=='nowplaying.desc'){
-        let genre_api_url=myAppConfig.tmdb.movieBaseUrl+'/movie/now_playing?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region;
-        this.getMoviesData(genre_api_url);
-      }
-      else{
-        let genre_api_url=myAppConfig.tmdb.movieBaseUrl+'/discover/movie?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&sort_by='+sort_by_desc+'&region='+region;
-        this.getMoviesData(genre_api_url);
-      }
+     this.getFilterContent()
     }else{
       this.ishidedrop=true;
       page=1;
@@ -225,18 +203,7 @@ export class MoviesComponent implements OnInit {
       page=1;
       this.ishidedrop=false;
       this.page_no=page;
-      if(sortBy=='upcoming.desc'){
-        let api_url=myAppConfig.tmdb.movieBaseUrl+'/movie/upcoming?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region;
-        this.getMoviesData(api_url);
-      }
-      else if(sort_by_desc=='nowplaying.desc'){
-        let api_url=myAppConfig.tmdb.movieBaseUrl+'/movie/now_playing?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region;
-        this.getMoviesData(api_url);
-      }
-      else{
-        let sort_api_url=myAppConfig.tmdb.movieBaseUrl+'/discover/movie?sort_by='+sort_by_desc+'&'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region;
-        this.getMoviesData(sort_api_url);
-      }
+      this.getFilterContent()
     }
     else{
      page=1;
@@ -249,6 +216,20 @@ export class MoviesComponent implements OnInit {
     }
   }
   
+  getFilterContent(){
+    if(sort_by_desc=='upcoming.desc'){
+      let api_url=myAppConfig.tmdb.movieBaseUrl+'/movie/upcoming?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region;
+      this.getMoviesData(api_url);
+    }
+    else if(sort_by_desc=='nowplaying.desc'){
+      let api_url=myAppConfig.tmdb.movieBaseUrl+'/movie/now_playing?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region;
+      this.getMoviesData(api_url);
+    }
+    else{
+      let sort_api_url=myAppConfig.tmdb.movieBaseUrl+'/discover/movie?sort_by='+sort_by_desc+'&'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region;
+      this.getMoviesData(sort_api_url);
+    }
+  }
   handlePagination(val:any){
     if(Search_value==""){
       this.ishidedrop=false;

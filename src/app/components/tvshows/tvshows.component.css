@@ -205,6 +205,14 @@ ngb-rating {
     font-weight: 600;
 }
 
+.network_logo{
+    width: 40px;
+    height: 25px;
+}
+.network_val{
+    width: 80px;
+    height: 70px;
+}
 /* thumbnail */
 .search-list::-webkit-scrollbar{
     width: 8px;
@@ -309,6 +317,5 @@ ngb-rating {
         width: 100%;
         margin: auto;
       }
-      /* Style the links inside the navigation bar */
-     
+      /* Style the links inside the navigation bar */  
   }

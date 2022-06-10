@@ -6,7 +6,7 @@ import { TvshowsService } from 'src/app/services/tvshows.service';
 
 
 var sort_by_desc="popularity.desc",page=1,Search_value="",genre_id="";
-var sorts_by='Trending Now',region='';
+var sorts_by='Trending Now',region='',network="";
 
 const SEARCH_URL="https://api.themoviedb.org/3/search/tv?"+myAppConfig.tmdb.apikey;
 
@@ -23,11 +23,16 @@ export class TvshowsComponent implements OnInit {
   orderList:any;
   genreList:any;
   countryList:any;
-
+  networkList:any;
+  searchList:any=[];
+ 
   country:string='';
   page_no:number=page;
   genre_value:string="";
   sortby_value:string=sorts_by;
+  network_value:string="";
+  network_homepage:string='';
+  findthistvshow:string='';
   searchForm!:FormGroup;
   isdisableprev:boolean=false;
   isdisablenext:boolean=false;
@@ -47,20 +52,39 @@ export class TvshowsComponent implements OnInit {
   ngOnInit(): void {
     this.getGenre();
     this.getOrder();
+    this.getNetwork();
     this.gettvshows();
     this.getCountries();
   }
   
+  getOrder() {
+    this.tvshowservice.getOrderList().subscribe((data)=>{
+      this.orderList=data;
+    })
+  }
+  getGenre() {
+    this.tvshowservice.getGenreList().subscribe((data)=>{
+      this.genreList=data;
+    })
+  }
+
+  getNetwork() {
+    this.tvshowservice.getNetworkList().subscribe((data)=>{
+      this.networkList=data;   
+    })
+  }
+
   getCountries() {
     var country_url=myAppConfig.tmdb.movieBaseUrl+"/configuration/countries?"+myAppConfig.tmdb.apikey;
     this.movieservice.getCountry(country_url);
     this.movieservice.countryData.subscribe((data)=>{
       this.countryList=data;
+      console.log(this.countryList);
+      
     })
   }
   
-  searchList:any=[];
-  findthistvshow:string='';
+
   findTvshow(){
         console.log(this.findthistvshow);
         if(this.findthistvshow.length > 0){
@@ -79,21 +103,22 @@ export class TvshowsComponent implements OnInit {
         Ele1?.classList.add('d-none');
         const Ele2= window.document.getElementById("search-list-sm");
         Ele2?.classList.add('d-none');
+      }
   }
-  }
+
   loadTvshow(movieName:string){
     this.tvshowservice.getSearchTvshows(movieName);
 
     let tempSearchList:any;
     this.tvshowservice.searchtvshowsData.subscribe((data)=>{
        tempSearchList=data;
-      console.log(data);
+      // console.log(data);
       this.searchList=tempSearchList.results;
       
     });  
-    
-    
   }
+
+
   gettvshows() {
     page=1;
     this.page_no=1;
@@ -113,18 +138,6 @@ export class TvshowsComponent implements OnInit {
     
   }
 
-  getOrder() {
-    this.tvshowservice.getOrderList().subscribe((data)=>{
-      this.orderList=data;
-     
-      
-    })
-  }
-  getGenre() {
-    this.tvshowservice.getGenreList().subscribe((data)=>{
-      this.genreList=data;
-    })
-  }
   getCountryContent(id:string,name:string){
     if(id==""&&name==""){
       region="";
@@ -137,18 +150,7 @@ export class TvshowsComponent implements OnInit {
       page=1;
       this.ishidedrop=false;
       this.page_no=page;
-      if(sort_by_desc=='airingtoday.desc'){
-        let api_url=myAppConfig.tmdb.tvshowDetailsBaseUrl+'airing_today?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region;
-        this.gettvshowsData(api_url);
-      }
-      else if(sort_by_desc=='ontheair.desc'){
-        let api_url=myAppConfig.tmdb.tvshowDetailsBaseUrl+'on_the_air?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region;
-        this.gettvshowsData(api_url);
-      }
-      else{
-      let genre_api_url=myAppConfig.tmdb.tvshowBaseUrl+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&sort_by='+sort_by_desc+'&region='+region;
-      this.gettvshowsData(genre_api_url);
-      }
+      this.getFilterContent();
     }else{
       this.ishidedrop=true;
       page=1;
@@ -172,18 +174,7 @@ export class TvshowsComponent implements OnInit {
       page=1;
       this.ishidedrop=false;
       this.page_no=page;
-      if(sort_by_desc=='airingtoday.desc'){
-        let api_url=myAppConfig.tmdb.tvshowDetailsBaseUrl+'airing_today?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region;
-        this.gettvshowsData(api_url);
-      }
-      else if(sort_by_desc=='ontheair.desc'){
-        let api_url=myAppConfig.tmdb.tvshowDetailsBaseUrl+'on_the_air?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region;
-        this.gettvshowsData(api_url);
-      }
-      else{
-      let genre_api_url=myAppConfig.tmdb.tvshowBaseUrl+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&sort_by='+sort_by_desc+'&region='+region;
-      this.gettvshowsData(genre_api_url);
-      }
+      this.getFilterContent()
     }else{
       this.ishidedrop=true;
       page=1;
@@ -195,6 +186,31 @@ export class TvshowsComponent implements OnInit {
     }
   }
 
+  getNetworkContent(id:string,name:string,path:string,homepage:string){
+    if(id==""&&name==""&&path==""){
+      network="";
+      this.network_value="";
+    }else{
+      network=id;
+      this.network_value=name;
+      this.network_homepage=homepage;
+      console.log(homepage);
+    }
+    if(Search_value==""){
+      page=1;
+      this.ishidedrop=false;
+      this.page_no=page;
+      this.getFilterContent();
+    }else{
+      this.ishidedrop=true;
+      page=1;
+      this.page_no=page;
+      this.sortby_value=Search_value;
+      this.genre_value="";
+      let genre_api_url=SEARCH_URL+'&query='+Search_value+'&page='+page;
+      this.gettvshowsData(genre_api_url);
+    }
+  }
 
   getOrderContent(sortBy:string,name:string){
 
@@ -209,18 +225,7 @@ export class TvshowsComponent implements OnInit {
       page=1;
       this.page_no=page;
       this.ishidedrop=false;
-      if(sortBy=='airingtoday.desc'){
-        let api_url=myAppConfig.tmdb.tvshowDetailsBaseUrl+'airing_today?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region;
-        this.gettvshowsData(api_url);
-      }
-      else if(sort_by_desc=='ontheair.desc'){
-        let api_url=myAppConfig.tmdb.tvshowDetailsBaseUrl+'on_the_air?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region;
-        this.gettvshowsData(api_url);
-      }
-      else{
-        let sort_api_url=myAppConfig.tmdb.tvshowBaseUrl+myAppConfig.tmdb.apikey+'&language=en-US&sort_by='+sort_by_desc+'&page='+page+'&with_genres='+genre_id+'&region='+region;
-        this.gettvshowsData(sort_api_url);
-      }
+      this.getFilterContent()
     }
     else{
       this.ishidedrop=true;
@@ -269,18 +274,7 @@ export class TvshowsComponent implements OnInit {
         page++;
         this.page_no=page;
       }
-      if(sort_by_desc=='airingtoday.desc'){
-        let api_url=myAppConfig.tmdb.tvshowDetailsBaseUrl+'airing_today?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region;
-        this.gettvshowsData(api_url);
-      }
-      else if(sort_by_desc=='ontheair.desc'){
-        let api_url=myAppConfig.tmdb.tvshowDetailsBaseUrl+'on_the_air?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region;
-        this.gettvshowsData(api_url);
-      }
-      else{
-        let page_api_url=myAppConfig.tmdb.tvshowBaseUrl+myAppConfig.tmdb.apikey+'&language=en-US&sort_by='+sort_by_desc+'&with_genres='+genre_id+'&page='+page+'&region='+region;
-        this.gettvshowsData(page_api_url);
-      }
+      this.getFilterContent()
     }else{
       this.ishidedrop=true;
       if(val==1){
@@ -304,6 +298,21 @@ export class TvshowsComponent implements OnInit {
   }
 
 
+  
+  getFilterContent(){
+    if(sort_by_desc=='airingtoday.desc'){
+      let api_url=myAppConfig.tmdb.tvshowDetailsBaseUrl+'airing_today?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region+'&with_networks='+network;
+      this.gettvshowsData(api_url);
+    }
+    else if(sort_by_desc=='ontheair.desc'){
+      let api_url=myAppConfig.tmdb.tvshowDetailsBaseUrl+'on_the_air?'+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&region='+region+'&with_networks='+network;
+      this.gettvshowsData(api_url);
+    }
+    else{
+    let genre_api_url=myAppConfig.tmdb.tvshowBaseUrl+myAppConfig.tmdb.apikey+'&page='+page+'&with_genres='+genre_id+'&sort_by='+sort_by_desc+'&region='+region+'&with_networks='+network;
+    this.gettvshowsData(genre_api_url);
+    }
+  }
 
   gettvshowsData(api_url: string) {
     this.tvshowservice.getallTvshows(api_url);
