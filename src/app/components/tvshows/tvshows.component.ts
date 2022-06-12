@@ -151,14 +151,6 @@ export class TvshowsComponent implements OnInit {
       this.ishidedrop=false;
       this.page_no=page;
       this.getFilterContent();
-    }else{
-      this.ishidedrop=true;
-      page=1;
-      this.page_no=page;
-      this.sortby_value=Search_value;
-      this.genre_value="";
-      let genre_api_url=SEARCH_URL+'&query='+Search_value+'&page='+page;
-      this.gettvshowsData(genre_api_url);
     }
   }
 
@@ -175,14 +167,6 @@ export class TvshowsComponent implements OnInit {
       this.ishidedrop=false;
       this.page_no=page;
       this.getFilterContent()
-    }else{
-      this.ishidedrop=true;
-      page=1;
-      this.page_no=page;
-      this.sortby_value=Search_value;
-      this.genre_value="";
-      let genre_api_url=SEARCH_URL+'&query='+Search_value+'&page='+page;
-      this.gettvshowsData(genre_api_url);
     }
   }
 
@@ -201,14 +185,6 @@ export class TvshowsComponent implements OnInit {
       this.ishidedrop=false;
       this.page_no=page;
       this.getFilterContent();
-    }else{
-      this.ishidedrop=true;
-      page=1;
-      this.page_no=page;
-      this.sortby_value=Search_value;
-      this.genre_value="";
-      let genre_api_url=SEARCH_URL+'&query='+Search_value+'&page='+page;
-      this.gettvshowsData(genre_api_url);
     }
   }
 
@@ -227,15 +203,7 @@ export class TvshowsComponent implements OnInit {
       this.ishidedrop=false;
       this.getFilterContent()
     }
-    else{
-      this.ishidedrop=true;
-     page=1;
-      this.page_no=page;
-      this.sortby_value=Search_value;
-      this.genre_value="";
-      let sort_api_url=SEARCH_URL+'&query'+Search_value+'&page='+page;
-        this.gettvshowsData(sort_api_url);
-    }
+  
   }
 
 
@@ -248,6 +216,7 @@ export class TvshowsComponent implements OnInit {
       this.ishidedrop=true;
       this.sortby_value=Search_value;
       this.findthistvshow='';
+      this.network_value="";
       this.gettvshowsData(SEARCH_URL+'&query='+Search_value);
     }else{
     this.ishidedrop=false;
@@ -295,6 +264,11 @@ export class TvshowsComponent implements OnInit {
       this.gettvshowsData(page_api_url);
     }
    
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+    });
   }
 
 

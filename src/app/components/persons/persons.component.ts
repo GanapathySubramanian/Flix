@@ -135,6 +135,12 @@ export class PersonsComponent implements OnInit {
       let SEARCH_URL=myAppConfig.tmdb.movieBaseUrl+'/search/person?'+myAppConfig.tmdb.apikey+'&query='+Search_value+'&page='+page;
         this.getPeoplesData(SEARCH_URL)
     }
+
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+    });
   }
 
 
