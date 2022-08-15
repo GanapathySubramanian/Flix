@@ -1,0 +1,6 @@
+.movie-heading{
+    display: block;
+    text-transform:uppercase;
+    color:var(--dark-red);
+    text-align: center;
+}

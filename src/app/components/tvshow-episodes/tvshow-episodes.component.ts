@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import myAppConfig from 'src/app/config/my-app-config';
-import { TvshowsService } from 'src/app/services/tvshows.service';
+import myAppConfig from 'src/app/core/config/my-app-config';
+import { TvshowsService } from 'src/app/core/services/tvshows.service';
 
 var tvshow_id=0,season_id=0,tv_name='';
 @Component({

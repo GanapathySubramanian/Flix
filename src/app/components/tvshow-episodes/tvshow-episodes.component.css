@@ -4,11 +4,11 @@ main{
     justify-content: center;
 }
 ngb-rating {
-    color: #FFC107;
-    font-size: 20px;
+    color: var(--base-orange);
+    font-size: 15px;
 }
 .tvshows-heading{
-    color:red;
+    color:var(--dark-red);
     text-align: center;
 }
 
@@ -46,7 +46,7 @@ main{
 }
 
 .tvshows-season-info{
-    color: #eee;
+    color: var(--base-white);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -54,7 +54,7 @@ main{
     letter-spacing: 0.5px;
 }
 .tvshows-season-infos{
-    color: #eee;
+    color: var(--base-white);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -73,13 +73,13 @@ main{
 }
 
 .green{
-    color: lightgreen;
+    color: var(--base-green);
 }
 .orange{
-    color: orange;
+    color: var(--base-orange);
 }
 .red{
-    color: red;
+    color: var(--dark-red);
 }
  
 .season-overview{
@@ -87,7 +87,7 @@ main{
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #fff;
+    background-color: var(--base-white);
     padding: 1rem;
     max-height: 100%;
     transform: translateY(101%);

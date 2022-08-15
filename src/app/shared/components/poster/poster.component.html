@@ -1,0 +1,15 @@
+<h2 class="movie-heading mt-5">{{data.original_title}} POSTERS</h2>
+<div *ngIf="data.posterList?.length<=0; then noposters else posters"></div>
+<ng-template #posters>
+    <carousel class="text-center" [autoplay]=true [autoplayInterval]=3000 [pauseOnHover]=true [height]=300 [margin]=30 arrowsTheme="dark">
+        <div class="carousel-cell" *ngFor="let post of data.posterList">
+            <img src="{{imgUrl+post.file_path}}" width="100%" height="100%">
+        </div>
+    </carousel>
+</ng-template>
+
+<ng-template #noposters>
+    <div id="no-record_poster">
+        <h1 class="text-warning text-center">Posters not available for {{data.original_title}}</h1>
+    </div>
+</ng-template>

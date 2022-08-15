@@ -17,4 +17,7 @@ export interface PersonDetails {
     instagram_id:string;
     tvrage_id:number;
     twitter_id:string;
+
+
+   
 }

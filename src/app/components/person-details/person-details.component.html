@@ -95,31 +95,11 @@
         <main id="main">
             
             
-            <div *ngIf="nocastMovie; then nocastmovie else castmoviedata"></div>
+            <div *ngIf="castMovieList.length<=0; then nocastmovie else castmoviedata"></div>
              <ng-template #castmoviedata>
                 <div class="person" *ngFor="let temp of castMovieList" [routerLink]="['/moviedetails', temp.id]">
-                        <div *ngIf="temp.poster_path==null; then thenBlock else elseBlock"></div>
-                        <ng-template #thenBlock>
-                            <figure>
-                            <img src="assets/images/no-image.png" class="no-image">
-                            </figure>
-                        </ng-template>
-                        <ng-template #elseBlock>
-                            <figure>
-                                <img src="{{imgUrl+temp.poster_path}}">
-                            </figure>
-                        </ng-template>
-                        <div class="person-info">
-                            <h4>{{temp.title}}</h4>
-                            <span class="person-rating" [ngClass]="{'red':temp.vote_average<=5,'orange':temp.vote_average>=5&&temp.vote_average<8,'green':temp.vote_average>=8}">{{float2int((temp.vote_average/10)*100) +'%'}}</span>
-                        </div>
-                        <div class="person-info">
-                            <ngb-rating [max]="10" [(rate)]="temp.vote_average" [readonly]="false"></ngb-rating>
-                        </div>
-                        <div class="date">
-                            <p><i class="fas fa-calendar-alt"></i> {{temp.release_date | date}}</p>
-                        </div>
-                    </div>
+                    <app-card [data]="temp"></app-card>       
+                </div>
                 
             </ng-template>
                 <ng-template #nocastmovie>
@@ -137,32 +117,11 @@
             
             
 
-            <div *ngIf="nocastTv; then nocasttv else casttvdata"></div>
+            <div *ngIf="castTvList.length<=0; then nocasttv else casttvdata"></div>
             <ng-template #casttvdata>
                 <div class="person" *ngFor="let temp1 of castTvList" [routerLink]="['/tvshowdetails', temp1.id]">
-        
-                        <div *ngIf="temp1.poster_path==null; then thenBlock else elseBlock"></div>
-                        <ng-template #thenBlock>
-                            <figure>
-                                <img src="assets/images/no-image.png" class="no-image">
-                            </figure>
-                        </ng-template>
-                        <ng-template #elseBlock>
-                            <figure>
-                                <img src="{{imgUrl+temp1.poster_path}}">
-                            </figure>
-                        </ng-template>
-
-                        <div class="person-info">
-                            <h4>{{temp1.original_name}}</h4>
-                            <span class="person-rating"[ngClass]="{'red':temp1.vote_average<=5,'orange':temp1.vote_average>=5&&temp1.vote_average<8,'green':temp1.vote_average>=8}">{{float2int((temp1.vote_average/10)*100)+'%'}}</span>
-                        </div>
-                        <div class="person-info">
-                            <ngb-rating [max]="10" [(rate)]="temp1.vote_average" [readonly]="false"></ngb-rating>
-                        </div>
-                        <div class="date">
-                            <p><i class="fas fa-calendar-alt"></i> {{temp1.first_air_date | date}}</p>
-                        </div>
+                    <app-card [data]="temp1"></app-card>       
+                    
                 </div>
         </ng-template>
             <ng-template #nocasttv>
@@ -178,29 +137,11 @@
         <p class="h4 text-center text-white">Click the movies to know more</p>
         <main id="main">
 
-            <div *ngIf="nocrewMovie; then nocrewmovie else crewmoviedata"></div>
+            <div *ngIf="crewMovieList.length<=0; then nocrewmovie else crewmoviedata"></div>
                 <ng-template #crewmoviedata>
-                        <div class="person crew-tvshow" *ngFor="let crew_data of crewMovieList" [routerLink]="['/moviedetails', crew_data.id]">
-                           
-                                <div *ngIf="crew_data.poster_path==null; then thenBlock else elseBlock"></div>
-                        
-                                        <ng-template #thenBlock>
-                                            <figure>
-                                                <img src="assets/images/no-image.png" class="no-image">
-                                            </figure>
-                                        </ng-template>
-                                        <ng-template #elseBlock>
-                                            <figure>
-                                                <img src="{{imgUrl+crew_data.poster_path}}">
-                                            </figure>    
-                                        </ng-template>
-                                        <div class="person-info-crew">
-                                            <h4>{{crew_data.title}}</h4>
-                                            <p>AS {{crew_data.job}}</p>
-                                        </div>
-                                        
-                    
-            </div>
+                    <div class="person crew-tvshow" *ngFor="let crew_data of crewMovieList" [routerLink]="['/moviedetails', crew_data.id]">
+                        <app-card [data]="crew_data"></app-card>       
+                     </div>
             </ng-template>
             <ng-template #nocrewmovie>
                 <div id="no-record_found_crew_movie">
@@ -215,26 +156,10 @@
           <p class="h4 text-center text-white">Click the tvshows to know more</p>
           <main id="main">
   
-            <div *ngIf="nocrewTv; then nocrewtv else crewtvdata"></div>
+            <div *ngIf="crewTvList.length<=0; then nocrewtv else crewtvdata"></div>
                 <ng-template #crewtvdata>
                         <div class="person crew-tvshow" *ngFor="let crew_data of crewTvList" [routerLink]="['/tvshowdetails', crew_data.id]">
-                          
-                                    <div *ngIf="crew_data.poster_path==null; then thenBlock else elseBlock"></div>
-                                
-                                    <ng-template #thenBlock>
-                                        <figure>
-                                            <img src="assets/images/no-image.png" class="no-image">
-                                        </figure>  
-                                    </ng-template>
-                                    <ng-template #elseBlock>
-                                        <figure>
-                                            <img src="{{imgUrl+crew_data.poster_path}}">
-                                        </figure>
-                                    </ng-template>
-                                    <div class="person-info-crew">
-                                        <h4>{{crew_data.name}}</h4>
-                                        <p>AS {{crew_data.job}}</p>
-                                    </div>
+                            <app-card [data]="crew_data"></app-card>       
                         </div>
                 </ng-template>
               <ng-template #nocrewtv>

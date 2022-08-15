@@ -3,17 +3,17 @@ nav{
     display: flex;
     justify-content: space-around;
     background-color: var(--secondary-color);
-    color:#eee;
+    color:var(--base-white);
 }
  
 .logo{
-    color: red;
+    color: var(--dark-red);
 }
 .nav-link{
     cursor: pointer;
 }
 .nav-link:hover{
-    color: red;
+    color: var(--dark-red);
 }
 
 nav a{
@@ -29,17 +29,17 @@ nav a{
 
   
 .copyright {
-margin-top:15px;
-text-align:center;
-font-size:13px;
-color:#aaa;
-margin-bottom:0;
+    margin-top:15px;
+    text-align:center;
+    font-size:13px;
+    color:#aaa;
+    margin-bottom:0;
 }
 
 
  .footer .container-fluid{
     display: flex;
-    margin-left: 5%;
+    /* margin-left: 5%; */
     color: #fff;
 }
 
@@ -50,17 +50,21 @@ margin-bottom:0;
 }
 
  .btn {
-    color: #ffffff;
+    color: var(--base-white);
 }
 .btn:hover{
-    background-color: red;
-    color: white;
+    background-color: var(--dark-red);
+    color: var(--base-white);
 } 
 @media only screen and (max-width:600px) {
     .footer .container-fluid{
        width: 100%;
-       color: #fff;
+       color: var(--base-white);
        margin-left:0%;
 
    }
 }
+
+
+
+

@@ -1,0 +1,104 @@
+.image{
+    width:100%; 
+}
+
+.card-info{
+    color: var(--base-white);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 00.5rem 1rem 1rem;
+    letter-spacing: 0.5px;
+}
+
+.no-image{
+    object-fit: cover;
+    height: 376px;
+}
+.card-info h4{
+    margin-top: 0;
+    width: 80%;
+    font-size: 20px;
+}
+.card-rating{
+    margin: 5px;
+    width: 20%;
+}
+
+.card-info span{
+    background-color: var(--primary-color);
+    padding: 0.25rem;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+figure {
+    margin: 0;
+    padding: 0;
+    background: var(--base-white);
+    overflow: hidden;
+}
+
+
+ /* Shine */
+figure {
+    position: relative;
+}
+figure::before {
+    position: absolute;
+    top: 0;
+    left: -85%;
+    z-index: 2;
+    display: block;
+    content: '';
+    width: 50%;
+    height: 100%;
+    background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,.3) 100%);
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,.3) 100%);
+    -webkit-transform: skewX(-25deg);
+    transform: skewX(-25deg);
+}
+figure:hover::before {
+    -webkit-animation: shine 1.5s;
+    animation: shine 1.5s;
+}
+@-webkit-keyframes shine {
+    100% {
+        left: 125%;
+    }
+}
+@keyframes shine {
+    100% {
+        left: 125%;
+    }
+}
+
+
+.green{
+    color: var(--base-green);
+}
+.orange{
+    color: var(--base-orange);
+}
+.red{
+    color: var(--dark-red);
+}
+
+ngb-rating {
+    color:var(--base-orange);
+    font-size: 15px;
+}
+
+.card-date{
+    color: var(--base-white);
+    display: flex;
+    justify-content:start;
+    margin: 5px;
+    padding: 10px;
+}
+
+.tvshow-info-cast,.tvshow-info-crew{
+    color: var(--base-white);
+    padding: 00.5rem 1rem 1rem;
+    letter-spacing: 0.5px;
+}

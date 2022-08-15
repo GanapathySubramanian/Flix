@@ -1,8 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PersonDetails } from 'src/app/common/person-details';
-import myAppConfig from 'src/app/config/my-app-config';
-import { PeopleService } from 'src/app/services/people.service';
+import { PersonDetails } from 'src/app/core/interface/person-details';
+import myAppConfig from 'src/app/core/config/my-app-config';
+import { PeopleService } from 'src/app/core/services/people.service';
 
 var person_id='';
 @Component({
@@ -21,10 +21,7 @@ export class PersonDetailsComponent implements OnInit {
   crewTvList:any=[];
   crewMovieList:any=[];
 
-  nocastMovie:boolean=true;
-  nocastTv:boolean=true;
-  nocrewMovie:boolean=true;
-  nocrewTv:boolean=true;
+  
   windowScrolled: boolean=false;
   
   constructor(private route: ActivatedRoute,private peopleservice:PeopleService) { 
@@ -88,19 +85,15 @@ export class PersonDetailsComponent implements OnInit {
           castTvcount++;
         }
       }
+
+    
+      for(let i=0;i<this.castTvList.length;i++){
+        this.castTvList[i].title = this.castTvList[i].name 
+        delete this.castTvList[i].name 
+      }
       
-      if(castMoviecount==0){
-        this.nocastMovie=true;
-      }else{
-        this.nocastMovie=false;
-      }
-
-      if(castTvcount==0){
-        this.nocastTv=true;
-      }else{
-        this.nocastTv=false;
-      }
-
+      
+     
       let crewMoviecount=0,crewTvcount=0;
       let m=0,n=0;
       for(let i=0;i<tempcredit.crew.length;i++){
@@ -116,21 +109,30 @@ export class PersonDetailsComponent implements OnInit {
       }
       
       if(crewMoviecount==0){
-        this.nocrewMovie=true;
+        console.log("no data");
+        
       }else{
-        this.nocrewMovie=false;
+
 
         let data=this.filterCrewData(this.crewMovieList);
         this.crewMovieList=data;
       }
 
       if(crewTvcount==0){
-        this.nocrewTv=true;
+        console.log("no data");
+
       }else{
-        this.nocrewTv=false;
+       
 
         let data=this.filterCrewData(this.crewTvList);
         this.crewTvList=data;
+      }
+      
+
+
+      for(let i=0;i<this.crewTvList.length;i++){
+        this.crewTvList[i].title = this.crewTvList[i].name 
+        delete this.crewTvList[i].name 
       }
       
     })

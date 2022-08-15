@@ -21,7 +21,7 @@ main{
 
 
 .person-info{
-    color: #eee;
+    color: var(--base-white);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -53,7 +53,7 @@ main{
 figure {
     margin: 0;
     padding: 0;
-    background: #fff;
+    background: var(--base-white);
     overflow: hidden;
 }
 
@@ -91,22 +91,22 @@ figure {
 }
 
 .green{
-    color: lightgreen;
+    color: var(--base-green);
 }
 .orange{
-    color: orange;
+    color: var(--base-orange);
 }
 .red{
-    color: red;
+    color: var(--dark-red);
 }
 
 ngb-rating {
-    color: #FFC107;
+    color: var(--base-orange);
     font-size: 20px;
 }
 
 .date{
-    color: #eee;
+    color:var(--base-white);
     display: flex;
     justify-content:start;
     margin: 5px;
@@ -114,15 +114,15 @@ ngb-rating {
 }
 
 .btn {
-    color: #ffffff;
+    color: var(--base-white);
     padding: 0.25rem 1.5rem;
     text-transform: uppercase;
     margin: 15px;
-    background-color: red;
+    background-color: var(--dark-red);
 }
 
 .btn:hover {
-    background-color: orange;
+    background-color: var(--base-orange);
     transition: 0.3s ease-in-out;
 }
 .pagination{
@@ -141,7 +141,7 @@ ngb-rating {
     padding: 0.5rem 1rem;
     border-radius: 50px;
     font-size: 1rem;
-    color: #fff;
+    color:var(--base-white);
     font-family: inherit;
 }
 
@@ -150,7 +150,7 @@ ngb-rating {
     background-color: var(--primary-color);
 }
 .search::placeholder{
-    color: #7378c5;
+    color: var(--secondary-color);
 }
 
 
@@ -166,7 +166,7 @@ ngb-rating {
     padding: 0.5rem;
     border-bottom: 1px solid var(--dark-color);
     width: calc(350px - 8px);
-    color: #fff;
+    color: var(--base-white);
     cursor: pointer;
     -webkit-transition: background-color 200ms ease;
     -o-transition: background-color 200ms ease;
@@ -275,7 +275,7 @@ ngb-rating {
         padding: 0.5rem 1rem;
         border-radius: 50px;
         font-size: 1rem;
-        color: #fff;
+        color: var(--base-white);
         font-family: inherit;
         height: 60px;
     }

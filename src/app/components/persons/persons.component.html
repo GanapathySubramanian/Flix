@@ -76,48 +76,17 @@
     <main id="main">
         
         <div id="person" class="person" *ngFor="let person of peopleList" [routerLink]="['/persondetails',person.id]">
-            <div *ngIf="person.profile_path==null;then thenBlock else elseBlock"></div>
-
-            <ng-template #thenBlock>
-                <figure>
-                    <img src="assets/images/no-image.png" class="figure" class="no-image">
-                </figure>
-            </ng-template>
-            <ng-template #elseBlock>
-                <figure>
-                    <img src="{{imgUrl+person.profile_path}}" alt="figure">
-                </figure>
-            </ng-template>
-
-            <div class="person-info">
-                <h4>{{person.name}}</h4>
-                
-                <!-- <span [ngClass]="{'red':person.popularity<=5,'orange':person.popularity>=5&&person.popularity<8,'green':person.popularity>=8}">{{float2int(((person.popularity/10)*100)) + '%'}}</span> -->
-            </div>
-            <div class="person-info">
-               <div *ngIf="person.known_for[0].title;then titleBlock else nameBlock"></div>
-
-                <ng-template #titleBlock>
-                    <p>{{person.known_for[0].title}}</p>
-                </ng-template>
-                <ng-template #nameBlock>
-                    <p>{{person.known_for[0].name}}</p>
-                </ng-template>
-            </div>
-                      
-            <div class="person-info">
-                <span>Popularity : <span [ngClass]="{'red':person.popularity<50,'orange':person.popularity>=50&&person.popularity<80,'green':person.popularity>=80}"> <i class="fa-solid fa-thumbs-up"></i> {{float2int(person.popularity)}}</span> </span>
-            </div>
+            <app-card [data]="person"></app-card>
         </div>
 
     </main>
 
-    <div class="pagination" id="pagination">
+    <div class="pagination" *ngIf="peopleList.length>0">
         <button class="btn" id="prev" [disabled]="isdisableprev" (click)="handlePagination(2)">Prev</button>
         <button class="btn"  id="home" (click)="handlePagination(1)" style="border-radius: 100%;">{{page_no}}</button>
         <button class="btn"  id="next" [disabled]="isdisablenext" (click)="handlePagination(3)">Next</button>
     </div>
-    <div id="no-record" class="d-none">
+    <div *ngIf="peopleList.length<=0">
         <h1 class="text-warning text-center">No persons Found</h1>
     </div>
 </div>

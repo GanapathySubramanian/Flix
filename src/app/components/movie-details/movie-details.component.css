@@ -231,30 +231,7 @@ ngb-rating {
 
 
   
-  .table-review-head{
-      color: orange;
-  }
-  
-  .table-review-head td{
-      border: 2px solid red;
-      /* margin: 1rem; */
-      padding: 1.5rem;
-  }
-
-  .table-review-body{
-      font-weight: normal;
-      line-height: 1rem;
-  }
-  .table-review-body td{
-      border: 2px solid red;
-      /* margin: 1rem; */
-      font-family: 'Poppins','sanserif';
-      word-spacing: 2px;
-      letter-spacing: 1px;
-      line-height: 1.6rem;
-      /* text-indent: 10px; */
-      padding: 1.5rem;
-  }
+ 
 
  
   .btn-image {

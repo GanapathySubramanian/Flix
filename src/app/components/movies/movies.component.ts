@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MoviesService } from 'src/app/services/movies.service';
-import myAppConfig from 'src/app/config/my-app-config';
+import { MoviesService } from 'src/app/core/services/movies.service';
+import myAppConfig from 'src/app/core/config/my-app-config';
 import { FormControl, FormGroup } from '@angular/forms';
+import { common } from 'src/app/core/interface/common';
 
 
 var sort_by_desc="popularity.desc",page=1,Search_value="",genre_id="";
@@ -16,7 +17,7 @@ export class MoviesComponent implements OnInit {
 
   imgUrl:string=myAppConfig.tmdb.imgUrl;
 
-  movieList:any;
+  movieList:common[]=[];
   genreList:any;
   orderList:any;
   countryList:any;
@@ -39,7 +40,7 @@ export class MoviesComponent implements OnInit {
       
     }else{
       this.ishidedrop=true;
-    }
+    }    
 
   }
 
@@ -69,12 +70,9 @@ export class MoviesComponent implements OnInit {
           let Ele2= window.document.getElementById("search-list-sm");
           Ele2?.classList.remove('d-none');
           let SEA_URL=myAppConfig.tmdb.movieBaseUrl+"/search/movie?"+myAppConfig.tmdb.apikey+'&query='+this.findthismovie+'&page=1'+'&sort_by=popular.desc';
-
           this.loadMovies(SEA_URL);
-          // this.ishidedrop=true;
         }  
       else {
-        // this.ishidedrop=false;
         let Ele1= window.document.getElementById("search-list-lg");
         Ele1?.classList.add('d-none');
         const Ele2= window.document.getElementById("search-list-sm");
@@ -253,25 +251,24 @@ export class MoviesComponent implements OnInit {
     this.movieservice.getallMovies(url);
 
     let tempMoviesList:any;
-    this.movieservice.moviesData.subscribe((data)=>{
-       tempMoviesList=data;
-       this.movieList=tempMoviesList.results;
-     
+    this.movieservice.moviesData.subscribe((data:any)=>{
+       tempMoviesList=data.results;
+        this.movieList=[]
+       for(let i=0;i<tempMoviesList.length;i++){
+        this.movieList[i]={} as common;
+        this.movieList[i].id=tempMoviesList[i].id;
+        this.movieList[i].title=tempMoviesList[i].title;
+        this.movieList[i].poster_path=tempMoviesList[i].poster_path;
+        this.movieList[i].vote_average=tempMoviesList[i].vote_average;
+        this.movieList[i].release_date=tempMoviesList[i].first_air_date;
+        this.movieList[i].release_date=tempMoviesList[i].release_date;
+        console.log(this.movieList[i]);
         
-       if(tempMoviesList.total_results==0){
-        const Ele= window.document.getElementById("no-record");
-        Ele?.classList.remove('d-none');
-        const Element= window.document.getElementById("pagination");
-        Element?.classList.add('d-none');
-      }else{
-        const Ele= window.document.getElementById("no-record");
-        Ele?.classList.add('d-none');
-        const Elemen= window.document.getElementById("pagination");
-        Elemen?.classList.remove('d-none');
       }
+      
 
   
-      if(tempMoviesList.total_pages==page){
+      if(data.total_pages==page){        
         this.isdisablenext=true;
       }else{
         this.isdisablenext=false;

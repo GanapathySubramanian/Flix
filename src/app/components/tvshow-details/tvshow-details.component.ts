@@ -1,9 +1,10 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TvshowDetails } from 'src/app/common/tvshow-details';
-import myAppConfig from 'src/app/config/my-app-config';
-import { TvshowsService } from 'src/app/services/tvshows.service';
+import { TvshowDetails } from 'src/app/core/interface/tvshow-details';
+import myAppConfig from 'src/app/core/config/my-app-config';
+import { TvshowsService } from 'src/app/core/services/tvshows.service';
+import { common } from 'src/app/core/interface/common';
 
 var tvshow_id=0;
 @Component({
@@ -18,28 +19,6 @@ export class TvshowDetailsComponent implements OnInit {
 
   tvshowDetails:TvshowDetails={} as TvshowDetails;
 
-  backdropList:any;
-  logoList:any;
-  posterList:any
-  reviewList:any;
-  castList:any;
-  crewList:any;
-  similartvshowList:any;
-  rectvshowList:any;
-  videoList:any;
-  
-  background_image:any;
-  watchprovider:any;
-
-
-  noreview:boolean=false;
-  nobackdrop:boolean=false;
-  nopost:boolean=false;
-  novideos:boolean=false;
-  nocastdata:boolean=false;
-  nocrewdata:boolean=false;
-  norectvshowdata:boolean=false;
-  nosimtvshowdata:boolean=false;
   windowScrolled: boolean=false;
 
   constructor(private route:ActivatedRoute,private router:Router,private tvshowservice:TvshowsService,private _sanitizer:DomSanitizer) { 
@@ -93,20 +72,17 @@ export class TvshowDetailsComponent implements OnInit {
     this.tvshowservice.videoData.subscribe((data)=>{
       videos=data;
       
-      this.videoList=videos.results;
-      if(this.videoList.length==0){
-        this.novideos=true;
-      }else{
-        this.novideos=false;
-        for(let i=0;i<this.videoList.length;i++){
-          if(this.videoList[i].key){
-            this.videoList[i].key=this._sanitizer.bypassSecurityTrustResourceUrl(myAppConfig.tmdb.videoUrl+this.videoList[i].key);
+      this.tvshowDetails.videoList=videos.results;
+      
+        for(let i=0;i<this.tvshowDetails.videoList.length;i++){
+          if(this.tvshowDetails.videoList[i].key){
+            this.tvshowDetails.videoList[i].key=this._sanitizer.bypassSecurityTrustResourceUrl(myAppConfig.tmdb.videoUrl+this.tvshowDetails.videoList[i].key);
           }
           else{
-            this.videoList[i].key=null;
+            this.tvshowDetails.videoList[i].key=null;
           }
         }
-      }
+      
       
     })
   }
@@ -117,17 +93,30 @@ export class TvshowDetailsComponent implements OnInit {
       let rectvshow:any;
       this.tvshowservice.rectvshowData.subscribe((data)=>{
         rectvshow=data;
+
+
         for(let i=0;i<rectvshow.results.length;i++){
           if(rectvshow.results[i].poster_path==null){
             rectvshow.results[i].poster_path="Empty";
           }
         }
-          if(rectvshow.total_results==0){
-            this.norectvshowdata=true;
-          }else{
-            this.norectvshowdata=false;
-            this.rectvshowList=rectvshow.results;
-          }
+            this.tvshowDetails.rectvshowList=rectvshow.results;
+            console.log(this.tvshowDetails.rectvshowList);
+            
+      let rec_tvshow=rectvshow.results;
+      this.tvshowDetails.similartvshowList=rec_tvshow;
+      for(let i=0;i<rec_tvshow.length;i++){
+
+        this.tvshowDetails.rectvshowList[i].id=rec_tvshow[i].id;
+        this.tvshowDetails.rectvshowList[i].title=rec_tvshow[i].name;
+        this.tvshowDetails.rectvshowList[i].poster_path=rec_tvshow[i].poster_path;
+        this.tvshowDetails.rectvshowList[i].vote_average=rec_tvshow[i].vote_average;
+        this.tvshowDetails.rectvshowList[i].release_date=rec_tvshow[i].first_air_date;
+
+        
+        
+      }
+          
       })
   }
   getSimilartvshow(similar_url: string) {
@@ -142,12 +131,22 @@ export class TvshowDetailsComponent implements OnInit {
           }
         }
         
-        if(similartvshow.total_results==0){
-          this.nosimtvshowdata=true;
-        }else{
-          this.nosimtvshowdata=false;
-          this.similartvshowList=similartvshow.results;
+
+        let s_tvshow=similartvshow.results;
+        this.tvshowDetails.similartvshowList=s_tvshow;
+        for(let i=0;i<s_tvshow.length;i++){
+
+          this.tvshowDetails.similartvshowList[i].id=s_tvshow[i].id;
+          this.tvshowDetails.similartvshowList[i].title=s_tvshow[i].name;
+          this.tvshowDetails.similartvshowList[i].poster_path=s_tvshow[i].poster_path;
+          this.tvshowDetails.similartvshowList[i].vote_average=s_tvshow[i].vote_average;
+          this.tvshowDetails.similartvshowList[i].release_date=s_tvshow[i].first_air_date;
+
+          
+          
         }
+          
+        
       })
   }
 
@@ -157,19 +156,37 @@ export class TvshowDetailsComponent implements OnInit {
     let tempcreditData:any;
     this.tvshowservice.tvshowcreditData.subscribe((data)=>{
       tempcreditData=data;
-      if(tempcreditData.cast.length==0){
-        this.nocastdata=true;
-      }else{
-        this.nocastdata=false;
-        this.castList=tempcreditData.cast;
-      }
-      if(tempcreditData.crew.length==0){
-        this.nocrewdata=true;
-      }else{
-        this.nocrewdata=false;
-        this.crewList=tempcreditData.crew;
-        this.crewList=this.filterCrewData(this.crewList);
-      }
+      
+          
+        let castList=tempcreditData.cast;
+        this.tvshowDetails.castList=castList;
+
+        for(let i=0;i<castList.length;i++){
+
+          this.tvshowDetails.castList[i].id=castList[i].id;
+          this.tvshowDetails.castList[i].title=castList[i].name;
+          this.tvshowDetails.castList[i].popularity=castList[i].popularity;
+          this.tvshowDetails.castList[i].poster_path=castList[i].profile_path;
+          this.tvshowDetails.castList[i].job=castList[i].known_for_department;
+          this.tvshowDetails.castList[i].character=castList[i].character;
+          
+          
+        }
+        console.log(this.tvshowDetails.castList);
+        
+
+        let c_data=this.filterCrewData(tempcreditData.crew);
+        this.tvshowDetails.crewList=c_data;
+               
+        for(let i=0;i<c_data.length;i++){
+
+         this.tvshowDetails.crewList[i].id=c_data[i].id;
+         this.tvshowDetails.crewList[i].title=c_data[i].name;
+         this.tvshowDetails.crewList[i].popularity=c_data[i].popularity;
+         this.tvshowDetails.crewList[i].poster_path=c_data[i].profile_path;
+         this.tvshowDetails.crewList[i].job=c_data[i].known_for_department;
+          
+        }
       
     })
   }
@@ -181,12 +198,9 @@ export class TvshowDetailsComponent implements OnInit {
     this.tvshowservice.tvshowreviewData.subscribe((data)=>{
       tempreviewData=data;
 
-      if(tempreviewData.total_results==0){
-        this.noreview=true;
-      }else{
-        this.noreview=false;
-        this.reviewList=tempreviewData.results;
-      }
+      
+        this.tvshowDetails.reviewList=tempreviewData.results;
+      
 
     })
   }
@@ -201,38 +215,34 @@ export class TvshowDetailsComponent implements OnInit {
         tempimagesData=data;
 
         if(tempimagesData.backdrops.length=='0'){
-          this.nobackdrop=true;
-          this.background_image=null;
+      
+          this.tvshowDetails.background_image=null;
         }
         else{
-          this.nobackdrop=false;
-          this.backdropList=tempimagesData.backdrops;
+       
+          this.tvshowDetails.backdropList=tempimagesData.backdrops;
 
-          this.background_image=this.highqualityImgUrl+tempimagesData.backdrops[0].file_path;
+          this.tvshowDetails.background_image=this.highqualityImgUrl+tempimagesData.backdrops[0].file_path;
           
           
           setInterval(() =>{
             const random = Math.floor(Math.random() * tempimagesData.backdrops.length);
-            this.background_image=this.highqualityImgUrl+tempimagesData.backdrops[random].file_path;
+            this.tvshowDetails.background_image=this.highqualityImgUrl+tempimagesData.backdrops[random].file_path;
           },5000);
 
         }
         
         //Tvshow Posters Images
-        if(tempimagesData.posters.length==0){
-          this.nopost=true;
-         
-        }else{
-          this.nopost=false;
-          this.posterList=tempimagesData.posters;
-        }
+        
+          this.tvshowDetails.posterList=tempimagesData.posters;
+        
    
 
         //Tvshow Logo Images
         if(tempimagesData.logos.length<0){
-          this.logoList.file_path=null;
+          this.tvshowDetails.logoList.file_path=null;
         }else{
-          this.logoList=tempimagesData.logos[0];
+          this.tvshowDetails.logoList=tempimagesData.logos[0];
         }
        
         
@@ -282,7 +292,9 @@ export class TvshowDetailsComponent implements OnInit {
       this.tvshowDetails.tagline=tempTvshowDetails.tagline;
       this.tvshowDetails.vote_average=tempTvshowDetails.vote_average;
       this.tvshowDetails.vote_count=tempTvshowDetails.vote_count;
-
+      
+      console.log(this.tvshowDetails);
+      
       
       // To Remove other than seasons
       // for(let i=0;i<this.tvshowDetails.seasons.length;i++){
@@ -295,7 +307,7 @@ export class TvshowDetailsComponent implements OnInit {
         var watch_provider=myAppConfig.tmdb.tvshowDetailsBaseUrl+tvshow_id+"/watch/providers?"+myAppConfig.tmdb.apikey;
         this.getWatchprovider(watch_provider)
       }else{
-        this.watchprovider=this.tvshowDetails.homepage;
+        this.tvshowDetails.watchprovider=this.tvshowDetails.homepage;
       }
 
     })
@@ -307,7 +319,7 @@ export class TvshowDetailsComponent implements OnInit {
     let watch:any;
     this.tvshowservice.watchData.subscribe((data)=>{
       watch=data;
-      this.watchprovider=watch.results.IN.link;
+      this.tvshowDetails.watchprovider=watch.results.IN.link;
     })
   }
 

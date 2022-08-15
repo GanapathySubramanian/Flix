@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import myAppConfig from 'src/app/config/my-app-config';
-import { MoviesService } from 'src/app/services/movies.service';
-import { TvshowsService } from 'src/app/services/tvshows.service';
+import myAppConfig from 'src/app/core/config/my-app-config';
+import { common } from 'src/app/core/interface/common';
+import { MoviesService } from 'src/app/core/services/movies.service';
+import { TvshowsService } from 'src/app/core/services/tvshows.service';
 
 
 var sort_by_desc="popularity.desc",page=1,Search_value="",genre_id="";
@@ -19,7 +20,7 @@ export class TvshowsComponent implements OnInit {
 
   imgUrl:string=myAppConfig.tmdb.imgUrl;
 
-  tvshowList:any;
+  tvshowList:common[]=[];
   orderList:any;
   genreList:any;
   countryList:any;
@@ -292,24 +293,23 @@ export class TvshowsComponent implements OnInit {
     this.tvshowservice.getallTvshows(api_url);
 
     let tempTvshowList:any;
-    this.tvshowservice.tvshowsData.subscribe((data)=>{
-      tempTvshowList=data;
-   
-      this.tvshowList=tempTvshowList.results;
-      
-      if(tempTvshowList.total_results==0){
-        const Ele= window.document.getElementById("no-record");
-        Ele?.classList.remove('d-none');
-        const Element= window.document.getElementById("pagination");
-        Element?.classList.add('d-none');
-      }else{
-        const Ele= window.document.getElementById("no-record");
-        Ele?.classList.add('d-none');
-        const Elemen= window.document.getElementById("pagination");
-        Elemen?.classList.remove('d-none');
+    this.tvshowservice.tvshowsData.subscribe((data:any)=>{
+      tempTvshowList=data.results;
+      this.tvshowList=[]
+      for(let i=0;i<tempTvshowList.length;i++){
+        this.tvshowList[i]={} as common;
+        this.tvshowList[i].id=tempTvshowList[i].id;
+        this.tvshowList[i].title=tempTvshowList[i].name;
+        this.tvshowList[i].poster_path=tempTvshowList[i].poster_path;
+        this.tvshowList[i].vote_average=tempTvshowList[i].vote_average;
+        this.tvshowList[i].release_date=tempTvshowList[i].first_air_date;
       }
+      
 
-      if(tempTvshowList.total_pages==page){
+
+      
+
+      if(data.total_pages==page){
         this.isdisablenext=true;
       }else{
         this.isdisablenext=false;

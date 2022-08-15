@@ -1,3 +1,5 @@
+import { common } from "./common";
+
 export interface TvshowDetails {
     avg_run_time: number;
     backdrop_path:string;
@@ -23,4 +25,20 @@ export interface TvshowDetails {
     vote_count:number;
     seasons:any;
     genre:any;
+    watchprovider:any;
+    background_image:any;
+
+    backdropList:any;
+    logoList:any;
+    posterList:any
+    reviewList:any;
+    castList:any;
+    crewList:any;
+    similartvshowList:any;
+    rectvshowList:any;
+    videoList:any;
+  
+    title:string,
+    release_date:string,
+    job:string,  
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import myAppConfig from 'src/app/config/my-app-config';
-import { PeopleService } from 'src/app/services/people.service';
+import myAppConfig from 'src/app/core/config/my-app-config';
+import { common } from 'src/app/core/interface/common';
+import { PeopleService } from 'src/app/core/services/people.service';
 
 var page=1,Search_value="";
 var sorts_by='Popular Peoples';
@@ -13,7 +14,7 @@ var sorts_by='Popular Peoples';
 export class PersonsComponent implements OnInit {
   imgUrl:string=myAppConfig.tmdb.imgUrl;
 
-  peopleList:any;
+  peopleList:common[] = [];
   
   sortby_value:string=sorts_by;
   page_no:number=page;
@@ -148,22 +149,20 @@ export class PersonsComponent implements OnInit {
     this.peopleservice.getPopularPeopleDetails(apiurl);
 
     let temppeopleList:any;
-    this.peopleservice.peoplesData.subscribe((data)=>{
-       temppeopleList=data;
-       this.peopleList=temppeopleList.results;
-       if(temppeopleList.total_results==0){
-        const Ele= window.document.getElementById("no-record");
-        Ele?.classList.remove('d-none');
-        const Element= window.document.getElementById("pagination");
-        Element?.classList.add('d-none');
-      }else{
-        const Ele= window.document.getElementById("no-record");
-        Ele?.classList.add('d-none');
-        const Elemen= window.document.getElementById("pagination");
-        Elemen?.classList.remove('d-none');
-      }
+    this.peopleservice.peoplesData.subscribe((data:any)=>{
+       temppeopleList=data.results;
 
-      if(temppeopleList.total_pages==page){
+        this.peopleList=[]
+        for(let i=0;i<temppeopleList.length;i++){
+          this.peopleList[i]={} as common;
+          console.log(temppeopleList); 
+          this.peopleList[i].id=temppeopleList[i].id;
+          this.peopleList[i].title=temppeopleList[i].name;
+          this.peopleList[i].popularity=temppeopleList[i].popularity;
+          this.peopleList[i].poster_path=temppeopleList[i].profile_path;
+          this.peopleList[i].job=temppeopleList[i].known_for_department;
+        }
+      if(data.total_pages==page){
         this.isdisablenext=true;
       }else{
         this.isdisablenext=false;

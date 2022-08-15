@@ -23,15 +23,6 @@
                   <li *ngFor="let order of orderList"><a class="dropdown-item link" (click)="getOrderContent(order.order,order.desc)">{{order.desc}}</a></li>
                 </ul>
             </li>
-            <!-- <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" style="color:#fff"href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                COUNTRY
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li ><a class="dropdown-item link text-danger" (click)="getCountryContent('','')">CLEAR COUNTRY</a></li>
-              <li *ngFor="let country of countryList"><a class="dropdown-item link" (click)="getCountryContent(country.iso_3166_1,country.english_name)">{{country.english_name}}</a></li>
-            </ul>
-        </li> -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" style="color:#fff"href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             NETWORK
@@ -122,42 +113,17 @@
     <!-- <h2 class="text-center text-warning h4" *ngIf="network_value!=''">{{"IN "}}<br /> <a href="{{network_homepage}}" target="_blank" class="text-decoration-none text-warning"> {{network_value | uppercase}}</a></h2> -->
 
     <main id="main">
+      <div class="tvshow" id="tvshow" *ngFor="let tvshow of tvshowList" [routerLink]="['/tvshowdetails',tvshow.id]">
+          <app-card [data]="tvshow"></app-card>
+      </div>
+  </main>
 
-        <div class="tvshows" *ngFor="let tvshow of tvshowList" [routerLink]="['/tvshowdetails', tvshow.id]">
-            
-            <div *ngIf="tvshow.poster_path==null;then thenBlock else elseBlock"></div>
-
-            <ng-template #thenBlock>
-                <figure>
-                    <img src="assets/images/no-image.png" class="no-image">
-                </figure>
-            </ng-template>
-            <ng-template #elseBlock>
-                <figure>
-                    <img src="{{imgUrl+tvshow.poster_path}}">
-                </figure>
-            </ng-template>
-
-            <div class="tvshows-info">
-                <h4>{{tvshow.name}}</h4>
-                <span class="tvshow-rating" [ngClass]="{'red':tvshow.vote_average<=5,'orange':tvshow.vote_average>=5&&tvshow.vote_average<8,'green':tvshow.vote_average>=8}">{{float2int((tvshow.vote_average/10)*100)+'%'}}</span>
-            </div>
-
-            <div class="tvshows-info">
-                <ngb-rating [max]="10" [(rate)]="tvshow.vote_average" [readonly]="true"></ngb-rating>
-            </div>
-            <div class="date">
-                <p>{{tvshow.first_air_date | date}}</p>
-            </div>
-        </div>
-    </main>
-
-    <div class="pagination" id="pagination">
+    <div class="pagination" id="pagination" *ngIf="tvshowList.length>0">
         <button class="btn" id="prev" [disabled]="isdisableprev" (click)="handlePagination(2)">Prev</button>
         <button class="btn"  id="home" (click)="handlePagination(1)" style="border-radius: 100%;">{{page_no}}</button>
         <button class="btn"  id="next" [disabled]="isdisablenext" (click)="handlePagination(3)">Next</button>
     </div>
-    <div id="no-record" class="d-none">
+    <div *ngIf="tvshowList.length<=0">
         <h1 class="text-warning text-center">No Tvshows Found</h1>
       </div>
 </div>

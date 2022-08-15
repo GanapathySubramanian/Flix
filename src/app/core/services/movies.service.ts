@@ -166,6 +166,7 @@ export class MoviesService {
     this.http.get(url).subscribe((res)=>{
       watchprovider=res;
       this.watchSource.next(watchprovider);
+      
     })
   }
 

@@ -21,4 +21,19 @@ export interface MovieDetails {
     vote_average:number;
     vote_count:number;
     genre:any;
+    background_image:any;
+    watchprovider:any;
+    reviewList:any;
+    
+
+
+    backdropList:any;
+    logoList:any;
+    posterList:any
+    castList:any;
+    crewList:any;
+    similarmovieList:any;
+    recmovieList:any;
+    videoList:any;
+  
 }

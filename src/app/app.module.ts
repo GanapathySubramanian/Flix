@@ -15,6 +15,7 @@ import { TvshowDetailsComponent } from './components/tvshow-details/tvshow-detai
 import { TvshowEpisodesComponent } from './components/tvshow-episodes/tvshow-episodes.component';
 import { PersonDetailsComponent } from './components/person-details/person-details.component';
 import { PersonsComponent } from './components/persons/persons.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { PersonsComponent } from './components/persons/persons.component';
     HttpClientModule,
     NgbModule,
     ReactiveFormsModule,
-    IvyCarouselModule
+    IvyCarouselModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
