@@ -7,8 +7,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 00.5rem 1rem 1rem;
     letter-spacing: 0.5px;
+    margin: 15px;
 }
 
 .no-image{
@@ -93,11 +93,10 @@ ngb-rating {
     color: var(--base-white);
     display: flex;
     justify-content:start;
-    margin: 5px;
-    padding: 10px;
+    margin: 15px;
 }
 
-.tvshow-info-cast,.tvshow-info-crew{
+.card-info-cast,.card-info-crew{
     color: var(--base-white);
     padding: 00.5rem 1rem 1rem;
     letter-spacing: 0.5px;

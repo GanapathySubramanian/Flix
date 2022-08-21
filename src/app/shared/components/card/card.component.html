@@ -17,7 +17,7 @@
             <span class="card-rating" *ngIf="data.vote_average" [ngClass]="{'red':data.vote_average<=5,'orange':data.vote_average>5&&data.vote_average<8,'green':data.vote_average>=8}">{{float2int(((data.vote_average/10)*100)) + '%'}}</span>
         </div>
 
-        <div class="tvshow-info-cast" *ngIf="data.character">
+        <div class="card-info-cast" *ngIf="data.character">
             <h4>{{data.title}}</h4>
             <span>AS {{data.character}}</span>
         </div>
