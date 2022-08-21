@@ -11,6 +11,7 @@ main{
     border-radius: 3px;
     box-shadow: 0.2px 4px 5px rgba(0,0,0,0.1);
     background-color: var(--secondary-color);
+    transition: background-color 2s;
     position: relative;
     overflow: hidden;
 }
@@ -138,6 +139,7 @@ ngb-rating {
 .search{
     background-color: transparent;
     border:2px solid var(--secondary-color);
+    transition: border 2s;
     padding: 0.5rem 1rem;
     border-radius: 50px;
     font-size: 1rem;
@@ -151,6 +153,7 @@ ngb-rating {
 }
 .search::placeholder{
     color: var(--secondary-color);
+    transition: color 2s;
 }
 
 

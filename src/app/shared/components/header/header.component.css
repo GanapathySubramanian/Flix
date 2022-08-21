@@ -1,9 +1,5 @@
 
-.movie img{
-    width:100%;
-}
-
-.movie-info{
+.header-info{
     color: var(--base-white);
     display: flex;
     align-items: center;
@@ -11,22 +7,10 @@
     padding: 00.5rem 1rem 1rem;
     letter-spacing: 0.5px;
 }
-.movie-info-cast,.movie-info-crew{
-    color: var(--base-white);
-    padding: 00.5rem 1rem 1rem;
-    letter-spacing: 0.5px;
-}
-.movie-info h4{
-    margin-top: 0;
-    width: 80%;
-    font-size: 20px;
-}
-.movie-rating{
-    margin: 5px;
-    width: 20%;
-}
-.movie-info span{
+
+.header-info span{
     background-color: var(--primary-color);
+    transition: background-color 2s;
     padding: 0.25rem;
     border-radius: 3px;
     font-weight: bold;
@@ -119,13 +103,14 @@ path.two {
 /* system and tab */
 @media only screen and (min-width: 600px) {
     
-        .movie-img{
+        .header-img{
             width:470px;
             /* height: 100%; */
             top: 1rem;
             border-radius: 40px;
             box-shadow: 0.2px 4px 5px rgba(0,0,0,0.1);
             background-color: var(--base-black);
+            transition: background-color 2s;
             position: relative;
             z-index: 10;
             overflow: hidden;
@@ -133,7 +118,7 @@ path.two {
             vertical-align: middle;
         }
 
-        .movie-img img{
+        .header-img img{
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -141,7 +126,7 @@ path.two {
             transition: all 1.5s ease-in-out;
         } 
 
-        .movie-img img:hover{
+        .header-img img:hover{
             transform: scale(1.35) rotateZ(5deg);
         }
 
@@ -154,6 +139,7 @@ path.two {
             bottom: 0;
             left: 0;
             background-color: rgba(0, 0, 0, 0.7);
+            transition: background-color 2s;
         }
 
         /* Banner Section Start */
@@ -235,7 +221,7 @@ path.two {
               width: 60%;
               float: left;
           }
-          .left-img .movie-img{
+          .left-img .header-img{
               margin-left: 50px;
           }
           .right-content{
@@ -246,25 +232,25 @@ path.two {
               float: right;
               position: relative;
            }
-        .movie-detail {
+        .header-detail {
             display: flex;
             align-items: center;
             flex-wrap: wrap;
             margin-top: 10px;
         }
 
-        .movie-info {
+        .header-info {
             display: flex;
             align-items: center;
             font-size: 1rem;
             font-weight: 600;
         }
 
-        .movie-info span {
+        .header-info span {
             margin-left: 5px;
         }
 
-        .movie-info i {
+        .header-info i {
             color: rgb(85, 82, 82);
             background-color: var(--dark-red);
             font-size: 1rem;
@@ -287,19 +273,11 @@ path.two {
             font-weight: 200;
             text-transform: uppercase;
         }
-        .item-action {
-            margin-top: 5px;
+
+        .header-poster-img{
+            display: none;
         }
 
-        .movie-poster-img{
-            display: none;
-        }
-        .tr-overview{
-            display: none;
-        }
-        .tr-release-date{
-            display: none;
-        }
         .wrapper-watchnow {
             display: flex;
             margin-top: 20px;
@@ -330,7 +308,7 @@ path.two {
     .header{
         display: none;
     }
-    .movie-img{
+    .header-img{
         display: none;
     }
     .overlay{
@@ -343,19 +321,20 @@ path.two {
         display: flex;
         justify-content: center;
     }
-    .movie-poster-img{
+    .header-poster-img{
         display: block;
         width:400px;
         margin: 0.5rem;
         border-radius: 3px;
         box-shadow: 0.2px 4px 5px rgba(0,0,0,0.1);
         background-color: var(--secondary-color);
+        transition: background-color 2s;
         position: relative;
         overflow: hidden;
         justify-content: center;
     }
     
-    .movie-poster-img img{
+    .header-poster-img img{
         width: 100%;
         height: 100%;
         /* height: 100%; */
@@ -364,7 +343,7 @@ path.two {
         transition: all 1.5s ease-in-out;
     }
     
-    .movie-poster-img img:hover{
+    .header-poster-img img:hover{
         transform: scale(1.35) rotateZ(5deg);
     }
     
@@ -373,14 +352,4 @@ path.two {
 
 }
 
-
-
-@media only screen and (max-width:600px) {
-    .movie-info h4{
-        margin-top: 0;
-        width: 80%;
-        font-size: 30px;
-    }
-   
-}
 

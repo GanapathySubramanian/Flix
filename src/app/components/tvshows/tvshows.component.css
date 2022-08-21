@@ -10,6 +10,7 @@ main{
     border-radius: 3px;
     box-shadow: 0.2px 4px 5px rgba(0,0,0,0.1);
     background-color: var(--secondary-color);
+    transition: background-color 2s;
     position: relative;
     overflow: hidden;
 }
@@ -29,7 +30,7 @@ main{
 }
 
 .btn {
-    color: var(--base-white);
+    color: #ffffff;
     padding: 0.25rem 1.5rem;
     text-transform: uppercase;
     margin: 15px;
@@ -49,17 +50,15 @@ main{
 .link{
     cursor: pointer;
 }
-.network-val{
-    width: 30px;
-    height: 30px;
-}
+
 .search{
     background-color: transparent;
     border:2px solid var(--secondary-color);
+    transition: border 2s;
     padding: 0.5rem 1rem;
     border-radius: 50px;
     font-size: 1rem;
-    color: var(--base-white);
+    color: #fff;
     font-family: inherit;
 }
 
@@ -68,7 +67,8 @@ main{
     background-color: var(--primary-color);
 }
 .search::placeholder{
-    color:var(--placeholder-color);
+    color: var(--placeholder-color);
+    transition: color 2s;
 }
 
 .search-list{
@@ -91,7 +91,7 @@ main{
     transition: background-color 200ms ease;
 }
 .search-list .search-list-item:Hover{
-    background-color: var(--base-black);
+    background-color: var(--secondary-color);
 }
 .search-list-item{
     display: -webkit-box;
@@ -142,6 +142,14 @@ main{
     max-height:400px;
     max-width:200px;
     overflow:scroll; 
+    background-color: var(--secondary-color);
+ }
+ .dropdown-item{
+    /* background-color: var(--primary-color); */
+    color: var(--base-white);
+ }
+ .dropdown-item:hover{
+    background-color: var(--primary-color);
  }
  .dropdown-menu::-webkit-scrollbar {
     display: none; /* for Chrome, Safari, and Opera */
@@ -237,5 +245,3 @@ main{
         margin-bottom: 0;
     }
   }
-
-

@@ -114,4 +114,13 @@ ngb-rating {
         width: 100%;
         height: 100%;
     }
+    .card-info h4{
+        margin-top: 0;
+        width: 80%;
+        font-size: 30px;
+    }
+    .card-rating{
+        margin: 5px;
+        width: auto;
+    }
 }

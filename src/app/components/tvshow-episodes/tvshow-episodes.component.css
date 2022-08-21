@@ -23,6 +23,7 @@ main{
     border-radius: 3px;
     box-shadow: 0.2px 4px 5px rgba(0,0,0,0.1);
     background-color: var(--secondary-color);
+    transition: background-color 2s;
     position: relative;
     overflow: hidden;
     cursor: pointer;
@@ -67,6 +68,7 @@ main{
 
 .tvshows-season-infos span{
     background-color: var(--primary-color);
+    transition: background-color 2s;
     padding: 0.25rem;
     border-radius: 3px;
     font-weight: bold;
@@ -88,6 +90,7 @@ main{
     right: 0;
     bottom: 0;
     background-color: var(--base-white);
+    transition: background-color 2s;
     padding: 1rem;
     max-height: 100%;
     transform: translateY(101%);
