@@ -207,16 +207,7 @@
         <ng-template #castdata>       
                 <main class="cast">   
                     <div class="tvshow btn-container" *ngFor="let cast_data of tvshowDetails.castList" [routerLink]="['/persondetails', cast_data.id]" >
-                        <div *ngIf="cast_data.profile_path==null; then thenBlock else elseBlock"></div>
-                        <ng-template #thenBlock><img class="btn-image" src="assets/images/no-image.png" class="no-image"></ng-template>
-                        <ng-template #elseBlock><img class="btn-image" src="{{imgUrl+cast_data.profile_path}}"></ng-template>
-                        <div class="btn-middle">
-                            <div class="text btn-info">Know More</div>
-                        </div>
-                        <div class="tvshow-info-cast">
-                            <h4>{{cast_data.original_name}}</h4>
-                            <span>AS {{cast_data.character}}</span>
-                        </div>
+                      <app-card [data]="cast_data"></app-card>
                     
                     </div>
                 </main>
@@ -238,17 +229,8 @@
         <ng-template #crewdata>
             <main class="cast">
                 <div class="tvshow btn-container" *ngFor="let crew_data of tvshowDetails.crewList" [routerLink]="['/persondetails', crew_data.id]" >
-    
-                    <div *ngIf="crew_data.profile_path==null; then thenBlock else elseBlock"></div>
-                    <ng-template #thenBlock><img class="btn-image"src="assets/images/no-image.png" class="no-image"></ng-template>
-                    <ng-template #elseBlock><img class="btn-image" src="{{imgUrl+crew_data.profile_path}}"></ng-template>
-                    <div class="btn-middle">
-                        <div class="text btn-info">Know More</div>
-                    </div>
-                    <div class="tvshow-info-crew">
-                        <h4>{{crew_data.original_name}}</h4>
-                        <span>Job : {{crew_data.job}}</span>
-                    </div>
+                    <app-card [data]="crew_data"></app-card>
+                    
                 </div>
             </main>
         </ng-template>

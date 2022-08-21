@@ -31,7 +31,7 @@
             <li ><a class="dropdown-item link text-danger" (click)="getNetworkContent('','','','')">CLEAR NETWORK</a></li>
           <li *ngFor="let network of networkList">
             <a class="dropdown-item link" (click)="getNetworkContent(network.id,network.name,network.logo_path,network.homepage)">
-              <img src="{{imgUrl+network.logo_path}}" class="network_logo"> 
+              <!-- <img src="{{imgUrl+network.logo_path}}" class="network_logo">  -->
               {{network.name}} 
             </a> 
           </li>
@@ -109,7 +109,7 @@
     <h1 class="text-center text-warning">{{sortby_value | uppercase}}</h1>
     <h2 class="text-center text-warning h4">{{genre_value | uppercase}}</h2>
     <!-- <h2 class="text-center text-warning">{{country | uppercase}}</h2> -->
-    <h2 class="text-center text-warning" *ngIf="network_value!=''">{{"IN "}}<br /> <a href="{{network_homepage}}" target="_blank">  <img src="{{imgUrl+network_value}}" class="network_val"></a></h2>
+    <h2 class="text-center text-warning" *ngIf="network_value!=''">{{"IN "}}<br /> <a href="{{network_homepage}}" target="_blank">  <img src="{{imgUrl+network_value}}" style="width: 200px;height: 80px;"class="network_val"></a></h2>
     <!-- <h2 class="text-center text-warning h4" *ngIf="network_value!=''">{{"IN "}}<br /> <a href="{{network_homepage}}" target="_blank" class="text-decoration-none text-warning"> {{network_value | uppercase}}</a></h2> -->
 
     <main id="main">

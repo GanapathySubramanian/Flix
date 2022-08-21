@@ -3,6 +3,7 @@ nav{
     display: flex;
     justify-content: space-around;
     background-color: var(--secondary-color);
+    transition: background-color 2s;
     color:var(--base-white);
 }
  
@@ -26,8 +27,6 @@ nav a{
     margin-top: 10px;
 }
 
-
-  
 .copyright {
     margin-top:15px;
     text-align:center;
@@ -39,21 +38,20 @@ nav a{
 
  .footer .container-fluid{
     display: flex;
-    /* margin-left: 5%; */
     color: #fff;
 }
 
 .move-top .btn{
     border-radius: 100%;
     bottom: 560px;
-    /* margin-left: 85%; */
 }
 
- .btn {
+.btn {
     color: var(--base-white);
 }
 .btn:hover{
     background-color: var(--dark-red);
+    transition: background-color 2s;
     color: var(--base-white);
 } 
 @media only screen and (max-width:600px) {

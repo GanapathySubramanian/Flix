@@ -24,7 +24,7 @@
     
         
         <div class="card-info star-rating" *ngIf="data.vote_average && !data.character && !data.job">
-            <ngb-rating [max]="10" [(rate)]="data.vote_average" [readonly]="true"></ngb-rating>
+            <ngb-rating [max]="10" [(rate)]="data.vote_average" [readonly]="true" [ngClass]="{'red':data.vote_average<=5,'orange':data.vote_average>5&&data.vote_average<8,'green':data.vote_average>=8}"></ngb-rating>
         </div>
         <div class="card-date" *ngIf="data.release_date && !data.character && !data.job">
             <p>{{data.release_date | date}}</p> 

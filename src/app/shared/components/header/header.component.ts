@@ -10,7 +10,7 @@ import { MovieDetails } from 'src/app/core/interface/movie-details';
 export class HeaderComponent implements OnInit {
 
   @Input() data:any={};
-  imgUrl:string=myAppConfig.tmdb.imgUrl;
+  imgUrl:string=myAppConfig.tmdb.highQualityImgUrl;
 
   constructor() { }
 

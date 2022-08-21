@@ -18,18 +18,11 @@ html, body {width: auto!important; overflow-x: hidden!important}
     --placeholder-color:#7378c5;
 }
 body{
-    background-color: var(--primary-color);
+    background: var(--primary-color);
+    transition: background 2s;
     font-family: 'Poppins',sans-serif;
     margin: 0;
     align-items: center;
     justify-content: center;
 }
 
-
-/* body.dark-theme{
-    background-color: var(--primary-dark);
-    font-family: 'Poppins',sans-serif;
-    margin: 0;
-    align-items: center;
-    justify-content: center;
-} */

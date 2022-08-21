@@ -37,7 +37,7 @@ import { DarkToggleComponent } from './components/dark-toggle/dark-toggle.compon
     VideoComponent,
     PosterComponent,
     LoaderComponent,
-    DarkToggleComponent
+    DarkToggleComponent,
   ]
 })
 export class SharedModule { }

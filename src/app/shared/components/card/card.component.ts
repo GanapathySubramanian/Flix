@@ -19,8 +19,8 @@ export class CardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
   float2int (value:any) {
     return value | 0;
   }
+
 }
