@@ -1,6 +1,7 @@
 
 <div class="movies-section">
   
+  
   <nav class="navbar navbar-expand mt-4 navbar-light" aria-label="Second navbar example">
     <div class="container-fluid">
       <div class="collapse navbar-collapse" id="navbarsExample02">
@@ -57,8 +58,9 @@
                       <div class = "search-item-info">
                           <h3>{{s.title}}          
                           </h3>
-                          <p><span class="search-date"> {{s.release_date | date}}</span> <span class="movie-rating ml-2" [ngClass]="{'red':s.vote_average<=5,'orange':s.vote_average>5&&s.vote_average<8,'green':s.vote_average>=8}">{{float2int(((s.vote_average/10)*100)) + '%'}}</span></p>
-                      </div>
+                          <!-- <p><span class="search-date"> {{s.release_date | date}}</span> <span class="movie-rating ml-2" [ngClass]="{'red':s.vote_average<=5,'orange':s.vote_average>5&&s.vote_average<8,'green':s.vote_average>=8}">{{float2int(((s.vote_average/10)*100)) + '%'}}</span></p> -->
+                          <p><span class="search-date"> {{s.release_date | date}}</span></p>
+                        </div>
                   </div>
               </div>
             </div>
@@ -67,6 +69,9 @@
         </div>
       </nav>
 
+
+      
+      <app-dark-toggle  [device]=true></app-dark-toggle>
 
       <div class="sm-search">
          
@@ -93,7 +98,8 @@
                 </div>
                 <div class = "search-item-info">
                     <h3>{{s.title}}</h3>
-                    <p><span class="search-date"> {{s.release_date | date}}</span> <span class="movie-rating ml-2" [ngClass]="{'red':s.vote_average<=5,'orange':s.vote_average>5&&s.vote_average<8,'green':s.vote_average>=8}">{{float2int(((s.vote_average/10)*100)) + '%'}}</span></p>
+                    <!-- <p><span class="search-date"> {{s.release_date | date}}</span> <span class="movie-rating ml-2" [ngClass]="{'red':s.vote_average<=5,'orange':s.vote_average>5&&s.vote_average<8,'green':s.vote_average>=8}">{{float2int(((s.vote_average/10)*100)) + '%'}}</span></p> -->
+                    <p><span class="search-date"> {{s.release_date | date}}</span></p>
 
                 </div>
             </div>
@@ -101,11 +107,11 @@
       </div>
       
 
+
     
     <h1 class="text-center text-warning">{{sortby_value | uppercase}}</h1>
     <h1 class="text-center text-warning h3">{{genre_value | uppercase}}</h1>
     <h1 class="text-center text-warning h3" *ngIf="country_value!=''"><span class="text-warning"> {{"IN "}}</span><br />{{country_value | uppercase}}</h1>
-
 
     <main id="main">
         <div class="movie" id="movie" *ngFor="let movie of movieList" [routerLink]="['/moviedetails',movie.id]">

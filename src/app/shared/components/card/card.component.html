@@ -1,5 +1,7 @@
         
-        <div *ngIf="data.poster_path==null;then thenBlock else elseBlock"></div>
+        <!-- {{data|json}} -->
+       
+       <div *ngIf="data.poster_path==null;then thenBlock else elseBlock"></div>
 
         <ng-template #thenBlock>
             <figure>

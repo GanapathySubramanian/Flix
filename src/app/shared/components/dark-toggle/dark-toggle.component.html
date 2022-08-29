@@ -1,9 +1,21 @@
-<div class="toggle-dark-light">
+<div *ngIf="device">
+  <div class="toggle-dark-light-mobile">
+    <input type="checkbox" class="checkbox" id="checkbox" (change)="toggleDarkTheme($event)">
+      <label for="checkbox" class="label">
+        <i class="fas fa-moon"></i>
+        <i class='fas fa-sun'></i>
+        <div class='ball-mobile'></div>
+      </label>
+</div>
+</div>
+
+<div *ngIf="!device">
+  <div class="toggle-dark-light-normal-screen" >
     <input type="checkbox" class="checkbox" id="checkbox" (change)="toggleDarkTheme($event)">
       <label for="checkbox" class="label">
         <i class="fas fa-moon"></i>
         <i class='fas fa-sun'></i>
         <div class='ball'></div>
       </label>
+  </div>
 </div>
-  

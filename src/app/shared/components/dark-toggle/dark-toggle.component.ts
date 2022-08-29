@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ThemeService } from 'src/app/core/services/theme.service';
 
@@ -10,6 +10,8 @@ import { ThemeService } from 'src/app/core/services/theme.service';
 export class DarkToggleComponent implements OnInit {
   isThemeDark: Observable<boolean> | undefined;
 
+  @Input() device!:boolean;
+
   constructor(
     private themeService: ThemeService
   ) {
@@ -19,6 +21,7 @@ export class DarkToggleComponent implements OnInit {
 
   ngOnInit() {
     this.isThemeDark = this.themeService.isThemeDark;
+    
   }
 
   toggleDarkTheme(event:any) {
@@ -29,14 +32,14 @@ export class DarkToggleComponent implements OnInit {
     
     if (checkbox?.checked) {
       console.log('Checkbox is checked');
-    this.themeService.setDarkTheme(true);
+      this.themeService.setDarkTheme(true);
 
     } else {
       console.log('Checkbox is NOT checked');
-    this.themeService.setDarkTheme(false);
-
+      this.themeService.setDarkTheme(false);
     }
     
+
   }
 
 }

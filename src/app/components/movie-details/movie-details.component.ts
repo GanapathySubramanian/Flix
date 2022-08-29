@@ -165,7 +165,8 @@ export class MovieDetailsComponent implements OnInit {
 
   
               let c_data=this.filterCrewData(tempcreditData.crew);
-
+              console.log(c_data);
+              
               this.movieDetails.crewList=c_data;
                
               for(let i=0;i<c_data.length;i++){

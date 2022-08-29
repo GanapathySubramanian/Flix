@@ -30,7 +30,6 @@
 .card-info span{
     background: var(--primary-color);
     transition: background 2s;
-
     padding: 0.25rem;
     border-radius: 3px;
     font-weight: bold;
