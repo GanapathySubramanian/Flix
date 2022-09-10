@@ -11,9 +11,9 @@ export class PeopleService {
     private personSource = new Subject();
     personData = this.personSource.asObservable();
   
-       //Search Person Details
-       private searchpersonSource = new Subject();
-       searchpersonData = this.searchpersonSource.asObservable();
+    //Search Person Details
+    private searchpersonSource = new Subject();
+    searchpersonData = this.searchpersonSource.asObservable();
      
     //Social links
     private socialSource = new Subject();

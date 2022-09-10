@@ -13,7 +13,6 @@ import { DarkToggleComponent } from './components/dark-toggle/dark-toggle.compon
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 
 
-
 @NgModule({
   declarations: [
     CardComponent,
@@ -40,7 +39,7 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
     PosterComponent,
     LoaderComponent,
     DarkToggleComponent,
-    LandingPageComponent
+    LandingPageComponent,
   ]
 })
 export class SharedModule { }
