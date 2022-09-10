@@ -16,6 +16,8 @@ import { TvshowEpisodesComponent } from './components/tvshow-episodes/tvshow-epi
 import { PersonDetailsComponent } from './components/person-details/person-details.component';
 import { PersonsComponent } from './components/persons/persons.component';
 import { SharedModule } from './shared/shared.module';
+import { RegisterComponent } from './components/auth/Signup/register/register.component';
+import { LoginComponent } from './components/auth/Signin/login/login.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { SharedModule } from './shared/shared.module';
     TvshowEpisodesComponent,
     PersonDetailsComponent,
     PersonsComponent,
+    RegisterComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

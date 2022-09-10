@@ -27,6 +27,12 @@ nav a{
     margin-top: 10px;
 }
 
+/* .navbar-lg{
+    display: block;
+}
+.navbar-sm{
+    display: none;
+} */
 .copyright {
     margin-top:15px;
     text-align:center;
@@ -59,8 +65,13 @@ nav a{
        width: 100%;
        color: var(--base-white);
        margin-left:0%;
-
    }
+   /* .navbar-lg{
+    display: none;
+}
+.navbar-sm{
+    display: block;
+} */
 }
 
 
