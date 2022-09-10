@@ -1,5 +1,24 @@
-<div class="demo">
-    <div class="perspective-container">
-      <div class="card"></div>
+<div class="landing-main">
+    <div>
+        <span  *ngFor="let mp of postersList.moviePoster">
+            <span>
+                <img class="img"  src="{{imgUrl+mp}}" alt="">
+            </span>
+        </span>
     </div>
-  </div>
+    <div>
+        <span  *ngFor="let mp of postersList.movieBackdrop">
+            <img class="img"  src="{{imgUrl+mp}}" alt="">
+        </span>
+    </div>
+    <div>
+        <span  *ngFor="let mp of postersList.tvshowPoster">
+            <img class="img"  src="{{imgUrl+mp}}" alt="">
+        </span>
+    </div>
+    <div>
+        <span  *ngFor="let mp of postersList.tvshowBackdrop">
+            <img class="img"  src="{{imgUrl+mp}}" alt="">
+        </span>
+    </div>
+</div>
