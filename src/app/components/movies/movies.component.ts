@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { MoviesService } from 'src/app/core/services/movies.service';
 import myAppConfig from 'src/app/core/config/my-app-config';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -14,7 +14,8 @@ var sorts_by='Trending Now',region='';
   styleUrls: ['./movies.component.css']
 })
 export class MoviesComponent implements OnInit {
-
+  mobiledevice:boolean=false;
+  component:string="movie"
   imgUrl:string=myAppConfig.tmdb.imgUrl;
 
   movieList:common[]=[];
@@ -41,6 +42,8 @@ export class MoviesComponent implements OnInit {
     }else{
       this.ishidedrop=true;
     }    
+   this.getScreenSize()
+
 
   }
 
@@ -290,5 +293,20 @@ export class MoviesComponent implements OnInit {
 
   scrollToTop(el:any) {
     el.scrollTop = 0;
+  }
+
+  scrHeight:any;
+  scrWidth:any;
+ 
+  @HostListener('window:resize', ['$event'])
+  getScreenSize() {
+        this.scrHeight = window.innerHeight;
+        this.scrWidth = window.innerWidth;
+        console.log(this.scrHeight, this.scrWidth);
+        if(this.scrWidth<=500){
+         this.mobiledevice=true;
+        }else{
+         this.mobiledevice=false
+        }
   }
 }

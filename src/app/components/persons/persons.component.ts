@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import myAppConfig from 'src/app/core/config/my-app-config';
 import { common } from 'src/app/core/interface/common';
@@ -13,7 +13,8 @@ var sorts_by='Popular Peoples';
 })
 export class PersonsComponent implements OnInit {
   imgUrl:string=myAppConfig.tmdb.imgUrl;
-
+  mobiledevice:boolean=false;
+  component:string="person"
   peopleList:common[] = [];
   
   sortby_value:string=sorts_by;
@@ -26,8 +27,25 @@ export class PersonsComponent implements OnInit {
   constructor(private peopleservice:PeopleService) {this.searchForm=new FormGroup({
       'personName':new FormControl("")
     })
+    this.getScreenSize()
+
   }
 
+
+  scrHeight:any;
+  scrWidth:any;
+ 
+  @HostListener('window:resize', ['$event'])
+  getScreenSize() {
+        this.scrHeight = window.innerHeight;
+        this.scrWidth = window.innerWidth;
+        console.log(this.scrHeight, this.scrWidth);
+        if(this.scrWidth<=500){
+         this.mobiledevice=true;
+        }else{
+         this.mobiledevice=false
+        }
+  }
   ngOnInit(): void {
     this.getPeoples()
   }

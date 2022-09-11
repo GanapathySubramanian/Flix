@@ -1,7 +1,6 @@
 
 <div class="movies-section">
   
-  
   <nav class="navbar navbar-expand mt-4 navbar-light" aria-label="Second navbar example">
     <div class="container-fluid">
       <div class="collapse navbar-collapse" id="navbarsExample02">
@@ -70,8 +69,6 @@
       </nav>
 
 
-      
-
       <div class="sm-search">
          
         <form id="form" [formGroup]="searchForm" (ngSubmit)="getSearchContent()" > 
@@ -106,7 +103,9 @@
       </div>
       
 
-
+ <span *ngIf="mobiledevice">
+         <app-dark-toggle [cmp]="component"></app-dark-toggle>
+      </span> 
     
     <h1 class="text-center text-warning">{{sortby_value | uppercase}}</h1>
     <h1 class="text-center text-warning h3">{{genre_value | uppercase}}</h1>
