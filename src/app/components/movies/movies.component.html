@@ -69,9 +69,8 @@
         </div>
       </nav>
 
+     
 
-      
-      <app-dark-toggle  [device]=true></app-dark-toggle>
 
       <div class="sm-search">
          
@@ -107,7 +106,9 @@
       </div>
       
 
-
+ <span *ngIf="mobiledevice">
+         <app-dark-toggle [cmp]="component"></app-dark-toggle>
+      </span> 
     
     <h1 class="text-center text-warning">{{sortby_value | uppercase}}</h1>
     <h1 class="text-center text-warning h3">{{genre_value | uppercase}}</h1>

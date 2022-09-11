@@ -101,14 +101,15 @@
                   <h3>{{s.name}}</h3>
                   <!-- <p><span class="search-date"> {{s.first_air_date | date}}</span> <span class="tvshow-rating" [ngClass]="{'red':s.vote_average<=5,'orange':s.vote_average>5&&s.vote_average<8,'green':s.vote_average>=8}">{{float2int(((s.vote_average/10)*100)) + '%'}}</span></p> -->
                   <p><span class="search-date"> {{s.first_air_date | date}}</span></p>
-
               </div>
           </div>
         </div>
       </div>
      
    
-
+      <span *ngIf="mobiledevice">
+        <app-dark-toggle [cmp]="component"></app-dark-toggle>
+     </span> 
     <h1 class="text-center text-warning">{{sortby_value | uppercase}}</h1>
     <h2 class="text-center text-warning h4">{{genre_value | uppercase}}</h2>
     <!-- <h2 class="text-center text-warning">{{country | uppercase}}</h2> -->
