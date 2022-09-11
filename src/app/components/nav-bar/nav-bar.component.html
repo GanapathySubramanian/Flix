@@ -4,7 +4,9 @@
               <a class="navbar-brand" href="">
                 🎬 FLIX 
               </a>
-              <app-dark-toggle [device]=false></app-dark-toggle>
+              <span *ngIf="!mobiledevice">
+                 <app-dark-toggle [cmp]="component"></app-dark-toggle>
+              </span> 
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>

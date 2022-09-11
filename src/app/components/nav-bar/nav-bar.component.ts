@@ -8,8 +8,12 @@ import { Component, HostListener, OnInit } from '@angular/core';
 export class NavBarComponent implements OnInit {
   windowScrolled: boolean=false;
   // footer: boolean=false;
-
-  constructor() { }
+  mobiledevice:boolean=false;
+  component:string='navbar';
+  constructor() { 
+   this.getScreenSize()
+    
+  }
 
   ngOnInit(): void {
   }
@@ -44,4 +48,20 @@ export class NavBarComponent implements OnInit {
      });
  }
 
+
+ 
+ scrHeight:any;
+ scrWidth:any;
+
+ @HostListener('window:resize', ['$event'])
+ getScreenSize() {
+       this.scrHeight = window.innerHeight;
+       this.scrWidth = window.innerWidth;
+       console.log(this.scrHeight, this.scrWidth);
+       if(this.scrWidth<=500){
+        this.mobiledevice=true;
+       }else{
+        this.mobiledevice=false
+       }
+ }
 }

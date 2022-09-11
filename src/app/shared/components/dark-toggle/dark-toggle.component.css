@@ -3,10 +3,11 @@
 
 
 .toggle-dark-light-mobile{
-    margin-left: 20px;
+    /* margin-left: 20px; */
+    margin: 20px;
     display: flex;
-    justify-content: end;
-    align-items: flex-end;
+    justify-content: center;
+    align-items: center;
 }
 
 .toggle-dark-light-normal-screen{

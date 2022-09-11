@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import myAppConfig from 'src/app/core/config/my-app-config';
 import { common } from 'src/app/core/interface/common';
@@ -18,6 +18,8 @@ const SEARCH_URL="https://api.themoviedb.org/3/search/tv?"+myAppConfig.tmdb.apik
 })
 export class TvshowsComponent implements OnInit {
 
+  mobiledevice:boolean=false;
+  component:string="tvshow"
   imgUrl:string=myAppConfig.tmdb.imgUrl;
 
   tvshowList:common[]=[];
@@ -48,6 +50,7 @@ export class TvshowsComponent implements OnInit {
     }else{
       this.ishidedrop=true;
     }
+    this.getScreenSize()
   }
 
   ngOnInit(): void {
@@ -334,5 +337,20 @@ export class TvshowsComponent implements OnInit {
     el.scrollTop = 0;
   }
 
+
+  scrHeight:any;
+  scrWidth:any;
+ 
+  @HostListener('window:resize', ['$event'])
+  getScreenSize() {
+        this.scrHeight = window.innerHeight;
+        this.scrWidth = window.innerWidth;
+        console.log(this.scrHeight, this.scrWidth);
+        if(this.scrWidth<=500){
+         this.mobiledevice=true;
+        }else{
+         this.mobiledevice=false
+        }
+  }
 
 }

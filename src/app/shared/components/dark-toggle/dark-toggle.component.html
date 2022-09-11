@@ -1,7 +1,9 @@
-<div *ngIf="device">
+
+
+<div *ngIf="cmp!=='navbar'">
   <div class="toggle-dark-light-mobile">
-    <input type="checkbox" class="checkbox" id="checkbox" (change)="toggleDarkTheme($event)">
-      <label for="checkbox" class="label">
+    <input type="checkbox" class="checkbox" id="checkbox1" (change)="toggleDarkTheme1($event)">
+      <label for="checkbox1" class="label">
         <i class="fas fa-moon"></i>
         <i class='fas fa-sun'></i>
         <div class='ball-mobile'></div>
@@ -9,10 +11,11 @@
 </div>
 </div>
 
-<div *ngIf="!device">
-  <div class="toggle-dark-light-normal-screen" >
-    <input type="checkbox" class="checkbox" id="checkbox" (change)="toggleDarkTheme($event)">
-      <label for="checkbox" class="label">
+
+<div  *ngIf="cmp=='navbar'">
+  <div class="toggle-dark-light-normal-screen">
+    <input type="checkbox" class="checkbox" id="checkbox2" (change)="toggleDarkTheme2($event)">
+      <label for="checkbox2" class="label">
         <i class="fas fa-moon"></i>
         <i class='fas fa-sun'></i>
         <div class='ball'></div>
