@@ -66,7 +66,7 @@ export class MoviesComponent implements OnInit {
   searchList:any=[];
   findthismovie:string='';
   findMovies(){
-        console.log(this.findthismovie);
+    
         if(this.findthismovie.length > 0){
           let Ele1= window.document.getElementById("search-list-lg");
           Ele1?.classList.remove('d-none');
@@ -88,7 +88,6 @@ export class MoviesComponent implements OnInit {
     let tempSearchList:any;
     this.movieservice.searchmoviesData.subscribe((data)=>{
        tempSearchList=data;
-      console.log(data);
       this.searchList=tempSearchList.results;
       
     });  
