@@ -1,4 +1,4 @@
-# Flix - Movies & Tvshows
+# Flix - Movies & Tvshows Responsive Website
 
 Live Demo : [Flix](https://ganapathysubramanian.github.io/Flix/)
 
