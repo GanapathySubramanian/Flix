@@ -1,6 +1,8 @@
+import { environment } from "src/environments/environment.prod";
+
 export default {
     tmdb:{
-        apikey:"api_key=7636ad8cc0fec57396bc5c069605a982",
+        apikey:environment.apiKey,
         movieBaseUrl:"https://api.themoviedb.org/3",
         tvshowBaseUrl:"https://api.themoviedb.org/3/discover/tv?",
         tvshowDetailsBaseUrl:"https://api.themoviedb.org/3/tv/",
