@@ -21,7 +21,7 @@ export class MovieDetailsComponent implements OnInit {
   
   movieDetails:MovieDetails={} as MovieDetails;
 
-
+  background_video:any;
   windowScrolled: boolean=false;
 
   constructor(private route:ActivatedRoute,private router:Router,private movieservice:MoviesService,private _sanitizer:DomSanitizer) { 
@@ -48,7 +48,7 @@ export class MovieDetailsComponent implements OnInit {
     this.getMovieDetailsData(api_url);
 
     //To get the movie images
-    let backdrop_url=myAppConfig.tmdb.movieBaseUrl+"/movie/"+movie_id+"/images?"+myAppConfig.tmdb.apikey;
+    let backdrop_url=myAppConfig.tmdb.movieBaseUrl+"/movie/"+movie_id+"/images?"+myAppConfig.tmdb.apikey+'&language=en-US';
     this.getMovieImages(backdrop_url)
 
     //To get the reviews
@@ -83,15 +83,20 @@ export class MovieDetailsComponent implements OnInit {
      
         for(let i=0;i<this.movieDetails.videoList.length;i++){
           if(this.movieDetails.videoList[i].key){
+            if(this.movieDetails.videoList[i].type="Teaser"){
+              this.background_video=this._sanitizer.bypassSecurityTrustResourceUrl(myAppConfig.tmdb.videoUrl+this.movieDetails.videoList[i].key+'?modestbranding=0&controls=0&fs=0&loop=1&showinfo=0&autoplay=1&mute=1&enablejsapi=1');
+            }else if(this.movieDetails.videoList[i].type="Trailer"){
+              this.background_video=this._sanitizer.bypassSecurityTrustResourceUrl(myAppConfig.tmdb.videoUrl+this.movieDetails.videoList[i].key+'?modestbranding=0&controls=0&fs=0&loop=1&showinfo=0&autoplay=1&mute=1&enablejsapi=1');
+            }
             this.movieDetails.videoList[i].key=this._sanitizer.bypassSecurityTrustResourceUrl(myAppConfig.tmdb.videoUrl+this.movieDetails.videoList[i].key);
+           
           }
           else{
             this.movieDetails.videoList[i].key=null;
           }
-        
       }
-      
     })
+
   }
   getWatchprovider(watch_provider: string) {
     this.movieservice.getWatchProviders(watch_provider);
@@ -223,13 +228,7 @@ export class MovieDetailsComponent implements OnInit {
     let tempreviewData:any;
     this.movieservice.moviereviewData.subscribe((data)=>{
       tempreviewData=data;
-
-      
-        this.movieDetails.reviewList=tempreviewData.results;
-      
-
-      
-      
+        this.movieDetails.reviewList=tempreviewData.results;      
     })
   }
 
@@ -260,7 +259,8 @@ export class MovieDetailsComponent implements OnInit {
        
           this.movieDetails.posterList=tempimagesData.posters;
         
-   
+        console.log(this.movieDetails.posterList);
+        
 
         //Movie Logo Images
         if(tempimagesData.logos.length<0){
@@ -286,7 +286,6 @@ export class MovieDetailsComponent implements OnInit {
 
       //Default Movie Details 
       this.movieDetails.backdrop_path=tempMovieDetails.backdrop_path;
-      this.movieDetails.backdrop_path=tempMovieDetails.backdrop_path;
       this.movieDetails.budget=tempMovieDetails.budget;
       this.movieDetails.homepage=tempMovieDetails.homepage;
       this.movieDetails.id=tempMovieDetails.id;
@@ -311,7 +310,8 @@ export class MovieDetailsComponent implements OnInit {
       }else{
         this.movieDetails.watchprovider=tempMovieDetails.homepage;
       }
-    
+      console.log(this.movieDetails);
+      
     })
   }
 

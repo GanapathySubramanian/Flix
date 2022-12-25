@@ -13,6 +13,8 @@ export class VideoComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.data);
+    
   }
 
 }

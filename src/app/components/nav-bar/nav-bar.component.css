@@ -1,10 +1,15 @@
 nav{
     padding: 1rem;
+    position: absolute;
+    z-index:999999;
     display: flex;
     justify-content: space-around;
     background-color: var(--secondary-color);
+    background-color: transparent;
     transition: background-color 2s;
     color:var(--base-white);
+    top: 0px;
+    width: 100%;
 }
  
 .logo{
@@ -60,6 +65,14 @@ nav a{
     transition: background-color 2s;
     color: var(--base-white);
 } 
+.nav-link:hover{
+    color: red;
+    border-bottom: red;
+}
+.navbar-dark .navbar-nav .nav-link.active{
+    color: #fff;
+    border-bottom: 1px solid red;
+}
 @media only screen and (max-width:600px) {
     .footer .container-fluid{
        width: 100%;
@@ -73,6 +86,7 @@ nav a{
     display: block;
 } */
 }
+
 
 
 

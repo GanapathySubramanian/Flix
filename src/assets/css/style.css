@@ -3,8 +3,8 @@
     box-sizing: border-box;
 }
 :root{
-    --primary-color:#22254b;
-    --secondary-color:#373b69;
+    --primary-color:black;
+    --secondary-color:#24252c;
 }
 body{
     background-color: var(--primary-color);

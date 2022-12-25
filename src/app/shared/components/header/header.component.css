@@ -106,7 +106,7 @@ path.two {
         .header-img{
             width:470px;
             /* height: 100%; */
-            top: 1rem;
+            top: 4.5rem;
             border-radius: 40px;
             box-shadow: 0.2px 4px 5px rgba(0,0,0,0.1);
             background-color: var(--base-black);
@@ -144,12 +144,12 @@ path.two {
 
         /* Banner Section Start */
 
-    .header {
-        min-height: 780px;
+    /* .header {
+        min-height: 880px;
         width: 100%;
         top:-10px;
         position: relative;
-    }
+    } */
 
     .header-bg{
         min-height: 780px;
@@ -165,6 +165,15 @@ path.two {
         -moz-animation: fade 6s infinite;
         -o-animation: fade 6s infinite;
         animation: fade 6s infinite;
+    }
+    .header{
+        min-height: 800px;
+        width: 100%;
+        background-position: center;
+        background-size: cover;
+        position: absolute;
+        background-position: center;
+        background-repeat: no-repeat;
     }
         @-webkit-keyframes fade {
             0% {
@@ -225,6 +234,7 @@ path.two {
               margin-left: 50px;
           }
           .right-content{
+                
               width: 35%;
               display: flex;
               justify-content: center;
@@ -260,6 +270,7 @@ path.two {
             font-size: 1rem;
             margin-top: 5px;
             line-height: 1.5rem;
+            text-align: left;
             color: var(--base-white);
         }
         .youtube-video{
@@ -269,6 +280,7 @@ path.two {
         .item-title{
             color:var(--base-orange);
             font-size: 50px;
+            text-align: left;
             line-height: 3rem;
             font-weight: 200;
             text-transform: uppercase;
@@ -346,10 +358,51 @@ path.two {
     .header-poster-img img:hover{
         transform: scale(1.35) rotateZ(5deg);
     }
-    
-   
-    
-
 }
 
+.play {
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: 2px;
+    font-size: 1.2em;
+}
 
+svg#playBtn {
+    width: 100%;
+    height: auto;
+    /* vertical-align: middle; */
+}
+.circle {
+    stroke: #e50914;
+    -webkit-transition: all 0.5s ease-in-out;
+    stroke-dashoffset: 0;
+    opacity: 1;
+}
+  
+.playBut {
+    display: inline-block;
+    -webkit-transition: all 0.5s ease;
+}
+.playBut:hover {
+    color: #e50914;  
+}
+.playBut .triangle {
+    -webkit-transition: all 0.7s ease-in-out;
+    stroke-dasharray: 240;
+    stroke-dashoffset: 480;
+    stroke: #fff;
+    transform: translateY(0);
+}
+.playBut:hover .triangle {
+    stroke-dashoffset: 0;
+    opacity: 1;
+    stroke: #e50914;
+}
+.playBut:hover .circle {
+    stroke-dasharray: 650;
+    stroke-dashoffset: 650;
+    opacity: 0.3;
+}
+  

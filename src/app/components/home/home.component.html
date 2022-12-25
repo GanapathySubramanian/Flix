@@ -1,0 +1,19 @@
+<div class="main-content" style="margin-top: -10px;">
+    <ng-container *ngIf="topMoviesList">
+        <carousel class="text-center"  cellWidth='100%' [transitionDuration]="800" transitionTimingFunction="ease-in-out"	 [height]=800 [margin]=20 [arrows]="false" [autoplay]="true" [autoplayInterval]="5000" [pauseOnHover]="false"  [loop]="true"> 
+            <div class="carousel-cell video" *ngFor="let movieDetails of topMoviesList">
+                <section class="header" >
+                    <app-header [data]="movieDetails"></app-header>
+                </section>    
+            </div>
+        </carousel>
+    </ng-container>
+</div>
+
+<!-- <video autoplay muted loop id="myVideo">
+    <source src="path_to_video" type="https://www.youtube.com/watch?v=AOlkcLtyXkw">
+    Your browser does not support HTML5 video.
+  </video> -->
+<!-- [autoplay]="true" [autoplayInterval]="10000" [pauseOnHover]="false"  [loop]="true" -->
+
+
