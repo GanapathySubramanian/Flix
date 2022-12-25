@@ -17,7 +17,9 @@ export class MoviesComponent implements OnInit {
   mobiledevice:boolean=false;
   component:string="movie"
   imgUrl:string=myAppConfig.tmdb.imgUrl;
+  highqualityImgUrl:string=myAppConfig.tmdb.highQualityImgUrl;
 
+  topMoviesList:any[]=[];
   movieList:common[]=[];
   genreList:any;
   orderList:any;
@@ -256,20 +258,16 @@ export class MoviesComponent implements OnInit {
     this.movieservice.moviesData.subscribe((data:any)=>{
        tempMoviesList=data.results;
         this.movieList=[]
-       for(let i=0;i<tempMoviesList.length;i++){
-        this.movieList[i]={} as common;
-        this.movieList[i].id=tempMoviesList[i].id;
-        this.movieList[i].title=tempMoviesList[i].title;
-        this.movieList[i].poster_path=tempMoviesList[i].poster_path;
-        this.movieList[i].vote_average=tempMoviesList[i].vote_average;
-        this.movieList[i].release_date=tempMoviesList[i].first_air_date;
-        this.movieList[i].release_date=tempMoviesList[i].release_date;
-        console.log(this.movieList[i]);
-        
-      }
+      this.movieList=tempMoviesList
       
-
-  
+      this.movieList.forEach((movies:any,index) => {
+        movies.background_image=this.highqualityImgUrl+movies.backdrop_path;
+        movies.no_animation=true;
+        if(index<10){
+          this.topMoviesList.push(movies);
+        }
+       });
+       
       if(data.total_pages==page){        
         this.isdisablenext=true;
       }else{

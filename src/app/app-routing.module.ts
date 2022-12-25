@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './components/home/home.component';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 import { MoviesComponent } from './components/movies/movies.component';
 import { PersonDetailsComponent } from './components/person-details/person-details.component';
@@ -10,7 +11,10 @@ import { TvshowsComponent } from './components/tvshows/tvshows.component';
 
 const routes: Routes = [
   {
-    path:'',component:MoviesComponent
+    path:'',component:HomeComponent
+  },
+  {
+    path:'movies',component:MoviesComponent
   },
   {
     path:'tvshows',component:TvshowsComponent
@@ -38,7 +42,7 @@ const routes: Routes = [
   },
   {
     path:'**',
-    component:MoviesComponent,
+    component:HomeComponent,
     pathMatch:'full'
   }
 ];

@@ -18,6 +18,7 @@ import { PersonsComponent } from './components/persons/persons.component';
 import { SharedModule } from './shared/shared.module';
 import { RegisterComponent } from './components/auth/Signup/register/register.component';
 import { LoginComponent } from './components/auth/Signin/login/login.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { LoginComponent } from './components/auth/Signin/login/login.component';
     PersonsComponent,
     RegisterComponent,
     LoginComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

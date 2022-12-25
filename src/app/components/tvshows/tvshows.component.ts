@@ -21,7 +21,8 @@ export class TvshowsComponent implements OnInit {
   mobiledevice:boolean=false;
   component:string="tvshow"
   imgUrl:string=myAppConfig.tmdb.imgUrl;
-
+  highqualityImgUrl:string=myAppConfig.tmdb.highQualityImgUrl;
+  topTvshowList:any=[]
   tvshowList:common[]=[];
   orderList:any;
   genreList:any;
@@ -299,17 +300,16 @@ export class TvshowsComponent implements OnInit {
     this.tvshowservice.tvshowsData.subscribe((data:any)=>{
       tempTvshowList=data.results;
       this.tvshowList=[]
-      for(let i=0;i<tempTvshowList.length;i++){
-        this.tvshowList[i]={} as common;
-        this.tvshowList[i].id=tempTvshowList[i].id;
-        this.tvshowList[i].title=tempTvshowList[i].name;
-        this.tvshowList[i].poster_path=tempTvshowList[i].poster_path;
-        this.tvshowList[i].vote_average=tempTvshowList[i].vote_average;
-        this.tvshowList[i].release_date=tempTvshowList[i].first_air_date;
-      }
+     this.tvshowList=tempTvshowList;
       
 
-
+      this.tvshowList.forEach((movies:any,index) => {
+        movies.background_image=this.highqualityImgUrl+movies.backdrop_path;
+        movies.no_animation=true;
+        if(index<10){
+          this.topTvshowList.push(movies);
+        }
+       });
       
 
       if(data.total_pages==page){

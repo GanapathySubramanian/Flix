@@ -11,6 +11,7 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { LoaderComponent } from './components/loader/loader.component';
 import { DarkToggleComponent } from './components/dark-toggle/dark-toggle.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { VideoHeaderComponent } from './components/video-header/video-header.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
     LoaderComponent,
     DarkToggleComponent,
     LandingPageComponent,
+    VideoHeaderComponent,
   ],
   imports: [
     CommonModule,
@@ -40,6 +42,7 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
     LoaderComponent,
     DarkToggleComponent,
     LandingPageComponent,
+    VideoHeaderComponent
   ]
 })
 export class SharedModule { }
