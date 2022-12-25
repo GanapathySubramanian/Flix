@@ -11,10 +11,11 @@ export class HeaderComponent implements OnInit {
 
   @Input() data:any={};
   imgUrl:string=myAppConfig.tmdb.highQualityImgUrl;
-
+  background_video:any;
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.data);
   }
 
 }
