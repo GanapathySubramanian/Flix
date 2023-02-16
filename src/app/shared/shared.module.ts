@@ -12,7 +12,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { DarkToggleComponent } from './components/dark-toggle/dark-toggle.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { VideoHeaderComponent } from './components/video-header/video-header.component';
-
+import { TrendingBackdropsComponent } from './components/trending-backdrops/trending-backdrops.component';
 
 @NgModule({
   declarations: [
@@ -26,13 +26,10 @@ import { VideoHeaderComponent } from './components/video-header/video-header.com
     DarkToggleComponent,
     LandingPageComponent,
     VideoHeaderComponent,
+    TrendingBackdropsComponent,
   ],
-  imports: [
-    CommonModule,
-    NgbModule,
-    IvyCarouselModule
-  ],
-  exports:[
+  imports: [CommonModule, NgbModule, IvyCarouselModule],
+  exports: [
     CardComponent,
     HeaderComponent,
     ReviewComponent,
@@ -42,7 +39,8 @@ import { VideoHeaderComponent } from './components/video-header/video-header.com
     LoaderComponent,
     DarkToggleComponent,
     LandingPageComponent,
-    VideoHeaderComponent
-  ]
+    VideoHeaderComponent,
+    TrendingBackdropsComponent,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

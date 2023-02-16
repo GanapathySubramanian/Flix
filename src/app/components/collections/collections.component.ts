@@ -3,20 +3,18 @@ import { MoviesService } from 'src/app/core/services/movies.service';
 import myAppConfig from 'src/app/core/config/my-app-config';
 import { FormControl, FormGroup } from '@angular/forms';
 import { common } from 'src/app/core/interface/common';
-
 var sort_by_desc = 'popularity.desc',
   page = 1,
   Search_value = '',
   genre_id = '';
 var sorts_by = 'Trending Now',
   region = '';
-
 @Component({
-  selector: 'app-movies',
-  templateUrl: './movies.component.html',
-  styleUrls: ['./movies.component.css'],
+  selector: 'app-collections',
+  templateUrl: './collections.component.html',
+  styleUrls: ['./collections.component.css'],
 })
-export class MoviesComponent implements OnInit {
+export class CollectionsComponent implements OnInit {
   mobiledevice: boolean = false;
   component: string = 'movie';
   imgUrl: string = myAppConfig.tmdb.imgUrl;
@@ -50,21 +48,17 @@ export class MoviesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getGenre();
-    this.getOrder();
-    this.getMovies();
-    this.getCountries();
+    this.getCollections();
   }
-
-  getCountries() {
-    var country_url =
+  getCollections() {
+    var api_url =
       myAppConfig.tmdb.movieBaseUrl +
-      '/configuration/countries?' +
-      myAppConfig.tmdb.apikey;
-    this.movieservice.getCountry(country_url);
-    this.movieservice.countryData.subscribe((data) => {
-      this.countryList = data;
-    });
+      '/search/collection?' +
+      myAppConfig.tmdb.apikey +
+      '&query=all&page' +
+      page;
+
+    this.getMoviesData(api_url);
   }
 
   searchList: any = [];
@@ -77,12 +71,11 @@ export class MoviesComponent implements OnInit {
       Ele2?.classList.remove('d-none');
       let SEA_URL =
         myAppConfig.tmdb.movieBaseUrl +
-        '/search/movie?' +
+        '/search/collection?' +
         myAppConfig.tmdb.apikey +
         '&query=' +
         this.findthismovie +
-        '&page=1' +
-        '&sort_by=popular.desc';
+        '&page=1';
       this.loadMovies(SEA_URL);
     } else {
       let Ele1 = window.document.getElementById('search-list-lg');
@@ -98,35 +91,8 @@ export class MoviesComponent implements OnInit {
     this.movieservice.searchmoviesData.subscribe((data) => {
       tempSearchList = data;
       this.searchList = tempSearchList.results;
+      console.log(this.searchList);
     });
-  }
-  getOrder() {
-    this.movieservice.getOrderList().subscribe((data) => {
-      this.orderList = data;
-    });
-  }
-  getGenre() {
-    this.movieservice.getGenreList().subscribe((data) => {
-      this.genreList = data;
-    });
-  }
-
-  getMovies() {
-    page = 1;
-    this.page_no = 1;
-    this.genre_value = '';
-    genre_id = '';
-    sort_by_desc = 'popularity.desc';
-    this.sortby_value = 'Trending Now';
-    let apiurl =
-      myAppConfig.tmdb.movieBaseUrl +
-      '/discover/movie?sort_by=' +
-      sort_by_desc +
-      '&' +
-      myAppConfig.tmdb.apikey +
-      '&page=' +
-      page;
-    this.getMoviesData(apiurl);
   }
 
   getSearchContent() {
@@ -138,7 +104,7 @@ export class MoviesComponent implements OnInit {
       this.sortby_value = Search_value;
       let SEARCH_URL =
         myAppConfig.tmdb.movieBaseUrl +
-        '/search/movie?' +
+        '/search/collection?' +
         myAppConfig.tmdb.apikey +
         '&query=' +
         Search_value +
@@ -154,9 +120,7 @@ export class MoviesComponent implements OnInit {
       this.country_value = '';
       let api_url =
         myAppConfig.tmdb.movieBaseUrl +
-        '/discover/movie?sort_by=' +
-        sort_by_desc +
-        '&' +
+        '/search/collection?' +
         myAppConfig.tmdb.apikey +
         '&page=' +
         page;
@@ -164,93 +128,6 @@ export class MoviesComponent implements OnInit {
     }
   }
 
-  getCountryContent(id: string, name: string) {
-    region = id;
-    if (id == '' && name == '') {
-      this.country_value = '';
-      region = '';
-    } else {
-      this.country_value = name;
-    }
-    if (Search_value == '') {
-      this.ishidedrop = false;
-      page = 1;
-      this.page_no = page;
-      this.getFilterContent();
-    }
-  }
-  getGenreContent(id: any, name: string) {
-    genre_id = id;
-    if (id == '' && name == '') {
-      this.genre_value = '';
-    } else {
-      this.genre_value = name + ' Movies';
-    }
-    if (Search_value == '') {
-      this.ishidedrop = false;
-      page = 1;
-      this.page_no = page;
-      this.getFilterContent();
-    }
-  }
-
-  getOrderContent(sortBy: string, name: string) {
-    sort_by_desc = sortBy;
-    if (sortBy == '' && name == '') {
-      this.sortby_value = 'Trending Now';
-      sort_by_desc = 'popularity.desc';
-    } else {
-      this.sortby_value = name;
-    }
-    if (Search_value == '') {
-      page = 1;
-      this.ishidedrop = false;
-      this.page_no = page;
-      this.getFilterContent();
-    }
-  }
-
-  getFilterContent() {
-    if (sort_by_desc == 'upcoming.desc') {
-      let api_url =
-        myAppConfig.tmdb.movieBaseUrl +
-        '/movie/upcoming?' +
-        myAppConfig.tmdb.apikey +
-        '&page=' +
-        page +
-        '&with_genres=' +
-        genre_id +
-        '&region=' +
-        region;
-      this.getMoviesData(api_url);
-    } else if (sort_by_desc == 'nowplaying.desc') {
-      let api_url =
-        myAppConfig.tmdb.movieBaseUrl +
-        '/movie/now_playing?' +
-        myAppConfig.tmdb.apikey +
-        '&page=' +
-        page +
-        '&with_genres=' +
-        genre_id +
-        '&region=' +
-        region;
-      this.getMoviesData(api_url);
-    } else {
-      let sort_api_url =
-        myAppConfig.tmdb.movieBaseUrl +
-        '/discover/movie?sort_by=' +
-        sort_by_desc +
-        '&' +
-        myAppConfig.tmdb.apikey +
-        '&page=' +
-        page +
-        '&with_genres=' +
-        genre_id +
-        '&region=' +
-        region;
-      this.getMoviesData(sort_api_url);
-    }
-  }
   handlePagination(val: any) {
     if (Search_value == '') {
       this.ishidedrop = false;
@@ -268,7 +145,6 @@ export class MoviesComponent implements OnInit {
         page++;
         this.page_no = page;
       }
-      this.getFilterContent();
     } else {
       this.ishidedrop = true;
       if (val == 1) {
@@ -287,7 +163,7 @@ export class MoviesComponent implements OnInit {
       }
       var page_api_url =
         myAppConfig.tmdb.movieBaseUrl +
-        '/search/movie?' +
+        '/search/collection?' +
         myAppConfig.tmdb.apikey +
         '&query=' +
         Search_value +
@@ -305,7 +181,6 @@ export class MoviesComponent implements OnInit {
 
   getMoviesData(url: any) {
     this.movieservice.getallMovies(url);
-
     let tempMoviesList: any;
     this.movieservice.moviesData.subscribe((data: any) => {
       tempMoviesList = data.results;

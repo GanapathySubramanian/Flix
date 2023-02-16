@@ -271,18 +271,7 @@ img:hover {
   transform: scale(1.1);
 }
 
-.kodfun-galeri {
-  display: flex;
-  height: 20rem;
-  gap: 1rem;
-}
-.kodfun-galeri > div {
-  flex: 1;
-  border-radius: 1rem;
-  background-position: center;
-  background-size: auto 100%;
-  transition: all 0.8s cubic-bezier(0.25, 0.4, 0.45, 1.4);
-}
-.kodfun-galeri > div:hover {
-  flex: 5;
+.no-image {
+  width: 300px;
+  height: 250px;
 }

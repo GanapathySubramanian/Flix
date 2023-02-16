@@ -1,0 +1,53 @@
+<div class="topMovies-container">
+  <h5 class="details-header">{{ title }}</h5>
+  <ng-container *ngIf="trendingList.length > 0">
+    <carousel
+      class="text-center"
+      [transitionDuration]="800"
+      transitionTimingFunction="ease-in-out"
+      [height]="250"
+      [margin]="20"
+      [cellWidth]="300"
+      [arrows]="true"
+      [pauseOnHover]="false"
+      [loop]="true"
+      [dots]="false"
+      [arrowsOutside]="false"
+      [arrowsTheme]="'dark'"
+    >
+      <div class="carousel-cell video" *ngFor="let trending of trendingList">
+        <div class="img">
+          <div
+            *ngIf="
+              trending.backdrop_path == null;
+              then thenBlock;
+              else elseBlock
+            "
+          ></div>
+          <ng-template #thenBlock
+            ><img
+              src="assets/images/no-image.png"
+              alt="figure"
+              class="no-image"
+          /></ng-template>
+          <ng-template #elseBlock>
+            <img
+              [attr.src]="highQualityImgUrl + trending.backdrop_path"
+              alt="{{ trending.original_title }}"
+          /></ng-template>
+          <div
+            class="title position-absolute d-flex justify-content-center align-items-center text-white"
+            style="margin-top: -30px; text-align: center; margin-left: 20px"
+          >
+            <div class="title-name" *ngIf="trending.name">
+              {{ trending.name }}
+            </div>
+            <div class="title-name" *ngIf="trending.title">
+              {{ trending.title }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </carousel>
+  </ng-container>
+</div>

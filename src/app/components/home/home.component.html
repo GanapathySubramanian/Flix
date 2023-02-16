@@ -1,11 +1,54 @@
-<div class="main-content" style="margin-top: -10px;">
-    <ng-container *ngIf="topMoviesList">
-        <carousel class="text-center"  cellWidth='100%' [transitionDuration]="800" transitionTimingFunction="ease-in-out"	 [height]=800 [margin]=20 [arrows]="false" [autoplay]="true" [autoplayInterval]="5000" [pauseOnHover]="false"  [loop]="true"> 
-            <div class="carousel-cell video" *ngFor="let movieDetails of topMoviesList">
-                <section class="header" >
-                    <app-header [data]="movieDetails"></app-header>
-                </section>    
-            </div>
-        </carousel>
-    </ng-container>
+<div class="main-content" style="margin-top: -10px">
+  <ng-container *ngIf="topMoviesList">
+    <carousel
+      class="text-center"
+      cellWidth="100%"
+      [transitionDuration]="800"
+      transitionTimingFunction="ease-in-out"
+      [height]="800"
+      [margin]="20"
+      [arrows]="false"
+      [autoplay]="true"
+      [autoplayInterval]="5000"
+      [pauseOnHover]="false"
+      [loop]="true"
+    >
+      <div
+        class="carousel-cell video"
+        *ngFor="let movieDetails of topMoviesList"
+      >
+        <section class="header">
+          <app-header [data]="movieDetails"></app-header>
+        </section>
+      </div>
+    </carousel>
+  </ng-container>
+</div>
+
+<app-trending-backdrops
+  [title]="trendingMoviesTitle"
+  [trendingList]="trendingMoviesList"
+></app-trending-backdrops>
+
+<app-trending-backdrops
+  [title]="trendingTvshowsTitle"
+  [trendingList]="trendingTvList"
+></app-trending-backdrops>
+
+<div *ngIf="topGrossingMoviesList.length > 0">
+  <h5 class="details-header">Top Grossing Movies</h5>
+  <div class="kodfun-galeri">
+    <div
+      *ngFor="let topGross of topGrossingMoviesList"
+      style="
+      background-image: url('{{ highQualityImgUrl + topGross.backdrop_path }}');
+    "
+    >
+      <div class="text-center text-white">
+        <p class="title-name mt-2" *ngIf="topGross.title">
+          {{ topGross.title }}
+        </p>
+      </div>
+    </div>
+  </div>
 </div>
