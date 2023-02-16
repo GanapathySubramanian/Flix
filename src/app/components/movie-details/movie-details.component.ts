@@ -20,7 +20,7 @@ export class MovieDetailsComponent implements OnInit {
   highqualityImgUrl:string=myAppConfig.tmdb.highQualityImgUrl;
   
   movieDetails:MovieDetails={} as MovieDetails;
-
+  background_video:any;
 
   windowScrolled: boolean=false;
 
@@ -83,15 +83,20 @@ export class MovieDetailsComponent implements OnInit {
      
         for(let i=0;i<this.movieDetails.videoList.length;i++){
           if(this.movieDetails.videoList[i].key){
+            if(this.movieDetails.videoList[i].type="Teaser"){
+              this.background_video=this._sanitizer.bypassSecurityTrustResourceUrl(myAppConfig.tmdb.videoUrl+this.movieDetails.videoList[i].key+'?modestbranding=0&controls=0&fs=0&loop=1&showinfo=0&autoplay=1&mute=1&enablejsapi=1');
+            }else if(this.movieDetails.videoList[i].type="Trailer"){
+              this.background_video=this._sanitizer.bypassSecurityTrustResourceUrl(myAppConfig.tmdb.videoUrl+this.movieDetails.videoList[i].key+'?modestbranding=0&controls=0&fs=0&loop=1&showinfo=0&autoplay=1&mute=1&enablejsapi=1');
+            }
             this.movieDetails.videoList[i].key=this._sanitizer.bypassSecurityTrustResourceUrl(myAppConfig.tmdb.videoUrl+this.movieDetails.videoList[i].key);
+           
           }
           else{
             this.movieDetails.videoList[i].key=null;
           }
-        
       }
-      
     })
+
   }
   getWatchprovider(watch_provider: string) {
     this.movieservice.getWatchProviders(watch_provider);

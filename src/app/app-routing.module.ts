@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CollectionDetailsComponent } from './components/collection-details/collection-details.component';
+import { CollectionsComponent } from './components/collections/collections.component';
+import { HomeComponent } from './components/home/home.component';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 import { MoviesComponent } from './components/movies/movies.component';
 import { PersonDetailsComponent } from './components/person-details/person-details.component';
@@ -10,41 +13,62 @@ import { TvshowsComponent } from './components/tvshows/tvshows.component';
 
 const routes: Routes = [
   {
-    path:'',component:MoviesComponent
+    path: '',
+    component: HomeComponent,
   },
   {
-    path:'tvshows',component:TvshowsComponent
+    path: 'movies',
+    component: MoviesComponent,
   },
   {
-    path:'peoples',component:PersonsComponent
+    path: 'tvshows',
+    component: TvshowsComponent,
   },
   {
-    path:'moviedetails/:id',component:MovieDetailsComponent
+    path: 'collections',
+    component: CollectionsComponent,
   },
   {
-    path:'similarmoviesdetails/:id',component:MovieDetailsComponent
+    path: 'peoples',
+    component: PersonsComponent,
   },
   {
-    path:'tvshowdetails/:id',component:TvshowDetailsComponent
+    path: 'moviedetails/:id',
+    component: MovieDetailsComponent,
   },
   {
-    path:'similartvshowdetails/:id',component:TvshowDetailsComponent
+    path: 'similarmoviesdetails/:id',
+    component: MovieDetailsComponent,
   },
   {
-    path:'persondetails/:id',component:PersonDetailsComponent
+    path: 'tvshowdetails/:id',
+    component: TvshowDetailsComponent,
   },
   {
-    path:'tvshow-episode/:tvshowid/:season/:tvshow_name',component:TvshowEpisodesComponent
+    path: 'similartvshowdetails/:id',
+    component: TvshowDetailsComponent,
   },
   {
-    path:'**',
-    component:MoviesComponent,
-    pathMatch:'full'
-  }
+    path: 'collectiondetails/:id',
+    component: CollectionDetailsComponent,
+  },
+  {
+    path: 'persondetails/:id',
+    component: PersonDetailsComponent,
+  },
+  {
+    path: 'tvshow-episode/:tvshowid/:season/:tvshow_name',
+    component: TvshowEpisodesComponent,
+  },
+  {
+    path: '**',
+    component: HomeComponent,
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

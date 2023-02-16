@@ -1,94 +1,154 @@
-<div class="persons-section">
-    <nav class="navbar navbar-expand mt-4 navbar-light" aria-label="Second navbar example">
-        <div class="container-fluid">
-          <div class="collapse navbar-collapse" id="navbarsExample02">
-            <div class="lg-search">
-                <form id="form" [formGroup]="searchForm" (ngSubmit)="getSearchContent()" > 
-                  <input type="text" placeholder="Search person" formControlName="personName"   class="search form-control" (keyup)="findPeoples()" [(ngModel)]="findthispeoples">
-                </form>
-                <div class = "search-list" id = "search-list-lg">
-                  <!-- list here -->
-                  
-                  <div class = "search-list-item" *ngFor="let s of searchList" [routerLink]="['/persondetails',s.id]">
-                      <div class = "search-item-thumbnail">
-                        <p *ngIf="s.profile_path==null;then thenBlock else elseBlock"></p>
-        
-                        <ng-template #thenBlock>
-                            
-                                <img src="assets/images/no-image.png">
-                            
-                        </ng-template>
-                        <ng-template #elseBlock>
-                            
-                                <img src="{{imgUrl+s.profile_path}}">
-                            
-                        </ng-template>
-                      </div>
-                      <div class = "search-item-info">
-                          <h3>{{s.name}}</h3>
-                          <span [ngClass]="{'red':s.popularity<50,'orange':s.popularity>=50&&s.popularity<80,'green':s.popularity>=80}"> <i class="fa-solid fa-thumbs-up"></i> {{float2int(s.popularity)}}</span>
-                      </div>
-                  </div>
-                </div>
-              </div>
-             
-           
-           </div>
-        </div>
-      </nav>
+<div class="persons-section mt-5">
+  <nav
+    class="navbar navbar-expand mt-4 navbar-light"
+    aria-label="Second navbar example"
+  >
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarsExample02">
+        <div class="lg-search">
+          <form
+            id="form"
+            [formGroup]="searchForm"
+            (ngSubmit)="getSearchContent()"
+          >
+            <input
+              type="text"
+              placeholder="Search person"
+              formControlName="personName"
+              class="search form-control"
+              (keyup)="findPeoples()"
+              [(ngModel)]="findthispeoples"
+            />
+          </form>
+          <div class="search-list" id="search-list-lg">
+            <!-- list here -->
 
-
-    <div class="sm-search">
-        <form id="form" [formGroup]="searchForm" (ngSubmit)="getSearchContent()" > 
-          <input type="text" placeholder="Search person" formControlName="personName"   class="search form-control" (keyup)="findPeoples()" [(ngModel)]="findthispeoples">
-        </form>
-        <div class = "search-list" id = "search-list-sm">
-          <!-- list here -->
-          
-          <div class = "search-list-item" *ngFor="let s of searchList" [routerLink]="['/persondetails',s.id]">
-              <div class = "search-item-thumbnail">
-                <p *ngIf="s.profile_path==null;then thenBlock else elseBlock"></p>
+            <div
+              class="search-list-item"
+              *ngFor="let s of searchList"
+              [routerLink]="['/persondetails', s.id]"
+            >
+              <div class="search-item-thumbnail">
+                <p
+                  *ngIf="s.profile_path == null; then thenBlock; else elseBlock"
+                ></p>
 
                 <ng-template #thenBlock>
-                    
-                        <img src="assets/images/no-image.png">
-                    
+                  <img src="assets/images/no-image.png" />
                 </ng-template>
                 <ng-template #elseBlock>
-                    
-                        <img src="{{imgUrl+s.profile_path}}">
-                    
+                  <img src="{{ imgUrl + s.profile_path }}" />
                 </ng-template>
               </div>
-              <div class = "search-item-info">
-                  <h3>{{s.name}}</h3>
-               <span [ngClass]="{'red':s.popularity<50,'orange':s.popularity>=50&&s.popularity<80,'green':s.popularity>=80}"> <i class="fa-solid fa-thumbs-up"></i> {{float2int(s.popularity)}}</span>
-
+              <div class="search-item-info">
+                <h3>{{ s.name }}</h3>
+                <span
+                  [ngClass]="{
+                    red: s.popularity < 50,
+                    orange: s.popularity >= 50 && s.popularity < 80,
+                    green: s.popularity >= 80
+                  }"
+                >
+                  <i class="fa-solid fa-thumbs-up"></i>
+                  {{ float2int(s.popularity) }}</span
+                >
               </div>
+            </div>
           </div>
         </div>
       </div>
-     
-      <span *ngIf="mobiledevice">
-        <app-dark-toggle [cmp]="component"></app-dark-toggle>
-     </span> 
-    <h1 class="text-center text-warning">{{sortby_value | uppercase}}</h1>
+    </div>
+  </nav>
 
+  <div class="sm-search">
+    <form id="form" [formGroup]="searchForm" (ngSubmit)="getSearchContent()">
+      <input
+        type="text"
+        placeholder="Search person"
+        formControlName="personName"
+        class="search form-control"
+        (keyup)="findPeoples()"
+        [(ngModel)]="findthispeoples"
+      />
+    </form>
+    <div class="search-list" id="search-list-sm">
+      <!-- list here -->
 
-    <main id="main">
-        
-        <div id="person" class="person" *ngFor="let person of peopleList" [routerLink]="['/persondetails',person.id]">
-            <app-card [data]="person"></app-card>
+      <div
+        class="search-list-item"
+        *ngFor="let s of searchList"
+        [routerLink]="['/persondetails', s.id]"
+      >
+        <div class="search-item-thumbnail">
+          <p *ngIf="s.profile_path == null; then thenBlock; else elseBlock"></p>
+
+          <ng-template #thenBlock>
+            <img src="assets/images/no-image.png" />
+          </ng-template>
+          <ng-template #elseBlock>
+            <img src="{{ imgUrl + s.profile_path }}" />
+          </ng-template>
         </div>
-
-    </main>
-
-    <div class="pagination" *ngIf="peopleList.length>0">
-        <button class="btn" id="prev" [disabled]="isdisableprev" (click)="handlePagination(2)">Prev</button>
-        <button class="btn"  id="home" (click)="handlePagination(1)" style="border-radius: 100%;">{{page_no}}</button>
-        <button class="btn"  id="next" [disabled]="isdisablenext" (click)="handlePagination(3)">Next</button>
+        <div class="search-item-info">
+          <h3>{{ s.name }}</h3>
+          <span
+            [ngClass]="{
+              red: s.popularity < 50,
+              orange: s.popularity >= 50 && s.popularity < 80,
+              green: s.popularity >= 80
+            }"
+          >
+            <i class="fa-solid fa-thumbs-up"></i>
+            {{ float2int(s.popularity) }}</span
+          >
+        </div>
+      </div>
     </div>
-    <div *ngIf="peopleList.length<=0">
-        <h1 class="text-warning text-center">No persons Found</h1>
+  </div>
+
+  <span *ngIf="mobiledevice">
+    <app-dark-toggle [cmp]="component"></app-dark-toggle>
+  </span>
+  <h1 class="text-center text-warning">{{ sortby_value | uppercase }}</h1>
+
+  <main id="main">
+    <div
+      id="person"
+      class="person"
+      *ngFor="let person of peopleList"
+      [routerLink]="['/persondetails', person.id]"
+    >
+      <app-card [data]="person"></app-card>
     </div>
+  </main>
+
+  <div class="pagination" *ngIf="peopleList.length > 0">
+    <button
+      class="btn"
+      id="prev"
+      [disabled]="isdisableprev"
+      (click)="handlePagination(2)"
+    >
+      Prev
+    </button>
+    <button
+      class="btn"
+      id="home"
+      (click)="handlePagination(1)"
+      style="border-radius: 100%"
+    >
+      {{ page_no }}
+    </button>
+    <button
+      class="btn"
+      id="next"
+      [disabled]="isdisablenext"
+      (click)="handlePagination(3)"
+    >
+      Next
+    </button>
+  </div>
+  <div *ngIf="peopleList.length <= 0">
+    <h1 class="text-warning text-center">No persons Found</h1>
+  </div>
 </div>

@@ -11,7 +11,9 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { LoaderComponent } from './components/loader/loader.component';
 import { DarkToggleComponent } from './components/dark-toggle/dark-toggle.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
-
+import { VideoHeaderComponent } from './components/video-header/video-header.component';
+import { TrendingBackdropsComponent } from './components/trending-backdrops/trending-backdrops.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -24,13 +26,11 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
     LoaderComponent,
     DarkToggleComponent,
     LandingPageComponent,
+    VideoHeaderComponent,
+    TrendingBackdropsComponent,
   ],
-  imports: [
-    CommonModule,
-    NgbModule,
-    IvyCarouselModule
-  ],
-  exports:[
+  imports: [CommonModule, NgbModule, IvyCarouselModule, RouterModule],
+  exports: [
     CardComponent,
     HeaderComponent,
     ReviewComponent,
@@ -40,6 +40,8 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
     LoaderComponent,
     DarkToggleComponent,
     LandingPageComponent,
-  ]
+    VideoHeaderComponent,
+    TrendingBackdropsComponent,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

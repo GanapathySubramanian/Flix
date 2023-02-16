@@ -1,0 +1,174 @@
+<!-- <div class="main-content" style="margin-top: -10px">
+  <ng-container *ngIf="topMoviesList.length > 0">
+    <carousel
+      class="text-center"
+      cellWidth="100%"
+      [transitionDuration]="800"
+      transitionTimingFunction="ease-in-out"
+      [height]="800"
+      [margin]="20"
+      [arrows]="false"
+      [autoplay]="true"
+      [autoplayInterval]="5000"
+      [pauseOnHover]="false"
+      [loop]="true"
+    >
+      <div
+        class="carousel-cell video"
+        *ngFor="let movieDetails of topMoviesList"
+      >
+        <section class="header">
+          <app-header [data]="movieDetails"></app-header>
+        </section>
+      </div>
+    </carousel>
+  </ng-container>
+</div> -->
+<div class="movies-section">
+  <nav
+    class="navbar navbar-expand mt-5 navbar-light"
+    aria-label="Second navbar example"
+  >
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarsExample02">
+        <ul
+          class="navbar-nav me-auto"
+          [ngStyle]="{ visibility: ishidedrop ? 'hidden' : 'visible' }"
+        ></ul>
+        <div class="lg-search mt-2">
+          <form
+            id="form"
+            [formGroup]="searchForm"
+            (ngSubmit)="getSearchContent()"
+          >
+            <input
+              type="text"
+              placeholder="Search Movie"
+              formControlName="movieName"
+              class="search form-control"
+              (keyup)="findMovies()"
+              [(ngModel)]="findthismovie"
+            />
+          </form>
+          <div class="search-list" id="search-list-lg">
+            <!-- list here -->
+            <div
+              class="search-list-item"
+              *ngFor="let s of searchList"
+              [routerLink]="['/collectiondetails', s.id]"
+            >
+              <div class="search-item-thumbnail">
+                <p
+                  *ngIf="s.poster_path == null; then thenBlock; else elseBlock"
+                ></p>
+
+                <ng-template #thenBlock>
+                  <img src="assets/images/no-image.png" />
+                </ng-template>
+                <ng-template #elseBlock>
+                  <img src="{{ imgUrl + s.poster_path }}" />
+                </ng-template>
+              </div>
+              <div class="search-item-info">
+                <h3>{{ s.name }}</h3>
+                <p *ngIf="s.adult">
+                  <span class="search-date"> 18+</span>
+                </p>
+                <p *ngIf="!s.adult">
+                  <span class="search-date"> PG 13</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="sm-search">
+    <form id="form" [formGroup]="searchForm" (ngSubmit)="getSearchContent()">
+      <input
+        type="text"
+        placeholder="Search Movie"
+        formControlName="movieName"
+        class="search form-control"
+        (keyup)="findMovies()"
+        [(ngModel)]="findthismovie"
+      />
+    </form>
+    <div class="search-list" id="search-list-sm">
+      <!-- list here -->
+
+      <div
+        class="search-list-item"
+        *ngFor="let s of searchList"
+        [routerLink]="['/collection-details', s.id]"
+      >
+        <div class="search-item-thumbnail">
+          <p *ngIf="s.poster_path == null; then thenBlock; else elseBlock"></p>
+
+          <ng-template #thenBlock>
+            <img src="assets/images/no-image.png" />
+          </ng-template>
+          <ng-template #elseBlock>
+            <img src="{{ imgUrl + s.poster_path }}" />
+          </ng-template>
+        </div>
+        <div class="search-item-info">
+          <h3>{{ s.name }}</h3>
+          <p *ngIf="s.adult">
+            <span class="search-date"> 18+</span>
+          </p>
+          <p *ngIf="!s.adult">
+            <span class="search-date"> PG 13</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="movie-filter-details" *ngIf="movieList.length > 0">
+    <h5 class="text-center filtered-value">COLLECTIONS</h5>
+  </div>
+
+  <main id="main">
+    <div
+      class="movie"
+      id="movie"
+      *ngFor="let movie of movieList"
+      [routerLink]="['/collectiondetails', movie.id]"
+    >
+      <app-card [data]="movie"></app-card>
+    </div>
+  </main>
+
+  <!-- <div class="pagination" *ngIf="movieList.length > 0">
+    <button
+      class="btn"
+      id="prev"
+      [disabled]="isdisableprev"
+      (click)="handlePagination(2)"
+    >
+      Prev
+    </button>
+    <button
+      class="btn"
+      id="home"
+      (click)="handlePagination(1)"
+      style="border-radius: 100%"
+    >
+      {{ page_no }}
+    </button>
+    <button
+      class="btn"
+      id="next"
+      [disabled]="isdisablenext"
+      (click)="handlePagination(3)"
+    >
+      Next
+    </button>
+  </div> -->
+
+  <div *ngIf="movieList.length <= 0">
+    <h1 class="filtered-value text-center">No Movies Found</h1>
+  </div>
+</div>

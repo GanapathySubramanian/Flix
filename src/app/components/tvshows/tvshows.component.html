@@ -1,7 +1,19 @@
+
+<div class="main-content" style="margin-top: -10px;">
+  <ng-container *ngIf="topTvshowList">
+      <carousel class="text-center"  cellWidth='100%' [transitionDuration]="800" transitionTimingFunction="ease-in-out"	 [height]=800 [margin]=20 [arrows]="false" [autoplay]="true" [autoplayInterval]="5000" [pauseOnHover]="false"  [loop]="true"> 
+          <div class="carousel-cell video" *ngFor="let tvshowDetails of topTvshowList">
+              <section class="header" >
+                  <app-header [data]="tvshowDetails"></app-header>
+              </section>    
+          </div>
+      </carousel>
+  </ng-container>
+</div>
 <div class="tvshows-section">
    
       
-  <nav class="navbar navbar-expand mt-4 navbar-light" aria-label="Second navbar example">
+  <nav class="navbar navbar-expand mt-5 navbar-light" aria-label="Second navbar example">
     <div class="container-fluid">
       <div class="collapse navbar-collapse" id="navbarsExample02">
         <ul class="navbar-nav me-auto" [ngStyle]="{'visibility': ishidedrop ? 'hidden' : 'visible'}">
