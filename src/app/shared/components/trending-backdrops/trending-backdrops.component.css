@@ -1,3 +1,17 @@
+.details-header {
+  color: red;
+  margin: 20px;
+}
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.image {
+  width: 300px;
+  height: 380px;
+}
+
 main {
   display: flex;
   flex-wrap: wrap;
@@ -242,4 +256,22 @@ main {
 }
 .filtered-value {
   color: red;
+}
+
+img {
+  -webkit-box-reflect: below 5px
+    linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.4));
+  -webkit-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+img:hover {
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.no-image {
+  width: 300px;
+  height: 250px;
 }

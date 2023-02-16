@@ -20,7 +20,7 @@ export class TvshowDetailsComponent implements OnInit {
   tvshowDetails:TvshowDetails={} as TvshowDetails;
 
   windowScrolled: boolean=false;
-
+  background_video:any;
   constructor(private route:ActivatedRoute,private router:Router,private tvshowservice:TvshowsService,private _sanitizer:DomSanitizer) { 
       let id=this.route.snapshot.params['id'];
       tvshow_id=id;
@@ -76,7 +76,13 @@ export class TvshowDetailsComponent implements OnInit {
       
         for(let i=0;i<this.tvshowDetails.videoList.length;i++){
           if(this.tvshowDetails.videoList[i].key){
+            if(this.tvshowDetails.videoList[i].type="Teaser"){
+              this.background_video=this._sanitizer.bypassSecurityTrustResourceUrl(myAppConfig.tmdb.videoUrl+this.tvshowDetails.videoList[i].key+'?modestbranding=0&controls=0&fs=0&loop=1&showinfo=0&autoplay=1&mute=1&enablejsapi=1');
+            }else if(this.tvshowDetails.videoList[i].type="Trailer"){
+              this.background_video=this._sanitizer.bypassSecurityTrustResourceUrl(myAppConfig.tmdb.videoUrl+this.tvshowDetails.videoList[i].key+'?modestbranding=0&controls=0&fs=0&loop=1&showinfo=0&autoplay=1&mute=1&enablejsapi=1');
+            }
             this.tvshowDetails.videoList[i].key=this._sanitizer.bypassSecurityTrustResourceUrl(myAppConfig.tmdb.videoUrl+this.tvshowDetails.videoList[i].key);
+           
           }
           else{
             this.tvshowDetails.videoList[i].key=null;

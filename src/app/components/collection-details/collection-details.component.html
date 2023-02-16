@@ -1,0 +1,87 @@
+<div class="tvshow-details">
+  <section class="header">
+    <app-header [data]="collectionDetails"></app-header>
+  </section>
+
+  <main id="main">
+    <div class="tvshow-poster-img">
+      <div
+        *ngIf="collectionDetails.poster_path == null; then NoImg; else Img"
+      ></div>
+      <ng-template #NoImg
+        ><img src="assets/images/no-image.png" class="no-image"
+      /></ng-template>
+      <ng-template #Img
+        ><img [attr.src]="highQualityImgUrl + collectionDetails.poster_path"
+      /></ng-template>
+    </div>
+  </main>
+
+  <div class="text-center mt-5" *ngIf="collectionDetails.logoList != null">
+    <img
+      id="tvshow-logo"
+      src="{{ highQualityImgUrl + collectionDetails.logoList.backdrop_path }}"
+    />
+  </div>
+
+  <div class="tvshow-content">
+    <div class="seasons-section">
+      <h2 class="tvshow-heading mt-5">{{ collectionDetails.name }}</h2>
+      <p class="text-white h4 text-center">Click the Collection to know more</p>
+      <main>
+        <div
+          class="tvshow"
+          *ngFor="let e of collectionDetails.parts; let i = index"
+          [routerLink]="['/moviedetails', e.id]"
+        >
+          <div
+            *ngIf="e.poster_path == null; then thenBlock; else elseBlock"
+          ></div>
+          <ng-template #thenBlock
+            ><img src="assets/images/no-image.png" class="no-image"
+          /></ng-template>
+          <ng-template #elseBlock
+            ><img src="{{ highQualityImgUrl + e.poster_path }}"
+          /></ng-template>
+          <div class="overview">
+            <h3 class="text-warning">Overview</h3>
+            <span class="text-secondary">
+              <span *ngIf="e.overview != null">
+                <span *ngIf="e.overview?.length <= 300">{{ e.overview }}</span>
+                <span *ngIf="e.overview?.length > 300">{{
+                  e.overview.substring(0, 300) + "..."
+                }}</span>
+              </span>
+              <span *ngIf="e.overview == null || e.overview == ''"
+                >Overview not available for this season</span
+              >
+            </span>
+            <br />
+            <button class="btn btn-warning">Know More</button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div
+    *ngIf="
+      collectionDetails.parts.length > 0 && collectionDetails.parts.length <= 8
+    "
+  >
+    <hr />
+    <div class="kodfun-galeri">
+      <div
+        *ngFor="let c of collectionDetails.parts"
+        style="
+        background-image: url('{{ highQualityImgUrl + c.backdrop_path }}');"
+      >
+        <div class="text-center text-white">
+          <p class="title-name mt-2" *ngIf="c.title">
+            {{ c.title }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

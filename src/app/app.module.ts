@@ -18,6 +18,9 @@ import { PersonsComponent } from './components/persons/persons.component';
 import { SharedModule } from './shared/shared.module';
 import { RegisterComponent } from './components/auth/Signup/register/register.component';
 import { LoginComponent } from './components/auth/Signin/login/login.component';
+import { HomeComponent } from './components/home/home.component';
+import { CollectionsComponent } from './components/collections/collections.component';
+import { CollectionDetailsComponent } from './components/collection-details/collection-details.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,9 @@ import { LoginComponent } from './components/auth/Signin/login/login.component';
     PersonsComponent,
     RegisterComponent,
     LoginComponent,
+    HomeComponent,
+    CollectionsComponent,
+    CollectionDetailsComponent,
   ],
   imports: [
     BrowserModule,
