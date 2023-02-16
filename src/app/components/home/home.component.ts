@@ -91,7 +91,7 @@ export class HomeComponent implements OnInit {
           this.trendingMoviesList.push(movies);
           if (index < 5) {
             this.getMovieImages(movies.id, index);
-            // this.topMoviesList.push(movies);
+            this.topMoviesList.push(movies);
           }
         }
       });
