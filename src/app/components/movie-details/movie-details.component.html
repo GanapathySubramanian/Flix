@@ -1,237 +1,312 @@
-
 <div #moviedetails class="movie-details">
-
-    <!-- <section class="header" >
+  <!-- <section class="header" >
         <app-header [data]="movieDetails"></app-header>
     </section> -->
-    <section class="header" >
-        <app-video-header [data]="movieDetails" [background_video]="background_video"></app-video-header>
-    </section>
+  <section class="header">
+    <app-video-header
+      [data]="movieDetails"
+      [background_video]="background_video"
+    ></app-video-header>
+  </section>
 
-    <main id="main">
-        <div class="movie-poster-img">
-            <div *ngIf="movieDetails.poster_path==null;then thenBlock else elseBlock"></div>
-            <ng-template #thenBlock><img src="assets/images/no-image.png" alt="figure" class="no-image"></ng-template>
-            <ng-template #elseBlock><img [attr.src]="highqualityImgUrl+movieDetails.poster_path" alt="{{movieDetails.original_title}}"></ng-template>
-        </div>
-    </main>
-
-    <div class="text-center mt-5" *ngIf="movieDetails.logoList!=null">
-        <img id="movie-logo" src="{{imgUrl+movieDetails.logoList.file_path}}">
+  <main id="main">
+    <div class="movie-poster-img">
+      <div
+        *ngIf="movieDetails.poster_path == null; then thenBlock; else elseBlock"
+      ></div>
+      <ng-template #thenBlock
+        ><img src="assets/images/no-image.png" alt="figure" class="no-image"
+      /></ng-template>
+      <ng-template #elseBlock
+        ><img
+          [attr.src]="highqualityImgUrl + movieDetails.poster_path"
+          alt="{{ movieDetails.original_title }}"
+      /></ng-template>
     </div>
-    
+  </main>
 
-    <h1 class="movie-heading mt-5">More About {{movieDetails.original_title}}</h1>
-    <div class="movie-content">
-        <table class="details-table">
-            <tbody>
-                <tr>
-                    <td class="details-name">Original Name</td>
-                    <td  class="colon"> : </td>
-                    <td class="details-value">{{movieDetails.original_title}} </td>
-                </tr>
-                <tr>
-                    <td class="details-name">Release Date</td>
-                    <td class="colon"> : </td>
-                    <td class="details-value">{{movieDetails.release_date | date}}</td>
-                </tr>
-                <tr>
-                    <td class="details-name">Status</td>
-                    <td class="colon"> : </td>
-                    <td class="details-value">{{movieDetails.status}}</td>
-                </tr>
-                <tr>
-                    <td class="details-name">Run Time</td>
-                    <td class="colon"> : </td>
-                    <td class="details-value">{{movieDetails.runtime+" min"}}</td>
-                </tr>
-                <tr>
-                    <td class="details-name">Rating</td>
-                    <td  class="colon"> : </td>
-                    <td class="details-value" > {{'( '+movieDetails.vote_average+' / 10 )'}}
-                        <ngb-rating [max]="10" [(rate)]="movieDetails.vote_average" [readonly]="true"></ngb-rating>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="details-name">Budget</td>
-                    <td class="colon"> : </td>
-                    <td class="details-value">{{movieDetails.budget}}</td>
-                </tr>
-                <tr>
-                    <td class="details-name">Revenue</td>
-                    <td class="colon"> : </td>
-                    <td class="details-value">{{movieDetails.revenue}}</td>
-                </tr>
-                <tr>
-                    <td class="details-name">Original Language</td>
-                    <td class="colon"> : </td>
-                    <td class="details-value">{{movieDetails.original_lan}}</td>
-                </tr>
-                <tr>
-                    <td class="details-name">Rating Count</td>
-                    <td class="colon"> : </td>
-                    <td class="details-value" >{{movieDetails.vote_count}} Votes</td>
-                </tr>
-                <tr class="tr-overview">
-                    <td class="details-name">OverView</td>
-                    <td class="colon"> : </td>
-                    <td class="details-value movie-description">{{movieDetails.overview}}</td>
-                </tr>
-                <tr>
-                    <td class="details-name">Production</td>
-                    <td class="colon"> : </td>
-                    <td class="details-value">
-                        <span *ngFor="let prod of movieDetails.production_companies; let i=index;">   
-                                <span>{{prod.name}}<span *ngIf='movieDetails.production_companies.length!=i+1'> , </span></span>
-                         
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="details-name">Genres</td>
-                    <td class="colon"> : </td>
-                    <td class="details-value">
-                        <span *ngFor="let genre of movieDetails.genre;let i=index;">
-                            {{genre.name}}
-                            <span *ngIf='movieDetails.genre.length != i+1'> , </span>
-                        </span>
-                    </td>
-                </tr>
-                
-            </tbody>
-        </table>
+  <div class="text-center mt-5" *ngIf="movieDetails.logoList != null">
+    <img id="movie-logo" src="{{ imgUrl + movieDetails.logoList.file_path }}" />
+  </div>
 
+  <h1 class="movie-heading mt-5">
+    More About {{ movieDetails.original_title }}
+  </h1>
+  <div class="movie-content">
+    <table class="details-table">
+      <tbody>
+        <tr>
+          <td class="details-name">Original Name</td>
+          <td class="colon">:</td>
+          <td class="details-value">{{ movieDetails.original_title }}</td>
+        </tr>
+        <tr>
+          <td class="details-name">Release Date</td>
+          <td class="colon">:</td>
+          <td class="details-value">{{ movieDetails.release_date | date }}</td>
+        </tr>
+        <tr>
+          <td class="details-name">Status</td>
+          <td class="colon">:</td>
+          <td class="details-value">{{ movieDetails.status }}</td>
+        </tr>
+        <tr>
+          <td class="details-name">Run Time</td>
+          <td class="colon">:</td>
+          <td class="details-value">{{ movieDetails.runtime + " min" }}</td>
+        </tr>
+        <tr>
+          <td class="details-name">Rating</td>
+          <td class="colon">:</td>
+          <td class="details-value">
+            {{ "( " + movieDetails.vote_average + " / 10 )" }}
+            <ngb-rating
+              [max]="10"
+              [(rate)]="movieDetails.vote_average"
+              [readonly]="true"
+            ></ngb-rating>
+          </td>
+        </tr>
+        <tr>
+          <td class="details-name">Budget</td>
+          <td class="colon">:</td>
+          <td class="details-value">{{ movieDetails.budget }}</td>
+        </tr>
+        <tr>
+          <td class="details-name">Revenue</td>
+          <td class="colon">:</td>
+          <td class="details-value">{{ movieDetails.revenue }}</td>
+        </tr>
+        <tr>
+          <td class="details-name">Original Language</td>
+          <td class="colon">:</td>
+          <td class="details-value">{{ movieDetails.original_lan }}</td>
+        </tr>
+        <tr>
+          <td class="details-name">Rating Count</td>
+          <td class="colon">:</td>
+          <td class="details-value">{{ movieDetails.vote_count }} Votes</td>
+        </tr>
+        <tr class="tr-overview">
+          <td class="details-name">OverView</td>
+          <td class="colon">:</td>
+          <td class="details-value movie-description">
+            {{ movieDetails.overview }}
+          </td>
+        </tr>
+        <tr>
+          <td class="details-name">Production</td>
+          <td class="colon">:</td>
+          <td class="details-value">
+            <span
+              *ngFor="
+                let prod of movieDetails.production_companies;
+                let i = index
+              "
+            >
+              <span
+                >{{ prod.name
+                }}<span
+                  *ngIf="movieDetails.production_companies.length != i + 1"
+                >
+                  ,
+                </span></span
+              >
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td class="details-name">Genres</td>
+          <td class="colon">:</td>
+          <td class="details-value">
+            <span *ngFor="let genre of movieDetails.genre; let i = index">
+              {{ genre.name }}
+              <span *ngIf="movieDetails.genre.length != i + 1"> , </span>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-        <div class="watchnow-btn text-center">
-            <div class="wrapper-watchnow">
-                <a class="cta" href="{{movieDetails.watchprovider}}">
-                    <span class="span-watchnow">WATCH NOW</span>
-                    <span class="span-watchnow">
-                        <svg width="66px" height="43px" viewBox="0 0 66 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <g id="arrow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <path class="one" d="M40.1543933,3.89485454 L43.9763149,0.139296592 C44.1708311,-0.0518420739 44.4826329,-0.0518571125 44.6771675,0.139262789 L65.6916134,20.7848311 C66.0855801,21.1718824 66.0911863,21.8050225 65.704135,22.1989893 C65.7000188,22.2031791 65.6958657,22.2073326 65.6916762,22.2114492 L44.677098,42.8607841 C44.4825957,43.0519059 44.1708242,43.0519358 43.9762853,42.8608513 L40.1545186,39.1069479 C39.9575152,38.9134427 39.9546793,38.5968729 40.1481845,38.3998695 C40.1502893,38.3977268 40.1524132,38.395603 40.1545562,38.3934985 L56.9937789,21.8567812 C57.1908028,21.6632968 57.193672,21.3467273 57.0001876,21.1497035 C56.9980647,21.1475418 56.9959223,21.1453995 56.9937605,21.1432767 L40.1545208,4.60825197 C39.9574869,4.41477773 39.9546013,4.09820839 40.1480756,3.90117456 C40.1501626,3.89904911 40.1522686,3.89694235 40.1543933,3.89485454 Z" fill="#FFFFFF"></path>
-                            <path class="two" d="M20.1543933,3.89485454 L23.9763149,0.139296592 C24.1708311,-0.0518420739 24.4826329,-0.0518571125 24.6771675,0.139262789 L45.6916134,20.7848311 C46.0855801,21.1718824 46.0911863,21.8050225 45.704135,22.1989893 C45.7000188,22.2031791 45.6958657,22.2073326 45.6916762,22.2114492 L24.677098,42.8607841 C24.4825957,43.0519059 24.1708242,43.0519358 23.9762853,42.8608513 L20.1545186,39.1069479 C19.9575152,38.9134427 19.9546793,38.5968729 20.1481845,38.3998695 C20.1502893,38.3977268 20.1524132,38.395603 20.1545562,38.3934985 L36.9937789,21.8567812 C37.1908028,21.6632968 37.193672,21.3467273 37.0001876,21.1497035 C36.9980647,21.1475418 36.9959223,21.1453995 36.9937605,21.1432767 L20.1545208,4.60825197 C19.9574869,4.41477773 19.9546013,4.09820839 20.1480756,3.90117456 C20.1501626,3.89904911 20.1522686,3.89694235 20.1543933,3.89485454 Z" fill="#FFFFFF"></path>
-                            <path class="three" d="M0.154393339,3.89485454 L3.97631488,0.139296592 C4.17083111,-0.0518420739 4.48263286,-0.0518571125 4.67716753,0.139262789 L25.6916134,20.7848311 C26.0855801,21.1718824 26.0911863,21.8050225 25.704135,22.1989893 C25.7000188,22.2031791 25.6958657,22.2073326 25.6916762,22.2114492 L4.67709797,42.8607841 C4.48259567,43.0519059 4.17082418,43.0519358 3.97628526,42.8608513 L0.154518591,39.1069479 C-0.0424848215,38.9134427 -0.0453206733,38.5968729 0.148184538,38.3998695 C0.150289256,38.3977268 0.152413239,38.395603 0.154556228,38.3934985 L16.9937789,21.8567812 C17.1908028,21.6632968 17.193672,21.3467273 17.0001876,21.1497035 C16.9980647,21.1475418 16.9959223,21.1453995 16.9937605,21.1432767 L0.15452076,4.60825197 C-0.0425130651,4.41477773 -0.0453986756,4.09820839 0.148075568,3.90117456 C0.150162624,3.89904911 0.152268631,3.89694235 0.154393339,3.89485454 Z" fill="#FFFFFF"></path>
-                            </g>
-                        </svg>
-                    </span> 
-                </a>
-            </div>
-        </div>
-
-
-        <div class="reviews-section">
-            <app-review [data]="movieDetails"></app-review>
-        </div>
-
-        <hr>
-        
-        <div class="Backdropimages">
-            <app-backdrop [data]="movieDetails"></app-backdrop>
-        </div>
-        <hr>
-
-        <div class="posterImages">
-            <app-poster [data]="movieDetails"></app-poster>
-        </div>
-        <hr>
-
-
-
-      
-        <div class="videos">
-            <app-video [data]="movieDetails"></app-video>
-        </div>
-        <hr>
-     
-
-        <div class="cast-section">
-            <h2 class="movie-heading mt-5">CAST</h2>
-            <p class="h4 text-center">Click the Person to know more</p>
-            <div *ngIf="movieDetails.castList?.length<=0; then nocast else castdata"></div>
-            <ng-template #castdata>       
-                    <main class="cast">   
-                        <div class="movie btn-container" *ngFor="let cast_data of movieDetails.castList" [routerLink]="['/persondetails', cast_data.id]" >
-                            <app-card [data]="cast_data"></app-card>
-
-                        </div>
-                    </main>
-            </ng-template>
-            <ng-template #nocast> 
-                <div id="no-record_cast">
-                    <h1 class="text-warning text-center">Cast not available for {{movieDetails.original_title}}</h1>
-                </div>
-            </ng-template>
-        </div>
-
-        <hr>
-
-        
-        <div class="crew-section">
-            <h2 class="movie-heading mt-5">CREW</h2>
-            <p class="h4 text-center">Click the Person to know more</p>
-            <div *ngIf="movieDetails.crewList?.length<=0; then nocrew else crewdata"></div>
-            <ng-template #crewdata>
-                <main class="cast">
-                    <div class="movie btn-container" *ngFor="let crew_data of movieDetails.crewList" [routerLink]="['/persondetails', crew_data.id]" >
-        
-                      <app-card [data]="crew_data"></app-card>
-
-                    </div>
-                </main>
-            </ng-template>
-            <ng-template #nocrew> 
-                <div id="no-record_crew">
-                    <h1 class="text-warning text-center">Crew not available for {{movieDetails.original_title}}</h1>
-                </div>
-            </ng-template>
-        </div>
-        <hr>
-
-
-        <div class="sim_movies">
-            <h2 class="movie-heading mt-5">RECOMMENDED MOVIES</h2>
-            <p class="h4 text-center">Click the movie to know more</p>
-            <div *ngIf="movieDetails.recmovieList?.length<=0; then norecmovie else recmovie"></div>
-            <ng-template #recmovie>
-                <main class="s_movies">
-                    <div class="movie rec-movies" *ngFor="let r_movies of movieDetails.recmovieList" [routerLink]="['/similarmoviesdetails', r_movies.id]">
-                        <app-card [data]="r_movies"></app-card>
-                    </div>
-                </main>
-            </ng-template>
-            <ng-template #norecmovie> 
-                <div id="no-record_recommended_movies">
-                    <h1 class="text-warning text-center">Recommeded movies not available for {{movieDetails.original_title}}</h1>
-                  </div>
-            </ng-template>    
-        </div>
-        <hr>
-
-
-
-        <div class="sim_movies-section">
-            <h2 class="movie-heading mt-5">SIMILAR MOVIES</h2>
-            <p class="h4 text-center">Click the movie to know more</p>
-
-            <div *ngIf="movieDetails.similarmovieList?.length<=0; then nosimmovie else simmoviedata"></div>
-            <ng-template #simmoviedata>
-                <main class="s_movies">
-                    <div class="movie sim-movies" *ngFor="let s_movies of movieDetails.similarmovieList" [routerLink]="['/similarmoviesdetails', s_movies.id]">
-                        <app-card [data]="s_movies"></app-card>
-                    </div>
-                </main>
-            </ng-template>
-            <ng-template #nosimmovie> 
-                <div id="no-record_similar_movies" >
-                    <h1 class="text-warning text-center">Similar movies not avilable for {{movieDetails.original_title}}</h1>
-                  </div>
-            </ng-template>
-        </div>
-
-
-
+    <div class="watchnow-btn text-center">
+      <div class="wrapper-watchnow">
+        <a class="cta" href="{{ movieDetails.watchprovider }}">
+          <span class="span-watchnow">WATCH NOW</span>
+          <span class="span-watchnow">
+            <svg
+              width="66px"
+              height="43px"
+              viewBox="0 0 66 43"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <g
+                id="arrow"
+                stroke="none"
+                stroke-width="1"
+                fill="none"
+                fill-rule="evenodd"
+              >
+                <path
+                  class="one"
+                  d="M40.1543933,3.89485454 L43.9763149,0.139296592 C44.1708311,-0.0518420739 44.4826329,-0.0518571125 44.6771675,0.139262789 L65.6916134,20.7848311 C66.0855801,21.1718824 66.0911863,21.8050225 65.704135,22.1989893 C65.7000188,22.2031791 65.6958657,22.2073326 65.6916762,22.2114492 L44.677098,42.8607841 C44.4825957,43.0519059 44.1708242,43.0519358 43.9762853,42.8608513 L40.1545186,39.1069479 C39.9575152,38.9134427 39.9546793,38.5968729 40.1481845,38.3998695 C40.1502893,38.3977268 40.1524132,38.395603 40.1545562,38.3934985 L56.9937789,21.8567812 C57.1908028,21.6632968 57.193672,21.3467273 57.0001876,21.1497035 C56.9980647,21.1475418 56.9959223,21.1453995 56.9937605,21.1432767 L40.1545208,4.60825197 C39.9574869,4.41477773 39.9546013,4.09820839 40.1480756,3.90117456 C40.1501626,3.89904911 40.1522686,3.89694235 40.1543933,3.89485454 Z"
+                  fill="#FFFFFF"
+                ></path>
+                <path
+                  class="two"
+                  d="M20.1543933,3.89485454 L23.9763149,0.139296592 C24.1708311,-0.0518420739 24.4826329,-0.0518571125 24.6771675,0.139262789 L45.6916134,20.7848311 C46.0855801,21.1718824 46.0911863,21.8050225 45.704135,22.1989893 C45.7000188,22.2031791 45.6958657,22.2073326 45.6916762,22.2114492 L24.677098,42.8607841 C24.4825957,43.0519059 24.1708242,43.0519358 23.9762853,42.8608513 L20.1545186,39.1069479 C19.9575152,38.9134427 19.9546793,38.5968729 20.1481845,38.3998695 C20.1502893,38.3977268 20.1524132,38.395603 20.1545562,38.3934985 L36.9937789,21.8567812 C37.1908028,21.6632968 37.193672,21.3467273 37.0001876,21.1497035 C36.9980647,21.1475418 36.9959223,21.1453995 36.9937605,21.1432767 L20.1545208,4.60825197 C19.9574869,4.41477773 19.9546013,4.09820839 20.1480756,3.90117456 C20.1501626,3.89904911 20.1522686,3.89694235 20.1543933,3.89485454 Z"
+                  fill="#FFFFFF"
+                ></path>
+                <path
+                  class="three"
+                  d="M0.154393339,3.89485454 L3.97631488,0.139296592 C4.17083111,-0.0518420739 4.48263286,-0.0518571125 4.67716753,0.139262789 L25.6916134,20.7848311 C26.0855801,21.1718824 26.0911863,21.8050225 25.704135,22.1989893 C25.7000188,22.2031791 25.6958657,22.2073326 25.6916762,22.2114492 L4.67709797,42.8607841 C4.48259567,43.0519059 4.17082418,43.0519358 3.97628526,42.8608513 L0.154518591,39.1069479 C-0.0424848215,38.9134427 -0.0453206733,38.5968729 0.148184538,38.3998695 C0.150289256,38.3977268 0.152413239,38.395603 0.154556228,38.3934985 L16.9937789,21.8567812 C17.1908028,21.6632968 17.193672,21.3467273 17.0001876,21.1497035 C16.9980647,21.1475418 16.9959223,21.1453995 16.9937605,21.1432767 L0.15452076,4.60825197 C-0.0425130651,4.41477773 -0.0453986756,4.09820839 0.148075568,3.90117456 C0.150162624,3.89904911 0.152268631,3.89694235 0.154393339,3.89485454 Z"
+                  fill="#FFFFFF"
+                ></path>
+              </g>
+            </svg>
+          </span>
+        </a>
+      </div>
     </div>
-    
-   
+
+    <div class="reviews-section">
+      <app-review [data]="movieDetails"></app-review>
+    </div>
+
+    <hr />
+
+    <div class="Backdropimages">
+      <app-backdrop [data]="movieDetails"></app-backdrop>
+    </div>
+    <hr />
+
+    <div class="posterImages">
+      <app-poster [data]="movieDetails"></app-poster>
+    </div>
+    <hr />
+
+    <div class="videos">
+      <app-video [data]="movieDetails"></app-video>
+    </div>
+    <hr />
+
+    <div class="cast-section">
+      <h2 class="movie-heading mt-5">CAST</h2>
+      <p class="h4 text-center">Click the Person to know more</p>
+      <div
+        *ngIf="movieDetails.castList?.length <= 0; then nocast; else castdata"
+      ></div>
+      <ng-template #castdata>
+        <main class="cast">
+          <div
+            class="movie btn-container"
+            *ngFor="let cast_data of movieDetails.castList"
+            [routerLink]="['/persondetails', cast_data.id]"
+          >
+            <app-card [data]="cast_data"></app-card>
+          </div>
+        </main>
+      </ng-template>
+      <ng-template #nocast>
+        <div id="no-record_cast">
+          <h1 class="text-warning text-center">
+            Cast not available for {{ movieDetails.original_title }}
+          </h1>
+        </div>
+      </ng-template>
+    </div>
+
+    <hr />
+
+    <div class="crew-section">
+      <h2 class="movie-heading mt-5">CREW</h2>
+      <p class="h4 text-center">Click the Person to know more</p>
+      <div
+        *ngIf="movieDetails.crewList?.length <= 0; then nocrew; else crewdata"
+      ></div>
+      <ng-template #crewdata>
+        <main class="cast">
+          <div
+            class="movie btn-container"
+            *ngFor="let crew_data of movieDetails.crewList"
+            [routerLink]="['/persondetails', crew_data.id]"
+          >
+            <app-card [data]="crew_data"></app-card>
+          </div>
+        </main>
+      </ng-template>
+      <ng-template #nocrew>
+        <div id="no-record_crew">
+          <h1 class="text-warning text-center">
+            Crew not available for {{ movieDetails.original_title }}
+          </h1>
+        </div>
+      </ng-template>
+    </div>
+    <hr />
+
+    <div class="sim_movies">
+      <h2 class="movie-heading mt-5">RECOMMENDED MOVIES</h2>
+      <p class="h4 text-center">Click the movie to know more</p>
+      <div
+        *ngIf="
+          movieDetails.recmovieList?.length <= 0;
+          then norecmovie;
+          else recmovie
+        "
+      ></div>
+      <ng-template #recmovie>
+        <main class="s_movies">
+          <div
+            class="movie rec-movies"
+            *ngFor="let r_movies of movieDetails.recmovieList"
+            [routerLink]="['/similarmoviesdetails', r_movies.id]"
+          >
+            <app-card [data]="r_movies"></app-card>
+          </div>
+        </main>
+      </ng-template>
+      <ng-template #norecmovie>
+        <div id="no-record_recommended_movies">
+          <h1 class="text-warning text-center">
+            Recommeded movies not available for
+            {{ movieDetails.original_title }}
+          </h1>
+        </div>
+      </ng-template>
+    </div>
+    <hr />
+
+    <div class="sim_movies-section">
+      <h2 class="movie-heading mt-5">SIMILAR MOVIES</h2>
+      <p class="h4 text-center">Click the movie to know more</p>
+
+      <div
+        *ngIf="
+          movieDetails.similarmovieList?.length <= 0;
+          then nosimmovie;
+          else simmoviedata
+        "
+      ></div>
+      <ng-template #simmoviedata>
+        <main class="s_movies">
+          <div
+            class="movie sim-movies"
+            *ngFor="let s_movies of movieDetails.similarmovieList"
+            [routerLink]="['/similarmoviesdetails', s_movies.id]"
+          >
+            <app-card [data]="s_movies"></app-card>
+          </div>
+        </main>
+      </ng-template>
+      <ng-template #nosimmovie>
+        <div id="no-record_similar_movies">
+          <h1 class="text-warning text-center">
+            Similar movies not avilable for {{ movieDetails.original_title }}
+          </h1>
+        </div>
+      </ng-template>
+    </div>
+  </div>
 </div>

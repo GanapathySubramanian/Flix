@@ -13,6 +13,7 @@ import { DarkToggleComponent } from './components/dark-toggle/dark-toggle.compon
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { VideoHeaderComponent } from './components/video-header/video-header.component';
 import { TrendingBackdropsComponent } from './components/trending-backdrops/trending-backdrops.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { TrendingBackdropsComponent } from './components/trending-backdrops/tren
     VideoHeaderComponent,
     TrendingBackdropsComponent,
   ],
-  imports: [CommonModule, NgbModule, IvyCarouselModule],
+  imports: [CommonModule, NgbModule, IvyCarouselModule, RouterModule],
   exports: [
     CardComponent,
     HeaderComponent,

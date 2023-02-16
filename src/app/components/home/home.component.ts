@@ -90,7 +90,8 @@ export class HomeComponent implements OnInit {
           movies.no_animation = true;
           this.trendingMoviesList.push(movies);
           if (index < 5) {
-            this.topMoviesList.push(movies);
+            this.getMovieImages(movies.id, index);
+            // this.topMoviesList.push(movies);
           }
         }
       });
@@ -109,10 +110,56 @@ export class HomeComponent implements OnInit {
             this.highQualityImgUrl + tvshow.backdrop_path;
           tvshow.no_animation = true;
           if (index < 5) {
-            this.topMoviesList.push(tvshow);
+            this.getTvshowImages(tvshow);
           }
         }
       });
+    });
+  }
+
+  getTvshowImages(tvshow: any) {
+    let backdrop_url =
+      myAppConfig.tmdb.movieBaseUrl +
+      '/tv/' +
+      tvshow.id +
+      '/images?' +
+      myAppConfig.tmdb.apikey;
+    this.movieService.getAllImages(backdrop_url);
+    let tempimagesData: any;
+    this.movieService.movieallImageData.subscribe((data: any) => {
+      tempimagesData = data;
+      if (data.id === tvshow.id) {
+        if (tempimagesData.logos.length < 0) {
+          tvshow.logoList.file_path = null;
+        } else {
+          if (data.logos[0]) {
+            tvshow.logoList = tempimagesData.logos[0];
+          }
+        }
+        this.topMoviesList.push(tvshow);
+      }
+    });
+  }
+
+  getMovieImages(id: string, index: number) {
+    let backdrop_url =
+      myAppConfig.tmdb.movieBaseUrl +
+      '/movie/' +
+      id +
+      '/images?' +
+      myAppConfig.tmdb.apikey;
+    this.movieService.getAllImages(backdrop_url);
+    let tempimagesData: any;
+    this.movieService.movieallImageData.subscribe((data: any) => {
+      if (data.id === id) {
+        tempimagesData = data;
+        //Movie Logo Images
+        if (tempimagesData.logos.length < 0) {
+          this.topMoviesList[index].logoList.file_path = null;
+        } else {
+          this.topMoviesList[index].logoList = tempimagesData.logos[0];
+        }
+      }
     });
   }
 }

@@ -352,6 +352,7 @@ export class TvshowsComponent implements OnInit {
         movies.background_image = this.highqualityImgUrl + movies.backdrop_path;
         movies.no_animation = true;
         if (index < 10) {
+          this.getTvshowImages(movies.id, index);
           this.topTvshowList.push(movies);
         }
       });
@@ -370,6 +371,27 @@ export class TvshowsComponent implements OnInit {
     });
   }
 
+  getTvshowImages(id: string, index: number) {
+    let backdrop_url =
+      myAppConfig.tmdb.movieBaseUrl +
+      '/tv/' +
+      id +
+      '/images?' +
+      myAppConfig.tmdb.apikey;
+    this.movieservice.getAllImages(backdrop_url);
+    let tempimagesData: any;
+    this.movieservice.movieallImageData.subscribe((data: any) => {
+      if (data.id === id) {
+        tempimagesData = data;
+        //Movie Logo Images
+        if (tempimagesData.logos.length < 0) {
+          this.topTvshowList[index].logoList.file_path = null;
+        } else {
+          this.topTvshowList[index].logoList = tempimagesData.logos[0];
+        }
+      }
+    });
+  }
   float2int(value: any) {
     return value | 0;
   }

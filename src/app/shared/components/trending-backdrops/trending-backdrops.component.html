@@ -16,7 +16,13 @@
       [arrowsTheme]="'dark'"
     >
       <div class="carousel-cell video" *ngFor="let trending of trendingList">
-        <div class="img">
+        <div
+          class="img"
+          [routerLink]="[
+            trending.title ? '/moviedetails' : '/tvshowdetails',
+            trending.id
+          ]"
+        >
           <div
             *ngIf="
               trending.backdrop_path == null;

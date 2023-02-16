@@ -3,6 +3,7 @@ import { MoviesService } from 'src/app/core/services/movies.service';
 import myAppConfig from 'src/app/core/config/my-app-config';
 import { FormControl, FormGroup } from '@angular/forms';
 import { common } from 'src/app/core/interface/common';
+import { COLLECTIONS } from 'src/app/core/constants/collections.contants';
 var sort_by_desc = 'popularity.desc',
   page = 1,
   Search_value = '',
@@ -34,7 +35,7 @@ export class CollectionsComponent implements OnInit {
   isdisableprev: boolean = false;
   isdisablenext: boolean = false;
   ishidedrop: boolean = false;
-
+  collectionData: any[] = COLLECTIONS;
   constructor(private movieservice: MoviesService) {
     this.searchForm = new FormGroup({
       movieName: new FormControl(''),
@@ -51,14 +52,26 @@ export class CollectionsComponent implements OnInit {
     this.getCollections();
   }
   getCollections() {
-    var api_url =
-      myAppConfig.tmdb.movieBaseUrl +
-      '/search/collection?' +
-      myAppConfig.tmdb.apikey +
-      '&query=all&page' +
-      page;
+    this.collectionData.forEach((collection) => {
+      var api_url =
+        myAppConfig.tmdb.movieBaseUrl +
+        '/collection/' +
+        collection.id +
+        '?' +
+        myAppConfig.tmdb.apikey;
 
-    this.getMoviesData(api_url);
+      this.getCollectionsdetails(api_url);
+    });
+
+    // this.getMoviesData(api_url);
+  }
+  getCollectionsdetails(api_url: string) {
+    this.movieservice.getallMovies(api_url);
+    let tempMoviesList: any;
+    this.movieservice.moviesData.subscribe((data: any) => {
+      if (!this.movieList.includes(data)) this.movieList.push(data);
+      console.log(data);
+    });
   }
 
   searchList: any = [];

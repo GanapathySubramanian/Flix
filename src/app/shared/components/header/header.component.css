@@ -133,6 +133,7 @@ path.two {
     right: 0;
     bottom: 0;
     left: 0;
+    height: 800px;
     background-color: rgba(0, 0, 0, 0.7);
     transition: background-color 2s;
   }

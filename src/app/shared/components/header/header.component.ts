@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import myAppConfig from 'src/app/core/config/my-app-config';
 import { MovieDetails } from 'src/app/core/interface/movie-details';
+import { MoviesService } from 'src/app/core/services/movies.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,7 @@ export class HeaderComponent implements OnInit {
   @Input() data: any = {};
   imgUrl: string = myAppConfig.tmdb.highQualityImgUrl;
   background_video: any;
-  constructor() {}
+  constructor(private movieservice: MoviesService) {}
 
   ngOnInit(): void {}
 }

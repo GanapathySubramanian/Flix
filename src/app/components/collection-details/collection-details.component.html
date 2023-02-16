@@ -62,10 +62,14 @@
         </div>
       </main>
     </div>
-    <hr />
   </div>
 
-  <div *ngIf="collectionDetails.parts.length > 0">
+  <div
+    *ngIf="
+      collectionDetails.parts.length > 0 && collectionDetails.parts.length <= 8
+    "
+  >
+    <hr />
     <div class="kodfun-galeri">
       <div
         *ngFor="let c of collectionDetails.parts"

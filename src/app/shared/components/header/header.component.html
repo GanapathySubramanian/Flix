@@ -1,54 +1,72 @@
-  
-        <ng-container *ngIf="data.no_animation">
-            <div class="header" id="i" [style.backgroundImage]="'url('+data.background_image+')'">
-            </div>
-        </ng-container>
-        <ng-container *ngIf="!data.no_animation">
-            <div class="header-bg" id="i" [style.backgroundImage]="'url('+data.background_image+')'">
-            </div>
-        </ng-container>
-        <div class="header-content">
-                <div class="left-img">
-                    <div class="header-img">
-                        <div *ngIf="data.poster_path==null;then thenBlock else elseBlock"></div>
-                        <ng-template #thenBlock><img src="assets/images/no-image.png" alt="figure" class="no-image"></ng-template>
-                        <ng-template #elseBlock><img [attr.src]="imgUrl+data.poster_path" alt="{{data.original_title}}"></ng-template>    
-                    </div>
-                </div>
-                <div class="overlay"></div>
-                <div class="right-content" style="margin-top: 100px;">
-                    <div class="home-slide-item-content">
-                        <div class="items">
-                            <div class="item-title">
-                                <span *ngIf="data.title">{{data.title}}</span>
-                                <span *ngIf="data.name">{{data.name}}</span>
+<ng-container *ngIf="data.no_animation">
+  <div
+    class="header"
+    id="i"
+    [style.backgroundImage]="'url(' + data.background_image + ')'"
+  ></div>
+</ng-container>
+<ng-container *ngIf="!data.no_animation">
+  <div
+    class="header-bg"
+    id="i"
+    [style.backgroundImage]="'url(' + data.background_image + ')'"
+  ></div>
+</ng-container>
+<div class="header-content">
+  <div class="left-img">
+    <div class="header-img">
+      <div
+        *ngIf="data.poster_path == null; then thenBlock; else elseBlock"
+      ></div>
+      <ng-template #thenBlock
+        ><img src="assets/images/no-image.png" alt="figure" class="no-image"
+      /></ng-template>
+      <ng-template #elseBlock
+        ><img
+          [attr.src]="imgUrl + data.poster_path"
+          alt="{{ data.original_title }}"
+      /></ng-template>
+    </div>
+  </div>
+  <div class="overlay"></div>
+  <div class="right-content" style="margin-top: 100px">
+    <div class="home-slide-item-content">
+      <div class="items">
+        <div class="item-title">
+          <span *ngIf="data.title && !data.logoList">{{ data.title }}</span>
+          <span *ngIf="data.name && !data.logoList">{{ data.name }}</span>
 
-                                <div class=" mt-5" *ngIf="data.logoList!=null">
-                                    <img id="logo-img" src="{{imgUrl+data.logoList.file_path}}">
-                                </div>
-
-                            </div>
-                            <div class="header-detail">
-                                <div class="header-info" *ngIf="data.vote_average">
-                                    <i class="far fa-star"></i>
-                                    <span>{{data.vote_average}}</span>
-                                </div>
-                                <div class="header-info" *ngIf="data.runtime">
-                                    <i class="fas fa-clock"></i>
-                                    <span *ngIf="data.runtime">{{data.runtime + ' min'}}</span>
-                                    <span *ngIf="data.avg_run_time">{{data.avg_run_time + ' min'}}</span>
-                                </div>
-                                <div class="header-info" *ngIf="data.release_date">
-                                    <i class="fas fa-calendar" ></i>
-                                    <span *ngIf="data.release_date">{{data.release_date | date}}</span>
-                                    <span *ngIf="data.first_air_date">{{data.first_air_date | date}}</span>
-                                </div>
-                            </div>
-                            <div class="item-overview">
-                                {{data.overview}}
-                            </div>
-                            <div class="wrapper-watchnow">
-                                <!-- <a class="cta" href="{{data.watchprovider}}">
+          <div class="mt-5" *ngIf="data.logoList != null">
+            <img id="logo-img" src="{{ imgUrl + data.logoList.file_path }}" />
+          </div>
+        </div>
+        <div class="header-detail">
+          <div class="header-info" *ngIf="data.vote_average">
+            <i class="far fa-star"></i>
+            <span>{{ data.vote_average }}</span>
+          </div>
+          <div class="header-info" *ngIf="data.runtime">
+            <i class="fas fa-clock"></i>
+            <span *ngIf="data.runtime">{{ data.runtime + " min" }}</span>
+            <span *ngIf="data.avg_run_time">{{
+              data.avg_run_time + " min"
+            }}</span>
+          </div>
+          <div class="header-info" *ngIf="data.release_date">
+            <i class="fas fa-calendar"></i>
+            <span *ngIf="data.release_date">{{
+              data.release_date | date
+            }}</span>
+            <span *ngIf="data.first_air_date">{{
+              data.first_air_date | date
+            }}</span>
+          </div>
+        </div>
+        <div class="item-overview">
+          {{ data.overview }}
+        </div>
+        <div class="wrapper-watchnow">
+          <!-- <a class="cta" href="{{data.watchprovider}}">
                                   <span class="span-watchnow">WATCH NOW</span>
                                   <span class="span-watchnow">
                                     <svg width="66px" height="43px" viewBox="0 0 66 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -60,22 +78,51 @@
                                     </svg>
                                   </span> 
                                 </a> -->
-                                <a class="play playBut" href="{{data.watchprovider}}">
-                                    <div style="display: inline-block; width: 50px;">
-                                        <svg id="playBtn" version="1.1"
-                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-                                        x="0px" y="0px" width="213.7px" height="213.7px" viewBox="0 0 213.7 213.7" enable-background="new 0 0 213.7 213.7"
-                                        xml:space="preserve">
-                                        <polygon class='triangle' id="XMLID_18_" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-                                    73.5,62.5 148.5,105.8 73.5,149.1 "/>
-                                        <circle class='circle' id="XMLID_17_" fill="none"  stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="106.8" cy="106.8" r="103.3"/>
-                                        </svg>
-                                    </div>
-                                    Watch Now
-                                </a>
-                              </div>
-                             
-                        </div>
-                    </div>
-                </div>    
+          <a class="play playBut" href="{{ data.watchprovider }}">
+            <div style="display: inline-block; width: 50px">
+              <svg
+                id="playBtn"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+                x="0px"
+                y="0px"
+                width="213.7px"
+                height="213.7px"
+                viewBox="0 0 213.7 213.7"
+                enable-background="new 0 0 213.7 213.7"
+                xml:space="preserve"
+              >
+                <polygon
+                  class="triangle"
+                  id="XMLID_18_"
+                  fill="none"
+                  stroke-width="7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-miterlimit="10"
+                  points="
+                                    73.5,62.5 148.5,105.8 73.5,149.1 "
+                />
+                <circle
+                  class="circle"
+                  id="XMLID_17_"
+                  fill="none"
+                  stroke-width="7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-miterlimit="10"
+                  cx="106.8"
+                  cy="106.8"
+                  r="103.3"
+                />
+              </svg>
+            </div>
+            Watch Now
+          </a>
         </div>
+      </div>
+    </div>
+  </div>
+</div>

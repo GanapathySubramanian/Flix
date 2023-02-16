@@ -316,6 +316,7 @@ export class MoviesComponent implements OnInit {
         movies.background_image = this.highqualityImgUrl + movies.backdrop_path;
         movies.no_animation = true;
         if (index < 10) {
+          this.getMovieImages(movies.id, index);
           if (movies.backdrop_path) this.topMoviesList.push(movies);
         }
       });
@@ -334,6 +335,27 @@ export class MoviesComponent implements OnInit {
     });
   }
 
+  getMovieImages(id: string, index: number) {
+    let backdrop_url =
+      myAppConfig.tmdb.movieBaseUrl +
+      '/movie/' +
+      id +
+      '/images?' +
+      myAppConfig.tmdb.apikey;
+    this.movieservice.getAllImages(backdrop_url);
+    let tempimagesData: any;
+    this.movieservice.movieallImageData.subscribe((data: any) => {
+      if (data.id === id) {
+        tempimagesData = data;
+        //Movie Logo Images
+        if (tempimagesData.logos.length < 0) {
+          this.topMoviesList[index].logoList.file_path = null;
+        } else {
+          this.topMoviesList[index].logoList = tempimagesData.logos[0];
+        }
+      }
+    });
+  }
   float2int(value: any) {
     return value | 0;
   }
