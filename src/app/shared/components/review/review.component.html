@@ -1,21 +1,27 @@
-<h2 class="movie-heading mt-5">REVIEWS FOR {{'('+data.original_title+')'}}</h2> 
-<div *ngIf="data.reviewList?.length<=0; then noreviewBlock else reviewBlock"></div> 
-    <ng-template #reviewBlock>
-        <table class="table-review table-responsive">
-            <thead class="table-review-head">
-                <td>SNO</td>
-                <td>REVIEWS</td>
-            </thead>
-            <tbody class="table-review-body">
-                <tr *ngFor="let rev of data.reviewList;let i=index;">
-                    <td>{{i+1}}</td>
-                    <td>{{rev.content}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </ng-template>               
-    <ng-template #noreviewBlock>
-    <div id="no-record_images">
-        <h1 class="text-warning text-center">Reviews Not available For {{data.original_title}}</h1>
-    </div>
-</ng-template> 
+<h4 class="movie-heading mt-5">
+  REVIEWS FOR {{ "(" + data.original_title + ")" }}
+</h4>
+<div
+  *ngIf="data.reviewList?.length <= 0; then noreviewBlock; else reviewBlock"
+></div>
+<ng-template #reviewBlock>
+  <table class="table-review table-responsive">
+    <thead class="table-review-head">
+      <td>SNO</td>
+      <td>REVIEWS</td>
+    </thead>
+    <tbody class="table-review-body">
+      <tr *ngFor="let rev of data.reviewList; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ rev.content }}</td>
+      </tr>
+    </tbody>
+  </table>
+</ng-template>
+<ng-template #noreviewBlock>
+  <div id="no-record_images">
+    <h5 class="text-warning text-center">
+      Reviews Not available For {{ data.original_title }}
+    </h5>
+  </div>
+</ng-template>

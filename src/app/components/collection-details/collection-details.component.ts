@@ -24,6 +24,7 @@ export class CollectionDetailsComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getCollectionDetails(collection_Id);
+    console.log(this.collectionDetails);
   }
   getCollectionDetails(id: number) {
     var api_url =
@@ -39,10 +40,20 @@ export class CollectionDetailsComponent implements OnInit {
     this.movieservice.getMovieDetails(api_url);
     this.movieservice.moviedetailsData.subscribe((data) => {
       this.collectionDetails = data;
-      console.log(data);
+      let parts = this.collectionDetails.parts;
+      let result = this.sort_by_key(parts, 'release_date');
+      this.collectionDetails.parts = result;
       this.collectionDetails.background_image =
         this.highQualityImgUrl + this.collectionDetails.backdrop_path;
       this.collectionDetails.no_animation = true;
+    });
+    console.log(this.collectionDetails);
+  }
+  sort_by_key(array: any, key: any) {
+    return array.sort((a: any, b: any) => {
+      var x = a[key];
+      var y = b[key];
+      return x < y ? -1 : x > y ? 1 : 0;
     });
   }
 }

@@ -29,9 +29,9 @@
     <img id="movie-logo" src="{{ imgUrl + movieDetails.logoList.file_path }}" />
   </div>
 
-  <h1 class="movie-heading mt-5">
+  <h4 class="movie-heading mt-5">
     More About {{ movieDetails.original_title }}
-  </h1>
+  </h4>
   <div class="movie-content">
     <table class="details-table">
       <tbody>
@@ -192,8 +192,8 @@
     <hr />
 
     <div class="cast-section">
-      <h2 class="movie-heading mt-5">CAST</h2>
-      <p class="h4 text-center">Click the Person to know more</p>
+      <h4 class="movie-heading mt-5">CAST</h4>
+      <h5 class="h5 text-center">Click the Person to know more</h5>
       <div
         *ngIf="movieDetails.castList?.length <= 0; then nocast; else castdata"
       ></div>
@@ -210,9 +210,9 @@
       </ng-template>
       <ng-template #nocast>
         <div id="no-record_cast">
-          <h1 class="text-warning text-center">
+          <h4 class="text-warning text-center">
             Cast not available for {{ movieDetails.original_title }}
-          </h1>
+          </h4>
         </div>
       </ng-template>
     </div>
@@ -220,8 +220,8 @@
     <hr />
 
     <div class="crew-section">
-      <h2 class="movie-heading mt-5">CREW</h2>
-      <p class="h4 text-center">Click the Person to know more</p>
+      <h4 class="movie-heading mt-5">CREW</h4>
+      <p class="h5 text-center">Click the Person to know more</p>
       <div
         *ngIf="movieDetails.crewList?.length <= 0; then nocrew; else crewdata"
       ></div>
@@ -238,17 +238,17 @@
       </ng-template>
       <ng-template #nocrew>
         <div id="no-record_crew">
-          <h1 class="text-warning text-center">
+          <h4 class="text-warning text-center">
             Crew not available for {{ movieDetails.original_title }}
-          </h1>
+          </h4>
         </div>
       </ng-template>
     </div>
     <hr />
 
     <div class="sim_movies">
-      <h2 class="movie-heading mt-5">RECOMMENDED MOVIES</h2>
-      <p class="h4 text-center">Click the movie to know more</p>
+      <h4 class="movie-heading mt-5">RECOMMENDED MOVIES</h4>
+      <p class="h5 text-center">Click the movie to know more</p>
       <div
         *ngIf="
           movieDetails.recmovieList?.length <= 0;
@@ -269,18 +269,18 @@
       </ng-template>
       <ng-template #norecmovie>
         <div id="no-record_recommended_movies">
-          <h1 class="text-warning text-center">
+          <h4 class="text-warning text-center">
             Recommeded movies not available for
             {{ movieDetails.original_title }}
-          </h1>
+          </h4>
         </div>
       </ng-template>
     </div>
     <hr />
 
     <div class="sim_movies-section">
-      <h2 class="movie-heading mt-5">SIMILAR MOVIES</h2>
-      <p class="h4 text-center">Click the movie to know more</p>
+      <h4 class="movie-heading mt-5">SIMILAR MOVIES</h4>
+      <p class="h5 text-center">Click the movie to know more</p>
 
       <div
         *ngIf="
@@ -302,9 +302,9 @@
       </ng-template>
       <ng-template #nosimmovie>
         <div id="no-record_similar_movies">
-          <h1 class="text-warning text-center">
+          <h4 class="text-warning text-center">
             Similar movies not avilable for {{ movieDetails.original_title }}
-          </h1>
+          </h4>
         </div>
       </ng-template>
     </div>

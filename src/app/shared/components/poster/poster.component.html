@@ -1,4 +1,4 @@
-<h2 class="movie-heading mt-5">{{ data.original_title }} POSTERS</h2>
+<h4 class="movie-heading mt-5">{{ data.original_title }} POSTERS</h4>
 <div *ngIf="data.posterList?.length <= 0; then noposters; else posters"></div>
 <ng-template #posters>
   <carousel
@@ -18,8 +18,8 @@
 
 <ng-template #noposters>
   <div id="no-record_poster">
-    <h1 class="text-warning text-center">
+    <h5 class="text-warning text-center">
       Posters not available for {{ data.original_title }}
-    </h1>
+    </h5>
   </div>
 </ng-template>

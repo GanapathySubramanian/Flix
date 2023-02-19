@@ -26,7 +26,7 @@
 
   <div class="tvshow-content">
     <div class="seasons-section">
-      <h2 class="tvshow-heading mt-5">{{ collectionDetails.name }}</h2>
+      <h4 class="tvshow-heading mt-5">{{ collectionDetails.name }}</h4>
       <p class="text-white h4 text-center">Click the Collection to know more</p>
       <main>
         <div
@@ -44,8 +44,14 @@
             ><img src="{{ highQualityImgUrl + e.poster_path }}"
           /></ng-template>
           <div class="overview">
-            <h3 class="text-warning">Overview</h3>
+            <h5 style="color: red">
+              {{ e.title }}
+            </h5>
+            <h5 class="text-warning">Overview</h5>
             <span class="text-secondary">
+              <span *ngIf="e.release_date == '' || !e.release_date"
+                >Release Date : TBU <br
+              /></span>
               <span *ngIf="e.overview != null">
                 <span *ngIf="e.overview?.length <= 300">{{ e.overview }}</span>
                 <span *ngIf="e.overview?.length > 300">{{
@@ -57,29 +63,32 @@
               >
             </span>
             <br />
-            <button class="btn btn-warning">Know More</button>
+            <!-- <button class="btn btn-warning">Know More</button> -->
           </div>
         </div>
       </main>
     </div>
   </div>
 
-  <div
-    *ngIf="
-      collectionDetails.parts.length > 0 && collectionDetails.parts.length <= 8
-    "
-  >
-    <hr />
-    <div class="kodfun-galeri">
-      <div
-        *ngFor="let c of collectionDetails.parts"
-        style="
+  <div *ngIf="collectionDetails && collectionDetails.parts">
+    <div
+      *ngIf="
+        collectionDetails?.parts.length > 0 &&
+        collectionDetails?.parts.length <= 8
+      "
+    >
+      <hr />
+      <div class="kodfun-galeri">
+        <div
+          *ngFor="let c of collectionDetails.parts"
+          style="
         background-image: url('{{ highQualityImgUrl + c.backdrop_path }}');"
-      >
-        <div class="text-center text-white">
-          <p class="title-name mt-2" *ngIf="c.title">
-            {{ c.title }}
-          </p>
+        >
+          <div class="text-center text-white">
+            <p class="title-name mt-2" *ngIf="c.title">
+              {{ c.title }}
+            </p>
+          </div>
         </div>
       </div>
     </div>

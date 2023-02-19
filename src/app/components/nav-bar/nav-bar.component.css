@@ -1,35 +1,36 @@
-nav{
-    padding: 1rem;
-    position: absolute;
-    z-index:999999;
-    display: flex;
-    justify-content: space-around;
-    background-color: var(--secondary-color);
-    background-color: transparent;
-    transition: background-color 2s;
-    color:var(--base-white);
-    top: 0px;
-    width: 100%;
-}
- 
-.logo{
-    color: var(--dark-red);
-}
-.nav-link{
-    cursor: pointer;
-}
-.nav-link:hover{
-    color: var(--dark-red);
+nav {
+  padding: 1rem;
+  position: absolute;
+  z-index: 999999;
+  display: flex;
+  justify-content: space-around;
+  background-color: var(--secondary-color);
+  background-color: transparent;
+  transition: background-color 2s;
+  color: var(--base-white);
+  top: 0px;
+  width: 100%;
 }
 
-nav a{
-    float: left;
+.logo {
+  color: #fff;
+  text-decoration: none;
+}
+.nav-link {
+  cursor: pointer;
+}
+.nav-link:hover {
+  color: var(--dark-red);
+}
+
+nav a {
+  float: left;
 }
 .navbar-nav {
-    margin-left: auto;
+  margin-left: auto;
 }
-.main-content{
-    margin-top: 10px;
+.main-content {
+  margin-top: 10px;
 }
 
 /* .navbar-lg{
@@ -39,43 +40,42 @@ nav a{
     display: none;
 } */
 .copyright {
-    margin-top:15px;
-    text-align:center;
-    font-size:13px;
-    color:#aaa;
-    margin-bottom:0;
+  margin-top: 15px;
+  text-align: center;
+  font-size: 13px;
+  color: #aaa;
+  margin-bottom: 0;
 }
 
-
- .footer .container-fluid{
-    display: flex;
-    color: #fff;
+.footer .container-fluid {
+  display: flex;
+  color: #fff;
 }
 
-.move-top .btn{
-    border-radius: 100%;
-    bottom: 560px;
+.move-top .btn {
+  border-radius: 100%;
+  bottom: 560px;
 }
 
 .btn {
-    color: var(--base-white);
+  color: var(--base-white);
 }
-.btn:hover{
-    background-color: var(--dark-red);
-    transition: background-color 2s;
-    color: var(--base-white);
-} 
+.btn:hover {
+  background-color: var(--dark-red);
+  transition: background-color 2s;
+  color: var(--base-white);
+}
 
-.navbar-dark .navbar-nav .nav-link.active{
-    color: #fff;
+.navbar-dark .navbar-nav .nav-link.active {
+  color: #fff;
 }
-@media only screen and (max-width:600px) {
-    .footer .container-fluid{
-       width: 100%;
-       color: var(--base-white);
-       margin-left:0%;
-   }
-   /* .navbar-lg{
+@media only screen and (max-width: 600px) {
+  .footer .container-fluid {
+    width: 100%;
+    color: var(--base-white);
+    margin-left: 0%;
+  }
+  /* .navbar-lg{
     display: none;
 }
 .navbar-sm{
@@ -83,7 +83,28 @@ nav a{
 } */
 }
 
+.play {
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 500;
+  text-decoration: none;
+  letter-spacing: 2px;
+  font-size: 1.2em;
+}
 
+.circle {
+  stroke: #e50914;
+  -webkit-transition: all 0.5s ease-in-out;
+  stroke-dashoffset: 0;
+  opacity: 1;
+}
 
+.playBut {
+  display: inline-block;
+  -webkit-transition: all 0.5s ease;
+}
 
-
+#logo-img {
+  width: 30%;
+  height: 30%;
+}

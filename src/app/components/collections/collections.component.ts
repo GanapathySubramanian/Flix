@@ -69,11 +69,22 @@ export class CollectionsComponent implements OnInit {
     this.movieservice.getallMovies(api_url);
     let tempMoviesList: any;
     this.movieservice.moviesData.subscribe((data: any) => {
-      if (!this.movieList.includes(data)) this.movieList.push(data);
-      console.log(data);
+      if (!this.movieList.includes(data)) {
+        this.movieList.push(data);
+      }
+
+      let result = this.sort_by_key(this.movieList, 'title');
+      this.movieList = result;
     });
   }
 
+  sort_by_key(array: any, key: any) {
+    return array.sort((a: any, b: any) => {
+      var x = a[key];
+      var y = b[key];
+      return x < y ? -1 : x > y ? 1 : 0;
+    });
+  }
   searchList: any = [];
   findthismovie: string = '';
   findMovies() {
@@ -141,56 +152,56 @@ export class CollectionsComponent implements OnInit {
     }
   }
 
-  handlePagination(val: any) {
-    if (Search_value == '') {
-      this.ishidedrop = false;
-      if (val == 1) {
-        page = 1;
-        this.page_no = page;
-      } else if (val == 2) {
-        if (page == 1) {
-          this.isdisableprev = true;
-        } else {
-          page--;
-          this.page_no = page;
-        }
-      } else {
-        page++;
-        this.page_no = page;
-      }
-    } else {
-      this.ishidedrop = true;
-      if (val == 1) {
-        page = 1;
-        this.page_no = page;
-      } else if (val == 2) {
-        if (page == 1) {
-          this.isdisableprev = true;
-        } else {
-          page--;
-          this.page_no = page;
-        }
-      } else {
-        page++;
-        this.page_no = page;
-      }
-      var page_api_url =
-        myAppConfig.tmdb.movieBaseUrl +
-        '/search/collection?' +
-        myAppConfig.tmdb.apikey +
-        '&query=' +
-        Search_value +
-        '&page=' +
-        page;
-      this.getMoviesData(page_api_url);
-    }
+  // handlePagination(val: any) {
+  //   if (Search_value == '') {
+  //     this.ishidedrop = false;
+  //     if (val == 1) {
+  //       page = 1;
+  //       this.page_no = page;
+  //     } else if (val == 2) {
+  //       if (page == 1) {
+  //         this.isdisableprev = true;
+  //       } else {
+  //         page--;
+  //         this.page_no = page;
+  //       }
+  //     } else {
+  //       page++;
+  //       this.page_no = page;
+  //     }
+  //   } else {
+  //     this.ishidedrop = true;
+  //     if (val == 1) {
+  //       page = 1;
+  //       this.page_no = page;
+  //     } else if (val == 2) {
+  //       if (page == 1) {
+  //         this.isdisableprev = true;
+  //       } else {
+  //         page--;
+  //         this.page_no = page;
+  //       }
+  //     } else {
+  //       page++;
+  //       this.page_no = page;
+  //     }
+  //     var page_api_url =
+  //       myAppConfig.tmdb.movieBaseUrl +
+  //       '/search/collection?' +
+  //       myAppConfig.tmdb.apikey +
+  //       '&query=' +
+  //       Search_value +
+  //       '&page=' +
+  //       page;
+  //     this.getMoviesData(page_api_url);
+  //   }
 
-    window.scroll({
-      top: 0,
-      left: 0,
-      behavior: 'smooth',
-    });
-  }
+  //   window.scroll({
+  //     top: 0,
+  //     left: 0,
+  //     behavior: 'smooth',
+  //   });
+  // }
 
   getMoviesData(url: any) {
     this.movieservice.getallMovies(url);
