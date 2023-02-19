@@ -109,7 +109,7 @@
   <span *ngIf="mobiledevice">
     <app-dark-toggle [cmp]="component"></app-dark-toggle>
   </span>
-  <h1 class="text-center text-warning">{{ sortby_value | uppercase }}</h1>
+  <h5 class="text-center filtered-value">{{ sortby_value | uppercase }}</h5>
 
   <main id="main">
     <div
@@ -149,6 +149,6 @@
     </button>
   </div>
   <div *ngIf="peopleList.length <= 0">
-    <h1 class="text-warning text-center">No persons Found</h1>
+    <h5 class="filtered-value text-center">No persons Found</h5>
   </div>
 </div>

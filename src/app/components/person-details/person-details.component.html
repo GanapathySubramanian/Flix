@@ -1,174 +1,281 @@
-<div #moviedetails class="person-details" >
+<div #moviedetails class="person-details">
+  <main id="main">
+    <div class="person-img">
+      <div
+        *ngIf="
+          personDetails.profile_path == null;
+          then thenBlock;
+          else elseBlock
+        "
+      ></div>
+      <!-- <ng-template #thenBlock><img src="../../assets/images/no-image.png"></ng-template> -->
+      <ng-template #thenBlock
+        ><img src="assets/images/no-image.png" class="no-image"
+      /></ng-template>
+      <ng-template #elseBlock
+        ><img
+          [attr.src]="highqualityImgUrl + personDetails.profile_path"
+          alt="{{ personDetails.name }}"
+      /></ng-template>
+    </div>
+  </main>
+
+  <div class="person-content">
+    <table class="details-table">
+      <tbody>
+        <tr>
+          <td class="details-name">Person Name</td>
+          <td class="colon">:</td>
+          <td class="details-value">{{ personDetails.name }}</td>
+        </tr>
+        <tr>
+          <td class="details-name">Birth Date</td>
+          <td class="colon">:</td>
+          <td class="details-value">{{ personDetails.birthday | date }}</td>
+        </tr>
+        <tr>
+          <td class="details-name">Death Date</td>
+          <td class="colon">:</td>
+          <td class="details-value">
+            {{ personDetails.deathday }}
+          </td>
+        </tr>
+        <tr>
+          <td class="details-name">Gender</td>
+          <td class="colon">:</td>
+          <td class="details-value">{{ personDetails.gender }}</td>
+        </tr>
+        <tr>
+          <td class="details-name">Profession</td>
+          <td class="colon">:</td>
+          <td class="details-value">
+            {{ personDetails.known_for_department }}
+          </td>
+        </tr>
+        <tr>
+          <td class="details-name">Place of Birth</td>
+          <td class="colon">:</td>
+          <td class="details-value">{{ personDetails.place_of_birth }}</td>
+        </tr>
+        <tr>
+          <td class="details-name">Biography</td>
+          <td class="colon">:</td>
+          <td class="details-value movie-description">
+            {{ personDetails.biography }}
+          </td>
+        </tr>
+        <tr>
+          <td class="details-name">Social Media</td>
+          <td class="colon">:</td>
+          <td class="details-value">
+            <div
+              *ngIf="
+                personDetails.facebook_id == null ||
+                  personDetails.facebook_id == '';
+                then noface;
+                else face
+              "
+            ></div>
+            <ng-template #face>
+              <a
+                class="p-2"
+                href="https://www.facebook.com/{{ personDetails.facebook_id }}"
+                ><img
+                  src="assets/images/Facebook.png"
+                  width="40px"
+                  height="40px"
+              /></a>
+            </ng-template>
+            <ng-template #noface>
+              <a
+                class="p-2"
+                href="https://www.facebook.com/{{ personDetails.name }}"
+                ><img
+                  src="assets/images/Facebook.png"
+                  width="40px"
+                  height="40px"
+              /></a>
+            </ng-template>
+
+            <div
+              *ngIf="
+                personDetails.instagram_id == null ||
+                  personDetails.instagram_id == '';
+                then noinsta;
+                else insta
+              "
+            ></div>
+            <ng-template #insta>
+              <a
+                class="p-2"
+                href="https://www.instagram.com/{{
+                  personDetails.instagram_id
+                }}"
+                ><img
+                  src="assets/images/Instagram.png"
+                  width="40px"
+                  height="40px"
+              /></a>
+            </ng-template>
+            <ng-template #noinsta>
+              <a
+                class="p-2"
+                href="https://www.instagram.com/{{ personDetails.name }}"
+                ><img
+                  src="assets/images/Instagram.png"
+                  width="40px"
+                  height="40px"
+              /></a>
+            </ng-template>
+
+            <div
+              *ngIf="
+                personDetails.twitter_id == null ||
+                  personDetails.twitter_id == '';
+                then notwit;
+                else twit
+              "
+            ></div>
+            <ng-template #twit>
+              <a
+                class="p-2"
+                href="https://www.twitter.com/{{ personDetails.twitter_id }}"
+                ><img
+                  src="assets/images/Twitter.png"
+                  width="40px"
+                  height="40px"
+              /></a>
+            </ng-template>
+            <ng-template #notwit>
+              <a
+                class="p-2"
+                href="https://www.twitter.com/{{ personDetails.name }}"
+                ><img
+                  src="assets/images/Twitter.png"
+                  width="40px"
+                  height="40px"
+              /></a>
+            </ng-template>
+
+            <div
+              *ngIf="
+                personDetails.imdb_id == null || personDetails.imdb_id == '';
+                then noimdb;
+                else imdb
+              "
+            ></div>
+            <ng-template #imdb>
+              <a
+                class="p-2"
+                href="https://www.imdb.com/name/{{ personDetails.imdb_id }}"
+                ><img src="assets/images/Imdb.png" width="40px" height="40px"
+              /></a>
+            </ng-template>
+            <ng-template #noimdb>
+              <a
+                class="p-2"
+                href="https://www.imdb.com/name/{{ personDetails.name }}"
+                ><img src="assets/images/Imdb.png" width="40px" height="40px"
+              /></a>
+            </ng-template>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <hr />
+    <h2 class="text-center" style="color: red">Movies Acted</h2>
+    <p class="h4 text-center text-white">Click the movies to know more</p>
     <main id="main">
-        <div class="person-img">
-            <div *ngIf="personDetails.profile_path==null; then thenBlock else elseBlock"></div>
-            <!-- <ng-template #thenBlock><img src="../../assets/images/no-image.png"></ng-template> -->
-            <ng-template #thenBlock><img src="assets/images/no-image.png" class="no-image"></ng-template>
-            <ng-template #elseBlock><img [attr.src]="highqualityImgUrl+personDetails.profile_path" alt="{{personDetails.name}}"></ng-template>
+      <div
+        *ngIf="castMovieList.length <= 0; then nocastmovie; else castmoviedata"
+      ></div>
+      <ng-template #castmoviedata>
+        <div
+          class="person"
+          *ngFor="let temp of castMovieList"
+          [routerLink]="['/moviedetails', temp.id]"
+        >
+          <app-card [data]="temp"></app-card>
         </div>
+      </ng-template>
+      <ng-template #nocastmovie>
+        <div id="no-record_found_cast_movie">
+          <h1 class="text-warning text-center">
+            {{ personDetails.name }} is not Acted in any Movies
+          </h1>
+        </div>
+      </ng-template>
     </main>
-    
+    <hr />
 
-    <div class="person-content">
-        <table class="details-table">
-            <tbody>
-                <tr>
-                    <td class="details-name">Person Name</td>
-                    <td  class="colon"> : </td>
-                    <td class="details-value">{{personDetails.name}} </td>
-                </tr>
-                <tr>
-                    <td class="details-name">Birth Date</td>
-                    <td class="colon"> : </td>
-                    <td class="details-value">{{personDetails.birthday | date}}</td>
-                </tr>
-                <tr>
-                    <td class="details-name">Death Date</td>
-                    <td class="colon"> : </td>
-                    <td class="details-value" >
-                            {{personDetails.deathday}}
-                    </td>
-                </tr>
-                <tr>
-                    <td class="details-name">Gender</td>
-                    <td class="colon"> : </td>
-                    <td class="details-value">{{personDetails.gender}}</td>
-                </tr>
-                <tr>
-                    <td class="details-name">Profession</td>
-                    <td class="colon"> : </td>
-                    <td class="details-value">{{personDetails.known_for_department}}</td>
-                </tr>
-                <tr>
-                    <td class="details-name">Place of Birth</td>
-                    <td class="colon"> : </td>
-                    <td class="details-value">{{personDetails.place_of_birth}}</td>
-                </tr>
-                <tr>
-                    <td class="details-name">Biography</td>
-                    <td class="colon"> : </td>
-                    <td class="details-value movie-description">{{personDetails.biography}}</td>
-                </tr>
-                <tr>
-                    <td class="details-name">Social Media</td>
-                    <td class="colon"> : </td>
-                    <td class="details-value">
-                        <div *ngIf="personDetails.facebook_id==null || personDetails.facebook_id==''; then noface else face"></div>
-                            <ng-template #face> 
-                                <a class="p-2" href="https://www.facebook.com/{{personDetails.facebook_id}}"><img src="assets/images/Facebook.png" width="40px" height="40px"></a>
-                            </ng-template>
-                            <ng-template #noface>
-                                <a class="p-2" href="https://www.facebook.com/{{personDetails.name}}"><img src="assets/images/Facebook.png" width="40px" height="40px"></a>
-                            </ng-template>
-                
-                        <div *ngIf="personDetails.instagram_id==null || personDetails.instagram_id==''; then noinsta else insta"></div>
-                            <ng-template #insta> 
-                                <a class="p-2" href="https://www.instagram.com/{{personDetails.instagram_id}}"><img src="assets/images/Instagram.png" width="40px" height="40px"></a>
-                            </ng-template>
-                            <ng-template #noinsta>
-                                <a class="p-2" href="https://www.instagram.com/{{personDetails.name}}"><img src="assets/images/Instagram.png" width="40px" height="40px"></a>
-                            </ng-template>
-                
-                        <div *ngIf="personDetails.twitter_id==null || personDetails.twitter_id==''; then notwit else twit"></div>
-                            <ng-template #twit> 
-                                 <a class="p-2" href="https://www.twitter.com/{{personDetails.twitter_id}}"><img src="assets/images/Twitter.png" width="40px" height="40px"></a>
-                            </ng-template>
-                            <ng-template #notwit>
-                                 <a class="p-2" href="https://www.twitter.com/{{personDetails.name}}"><img src="assets/images/Twitter.png" width="40px" height="40px"></a>
-                            </ng-template>
-                
-                        <div *ngIf="personDetails.imdb_id==null || personDetails.imdb_id==''; then noimdb else imdb"></div>
-                            <ng-template #imdb> 
-                                <a class="p-2" href="https://www.imdb.com/name/{{personDetails.imdb_id}}"><img src="assets/images/Imdb.png"  width="40px" height="40px"></a>
-                            </ng-template>
-                            <ng-template #noimdb>
-                                 <a class="p-2" href="https://www.imdb.com/name/{{personDetails.name}}"><img src="assets/images/Imdb.png"  width="40px" height="40px"></a>
-                            </ng-template>
-                    </td>
-                </tr>
-                
-            </tbody>
-        </table>
-        <hr>
-        <h2 class="text-danger text-center">Movies Acted</h2>
-        <p class="h4 text-center text-white">Click the movies to know more</p>
-        <main id="main">
-            
-            
-            <div *ngIf="castMovieList.length<=0; then nocastmovie else castmoviedata"></div>
-             <ng-template #castmoviedata>
-                <div class="person" *ngFor="let temp of castMovieList" [routerLink]="['/moviedetails', temp.id]">
-                    <app-card [data]="temp"></app-card>       
-                </div>
-                
-            </ng-template>
-                <ng-template #nocastmovie>
-                    <div id="no-record_found_cast_movie">
-                        <h1 class="text-warning text-center">{{personDetails.name}} is not Acted in any Movies</h1>
-                    </div>
-                </ng-template>
-            
-          </main>
-          <hr>
+    <h2 class="text-center" style="color: red">Tvshows Acted</h2>
+    <p class="h4 text-center text-white">Click the tvshows to know more</p>
+    <main id="main">
+      <div *ngIf="castTvList.length <= 0; then nocasttv; else casttvdata"></div>
+      <ng-template #casttvdata>
+        <div
+          class="person"
+          *ngFor="let temp1 of castTvList"
+          [routerLink]="['/tvshowdetails', temp1.id]"
+        >
+          <app-card [data]="temp1"></app-card>
+        </div>
+      </ng-template>
+      <ng-template #nocasttv>
+        <div id="no-record_found_cast_tv">
+          <h1 class="text-warning text-center">
+            {{ personDetails.name }} is not Acted in any tvshows
+          </h1>
+        </div>
+      </ng-template>
+    </main>
+    <hr />
 
-          <h2 class="text-danger text-center">Tvshows Acted</h2>
-          <p class="h4 text-center text-white">Click the tvshows to know more</p>
-          <main id="main">
-            
-            
+    <h2 class="text-center" style="color: red">As Crew in Movies</h2>
+    <p class="h4 text-center text-white">Click the movies to know more</p>
+    <main id="main">
+      <div
+        *ngIf="crewMovieList.length <= 0; then nocrewmovie; else crewmoviedata"
+      ></div>
+      <ng-template #crewmoviedata>
+        <div
+          class="person crew-tvshow"
+          *ngFor="let crew_data of crewMovieList"
+          [routerLink]="['/moviedetails', crew_data.id]"
+        >
+          <app-card [data]="crew_data"></app-card>
+        </div>
+      </ng-template>
+      <ng-template #nocrewmovie>
+        <div id="no-record_found_crew_movie">
+          <h1 class="text-warning text-center">
+            {{ personDetails.name }} is not as a crew member in any Movies
+          </h1>
+        </div>
+      </ng-template>
+    </main>
+    <hr />
 
-            <div *ngIf="castTvList.length<=0; then nocasttv else casttvdata"></div>
-            <ng-template #casttvdata>
-                <div class="person" *ngFor="let temp1 of castTvList" [routerLink]="['/tvshowdetails', temp1.id]">
-                    <app-card [data]="temp1"></app-card>       
-                    
-                </div>
-        </ng-template>
-            <ng-template #nocasttv>
-                <div id="no-record_found_cast_tv">
-                    <h1 class="text-warning text-center">{{personDetails.name}} is not Acted in any tvshows</h1>
-                </div>
-            </ng-template>
-          </main>
-          <hr>
-
-
-        <h2 class="text-danger text-center">As Crew in Movies</h2>
-        <p class="h4 text-center text-white">Click the movies to know more</p>
-        <main id="main">
-
-            <div *ngIf="crewMovieList.length<=0; then nocrewmovie else crewmoviedata"></div>
-                <ng-template #crewmoviedata>
-                    <div class="person crew-tvshow" *ngFor="let crew_data of crewMovieList" [routerLink]="['/moviedetails', crew_data.id]">
-                        <app-card [data]="crew_data"></app-card>       
-                     </div>
-            </ng-template>
-            <ng-template #nocrewmovie>
-                <div id="no-record_found_crew_movie">
-                    <h1 class="text-warning text-center">{{personDetails.name}} is not as a crew member in any Movies</h1>
-                </div>
-            </ng-template>
-            
-          </main>
-          <hr>
-            
-          <h2 class="text-danger text-center">As Crew in Tvshows</h2>
-          <p class="h4 text-center text-white">Click the tvshows to know more</p>
-          <main id="main">
-  
-            <div *ngIf="crewTvList.length<=0; then nocrewtv else crewtvdata"></div>
-                <ng-template #crewtvdata>
-                        <div class="person crew-tvshow" *ngFor="let crew_data of crewTvList" [routerLink]="['/tvshowdetails', crew_data.id]">
-                            <app-card [data]="crew_data"></app-card>       
-                        </div>
-                </ng-template>
-              <ng-template #nocrewtv>
-                <div id="no-record_found_crew_tv">
-                    <h1 class="text-warning text-center">{{personDetails.name}} is not as a crew member in any tvshows</h1>
-                </div>
-            </ng-template>
-            </main>
-
-
-         
+    <h2 class="text-center" style="color: red">As Crew in Tvshows</h2>
+    <p class="h4 text-center text-white">Click the tvshows to know more</p>
+    <main id="main">
+      <div *ngIf="crewTvList.length <= 0; then nocrewtv; else crewtvdata"></div>
+      <ng-template #crewtvdata>
+        <div
+          class="person crew-tvshow"
+          *ngFor="let crew_data of crewTvList"
+          [routerLink]="['/tvshowdetails', crew_data.id]"
+        >
+          <app-card [data]="crew_data"></app-card>
+        </div>
+      </ng-template>
+      <ng-template #nocrewtv>
+        <div id="no-record_found_crew_tv">
+          <h1 class="text-warning text-center">
+            {{ personDetails.name }} is not as a crew member in any tvshows
+          </h1>
+        </div>
+      </ng-template>
+    </main>
+  </div>
 </div>

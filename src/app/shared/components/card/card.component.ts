@@ -5,22 +5,18 @@ import { common } from 'src/app/core/interface/common';
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.css']
+  styleUrls: ['./card.component.css'],
 })
 export class CardComponent implements OnInit {
+  @Input() data!: any;
+  imgUrl: string = myAppConfig.tmdb.imgUrl;
+  @Input() isCollections: boolean = false;
 
+  constructor() {}
 
-  @Input() data!:common;
-  imgUrl:string=myAppConfig.tmdb.imgUrl;
+  ngOnInit(): void {}
 
-  
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-  float2int (value:any) {
+  float2int(value: any) {
     return value | 0;
   }
-
 }

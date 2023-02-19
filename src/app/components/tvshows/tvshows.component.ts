@@ -45,6 +45,7 @@ export class TvshowsComponent implements OnInit {
   isdisableprev: boolean = false;
   isdisablenext: boolean = false;
   ishidedrop: boolean = false;
+  networkName: string = '';
   constructor(
     private tvshowservice: TvshowsService,
     private movieservice: MoviesService
@@ -193,6 +194,7 @@ export class TvshowsComponent implements OnInit {
     } else {
       network = id;
       this.network_value = path;
+      this.networkName = name;
       this.network_homepage = homepage;
       console.log(homepage);
     }

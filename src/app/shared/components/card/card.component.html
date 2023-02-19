@@ -1,7 +1,21 @@
 <!-- {{data|json}} -->
-
+<span
+  *ngIf="isCollections"
+  style="
+    color: #fff;
+    position: absolute;
+    z-index: 1;
+    right: 10px;
+    top: 10px;
+    background-color: red;
+    width: 25px;
+    height: 23px;
+    border-radius: 50%;
+    text-align: center;
+  "
+  >{{ data?.parts.length }}</span
+>
 <div *ngIf="data.poster_path == null; then thenBlock; else elseBlock"></div>
-
 <ng-template #thenBlock>
   <figure>
     <img src="assets/images/no-image.png" alt="figure" class="no-image" />
@@ -27,11 +41,10 @@
   >
 </div> -->
 
-<div class="card-info-cast" *ngIf="data.character">
-  <h4>{{ data.title }}</h4>
+<div *ngIf="data.character" class="text-over-card">
+  <span *ngIf="data.title">{{ data.title }}</span>
   <span>AS {{ data.character }}</span>
 </div>
-
 <!-- <div
   class="card-info star-rating"
   *ngIf="data.vote_average && !data.character && !data.job"
@@ -55,12 +68,9 @@
   <p>{{ data.release_date | date }}</p>
 </div> -->
 
-<div class="card-info title" *ngIf="data.job && !data.character">
-  <h4 class="card-name" *ngIf="data.title">{{ data.title }}</h4>
-</div>
-
-<div class="card-info" *ngIf="data.job && !data.character">
-  <p>{{ "Job : " + data.job }}</p>
+<div *ngIf="data.job && !data.character" class="text-over-card">
+  <span *ngIf="data.title">{{ data.title }}</span>
+  <span>{{ "Job : " + data.job }}</span>
 </div>
 
 <!-- <div class="card-info" *ngIf="data.popularity && !data.character && !data.job">

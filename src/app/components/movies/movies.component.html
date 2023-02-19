@@ -1,4 +1,4 @@
-<div class="main-content" style="margin-top: -10px">
+<!-- <div class="main-content" style="margin-top: -10px">
   <ng-container *ngIf="topMoviesList.length > 0">
     <carousel
       class="text-center"
@@ -23,11 +23,12 @@
       </div>
     </carousel>
   </ng-container>
-</div>
+</div> -->
 <div class="movies-section mt-5">
   <nav
-    class="navbar navbar-expand mt-5 navbar-light"
+    class="navbar navbar-expand navbar-light"
     aria-label="Second navbar example"
+    style="margin-top: 60px; margin-left: 20px; margin-right: 20px"
   >
     <div class="container-fluid">
       <div class="collapse navbar-collapse" id="navbarsExample02">
@@ -50,7 +51,8 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li>
                 <a
-                  class="dropdown-item link text-danger"
+                  class="dropdown-item link"
+                  style="color: red"
                   (click)="getGenreContent('', '')"
                   >CLEAR GENRE</a
                 >
@@ -79,7 +81,8 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li>
                 <a
-                  class="dropdown-item link text-danger"
+                  class="dropdown-item link"
+                  style="color: red"
                   (click)="getOrderContent('', '')"
                   >CLEAR FILTER</a
                 >
@@ -108,7 +111,8 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li>
                 <a
-                  class="dropdown-item link text-danger"
+                  class="dropdown-item link"
+                  style="color: red"
                   (click)="getCountryContent('', '')"
                   >CLEAR COUNTRY</a
                 >
@@ -212,10 +216,10 @@
       </div>
     </div>
   </div>
-
+  <!-- 
   <span *ngIf="mobiledevice">
     <app-dark-toggle [cmp]="component"></app-dark-toggle>
-  </span>
+  </span> -->
 
   <div class="movie-filter-details" *ngIf="movieList.length > 0">
     <h5 class="text-center filtered-value">{{ sortby_value | titlecase }}</h5>
@@ -265,6 +269,6 @@
   </div>
 
   <div *ngIf="movieList.length <= 0">
-    <h1 class="filtered-value text-center">No Movies Found</h1>
+    <h5 class="filtered-value text-center">No Movies Found</h5>
   </div>
 </div>

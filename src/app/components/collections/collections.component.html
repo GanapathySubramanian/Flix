@@ -137,7 +137,7 @@
       *ngFor="let movie of movieList"
       [routerLink]="['/collectiondetails', movie.id]"
     >
-      <app-card [data]="movie"></app-card>
+      <app-card [data]="movie" [isCollections]="true"></app-card>
     </div>
   </main>
 
@@ -169,6 +169,6 @@
   </div> -->
 
   <div *ngIf="movieList.length <= 0">
-    <h1 class="filtered-value text-center">No Movies Found</h1>
+    <h5 class="filtered-value text-center">No Movies Found</h5>
   </div>
 </div>

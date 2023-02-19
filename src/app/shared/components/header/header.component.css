@@ -34,7 +34,7 @@
 
 .cta:hover {
   transition: 0.5s;
-  box-shadow: 10px 10px 0 var(--base-orange);
+  box-shadow: 10px 10px 0 var(--dark-red);
 }
 
 .cta span:nth-child(2) {
@@ -91,7 +91,7 @@ path.two {
     fill: var(--base-white);
   }
   50% {
-    fill: var(--base-orange);
+    fill: var(--dark-red);
   }
   100% {
     fill: var(--base-white);
@@ -273,8 +273,8 @@ path.two {
     width: 100%;
   }
   .item-title {
-    color: var(--base-orange);
-    font-size: 50px;
+    color: var(--dark-red);
+    font-size: 30px;
     text-align: left;
     line-height: 3rem;
     font-weight: 200;

@@ -1,4 +1,4 @@
-<h2 class="movie-heading mt-5">{{ data.original_title }} VIDEOS</h2>
+<h4 class="movie-heading mt-5">{{ data.original_title }} VIDEOS</h4>
 <div *ngIf="data.videoList?.length <= 0; then novideo; else video"></div>
 <ng-template #video>
   <div class="lg-carousel">
@@ -72,8 +72,8 @@
 </ng-template>
 <ng-template #novideo>
   <div id="no-record_images">
-    <h1 class="text-warning text-center">
+    <h5 class="text-warning text-center">
       Videos not available for {{ data.original_title }}
-    </h1>
+    </h5>
   </div>
 </ng-template>
