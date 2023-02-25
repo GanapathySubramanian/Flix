@@ -1,6 +1,6 @@
 # Flix - Movies & Tvshows Responsive Website
 
-Live Demo : [Flix](https://ganapathysubramanian.github.io/Flix/) Old Version
+Live Demo : [Flix](https://ganapathydatournament.netlify.app/) Old Version
 
 Live Demo : [Flix](https://transcendent-piroshki-4c4f07.netlify.app/) New Version
 
