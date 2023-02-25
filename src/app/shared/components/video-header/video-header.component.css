@@ -147,21 +147,6 @@ path.two {
     position: relative;
   }
 
-  /* .header-bg{
-        min-height: 780px;
-        width: 100%;
-        background-position: center;
-        background-size: cover;
-        position: absolute;
-        background-position: center;
-        background-repeat: no-repeat;
-        transition:0.5s;
-
-        -webkit-animation: fade 6s infinite;
-        -moz-animation: fade 6s infinite;
-        -o-animation: fade 6s infinite;
-        animation: fade 6s infinite;
-    } */
   .header {
     min-height: 800px;
     width: 100%;
@@ -289,6 +274,7 @@ path.two {
     display: flex;
     margin-top: 20px;
     /* justify-content: center; */
+    font-family: Monoton;
   }
   .watchnow-btn {
     display: none;
@@ -510,4 +496,8 @@ iframe {
   width: 100%;
   height: 100%;
   mix-blend-mode: overlay;
+}
+
+.color-red {
+  color: #e50914;
 }

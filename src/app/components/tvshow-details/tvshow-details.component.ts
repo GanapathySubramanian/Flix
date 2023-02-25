@@ -106,9 +106,7 @@ export class TvshowDetailsComponent implements OnInit {
             rectvshow.results[i].poster_path="Empty";
           }
         }
-            this.tvshowDetails.rectvshowList=rectvshow.results;
-            console.log(this.tvshowDetails.rectvshowList);
-            
+            this.tvshowDetails.rectvshowList=rectvshow.results;            
       let rec_tvshow=rectvshow.results;
       this.tvshowDetails.similartvshowList=rec_tvshow;
       for(let i=0;i<rec_tvshow.length;i++){
@@ -178,7 +176,6 @@ export class TvshowDetailsComponent implements OnInit {
           
           
         }
-        console.log(this.tvshowDetails.castList);
         
 
         let c_data=this.filterCrewData(tempcreditData.crew);
@@ -299,7 +296,6 @@ export class TvshowDetailsComponent implements OnInit {
       this.tvshowDetails.vote_average=tempTvshowDetails.vote_average;
       this.tvshowDetails.vote_count=tempTvshowDetails.vote_count;
       
-      console.log(this.tvshowDetails);
       
       
       // To Remove other than seasons
@@ -335,9 +331,7 @@ export class TvshowDetailsComponent implements OnInit {
     return value | 0;
   }
 
-   filterCrewData(arr:any):any{
-    console.log(arr);
-    
+   filterCrewData(arr:any):any{    
     let clientImages:any=[];
     var c_data:any  =[];
     c_data= arr;

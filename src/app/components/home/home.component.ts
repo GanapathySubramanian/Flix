@@ -21,13 +21,27 @@ export class HomeComponent implements OnInit {
   topGrossingTvshowList: any[] = [];
   collections: any = [];
   collectionList: any;
-
+  genreList: any[] = [];
   constructor(
     private movieService: MoviesService,
     private tvshowService: TvshowsService
   ) {}
 
   ngOnInit(): void {
+    let genrearr: any[] = [];
+    this.movieService.getGenreList().subscribe((data) => {
+      data.forEach((genre) => {
+        genrearr.push(genre);
+      });
+    });
+    this.tvshowService.getGenreList().subscribe((data) => {
+      data.forEach((genre) => {
+        genrearr.push(genre);
+      });
+    });
+    this.genreList = genrearr.filter(
+      (arr, index, self) => index === self.findIndex((t) => t.id === arr.id)
+    );
     this.getPopularMovies();
     this.getPopularTvShows();
     this.getTopGrossingMovies();
@@ -70,6 +84,7 @@ export class HomeComponent implements OnInit {
         if (movies.backdrop_path !== null) {
           movies.background_image =
             this.highQualityImgUrl + movies.backdrop_path;
+
           movies.no_animation = true;
           if (index <= 10) {
             this.topGrossingMoviesList.push(movies);
@@ -88,7 +103,13 @@ export class HomeComponent implements OnInit {
           movies.background_image =
             this.highQualityImgUrl + movies.backdrop_path;
           movies.no_animation = true;
+          let m_genres: any[] = [];
+          movies.genre_ids.forEach((genre: any) => {
+            m_genres.push(this.genreList.find((o) => o.id === genre));
+          });
+          movies.genre_ids = m_genres;
           this.trendingMoviesList.push(movies);
+
           if (index < 5) {
             this.getMovieImages(movies.id, index);
             this.topMoviesList.push(movies);
@@ -105,6 +126,11 @@ export class HomeComponent implements OnInit {
       tempTvshowList = data.results;
       tempTvshowList.forEach((tvshow: any, index: number) => {
         if (tvshow.backdrop_path !== null) {
+          let m_genres: any[] = [];
+          tvshow.genre_ids.forEach((genre: any) => {
+            m_genres.push(this.genreList.find((o) => o.id === genre));
+          });
+          tvshow.genre_ids = m_genres;
           this.trendingTvList.push(tvshow);
           tvshow.background_image =
             this.highQualityImgUrl + tvshow.backdrop_path;

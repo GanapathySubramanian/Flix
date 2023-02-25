@@ -400,3 +400,7 @@ svg#playBtn {
   width: 30%;
   height: 30%;
 }
+
+.color-red {
+  color: #e50914;
+}

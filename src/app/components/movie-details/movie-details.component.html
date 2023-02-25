@@ -25,15 +25,15 @@
     </div>
   </main>
 
-  <div class="text-center mt-5" *ngIf="movieDetails.logoList != null">
+  <!-- <div class="text-center mt-5" *ngIf="movieDetails.logoList != null">
     <img id="movie-logo" src="{{ imgUrl + movieDetails.logoList.file_path }}" />
-  </div>
+  </div> -->
 
-  <h4 class="movie-heading mt-5">
+  <!-- <h4 class="movie-heading mt-5">
     More About {{ movieDetails.original_title }}
-  </h4>
+  </h4> -->
   <div class="movie-content">
-    <table class="details-table">
+    <!-- <table class="details-table">
       <tbody>
         <tr>
           <td class="details-name">Original Name</td>
@@ -126,9 +126,9 @@
           </td>
         </tr>
       </tbody>
-    </table>
+    </table> -->
 
-    <div class="watchnow-btn text-center">
+    <!-- <div class="watchnow-btn text-center">
       <div class="wrapper-watchnow">
         <a class="cta" href="{{ movieDetails.watchprovider }}">
           <span class="span-watchnow">WATCH NOW</span>
@@ -168,7 +168,7 @@
           </span>
         </a>
       </div>
-    </div>
+    </div> -->
 
     <div class="reviews-section">
       <app-review [data]="movieDetails"></app-review>
@@ -221,7 +221,7 @@
 
     <div class="crew-section">
       <h4 class="movie-heading mt-5">CREW</h4>
-      <p class="h5 text-center">Click the Person to know more</p>
+      <h5 class="h5 text-center">Click the Person to know more</h5>
       <div
         *ngIf="movieDetails.crewList?.length <= 0; then nocrew; else crewdata"
       ></div>
@@ -248,7 +248,7 @@
 
     <div class="sim_movies">
       <h4 class="movie-heading mt-5">RECOMMENDED MOVIES</h4>
-      <p class="h5 text-center">Click the movie to know more</p>
+      <h5 class="h5 text-center">Click the movie to know more</h5>
       <div
         *ngIf="
           movieDetails.recmovieList?.length <= 0;
@@ -280,7 +280,7 @@
 
     <div class="sim_movies-section">
       <h4 class="movie-heading mt-5">SIMILAR MOVIES</h4>
-      <p class="h5 text-center">Click the movie to know more</p>
+      <h5 class="h5 text-center">Click the movie to know more</h5>
 
       <div
         *ngIf="

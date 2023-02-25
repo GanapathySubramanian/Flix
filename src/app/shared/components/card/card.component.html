@@ -1,6 +1,6 @@
 <!-- {{data|json}} -->
 <span
-  *ngIf="isCollections"
+  *ngIf="isCollections && data?.parts"
   style="
     color: #fff;
     position: absolute;
@@ -13,7 +13,7 @@
     border-radius: 50%;
     text-align: center;
   "
-  >{{ data?.parts.length }}</span
+  >{{ data?.parts?.length }}</span
 >
 <div *ngIf="data.poster_path == null; then thenBlock; else elseBlock"></div>
 <ng-template #thenBlock>
@@ -41,6 +41,49 @@
   >
 </div> -->
 
+<div *ngIf="!data.character && !data.job" class="text-over-card">
+  <span *ngIf="data.title"
+    >{{ data.title }}
+    <!-- <span
+      class="card-rating"
+      *ngIf="data.vote_average"
+      [ngClass]="{
+        red: data.vote_average <= 5,
+        orange: data.vote_average > 5 && data.vote_average < 8,
+        green: data.vote_average >= 8
+      }"
+      >{{ float2int((data.vote_average / 10) * 100) + "%" }}</span
+    > -->
+    <div class="rating">
+      <span
+        *ngIf="data.vote_average"
+        [ngClass]="{
+          red: data.vote_average <= 5,
+          orange: data.vote_average > 5 && data.vote_average < 8,
+          green: data.vote_average >= 8
+        }"
+      >
+        {{ data.vote_average }}</span
+      >
+      <img src="../../../../assets/images/IMDb-icon.png" alt="imbd" />
+    </div>
+  </span>
+  <span *ngIf="!data.title && data.name"
+    >{{ data.name }}
+    <div class="rating" *ngIf="data.vote_average">
+      <span
+        [ngClass]="{
+          red: data.vote_average <= 5,
+          orange: data.vote_average > 5 && data.vote_average < 8,
+          green: data.vote_average >= 8
+        }"
+      >
+        {{ data.vote_average }}</span
+      >
+      <img src="../../../../assets/images/IMDb-icon.png" alt="imbd" />
+    </div>
+  </span>
+</div>
 <div *ngIf="data.character" class="text-over-card">
   <span *ngIf="data.title">{{ data.title }}</span>
   <span>AS {{ data.character }}</span>

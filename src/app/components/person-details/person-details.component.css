@@ -1,111 +1,107 @@
-main{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 ngb-rating {
-    color: var(--base-orange);
-    font-size: 20px;
+  color: var(--base-orange);
+  font-size: 20px;
+}
+h4,
+h5 {
+  font-family: Monoton;
+}
+.details-table {
+  margin-left: 10%;
+  margin-right: 5%;
+}
+.details-name {
+  text-align: justify;
+  padding: 5px 15px;
+  color: var(--base-orange);
+}
+.colon {
+  text-align: justify;
+  padding: 5px 15px;
+  color: var(--base-white);
+}
+.details-value {
+  text-align: justify;
+  padding: 5px 15px;
+  color: var(--base-white);
+}
+.details-value.person-description {
+  line-height: 24px;
+}
+.person-img {
+  width: 400px;
+  margin: 1rem;
+  border-radius: 3px;
+  box-shadow: 0.2px 4px 5px rgba(0, 0, 0, 0.1);
+  background-color: var(--secondary-color);
+  transition: background-color 2s;
+  position: relative;
+  overflow: hidden;
+  justify-content: center;
 }
 
+.person-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+  transition: all 1.5s ease-in-out;
+}
 
-.details-table{
-    margin-left: 10%;
-    margin-right:5%;
-    
+.person-img img:hover {
+  transform: scale(1.35) rotateZ(5deg);
 }
-.details-name{
-    text-align: justify;
-    padding: 5px 15px;
-    color:var(--base-orange);
+hr {
+  color: var(--base-white);
+  height: 2px;
 }
-.colon{
-    text-align: justify;
-    padding: 5px 15px;
-    color:var(--base-white);
+
+.person {
+  width: 250px;
+  margin: 1rem;
+  border-radius: 3px;
+  box-shadow: 0.2px 4px 5px rgba(0, 0, 0, 0.1);
+  background-color: var(--secondary-color);
+  transition: background-color 2s;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
 }
-.details-value{
-    text-align: justify;
-    padding: 5px 15px;
-    color:var(--base-white);
+
+.person img {
+  width: 100%;
+  transition: all 1.5s ease-in-out;
 }
-.details-value.person-description{
-    line-height: 24px;
+
+.person:hover {
+  /* top:-10px; */
+  cursor: pointer;
 }
-.person-img{
-    width:400px;
+
+.no-image {
+  object-fit: cover;
+  height: 376px;
+}
+
+@media only screen and (max-width: 600px) {
+  .no-image {
+    object-fit: cover;
+    height: auto;
+  }
+
+  .person {
+    width: 500px;
     margin: 1rem;
     border-radius: 3px;
-    box-shadow: 0.2px 4px 5px rgba(0,0,0,0.1);
+    box-shadow: 0.2px 4px 5px rgba(0, 0, 0, 0.1);
     background-color: var(--secondary-color);
     transition: background-color 2s;
     position: relative;
     overflow: hidden;
-    justify-content: center;
-}
-
-.person-img img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    overflow: hidden;
-    transition: all 1.5s ease-in-out;
-}
-
-.person-img img:hover{
-    transform: scale(1.35) rotateZ(5deg);
-}
-hr{
-    color:var(--base-white);
-    height: 2px;
-}
-
-.person{
-    width:250px;
-    margin: 1rem;
-    border-radius: 3px;
-    box-shadow: 0.2px 4px 5px rgba(0,0,0,0.1);
-    background-color: var(--secondary-color);
-    transition: background-color 2s;
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-
-}
-
-.person img{
-    width:100%;
-    transition: all 1.5s ease-in-out;
-}
-
-
-.person:hover{
-    /* top:-10px; */
-    cursor: pointer;
-}
-
-.no-image{
-    object-fit: cover;
-    height: 376px;
-}
-
-
-   
-
-@media only screen and (max-width:600px) {
-    .no-image{
-        object-fit: cover;
-        height: auto;
-    }
-   
-    .person{
-        width:500px;
-        margin: 1rem;
-        border-radius: 3px;
-        box-shadow: 0.2px 4px 5px rgba(0,0,0,0.1);
-        background-color: var(--secondary-color);
-    transition: background-color 2s;
-        position: relative;
-        overflow: hidden;
-    }
+  }
 }

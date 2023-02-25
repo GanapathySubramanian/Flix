@@ -1,10 +1,6 @@
-.network-img {
-  width: 100px;
-  height: 50px;
-}
-
 .tvshow img {
   width: 100%;
+  height: 100%;
 }
 
 .tvshow-info span {
@@ -13,7 +9,8 @@
   border-radius: 3px;
   font-weight: bold;
 }
-
+.tvshow {
+}
 .tvshow-info,
 .tvshow-info-sea {
   color: var(--base-white);
@@ -46,7 +43,7 @@
   font-size: 20px;
 }
 
-.tvshow-info-sea p {
+.tvshow-info-sea h4 {
   margin-top: 0;
   width: 50%;
   font-size: 20px;
@@ -93,10 +90,11 @@ ngb-rating {
   text-transform: uppercase;
   color: var(--dark-red);
   text-align: center;
+  font-family: Monoton;
 }
 .tvshow {
   width: 300px;
-  height: 450px;
+  height: auto;
   margin: 0.5rem;
   border-radius: 3px;
   box-shadow: 0.2px 4px 5px rgba(0, 0, 0, 0.1);
@@ -381,6 +379,13 @@ path.two {
     width: 80%;
     font-size: 30px;
   }
+}
+
+h5 {
+  font-family: Monoton;
+}
+h4 {
+  font-family: Monoton;
 }
 
 .kodfun-galeri {

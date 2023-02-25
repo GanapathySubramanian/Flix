@@ -24,7 +24,6 @@ export class CollectionDetailsComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getCollectionDetails(collection_Id);
-    console.log(this.collectionDetails);
   }
   getCollectionDetails(id: number) {
     var api_url =
@@ -47,7 +46,6 @@ export class CollectionDetailsComponent implements OnInit {
         this.highQualityImgUrl + this.collectionDetails.backdrop_path;
       this.collectionDetails.no_animation = true;
     });
-    console.log(this.collectionDetails);
   }
   sort_by_key(array: any, key: any) {
     return array.sort((a: any, b: any) => {

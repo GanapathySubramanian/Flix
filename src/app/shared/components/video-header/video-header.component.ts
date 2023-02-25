@@ -4,25 +4,22 @@ import myAppConfig from 'src/app/core/config/my-app-config';
 @Component({
   selector: 'app-video-header',
   templateUrl: './video-header.component.html',
-  styleUrls: ['./video-header.component.css']
+  styleUrls: ['./video-header.component.css'],
 })
 export class VideoHeaderComponent implements OnInit {
-
- 
-  @Input() data:any={};
-  imgUrl:string=myAppConfig.tmdb.highQualityImgUrl;
-  @Input() background_video:any;
-  playVideo:boolean=false;
-  constructor() { }
+  @Input() data: any = {};
+  imgUrl: string = myAppConfig.tmdb.highQualityImgUrl;
+  @Input() background_video: any;
+  playVideo: boolean = false;
+  constructor() {}
 
   ngOnInit(): void {
     console.log(this.data);
-    
   }
-  playTrailer(){
-    this.playVideo=true;
+  playTrailer() {
+    this.playVideo = true;
   }
-  stopTrailer(){
-    this.playVideo=false;
+  stopTrailer() {
+    this.playVideo = false;
   }
 }

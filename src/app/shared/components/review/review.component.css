@@ -1,31 +1,33 @@
-.table-review-head{
-    color: var(--base-orange);
+.table-review-head {
+  color: var(--base-orange);
+  font-family: Monoton;
 }
 
-.table-review-head td{
-    border: 2px solid var(--dark-red);
-    /* margin: 1rem; */
-    padding: 1.5rem;
+.table-review-head td {
+  border: 2px solid var(--dark-red);
+  /* margin: 1rem; */
+  padding: 1.5rem;
 }
 
-.table-review-body{
-    font-weight: normal;
-    line-height: 1rem;
+.table-review-body {
+  font-weight: normal;
+  line-height: 1rem;
 }
-.table-review-body td{
-    border: 2px solid var(--dark-red);
-    /* margin: 1rem; */
-    font-family: 'Poppins','sanserif';
-    word-spacing: 2px;
-    letter-spacing: 1px;
-    line-height: 1.6rem;
-    /* text-indent: 10px; */
-    padding: 1.5rem;
+.table-review-body td {
+  border: 2px solid var(--dark-red);
+  /* margin: 1rem; */
+  font-family: "Poppins", "sanserif";
+  word-spacing: 2px;
+  letter-spacing: 1px;
+  line-height: 1.6rem;
+  /* text-indent: 10px; */
+  padding: 1.5rem;
 }
 
-.movie-heading{
-    display: block;
-    text-transform:uppercase;
-    color:var(--dark-red);
-    text-align: center;
+.movie-heading {
+  display: block;
+  text-transform: uppercase;
+  color: var(--dark-red);
+  text-align: center;
+  font-family: Monoton;
 }

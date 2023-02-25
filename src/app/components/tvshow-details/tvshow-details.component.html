@@ -23,20 +23,20 @@
       /></ng-template>
     </div>
   </main>
-
+  <!-- 
   <div class="text-center mt-5" *ngIf="tvshowDetails.logoList != null">
     <img
       id="tvshow-logo"
       src="{{ imgUrl + tvshowDetails.logoList.file_path }}"
     />
-  </div>
+  </div> -->
 
-  <h4 class="tvshow-heading mt-5">
+  <!-- <h4 class="tvshow-heading mt-5">
     More About ({{ tvshowDetails.original_title }})
-  </h4>
+  </h4> -->
 
   <div class="tvshow-content">
-    <table class="details-table">
+    <!-- <table class="details-table">
       <tbody>
         <tr>
           <td class="details-name">Original Name</td>
@@ -170,8 +170,8 @@
         </tr>
         <tr></tr>
       </tbody>
-    </table>
-    <div class="watchnow-btn text-center">
+    </table> -->
+    <!-- <div class="watchnow-btn text-center">
       <div class="wrapper-watchnow">
         <a class="cta" href="{{ tvshowDetails.watchprovider }}">
           <span class="span-watchnow">WATCH NOW</span>
@@ -211,7 +211,7 @@
           </span>
         </a>
       </div>
-    </div>
+    </div> -->
 
     <div class="reviews-section">
       <app-review [data]="tvshowDetails"></app-review>
@@ -227,7 +227,7 @@
       <h4 class="tvshow-heading mt-5">
         {{ tvshowDetails.original_title }} SEASONS
       </h4>
-      <p class="text-white h5 text-center">Click the Seasons to know more</p>
+      <h5 class="text-white h5 text-center">Click the Seasons to know more</h5>
       <main>
         <div
           class="tvshow"
@@ -249,25 +249,18 @@
             ><img src="{{ imgUrl + e.poster_path }}"
           /></ng-template>
 
-          <div class="tvshow-info">
-            <h3>{{ e.name }}</h3>
-          </div>
-          <div class="tvshow-info-sea">
-            <h4>air date</h4>
-            {{ e.air_date | date }}
-          </div>
-          <div class="tvshow-info">
-            <h4>Episode counts</h4>
-            {{ e.episode_count }}
-          </div>
-
           <div class="overview">
-            <h3 class="text-warning">Overview</h3>
+            <h5 style="color: red">
+              {{ e.name }}
+            </h5>
+            <h5 style="color: red">Episode counts {{ e.episode_count }}</h5>
+
+            <h5 class="text-warning">Overview</h5>
             <span class="text-secondary">
               <span *ngIf="e.overview != null">
                 <span *ngIf="e.overview?.length <= 300">{{ e.overview }}</span>
                 <span *ngIf="e.overview?.length > 300">{{
-                  e.overview.substring(0, 300) + "..."
+                  e.overview.substring(0, 100) + "..."
                 }}</span>
               </span>
               <span *ngIf="e.overview == null || e.overview == ''"
@@ -275,7 +268,7 @@
               >
             </span>
             <br />
-            <button class="btn btn-warning">Know More</button>
+            <!-- <button class="btn btn-warning">Know More</button> -->
           </div>
         </div>
       </main>
@@ -294,7 +287,7 @@
 
     <div class="cast-section">
       <h4 class="tvshow-heading mt-5">CAST</h4>
-      <p class="h5 text-center">Click the Person to know more</p>
+      <h5 class="h5 text-center">Click the Person to know more</h5>
       <div
         *ngIf="tvshowDetails.castList?.length <= 0; then nocast; else castdata"
       ></div>
@@ -322,7 +315,7 @@
 
     <div class="crew-section">
       <h4 class="tvshow-heading mt-5">CREW</h4>
-      <p class="h5 text-center">Click the Person to know more</p>
+      <h5 class="h5 text-center">Click the Person to know more</h5>
       <div
         *ngIf="tvshowDetails.crewList?.length <= 0; then nocrew; else crewdata"
       ></div>
@@ -348,8 +341,8 @@
     <hr />
 
     <div class="sim_tvshow">
-      <h4 class="tvshow-heading mt-5">RECOMMENDED tvshow</h4>
-      <p class="h5 text-center">Click the tvshow to know more</p>
+      <h4 class="tvshow-heading mt-5">RECOMMENDED TVSHOW</h4>
+      <h5 class="h5 text-center">Click the tvshow to know more</h5>
       <div
         *ngIf="
           tvshowDetails.rectvshowList?.length <= 0;
@@ -380,8 +373,8 @@
     <hr />
 
     <div class="sim_tvshow-section">
-      <h4 class="tvshow-heading mt-5">SIMILAR tvshow</h4>
-      <p class="h5 text-center">Click the tvshow to know more</p>
+      <h4 class="tvshow-heading mt-5">SIMILAR TVSHOW</h4>
+      <h5 class="h5 text-center">Click the tvshow to know more</h5>
 
       <div
         *ngIf="

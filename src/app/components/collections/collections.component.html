@@ -28,6 +28,7 @@
   <nav
     class="navbar navbar-expand mt-5 navbar-light"
     aria-label="Second navbar example"
+    style="z-index: 1000000"
   >
     <div class="container-fluid">
       <div class="collapse navbar-collapse" id="navbarsExample02">
@@ -37,18 +38,24 @@
         ></ul>
         <div class="lg-search mt-2">
           <form
+            action=""
+            class="search-box"
             id="form"
             [formGroup]="searchForm"
             (ngSubmit)="getSearchContent()"
           >
             <input
               type="text"
-              placeholder="Search Movie"
+              name="search"
+              placeholder="Search Collection"
               formControlName="movieName"
-              class="search form-control"
+              class="search-input"
               (keyup)="findMovies()"
               [(ngModel)]="findthismovie"
             />
+            <button type="submit">
+              <i class="fas fa-search"></i>
+            </button>
           </form>
           <div class="search-list" id="search-list-lg">
             <!-- list here -->
@@ -85,16 +92,26 @@
     </div>
   </nav>
 
-  <div class="sm-search">
-    <form id="form" [formGroup]="searchForm" (ngSubmit)="getSearchContent()">
+  <div class="sm-search" style="z-index: 100000000000; position: relative">
+    <form
+      action=""
+      class="search-box"
+      id="form"
+      [formGroup]="searchForm"
+      (ngSubmit)="getSearchContent()"
+    >
       <input
         type="text"
-        placeholder="Search Movie"
+        name="search"
+        placeholder="Search Collection"
         formControlName="movieName"
-        class="search form-control"
+        class="search-input"
         (keyup)="findMovies()"
         [(ngModel)]="findthismovie"
       />
+      <button type="submit">
+        <i class="fas fa-search"></i>
+      </button>
     </form>
     <div class="search-list" id="search-list-sm">
       <!-- list here -->

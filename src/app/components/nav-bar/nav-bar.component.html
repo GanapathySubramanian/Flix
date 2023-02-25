@@ -1,12 +1,9 @@
-<nav
+<!-- <nav
   class="navbar navbar-expand navbar-dark shadow-5-strong mb-2"
   aria-label="Second navbar example"
 >
   <div class="container-fluid">
     <div class="collapse navbar-collapse" id="navbarsExample02">
-      <!-- <a class="navbar-brand" href="" class="logo"> 
-        
-         FLIX </a> -->
       <a class="play playBut" href="">
         <div style="display: inline; width: 50px">
           <img
@@ -18,13 +15,6 @@
         </div>
         FLIX
       </a>
-      <!-- <span *ngIf="!mobiledevice">
-               <app-dark-toggle [cmp]="component"></app-dark-toggle>
-            </span> 
-
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button> -->
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
@@ -54,26 +44,80 @@
       </div>
     </div>
   </div>
-</nav>
-<div class="main-content">
-  <router-outlet (activate)="onActivate($event)"></router-outlet>
-</div>
+</nav> -->
 
 <nav
-  class="navbar navbar-expand navbar-dark footer navbar-fixed-bottom"
-  aria-label="Second navbar example"
-  [ngStyle]="{ display: windowScrolled ? 'block' : 'none' }"
+  class="navigation navbar navbar-expand navbar-dark shadow-5-strong"
+  [attr.style]="lapdevice ? 'margin-top: -40px' : ''"
 >
-  <div class="container-fluid">
-    <div class="container text-center">
-      <p class="mb-0 py-2">Done By Ganapathy Subramanian ❤️</p>
-    </div>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <div class="move-top">
-        <button class="btn" (click)="scrollToTop()">
-          <i class="fa-solid fa-arrow-up"></i>
-        </button>
+  <!--menu-btn--------------->
+  <ng-container *ngIf="mobiledevice">
+    <input type="checkbox" class="menu-btn" id="menu-btn" />
+    <label for="menu-btn" class="menu-icon">
+      <span class="nav-icon"></span> </label
+  ></ng-container>
+
+  <!--logo------------------->
+  <a href="index.html" class="logo"> FLIX<span>HD</span> </a>
+  <!--menu------------------->
+  <ul class="menu">
+    <li><a href="">Home</a></li>
+    <li><a routerLink="/movies" routerLinkActive="active">Movies</a></li>
+    <li><a routerLink="/tvshows" routerLinkActive="active">TV Shows</a></li>
+    <li>
+      <a routerLink="/collections" routerLinkActive="active">Collections</a>
+    </li>
+    <li><a routerLink="/peoples" routerLinkActive="active">Peoples</a></li>
+  </ul>
+  <div class="container-fluid show-right-nav">
+    <div class="collapse navbar-collapse" id="navbarsExample02">
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="">HOME</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/movies" routerLinkActive="active"
+              >MOVIES</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/tvshows" routerLinkActive="active"
+              >TVSHOWS</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/collections"
+              routerLinkActive="active"
+              >COLLECTIONS</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/peoples" routerLinkActive="active"
+              >PEOPLES</a
+            >
+          </li>
+        </ul>
       </div>
     </div>
   </div>
 </nav>
+<div id="progress">
+  <span id="progress-value" (click)="scrollToTop()" style="color: red">
+    <i class="fa-solid fa-arrow-up"></i>
+  </span>
+</div>
+<div class="main-content">
+  <router-outlet (activate)="onActivate($event)"></router-outlet>
+</div>
+<!--==footer==============================-->
+<footer>
+  <!--footer-logo--->
+  <a href="index.html" class="logo"> FLIX<span>hd</span> </a>
+  <!--copyright----->
+  <span class="copyright">
+    Copyright 2021 - Done By Ganapathy Subramanian ❤️
+  </span>
+</footer>

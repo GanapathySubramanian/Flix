@@ -1,6 +1,7 @@
 .details-header {
   color: red;
   margin: 20px;
+  font-family: Monoton;
 }
 main {
   display: flex;

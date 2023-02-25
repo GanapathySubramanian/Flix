@@ -15,8 +15,6 @@ export class DarkToggleComponent implements OnInit {
   constructor(
     private themeService: ThemeService
   ) {
-    // console.log(this.mobiledevice);   
-    // this.getScreenSize(); 
   }
 
   ngOnInit() {
@@ -34,11 +32,9 @@ export class DarkToggleComponent implements OnInit {
     ) as HTMLInputElement | null;
     
     if (checkbox?.checked) {
-      console.log('Checkbox is checked');
       this.themeService.setDarkTheme(true);
 
     } else {
-      console.log('Checkbox is NOT checked');
       this.themeService.setDarkTheme(false);
     }
   
@@ -51,11 +47,9 @@ export class DarkToggleComponent implements OnInit {
     ) as HTMLInputElement | null;
     
     if (checkbox?.checked) {
-      console.log('Checkbox is checked');
       this.themeService.setDarkTheme(true);
 
     } else {
-      console.log('Checkbox is NOT checked');
       this.themeService.setDarkTheme(false);
     }
   }

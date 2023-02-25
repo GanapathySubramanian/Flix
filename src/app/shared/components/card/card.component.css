@@ -13,10 +13,19 @@
   text-align: left;
   display: flex;
   flex-direction: column;
-
   text-shadow: -1px 5px 8px black;
 }
-
+.rating img {
+  height: 10px;
+  width: 20px;
+  object-fit: contain;
+  object-position: center;
+}
+.rating {
+  font-size: 0.8rem;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
 .card-info {
   color: var(--base-white);
   display: flex;

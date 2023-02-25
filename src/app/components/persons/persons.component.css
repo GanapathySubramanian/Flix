@@ -18,7 +18,10 @@ main {
 .person img {
   width: 100%;
 }
-
+h4,
+h5 {
+  font-family: Monoton;
+}
 .person-info {
   color: var(--base-white);
   display: flex;
@@ -150,8 +153,9 @@ ngb-rating {
   padding: 0.5rem 1rem;
   border-radius: 50px;
   font-size: 1rem;
-  color: var(--base-white);
+  color: #fff;
   font-family: inherit;
+  width: 300px;
 }
 
 .search:focus {
@@ -171,7 +175,7 @@ ngb-rating {
   z-index: 10;
 }
 .search-list .search-list-item {
-  background-color: var(--secondary-color);
+  background-color: #8c8888ae;
   padding: 0.5rem;
   border-bottom: 1px solid var(--dark-color);
   width: calc(350px - 8px);
@@ -182,7 +186,7 @@ ngb-rating {
   transition: background-color 200ms ease;
 }
 .search-list .search-list-item:hover {
-  background-color: #1f1f1f;
+  background-color: #6341415d;
 }
 .search-list-item {
   display: -webkit-box;
@@ -302,4 +306,32 @@ ngb-rating {
     width: 100%;
     margin: auto;
   }
+}
+
+/*--search-box----*/
+.search-box {
+  background-color: #d1d1d11a;
+  padding: 3px 20px;
+  border-radius: 20px;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 20px;
+}
+.search-box input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+}
+.search-box input::placeholder {
+  color: #ffffff5e;
+}
+.search-box button {
+  background-color: transparent;
+  color: #ffffffc9;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }

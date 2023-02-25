@@ -304,7 +304,7 @@ export class MovieDetailsComponent implements OnInit {
       this.movieDetails.production_companies=tempMovieDetails.production_companies;
       this.movieDetails.production_countries=tempMovieDetails.production_countries;
       this.movieDetails.runtime=tempMovieDetails.runtime;
-      this.movieDetails.genre=tempMovieDetails.genres;
+      this.movieDetails.genre=tempMovieDetails.genres;      
       this.movieDetails.release_date=tempMovieDetails.release_date;
       this.movieDetails.revenue=tempMovieDetails.revenue;
       this.movieDetails.status=tempMovieDetails.status;

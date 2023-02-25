@@ -19,15 +19,12 @@ export class ThemeService {
     this._themeDark.next(isThemeDark);
 
     if (isThemeDark == true) {
-      console.log('Dark Used');
-
       // #1a242f #0f3b43 #141414
       document.documentElement.style.setProperty("--primary-color", "black");
       document.documentElement.style.setProperty("--secondary-color", "#1a242f");
       document.documentElement.style.setProperty("--placeholder-color", "#1a242f");
     }
     else {
-      console.log('Light Used');
       document.documentElement.style.setProperty("--primary-color", "#22254b");
       document.documentElement.style.setProperty("--secondary-color", "#373b69");
       document.documentElement.style.setProperty("--placeholder-color", "#7378c5");

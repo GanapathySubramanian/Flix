@@ -20,9 +20,6 @@ imgUrl:string=myAppConfig.tmdb.imgUrl;
 
     this.landingService.posterData.subscribe(data=>{
       this.postersList=data;
-      console.log(data);
-      
-      console.log(this.postersList);
     })
    }
 

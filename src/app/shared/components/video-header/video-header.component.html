@@ -12,7 +12,7 @@
   <div class="text">
     <a
       class="play playBut"
-      style="background-color: transparent; color: white"
+      style="background-color: transparent; color: white; font-family: Monoton"
       (click)="stopTrailer()"
     >
       <div style="display: inline-block; width: 50px">
@@ -94,39 +94,64 @@
       <div class="home-slide-item-content">
         <div class="items">
           <div class="item-title">
-            <span *ngIf="data.title">{{ data.title }}</span>
-            <span *ngIf="data.name">{{ data.name }}</span>
+            <span *ngIf="!data.logoList">
+              <span
+                *ngIf="data.title"
+                style="font-family: Monoton; color: red; font-size: 30px"
+                >{{ data.title }}</span
+              >
+              <span
+                *ngIf="data.name"
+                style="font-family: Monoton; color: red; font-size: 30px"
+                >{{ data.name }}</span
+              >
+              <span
+                *ngIf="!data.name && !data.title && data.original_title"
+                style="font-family: Monoton; color: red; font-size: 30px"
+                >{{ data.original_title }}</span
+              >
+            </span>
 
             <div class="mt-5" *ngIf="data.logoList != null">
               <img id="logo-img" src="{{ imgUrl + data.logoList.file_path }}" />
             </div>
           </div>
           <div class="header-detail">
-            <div class="header-info" *ngIf="data.vote_average">
-              <i class="far fa-star"></i>
-              <span>{{ data.vote_average }}</span>
-            </div>
-            <div class="header-info" *ngIf="data.runtime">
-              <i class="fas fa-clock"></i>
-              <span *ngIf="data.runtime">{{ data.runtime + " min" }}</span>
-              <span *ngIf="data.avg_run_time">{{
-                data.avg_run_time + " min"
-              }}</span>
-            </div>
-            <div class="header-info" *ngIf="data.release_date">
-              <i class="fas fa-calendar"></i>
-              <span *ngIf="data.release_date">{{
-                data.release_date | date
-              }}</span>
-              <span *ngIf="data.first_air_date">{{
-                data.first_air_date | date
-              }}</span>
-            </div>
+            <span *ngIf="data.vote_average" class="badge"
+              ><span
+                [ngClass]="{
+                  'text-danger': data.vote_average <= 5,
+                  'text-warning':
+                    data.vote_average > 5 && data.vote_average < 8,
+                  'text-success': data.vote_average >= 8
+                }"
+                ><i class="fa-solid fa-star"></i> </span
+              >{{ data.vote_average }}</span
+            >
+            <span *ngIf="data.runtime" class="text-white badge"
+              ><i class="fa-solid fa-clock"></i> {{ data.runtime }}</span
+            >
+            <span *ngIf="data.release_date" class="text-white badge"
+              ><i class="fa-solid fa-calendar"></i>
+              {{ data.release_date | date }}</span
+            >
+            <span *ngIf="data.first_air_date" class="text-white badge"
+              ><i class="fa-solid fa-calendar"></i>
+              {{ data.first_air_date | date }}</span
+            >
+          </div>
+          <div class="header-detail text-danger">
+            <span
+              *ngFor="let genre of data.genre_ids; let i = index"
+              class="badge text-bg-danger color-red"
+            >
+              {{ genre.name }}
+            </span>
           </div>
           <div class="item-overview">
             {{ data.overview }}
           </div>
-          <div class="wrapper-watchnow">
+          <div class="wrapper-watchnow" *ngIf="background_video">
             <!-- <a class="cta" href="{{data.watchprovider}}">
                                       <span class="span-watchnow">WATCH NOW</span>
                                       <span class="span-watchnow">

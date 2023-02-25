@@ -1,4 +1,4 @@
-<div #moviedetails class="person-details">
+<div #moviedetails class="person-details" style="margin-top: 80px">
   <main id="main">
     <div class="person-img">
       <div
@@ -183,8 +183,8 @@
       </tbody>
     </table>
     <hr />
-    <h2 class="text-center" style="color: red">Movies Acted</h2>
-    <p class="h4 text-center text-white">Click the movies to know more</p>
+    <h5 class="text-center" style="color: red">Movies Acted</h5>
+    <h5 class="h5 text-center text-white">Click the movies to know more</h5>
     <main id="main">
       <div
         *ngIf="castMovieList.length <= 0; then nocastmovie; else castmoviedata"
@@ -200,16 +200,16 @@
       </ng-template>
       <ng-template #nocastmovie>
         <div id="no-record_found_cast_movie">
-          <h1 class="text-warning text-center">
+          <h5 class="text-warning text-center">
             {{ personDetails.name }} is not Acted in any Movies
-          </h1>
+          </h5>
         </div>
       </ng-template>
     </main>
     <hr />
 
-    <h2 class="text-center" style="color: red">Tvshows Acted</h2>
-    <p class="h4 text-center text-white">Click the tvshows to know more</p>
+    <h5 class="text-center" style="color: red">Tvshows Acted</h5>
+    <h5 class="h5 text-center text-white">Click the tvshows to know more</h5>
     <main id="main">
       <div *ngIf="castTvList.length <= 0; then nocasttv; else casttvdata"></div>
       <ng-template #casttvdata>
@@ -223,16 +223,16 @@
       </ng-template>
       <ng-template #nocasttv>
         <div id="no-record_found_cast_tv">
-          <h1 class="text-warning text-center">
+          <h5 class="text-warning text-center">
             {{ personDetails.name }} is not Acted in any tvshows
-          </h1>
+          </h5>
         </div>
       </ng-template>
     </main>
     <hr />
 
-    <h2 class="text-center" style="color: red">As Crew in Movies</h2>
-    <p class="h4 text-center text-white">Click the movies to know more</p>
+    <h4 class="text-center" style="color: red">As Crew in Movies</h4>
+    <h5 class="h5 text-center text-white">Click the movies to know more</h5>
     <main id="main">
       <div
         *ngIf="crewMovieList.length <= 0; then nocrewmovie; else crewmoviedata"
@@ -248,16 +248,16 @@
       </ng-template>
       <ng-template #nocrewmovie>
         <div id="no-record_found_crew_movie">
-          <h1 class="text-warning text-center">
+          <h5 class="text-warning text-center">
             {{ personDetails.name }} is not as a crew member in any Movies
-          </h1>
+          </h5>
         </div>
       </ng-template>
     </main>
     <hr />
 
-    <h2 class="text-center" style="color: red">As Crew in Tvshows</h2>
-    <p class="h4 text-center text-white">Click the tvshows to know more</p>
+    <h5 class="text-center" style="color: red">As Crew in Tvshows</h5>
+    <p class="h5 text-center text-white">Click the tvshows to know more</p>
     <main id="main">
       <div *ngIf="crewTvList.length <= 0; then nocrewtv; else crewtvdata"></div>
       <ng-template #crewtvdata>
@@ -271,9 +271,9 @@
       </ng-template>
       <ng-template #nocrewtv>
         <div id="no-record_found_crew_tv">
-          <h1 class="text-warning text-center">
+          <h5 class="text-warning text-center">
             {{ personDetails.name }} is not as a crew member in any tvshows
-          </h1>
+          </h5>
         </div>
       </ng-template>
     </main>

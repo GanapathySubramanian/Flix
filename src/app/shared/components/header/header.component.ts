@@ -14,5 +14,11 @@ export class HeaderComponent implements OnInit {
   background_video: any;
   constructor(private movieservice: MoviesService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.data);
+  }
+
+  float2int(value: any) {
+    return value | 0;
+  }
 }

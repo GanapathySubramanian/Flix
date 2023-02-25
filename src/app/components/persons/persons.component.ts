@@ -51,7 +51,6 @@ export class PersonsComponent implements OnInit {
   searchList: any = [];
   findthispeoples: string = '';
   findPeoples() {
-    console.log(this.findthispeoples);
     if (this.findthispeoples.length > 0) {
       let Ele1 = window.document.getElementById('search-list-lg');
       Ele1?.classList.remove('d-none');
@@ -82,7 +81,6 @@ export class PersonsComponent implements OnInit {
     let tempSearchList: any;
     this.peopleservice.searchpersonData.subscribe((data) => {
       tempSearchList = data;
-      console.log(data);
       this.searchList = tempSearchList.results;
     });
   }
@@ -205,7 +203,6 @@ export class PersonsComponent implements OnInit {
       this.peopleList = [];
       for (let i = 0; i < temppeopleList.length; i++) {
         this.peopleList[i] = {} as common;
-        console.log(temppeopleList);
         this.peopleList[i].id = temppeopleList[i].id;
         this.peopleList[i].title = temppeopleList[i].name;
         this.peopleList[i].popularity = temppeopleList[i].popularity;

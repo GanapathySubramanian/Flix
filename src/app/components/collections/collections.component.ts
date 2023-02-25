@@ -110,12 +110,10 @@ export class CollectionsComponent implements OnInit {
   }
   loadMovies(movieName: string) {
     this.movieservice.getSearchMovies(movieName);
-
     let tempSearchList: any;
     this.movieservice.searchmoviesData.subscribe((data) => {
       tempSearchList = data;
       this.searchList = tempSearchList.results;
-      console.log(this.searchList);
     });
   }
 

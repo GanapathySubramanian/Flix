@@ -1,147 +1,148 @@
-main{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 ngb-rating {
-    color: var(--base-orange);
-    font-size: 15px;
+  /* color: var(--base-orange); */
+  font-size: 15px;
 }
-.tvshows-heading{
-    color:var(--dark-red);
-    text-align: center;
-}
-
-main{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-.tvshows-season{
-    width:350px;
-    margin: 0.5rem;
-    border-radius: 3px;
-    box-shadow: 0.2px 4px 5px rgba(0,0,0,0.1);
-    background-color: var(--secondary-color);
-    transition: background-color 2s;
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
+.tvshows-heading {
+  color: var(--dark-red);
+  text-align: center;
+  font-family: Monoton;
 }
 
-.no-image{
-    object-fit: cover;
-    height: 197px;
+h4 {
+  font-family: Monoton;
+}
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.tvshows-season {
+  width: 350px;
+  margin: 0.5rem;
+  border-radius: 3px;
+  box-shadow: 0.2px 4px 5px rgba(0, 0, 0, 0.1);
+  background-color: var(--secondary-color);
+  transition: background-color 2s;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
 }
 
-.tvshows-season img{
-    transition: all 0.5s ease-in-out;
-    width:100%;
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
+.no-image {
+  object-fit: cover;
+  height: 197px;
 }
 
-.tvshows-season img:hover{
-    -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(0%);
+.tvshows-season img {
+  transition: all 0.5s ease-in-out;
+  width: 100%;
+  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
 }
 
-.tvshows-season-info{
-    color: var(--base-white);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 00.5rem 1rem 1rem;
-    letter-spacing: 0.5px;
-}
-.tvshows-season-infos{
-    color: var(--base-white);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 00.5rem 1rem 1rem;
-    letter-spacing: 0.5px;
-}
-.tvshows-season-info h3{
-    margin-top: 0;
+.tvshows-season img:hover {
+  -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(0%);
 }
 
-.tvshows-season-infos span{
-    background-color: var(--primary-color);
-    transition: background-color 2s;
-    padding: 0.25rem;
-    border-radius: 3px;
-    font-weight: bold;
+.tvshows-season-info {
+  color: var(--base-white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 00.5rem 1rem 1rem;
+  letter-spacing: 0.5px;
+}
+.tvshows-season-infos {
+  color: var(--base-white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 00.5rem 1rem 1rem;
+  letter-spacing: 0.5px;
+}
+.tvshows-season-info h3 {
+  margin-top: 0;
 }
 
-.green{
-    color: var(--base-green);
-}
-.orange{
-    color: var(--base-orange);
-}
-.red{
-    color: var(--dark-red);
-}
- 
-.season-overview{
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--base-white);
-    transition: background-color 2s;
-    padding: 1rem;
-    max-height: 100%;
-    transform: translateY(101%);
-    transition: all 1s ease-in-out;
+.tvshows-season-infos span {
+  background-color: var(--primary-color);
+  transition: background-color 2s;
+  padding: 0.25rem;
+  border-radius: 3px;
+  font-weight: bold;
 }
 
-.tvshows-season:hover .season-overview{
-    transform: translateY(0);
+.green {
+  color: var(--base-green);
+}
+.orange {
+  color: var(--base-orange);
+}
+.red {
+  color: var(--dark-red);
 }
 
+.season-overview {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--base-white);
+  transition: background-color 2s;
+  padding: 1rem;
+  max-height: 100%;
+  transform: translateY(101%);
+  transition: all 1s ease-in-out;
+}
 
-  @media screen and (max-height: 450px) {
-    .overlay a {font-size: 20px}
-    .overlay .closebtn {
+.tvshows-season:hover .season-overview {
+  transform: translateY(0);
+}
+
+@media screen and (max-height: 450px) {
+  .overlay a {
+    font-size: 20px;
+  }
+  .overlay .closebtn {
     font-size: 40px;
     top: 15px;
     right: 35px;
-    }
   }
-  #movie-logo{
-    width: 20%;
-    height: 20%;
+}
+#movie-logo {
+  width: 20%;
+  height: 20%;
 }
 @media only screen and (max-width: 500px) {
-    #movie-logo{
-   width: 70%;
-   height: 100%;
+  #movie-logo {
+    width: 70%;
+    height: 100%;
+  }
 }
-}  
-
 
 @media only screen and (max-width: 600px) {
- 
-    .tvshows-season{
-        width:500px;
-        margin: 1rem;
-        border-radius: 3px;
-        box-shadow: 0.2px 4px 5px rgba(0,0,0,0.1);
-        background-color: var(--secondary-color);
-        position: relative;
-        overflow: hidden;
-    }
-    .tvshows-season-info h4{
-        margin-top: 0;
-        width: 80%;
-        font-size: 30px;
-    }
-    .tvshows-season-rating{
-        margin: 5px;
-        width: auto;
-    }
-
-
+  .tvshows-season {
+    width: 500px;
+    margin: 1rem;
+    border-radius: 3px;
+    box-shadow: 0.2px 4px 5px rgba(0, 0, 0, 0.1);
+    background-color: var(--secondary-color);
+    position: relative;
+    overflow: hidden;
   }
+  .tvshows-season-info h4 {
+    margin-top: 0;
+    width: 80%;
+    font-size: 30px;
+  }
+  .tvshows-season-rating {
+    margin: 5px;
+    width: auto;
+  }
+}
