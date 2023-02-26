@@ -12,7 +12,12 @@
   <div class="text">
     <a
       class="play playBut"
-      style="background-color: transparent; color: white; font-family: Monoton"
+      style="
+        background-color: transparent;
+        color: white;
+        font-family: Monoton;
+        cursor: pointer;
+      "
       (click)="stopTrailer()"
     >
       <div style="display: inline-block; width: 50px">
@@ -117,17 +122,20 @@
             </div>
           </div>
           <div class="header-detail">
-            <span *ngIf="data.vote_average" class="badge"
-              ><span
+            <div class="rating" *ngIf="data.vote_average">
+              <img src="../../../../assets/images/IMDb-icon.png" alt="imbd" />
+
+              <span
+                *ngIf="data.vote_average"
                 [ngClass]="{
-                  'text-danger': data.vote_average <= 5,
-                  'text-warning':
-                    data.vote_average > 5 && data.vote_average < 8,
-                  'text-success': data.vote_average >= 8
+                  red: data.vote_average <= 5,
+                  orange: data.vote_average > 5 && data.vote_average < 8,
+                  green: data.vote_average >= 8
                 }"
-                ><i class="fa-solid fa-star"></i> </span
-              >{{ data.vote_average }}</span
-            >
+              >
+                {{ data.vote_average }}</span
+              >
+            </div>
             <span *ngIf="data.runtime" class="text-white badge"
               ><i class="fa-solid fa-clock"></i> {{ data.runtime }}</span
             >
@@ -151,7 +159,11 @@
           <div class="item-overview">
             {{ data.overview }}
           </div>
-          <div class="wrapper-watchnow" *ngIf="background_video">
+          <div
+            class="wrapper-watchnow"
+            *ngIf="background_video"
+            style="cursor: pointer"
+          >
             <!-- <a class="cta" href="{{data.watchprovider}}">
                                       <span class="span-watchnow">WATCH NOW</span>
                                       <span class="span-watchnow">

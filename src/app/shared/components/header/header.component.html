@@ -49,16 +49,19 @@
           </div>
         </div>
         <div class="header-detail">
-          <span *ngIf="data.vote_average" class="badge"
-            ><span
+          <div class="rating" *ngIf="data.vote_average">
+            <img src="../../../../assets/images/IMDb-icon.png" alt="imbd" />
+            <span
+              *ngIf="data.vote_average"
               [ngClass]="{
-                'text-danger': data.vote_average <= 5,
-                'text-warning': data.vote_average > 5 && data.vote_average < 8,
-                'text-success': data.vote_average >= 8
+                red: data.vote_average <= 5,
+                orange: data.vote_average > 5 && data.vote_average < 8,
+                green: data.vote_average >= 8
               }"
-              ><i class="fa-solid fa-star"></i> </span
-            >{{ data.vote_average }}</span
-          >
+            >
+              {{ data.vote_average }}</span
+            >
+          </div>
           <span *ngIf="data.runtime" class="text-white badge"
             ><i class="fa-solid fa-clock"></i> {{ data.runtime }}</span
           >

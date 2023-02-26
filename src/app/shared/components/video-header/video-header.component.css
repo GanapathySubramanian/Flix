@@ -433,6 +433,17 @@ svg#playBtn {
   line-height: 1em;
   text-transform: uppercase;
 }
+.rating img {
+  height: 10px;
+  width: 20px;
+  object-fit: contain;
+  object-position: center;
+}
+.rating {
+  font-size: 0.8rem;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
 .text p {
   font-size: 1.1em;
   color: #fff;
