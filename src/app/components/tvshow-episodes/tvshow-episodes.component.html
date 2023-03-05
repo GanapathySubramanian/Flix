@@ -29,7 +29,7 @@
           }}<span class="text-bold">{{ e.name }}</span></span
         >
       </div>
-      <div class="tvshows-season-infos">
+      <div class="tvshows-season-infos" *ngIf="e.vote_average">
         <ngb-rating
           [max]="10"
           [(rate)]="e.vote_average"
@@ -56,7 +56,7 @@
         </h6>
       </div>
       <div class="season-overview">
-        <h3 class="text-warning">Overview</h3>
+        <h3 class="text-warning" style="font-family: Monoton">Overview</h3>
         <span class="text-secondary">
           <span *ngIf="e.overview != null">
             <span *ngIf="e.overview?.length <= 300">{{ e.overview }}</span>

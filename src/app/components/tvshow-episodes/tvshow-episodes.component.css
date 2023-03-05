@@ -26,7 +26,7 @@ main {
   margin: 0.5rem;
   border-radius: 3px;
   box-shadow: 0.2px 4px 5px rgba(0, 0, 0, 0.1);
-  background-color: var(--secondary-color);
+  background-color: #141414;
   transition: background-color 2s;
   position: relative;
   overflow: hidden;
@@ -103,6 +103,10 @@ main {
 
 .tvshows-season:hover .season-overview {
   transform: translateY(0);
+}
+.tvshows-season:hover img {
+  -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(0%);
 }
 
 @media screen and (max-height: 450px) {
