@@ -52,7 +52,11 @@
 
       <div class="tvshows-season-infos">
         <h6>
-          {{ e.air_date | date }} / {{ e?.runtime + " min" || 0 + " min" }}
+          <span *ngIf="e.air_date">{{ e.air_date | date }}</span>
+          <span *ngIf="e.air_date && e.runtime">/</span>
+          <span *ngIf="e.runtime">
+            {{ e?.runtime + " min" || 0 + " min" }}
+          </span>
         </h6>
       </div>
       <div class="season-overview">
