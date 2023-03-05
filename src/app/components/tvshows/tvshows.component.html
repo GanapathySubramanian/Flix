@@ -266,7 +266,11 @@
     </div>
   </main>
 
-  <div class="pagination" id="pagination" *ngIf="tvshowList.length > 0">
+  <div
+    class="pagination"
+    id="pagination"
+    *ngIf="tvshowList.length > 0 && !(tvshowList.length < 19)"
+  >
     <button
       class="btn"
       id="prev"

@@ -94,12 +94,10 @@ export class TvshowsComponent implements OnInit {
     this.movieservice.getCountry(country_url);
     this.movieservice.countryData.subscribe((data) => {
       this.countryList = data;
-      console.log(this.countryList);
     });
   }
 
   findTvshow() {
-    console.log(this.findthistvshow);
     if (this.findthistvshow.length > 0) {
       let Ele1 = window.document.getElementById('search-list-lg');
       Ele1?.classList.remove('d-none');
@@ -124,7 +122,6 @@ export class TvshowsComponent implements OnInit {
     let tempSearchList: any;
     this.tvshowservice.searchtvshowsData.subscribe((data) => {
       tempSearchList = data;
-      // console.log(data);
       this.searchList = tempSearchList.results;
     });
   }
@@ -196,7 +193,6 @@ export class TvshowsComponent implements OnInit {
       this.network_value = path;
       this.networkName = name;
       this.network_homepage = homepage;
-      console.log(homepage);
     }
     if (Search_value == '') {
       page = 1;

@@ -4,15 +4,12 @@ import myAppConfig from 'src/app/core/config/my-app-config';
 @Component({
   selector: 'app-poster',
   templateUrl: './poster.component.html',
-  styleUrls: ['./poster.component.css']
+  styleUrls: ['./poster.component.css'],
 })
 export class PosterComponent implements OnInit {
+  imgUrl: string = myAppConfig.tmdb.highQualityImgUrl;
+  @Input() data: any;
+  constructor() {}
 
-  @Input() data:any;
-  imgUrl:string=myAppConfig.tmdb.imgUrl;
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

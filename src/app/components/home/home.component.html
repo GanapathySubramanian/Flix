@@ -27,12 +27,17 @@
 
 <app-trending-backdrops
   [title]="trendingMoviesTitle"
-  [trendingList]="trendingMoviesList"
+  [trendingList]="upcomingMovieList"
 ></app-trending-backdrops>
 
 <app-trending-backdrops
-  [title]="trendingTvshowsTitle"
-  [trendingList]="trendingTvList"
+  [title]="trendingTvshowsTitleInNetflix"
+  [trendingList]="trendingInNetflix"
+></app-trending-backdrops>
+
+<app-trending-backdrops
+  [title]="trendingTvshowsTitleInAmazon"
+  [trendingList]="trendingInPrime"
 ></app-trending-backdrops>
 
 <div *ngIf="topGrossingMoviesList.length > 0">

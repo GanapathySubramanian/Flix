@@ -15,6 +15,10 @@
   font-weight: bold;
 }
 
+#prod-logo-img {
+  width: 30px;
+  height: 30px;
+}
 .cta {
   display: flex;
   padding: 10px 35px;
@@ -246,6 +250,15 @@ path.two {
     font-size: 1rem;
   }
 
+  .green {
+    color: var(--base-green);
+  }
+  .orange {
+    color: var(--base-orange);
+  }
+  .red {
+    color: var(--dark-red);
+  }
   .item-overview {
     font-size: 1rem;
     margin-top: 5px;

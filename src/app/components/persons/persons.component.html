@@ -139,7 +139,10 @@
     </div>
   </main>
 
-  <div class="pagination" *ngIf="peopleList.length > 0">
+  <div
+    class="pagination"
+    *ngIf="peopleList.length > 0 && !(peopleList.length < 19)"
+  >
     <button
       class="btn"
       id="prev"

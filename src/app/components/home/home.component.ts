@@ -10,18 +10,21 @@ import { TvshowsService } from 'src/app/core/services/tvshows.service';
 })
 export class HomeComponent implements OnInit {
   topMoviesList: any[] = [];
-  trendingMoviesList: any[] = [];
+  upcomingMovieList: any[] = [];
   trendingTvList: any[] = [];
 
   highQualityImgUrl: string = myAppConfig.tmdb.highQualityImgUrl;
 
-  trendingMoviesTitle = 'Trending Movies';
-  trendingTvshowsTitle = 'Trending Tvshows';
+  trendingMoviesTitle = 'Upcoming Movies';
+  trendingTvshowsTitleInNetflix = 'Trending In Netflix';
+  trendingTvshowsTitleInAmazon = 'Trending In Amazon';
   topGrossingMoviesList: any[] = [];
   topGrossingTvshowList: any[] = [];
   collections: any = [];
   collectionList: any;
   genreList: any[] = [];
+  trendingInPrime: any[] = [];
+  trendingInNetflix: any[] = [];
   constructor(
     private movieService: MoviesService,
     private tvshowService: TvshowsService
@@ -43,8 +46,11 @@ export class HomeComponent implements OnInit {
       (arr, index, self) => index === self.findIndex((t) => t.id === arr.id)
     );
     this.getPopularMovies();
-    this.getPopularTvShows();
+    this.getPopularTvshow();
+    this.getTrendingShowInPrime();
+    this.getTrendingShowInNetflix();
     this.getTopGrossingMovies();
+    this.getUpcomingMovies();
   }
 
   getPopularMovies() {
@@ -56,7 +62,7 @@ export class HomeComponent implements OnInit {
       '&page=1';
     this.getMoviesData(api_url);
   }
-  getPopularTvShows() {
+  getPopularTvshow() {
     let api_url =
       myAppConfig.tmdb.tvshowBaseUrl +
       myAppConfig.tmdb.apikey +
@@ -64,7 +70,28 @@ export class HomeComponent implements OnInit {
       '&page=1';
     this.getTvshowsData(api_url);
   }
-
+  getTrendingShowInPrime() {
+    let api_url =
+      myAppConfig.tmdb.tvshowBaseUrl +
+      myAppConfig.tmdb.apikey +
+      '&page=1&sort_by=popularity.desc&with_networks=1024';
+    this.getTrendingShowInPrimeData(api_url);
+  }
+  getTrendingShowInNetflix() {
+    let api_url =
+      myAppConfig.tmdb.tvshowBaseUrl +
+      myAppConfig.tmdb.apikey +
+      '&page=1&sort_by=popularity.desc&with_networks=213';
+    this.getTrendingShowInNetflixData(api_url);
+  }
+  getUpcomingMovies() {
+    let api_url =
+      myAppConfig.tmdb.movieBaseUrl +
+      '/movie/upcoming?' +
+      myAppConfig.tmdb.apikey +
+      '&page=1';
+    this.getUpcomingMovieData(api_url);
+  }
   getTopGrossingMovies() {
     let api_url =
       myAppConfig.tmdb.movieBaseUrl +
@@ -75,6 +102,68 @@ export class HomeComponent implements OnInit {
     this.getTopGrossingMovieData(api_url);
   }
 
+  getTrendingShowInPrimeData(url: string) {
+    this.movieService.getTrendingShowInPrime(url);
+    let temptvhsowList: any;
+    this.movieService.trendingInPrimeData.subscribe((data: any) => {
+      temptvhsowList = data.results;
+      temptvhsowList.forEach((movies: any, index: number) => {
+        if (movies.backdrop_path !== null) {
+          movies.background_image =
+            this.highQualityImgUrl + movies.backdrop_path;
+          movies.no_animation = true;
+          let m_genres: any[] = [];
+          movies.genre_ids.forEach((genre: any) => {
+            m_genres.push(this.genreList.find((o) => o.id === genre));
+          });
+          movies.genre_ids = m_genres;
+          if (movies) {
+            this.trendingInPrime.push(movies);
+          }
+        }
+      });
+    });
+  }
+  getUpcomingMovieData(url: string) {
+    this.movieService.getUpcomingMovies(url);
+    let tempMoviesList: any;
+    this.movieService.upcomingData.subscribe((data: any) => {
+      tempMoviesList = data.results;
+      tempMoviesList.forEach((movies: any, index: number) => {
+        if (movies.backdrop_path !== null) {
+          movies.background_image =
+            this.highQualityImgUrl + movies.backdrop_path;
+          movies.no_animation = true;
+          let m_genres: any[] = [];
+          movies.genre_ids.forEach((genre: any) => {
+            m_genres.push(this.genreList.find((o) => o.id === genre));
+          });
+          movies.genre_ids = m_genres;
+          this.upcomingMovieList.push(movies);
+        }
+      });
+    });
+  }
+  getTrendingShowInNetflixData(url: string) {
+    this.tvshowService.getUpcomingTvshows(url);
+    let tempMoviesList: any;
+    this.tvshowService.upcomingTvshowData.subscribe((data: any) => {
+      tempMoviesList = data.results;
+      tempMoviesList.forEach((movies: any, index: number) => {
+        if (movies.backdrop_path !== null) {
+          movies.background_image =
+            this.highQualityImgUrl + movies.backdrop_path;
+          movies.no_animation = true;
+          let m_genres: any[] = [];
+          movies.genre_ids.forEach((genre: any) => {
+            m_genres.push(this.genreList.find((o) => o.id === genre));
+          });
+          movies.genre_ids = m_genres;
+          this.trendingInNetflix.push(movies);
+        }
+      });
+    });
+  }
   getTopGrossingMovieData(url: string) {
     this.movieService.getTopGrossingMovies(url);
     let tempMoviesList: any;
@@ -108,7 +197,7 @@ export class HomeComponent implements OnInit {
             m_genres.push(this.genreList.find((o) => o.id === genre));
           });
           movies.genre_ids = m_genres;
-          this.trendingMoviesList.push(movies);
+          // this.trendingMoviesList.push(movies);
 
           if (index < 5) {
             this.getMovieImages(movies.id, index);

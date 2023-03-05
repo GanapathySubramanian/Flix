@@ -286,7 +286,10 @@
     </div>
   </main>
 
-  <div class="pagination" *ngIf="movieList.length > 0">
+  <div
+    class="pagination"
+    *ngIf="movieList.length > 0 && !(movieList.length < 19)"
+  >
     <button
       class="btn"
       id="prev"

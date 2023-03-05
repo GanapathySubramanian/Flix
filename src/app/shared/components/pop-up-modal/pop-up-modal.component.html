@@ -1,0 +1,13 @@
+<div class="section full-height app-pop-up-modal" *ngIf="openModal">
+  <input class="modal-btn" type="checkbox" id="modal-btn" name="modal-btn" />
+  <label
+    (click)="closeModal()"
+    style="cursor: pointer; z-index: 100000; color: #fff"
+  >
+  </label>
+  <div class="modal">
+    <div class="modal-wrap">
+      <img [src]="highqualityImgUrl + data.file_path" alt="" />
+    </div>
+  </div>
+</div>

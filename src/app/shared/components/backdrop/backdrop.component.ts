@@ -4,16 +4,23 @@ import myAppConfig from 'src/app/core/config/my-app-config';
 @Component({
   selector: 'app-backdrop',
   templateUrl: './backdrop.component.html',
-  styleUrls: ['./backdrop.component.css']
+  styleUrls: ['./backdrop.component.css'],
 })
 export class BackdropComponent implements OnInit {
+  @Input() data: any;
+  imgUrl: string = myAppConfig.tmdb.imgUrl;
+  selectedImage: any;
+  openPopUp: boolean = false;
+  constructor() {}
 
-  @Input() data:any;
-  highqualityImgUrl:string=myAppConfig.tmdb.highQualityImgUrl;
+  ngOnInit(): void {}
 
-  constructor() { }
-
-  ngOnInit(): void {
+  openModal(back_path: any) {
+    this.openPopUp = true;
+    this.selectedImage = back_path;
   }
-
+  resetData(event: boolean) {
+    this.selectedImage = {};
+    this.openPopUp = !event;
+  }
 }

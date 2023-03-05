@@ -15,8 +15,11 @@
       *ngFor="let back_path of data.backdropList"
     >
       <span
+        class="pe-auto"
+        (click)="openModal(back_path)"
+        style="cursor: pointer"
         ><img
-          src="{{ highqualityImgUrl + back_path.file_path }}"
+          src="{{ imgUrl + back_path.file_path }}"
           width="100%"
           height="100%"
       /></span>
@@ -30,3 +33,11 @@
     </h5>
   </div>
 </ng-template>
+
+<ng-container *ngIf="openPopUp">
+  <app-pop-up-modal
+    [openModal]="openPopUp"
+    [data]="selectedImage"
+    (resetData)="resetData($event)"
+  ></app-pop-up-modal>
+</ng-container>

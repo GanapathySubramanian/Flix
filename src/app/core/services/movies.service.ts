@@ -53,6 +53,9 @@ export class MoviesService {
   private upcomingSource = new Subject();
   upcomingData = this.upcomingSource.asObservable();
 
+  private trendingSource = new Subject();
+  trendingInPrimeData = this.trendingSource.asObservable();
+
   //Upcoming Movies List
   private topgrossingSource = new Subject();
   topGrossingData = this.topgrossingSource.asObservable();
@@ -147,6 +150,13 @@ export class MoviesService {
     });
   }
 
+  getTrendingShowInPrime(url: any) {
+    let trending: any;
+    this.http.get(url).subscribe((res) => {
+      trending = res;
+      this.trendingSource.next(trending);
+    });
+  }
   getMovieDetails(url: any) {
     let moviedetails: any;
     this.http.get(url).subscribe((res) => {

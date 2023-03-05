@@ -14,6 +14,7 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { VideoHeaderComponent } from './components/video-header/video-header.component';
 import { TrendingBackdropsComponent } from './components/trending-backdrops/trending-backdrops.component';
 import { RouterModule } from '@angular/router';
+import { PopUpModalComponent } from './components/pop-up-modal/pop-up-modal.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { RouterModule } from '@angular/router';
     LandingPageComponent,
     VideoHeaderComponent,
     TrendingBackdropsComponent,
+    PopUpModalComponent,
   ],
   imports: [CommonModule, NgbModule, IvyCarouselModule, RouterModule],
   exports: [
