@@ -18,12 +18,12 @@
 <div *ngIf="data.poster_path == null; then thenBlock; else elseBlock"></div>
 <ng-template #thenBlock>
   <figure>
-    <img src="assets/images/no-image.png" alt="figure" class="no-image" />
+    <img src="assets/images/no-image.png" alt="figure" class="no-image" data-aos="zoom-in" />
   </figure>
 </ng-template>
 <ng-template #elseBlock>
   <figure>
-    <img src="{{ imgUrl + data.poster_path }}" alt="figure" class="image" />
+    <img src="{{ imgUrl + data.poster_path }}" alt="figure" class="image"  data-aos="zoom-in"/>
   </figure>
 </ng-template>
 
@@ -41,7 +41,7 @@
   >
 </div> -->
 
-<div *ngIf="!data.character && !data.job" class="text-over-card">
+<div *ngIf="!data.character && !data.job" class="text-over-card bg-transparent" data-aos="fade-left">
   <span *ngIf="data.title" style="font-size: 13px">{{ data.title }} </span>
   <span *ngIf="!data.title && data.name" style="font-size: 13px"
     >{{ data.name }}
@@ -60,7 +60,7 @@
     <img src="assets/images/IMDb-icon.png" alt="imbd" />
   </div>
 </div>
-<div *ngIf="data.character" class="text-over-card">
+<div *ngIf="data.character" class="text-over-card" data-aos="fade-left">
   <span *ngIf="data.title">{{ data.title }}</span>
   <span>AS {{ data.character }}</span>
 </div>
@@ -87,7 +87,7 @@
   <p>{{ data.release_date | date }}</p>
 </div> -->
 
-<div *ngIf="data.job && !data.character" class="text-over-card">
+<div *ngIf="data.job && !data.character" class="text-over-card" data-aos="fade-left">
   <span *ngIf="data.title">{{ data.title }}</span>
   <span>{{ "Job : " + data.job }}</span>
 </div>

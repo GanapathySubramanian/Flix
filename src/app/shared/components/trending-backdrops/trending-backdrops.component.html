@@ -1,4 +1,4 @@
-<div class="topMovies-container">
+<div class="topMovies-container" >
   <h4 class="details-header">{{ title }}</h4>
   <ng-container *ngIf="trendingList.length > 0">
     <carousel
@@ -40,15 +40,16 @@
             <img
               [attr.src]="highQualityImgUrl + trending.backdrop_path"
               alt="{{ trending.original_title }}"
+              data-aos="zoom-in"
           /></ng-template>
           <div
             class="title position-absolute d-flex justify-content-center align-items-center text-white"
             style="margin-top: -30px; text-align: center; margin-left: 20px"
           >
-            <div class="title-name" *ngIf="trending.name">
+            <div class="title-name" *ngIf="trending.name" data-aos="fade-left">
               {{ trending.name }}
             </div>
-            <div class="title-name" *ngIf="trending.title">
+            <div class="title-name" *ngIf="trending.title" data-aos="fade-right">
               {{ trending.title }}
             </div>
           </div>

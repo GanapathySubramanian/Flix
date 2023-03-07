@@ -55,7 +55,7 @@
 figure {
   margin: 0;
   padding: 0;
-  background: var(--base-white);
+  background: var(--secondary-color);
   transition: background 2s;
 
   overflow: hidden;

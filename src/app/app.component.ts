@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoaderService } from './core/services/loader.service';
+import * as Aos from 'aos';
 
 @Component({
   selector: 'app-root',
@@ -17,5 +18,8 @@ export class AppComponent implements OnInit{
     this.loaderService.loaderStatus.subscribe((status) => {
       this.loader = status;
     });
+    Aos.init();//AOS - 2
+    Aos.refresh();
+    Aos.refreshHard();
   }
 }

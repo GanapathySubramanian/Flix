@@ -91,7 +91,7 @@ h4 {
 figure {
   margin: 0;
   padding: 0;
-  background: var(--base-white);
+  background: var(--secondary-color);
   overflow: hidden;
 }
 

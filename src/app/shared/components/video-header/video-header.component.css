@@ -6,7 +6,6 @@
   padding: 00.5rem 1rem 1rem;
   letter-spacing: 0.5px;
 }
-
 .header-info span {
   background-color: var(--primary-color);
   transition: background-color 2s;

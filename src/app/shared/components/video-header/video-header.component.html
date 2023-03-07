@@ -18,6 +18,7 @@
         font-family: Monoton;
         cursor: pointer;
       "
+      data-aos="fade-down"
       (click)="stopTrailer()"
     >
       <div style="display: inline-block; width: 50px">
@@ -80,10 +81,11 @@
 
   <div class="header-content">
     <div class="left-img">
-      <div class="header-img">
+      <div class="header-img" >
         <div
           *ngIf="data.poster_path == null; then thenBlock; else elseBlock"
         ></div>
+      
         <ng-template #thenBlock
           ><img src="assets/images/no-image.png" alt="figure" class="no-image"
         /></ng-template>
@@ -91,6 +93,7 @@
           ><img
             [attr.src]="imgUrl + data.poster_path"
             alt="{{ data.original_title }}"
+            data-aos="fade-down"
         /></ng-template>
       </div>
     </div>
@@ -99,7 +102,8 @@
       <div class="home-slide-item-content">
         <div class="items">
           <div class="item-title">
-            <span *ngIf="!data.logoList">
+            <span *ngIf="!data.logoList" data-aos="fade-down" data-aos-easing="linear"
+            >
               <span
                 *ngIf="data.title"
                 style="font-family: Monoton; color: red; font-size: 30px"
@@ -117,12 +121,12 @@
               >
             </span>
 
-            <div class="mt-5" *ngIf="data.logoList != null">
+            <div class="mt-5" *ngIf="data.logoList != null" data-aos="fade-down" >
               <img id="logo-img" src="{{ imgUrl + data.logoList.file_path }}" />
             </div>
           </div>
-          <div class="header-detail">
-            <div class="rating" *ngIf="data.vote_average">
+          <div class="header-detail" data-aos="fade-down" data-aos-anchor-placement="top-bottom" >
+            <div class="rating" *ngIf="data.vote_average" >
               <img src="assets/images/IMDb-icon.png" alt="imbd" />
 
               <span
@@ -149,7 +153,7 @@
               {{ data.first_air_date | date }}</span
             >
           </div>
-          <div class="header-detail text-danger" *ngIf="data.genre">
+          <div class="header-detail text-danger" *ngIf="data.genre" data-aos="fade-down" >
             <span
               *ngFor="let genre of data.genre; let i = index"
               class="badge text-bg-danger color-white bg-danger rounded m-2"
@@ -157,7 +161,7 @@
               {{ genre.name }}
             </span>
           </div>
-          <div class="header-detail text-danger" *ngIf="data.genre_ids">
+          <div class="header-detail text-danger" *ngIf="data.genre_ids" data-aos="fade-down" >
             <span
               *ngFor="let genre of data.genre_ids; let i = index"
               class="badge text-bg-danger color-white bg-danger rounded m-2"
@@ -165,8 +169,8 @@
               {{ genre.name }}
             </span>
           </div>
-          <div class="item-overview">
-            {{ data.overview }}
+          <div class="item-overview" >
+            <p data-aos="fade-down">{{ data.overview }}</p>
           </div>
           <!-- <div class="production text-white text-wrap mt-2">
             <span *ngFor="let prod of data.production_companies; let i = index">
@@ -185,7 +189,7 @@
               >
             </span>
           </div> -->
-          <div class="production text-white text-wrap mt-2">
+          <div class="production text-white text-wrap mt-2" data-aos="fade-down" >
             <span *ngIf="data?.production_companies?.length > 0"
               >Production :
             </span>
@@ -199,7 +203,7 @@
             </span>
           </div>
 
-          <div class="streaming text-white text-wrap mt-2">
+          <div class="streaming text-white text-wrap mt-2" data-aos="fade-down" >
             <span *ngIf="data?.networks?.length > 0"> Streaming On : </span>
             <span
               *ngFor="let stream of data.networks; let i = index"
@@ -223,6 +227,8 @@
             class="wrapper-watchnow"
             *ngIf="background_video"
             style="cursor: pointer"
+            data-aos="fade-down"
+            
           >
             <a class="play playBut" (click)="playTrailer()">
               <div style="display: inline-block; width: 50px">

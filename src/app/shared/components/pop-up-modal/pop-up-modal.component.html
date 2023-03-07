@@ -1,4 +1,4 @@
-<div class="section full-height app-pop-up-modal" *ngIf="openModal">
+<div class="section full-height app-pop-up-modal" *ngIf="openModal" >
   <input class="modal-btn" type="checkbox" id="modal-btn" name="modal-btn" />
   <label
     (click)="closeModal()"
@@ -7,7 +7,7 @@
   </label>
   <div class="modal">
     <div class="modal-wrap">
-      <img [src]="highqualityImgUrl + data.file_path" alt="" />
+      <img [src]="highqualityImgUrl + data.file_path" alt="" data-aos="zoom-in"/>
     </div>
   </div>
 </div>
