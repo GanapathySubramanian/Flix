@@ -256,10 +256,6 @@ path.two {
 
 /* for mobile */
 @media only screen and (max-width: 900px) {
-  .header {
-    display: none;
-  }
-
   .tr-overview {
     display: contents;
   }

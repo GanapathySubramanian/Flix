@@ -13,8 +13,9 @@ export class VideoHeaderComponent implements OnInit {
   playVideo: boolean = false;
   constructor() {}
 
-  ngOnInit(): void {
-
+  ngOnInit(): void {   
+    console.log(this.data);
+     this.data.vote_average=(this.data.vote_average*50)/100;
   }
   playTrailer() {
     this.playVideo = true;

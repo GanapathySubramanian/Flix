@@ -6,7 +6,7 @@
     ></app-video-header>
   </section>
 
-  <main id="main">
+  <!-- <main id="main">
     <div class="movie-poster-img">
       <div
         *ngIf="movieDetails.poster_path == null; then thenBlock; else elseBlock"
@@ -20,14 +20,9 @@
           alt="{{ movieDetails.original_title }}"
       /></ng-template>
     </div>
-  </main>
+  </main> -->
 
   <div class="movie-content">
-    <div class="reviews-section">
-      <app-review [data]="movieDetails"></app-review>
-    </div>
-
-    <hr />
 
     <div class="Backdropimages">
       <app-backdrop [data]="movieDetails"></app-backdrop>
@@ -161,5 +156,10 @@
         </div>
       </ng-template>
     </div>
+    <hr />
+    <div class="reviews-section">
+      <app-review [data]="movieDetails"></app-review>
+    </div>
+    
   </div>
 </div>

@@ -1,22 +1,52 @@
 <h4 class="movie-heading mt-5">
   REVIEWS FOR {{ "(" + data.original_title + ")" }}
 </h4>
-<div
+ <div
   *ngIf="data.reviewList?.length <= 0; then noreviewBlock; else reviewBlock"
 ></div>
 <ng-template #reviewBlock>
-  <table class="table-review table-responsive">
-    <thead class="table-review-head">
-      <td>SNO</td>
-      <td>REVIEWS</td>
-    </thead>
-    <tbody class="table-review-body">
-      <tr *ngFor="let rev of data.reviewList; let i = index">
-        <td>{{ i + 1 }}</td>
-        <td>{{ rev.content }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <section class="review-section" >
+    <div class="review-container mt-4" *ngFor="let rev of data.reviewList; let i = index" style="width: 100%;
+    padding: 20px;
+    border: 1px solid red;
+    border-radius: 8px;">
+        <div class="d-flex">
+          <div class="author-image">
+            <span *ngIf="rev.author_details.avatar_path">
+              <img [src]="imgUrl+rev.author_details.avatar_path"  alt=""  style="width:50px;height:50px;border-radius: 100%;">
+            </span>
+            <span *ngIf="!rev.author_details.avatar_path">
+              <div class="circle" style="border-radius: 50%;
+              width: 50px;
+              height: 50px;
+              padding: 10px;
+              
+              border: 3px solid #000;
+              color: #000;
+              text-align: center;"
+              [style.backgroundColor]="bgColor"
+              >{{rev?.author[0]}}</div>
+            </span>
+          </div>
+          <div class="review-details" style="margin-left:30px">
+            <span>A review by <span style="color:orange">{{rev.author}}</span>
+            <span style="
+            margin-left:10px;
+            background: #fff;
+            color: black;
+            border-radius: 8px;
+            font-size: 10px;
+            padding: 2px;"> 
+            <i class="fa-solid fa-star"></i> {{rev.author_details.rating}}
+
+            </span>
+          </span>
+            <p style="font-size:12px;">Written by {{rev.author}} on {{rev.created_at | date}}</p>
+            <p style="font-size: 13px;">{{rev.content}}</p>
+          </div>
+        </div>
+    </div>
+  </section>
 </ng-template>
 <ng-template #noreviewBlock>
   <div id="no-record_images">
@@ -24,4 +54,4 @@
       Reviews Not available For {{ data.original_title }}
     </h5>
   </div>
-</ng-template>
+</ng-template> 

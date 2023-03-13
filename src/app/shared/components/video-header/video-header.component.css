@@ -211,7 +211,7 @@ path.two {
     /* justify-content: space-around; */
   }
   .left-img {
-    width: 60%;
+    width: 40%;
     float: left;
   }
   .left-img .header-img {
@@ -292,7 +292,9 @@ path.two {
     display: none;
   }
 }
-
+.sm-video-header{
+  display: none;
+}
 @media only screen and (max-width: 1500px) {
   .left-img {
     width: 50%;
@@ -301,8 +303,23 @@ path.two {
   .right-content {
     width: 50%;
   }
+  .lg-video-header{
+    display: block;
+  }
+  .sm-video-header{
+    display: none;
+  }
 }
 
+@media only screen and (max-width: 1077px) {
+
+  .lg-video-header{
+    display: none;
+  }
+  .sm-video-header{
+    display: block;
+  }
+}
 /* for mobile */
 @media only screen and (max-width: 900px) {
   .header {
