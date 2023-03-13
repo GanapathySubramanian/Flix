@@ -9,6 +9,7 @@
     [height]="300"
     [margin]="30"
     arrowsTheme="dark"
+    style="z-index:100"
   >
     <div class="carousel-cell" *ngFor="let post of data.posterList">
       <img src="{{ imgUrl + post.file_path }}" width="100%" height="100%" />

@@ -315,10 +315,10 @@ export class MoviesComponent implements OnInit {
       this.movieList.forEach((movies: any, index) => {
         movies.background_image = this.highqualityImgUrl + movies.backdrop_path;
         movies.no_animation = true;
-        if (index < 10) {
-          this.getMovieImages(movies.id, index);
-          if (movies.backdrop_path) this.topMoviesList.push(movies);
-        }
+        // if (index < 10) {
+        //   this.getMovieImages(movies.id, index);
+        //   if (movies.backdrop_path) this.topMoviesList.push(movies);
+        // }
       });
 
       if (data.total_pages == page) {

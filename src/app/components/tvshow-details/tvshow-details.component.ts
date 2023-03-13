@@ -28,12 +28,14 @@ export class TvshowDetailsComponent implements OnInit {
   ) {
     let id = this.route.snapshot.params['id'];
     tvshow_id = id;
-  }
-
-  ngOnInit(): void {
     this.router.navigateByUrl('/tvshowdetails/' + tvshow_id);
 
     this.getTvshowDetails(tvshow_id);
+
+  }
+
+  ngOnInit(): void {
+   
   }
 
   getTvshowDetails(tvshow_id: number) {
@@ -102,7 +104,9 @@ export class TvshowDetailsComponent implements OnInit {
       videos = data;
 
       this.tvshowDetails.videoList = videos.results;
-
+      this.tvshowDetails.videoList.forEach((video:any) => {
+        video.videoThumbnail=myAppConfig.tmdb.thumbnailUrl+video.key+'/0.jpg';
+      });
       for (let i = 0; i < this.tvshowDetails.videoList.length; i++) {
         if (this.tvshowDetails.videoList[i].key) {
           if ((this.tvshowDetails.videoList[i].type = 'Teaser')) {
@@ -224,7 +228,19 @@ export class TvshowDetailsComponent implements OnInit {
     this.tvshowservice.tvshowreviewData.subscribe((data) => {
       tempreviewData = data;
 
+      tempreviewData.results.forEach((review:any) => {
+        if(review.author_details.avatar_path){
+          if(review.author_details.avatar_path[0]=='/' && review.author_details.avatar_path[1]=='h' && review.author_details.avatar_path[2]=='t' && review.author_details.avatar_path[3]=='t' && review.author_details.avatar_path[4]=='p'){
+            let avatar_path=review.author_details.avatar_path.substring(1);
+            review.author_details.avatar_path=avatar_path;
+          }else{
+            let avatar_path=this.imgUrl+review.author_details.avatar_path;
+            review.author_details.avatar_path=avatar_path;
+          }
+        }
+      });
       this.tvshowDetails.reviewList = tempreviewData.results;
+      
     });
   }
 
@@ -256,12 +272,18 @@ export class TvshowDetailsComponent implements OnInit {
 
       this.tvshowDetails.posterList = tempimagesData.posters;
 
-      //Tvshow Logo Images
-      if (tempimagesData.logos.length < 0) {
-        this.tvshowDetails.logoList.file_path = null;
-      } else {
-        this.tvshowDetails.logoList = tempimagesData.logos[0];
+      let englishLogos:any[]=[];
+      if(tempimagesData.logos.length>0){
+        tempimagesData?.logos.forEach((logo:any) => {
+          if(logo.iso_639_1=='en'){
+            englishLogos.push(logo);
+          }
+        });
       }
+
+      if(englishLogos.length>0){
+        this.tvshowDetails.logoList=englishLogos[0];
+      }    
     });
   }
 

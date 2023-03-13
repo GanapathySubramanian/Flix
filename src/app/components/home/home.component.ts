@@ -197,11 +197,9 @@ export class HomeComponent implements OnInit {
             m_genres.push(this.genreList.find((o) => o.id === genre));
           });
           movies.genre_ids = m_genres;
-          // this.trendingMoviesList.push(movies);
-
           if (index < 5) {
-            this.getMovieImages(movies.id, index);
-            this.topMoviesList.push(movies);
+            this.getMovieImages(movies);
+            // this.topMoviesList.push(movies);
           }
         }
       });
@@ -226,6 +224,7 @@ export class HomeComponent implements OnInit {
           tvshow.no_animation = true;
           if (index < 5) {
             this.getTvshowImages(tvshow);
+            // this.topMoviesList.push(tvshow);
           }
         }
       });
@@ -244,36 +243,49 @@ export class HomeComponent implements OnInit {
     this.movieService.movieallImageData.subscribe((data: any) => {
       tempimagesData = data;
       if (data.id === tvshow.id) {
-        if (tempimagesData.logos.length < 0) {
-          tvshow.logoList.file_path = null;
-        } else {
-          if (data.logos[0]) {
-            tvshow.logoList = tempimagesData.logos[0];
-          }
+        let englishLogos:any[]=[];
+        if(tempimagesData.logos.length>0){
+          tempimagesData?.logos.forEach((logo:any) => {
+            if(logo.iso_639_1=='en'){
+              englishLogos.push(logo);
+            }
+          });
         }
-        this.topMoviesList.push(tvshow);
+
+        if(englishLogos.length>0){
+          tvshow.logoList=englishLogos[0];
+        }       
+       this.topMoviesList.push(tvshow);
       }
     });
   }
 
-  getMovieImages(id: string, index: number) {
+  getMovieImages(movie:any) {
     let backdrop_url =
       myAppConfig.tmdb.movieBaseUrl +
       '/movie/' +
-      id +
+      movie.id +
       '/images?' +
       myAppConfig.tmdb.apikey;
     this.movieService.getAllImages(backdrop_url);
     let tempimagesData: any;
     this.movieService.movieallImageData.subscribe((data: any) => {
-      if (data.id === id) {
+      if (data.id === movie.id) {
         tempimagesData = data;
-        //Movie Logo Images
-        if (tempimagesData.logos.length < 0) {
-          this.topMoviesList[index].logoList.file_path = null;
-        } else {
-          this.topMoviesList[index].logoList = tempimagesData.logos[0];
+        let englishLogos:any[]=[];
+        if(tempimagesData.logos.length>0){
+          tempimagesData?.logos.forEach((logo:any) => {
+            
+            if(logo.iso_639_1=='en'){
+              englishLogos.push(logo);
+            }
+          });
         }
+        if(englishLogos.length>0){
+          movie.logoList=englishLogos[0];
+        }   
+        
+       this.topMoviesList.push(movie);
       }
     });
   }

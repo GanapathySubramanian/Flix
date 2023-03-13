@@ -8,14 +8,14 @@ import myAppConfig from 'src/app/core/config/my-app-config';
 })
 export class VideoHeaderComponent implements OnInit {
   @Input() data: any = {};
-  imgUrl: string = myAppConfig.tmdb.highQualityImgUrl;
+  highQualityImgUrl: string = myAppConfig.tmdb.highQualityImgUrl;
+  imgUrl: string = myAppConfig.tmdb.imgUrl;
   @Input() background_video: any;
   @Input() isCarousel:boolean=false;
   playVideo: boolean = false;
   constructor() {}
 
   ngOnInit(): void {   
-    console.log(this.data);
      this.data.vote_average=(this.data.vote_average*50)/100;
   }
   playTrailer() {

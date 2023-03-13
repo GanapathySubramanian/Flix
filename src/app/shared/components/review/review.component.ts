@@ -18,7 +18,6 @@ export class ReviewComponent implements OnInit {
     this.bgColor="rgb(" + x + "," + y + "," + z + ")";
   }
 
-  ngOnInit(): void {   
-  }
+  ngOnInit(): void {}
  
 }

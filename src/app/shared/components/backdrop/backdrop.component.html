@@ -38,6 +38,8 @@
   <app-pop-up-modal
     [openModal]="openPopUp"
     [data]="selectedImage"
+    [isImage]="true"
+    [isVideo]="false"
     (resetData)="resetData($event)"
   ></app-pop-up-modal>
 </ng-container>

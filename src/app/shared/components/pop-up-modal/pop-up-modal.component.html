@@ -6,8 +6,21 @@
   >
   </label>
   <div class="modal">
-    <div class="modal-wrap">
+    <div class="modal-wrap" *ngIf="isImage">
       <img [src]="highqualityImgUrl + data.file_path" alt="" data-aos="zoom-in"/>
+    </div>
+    <div class="modal-wrap" *ngIf="isVideo" style="height:700px">
+      <iframe
+      height="100%"
+      width="100%"
+      id="stop-video"
+      class="youtube-video"
+      [src]="data.key"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+ 
     </div>
   </div>
 </div>

@@ -9,9 +9,21 @@ import myAppConfig from 'src/app/core/config/my-app-config';
 export class VideoComponent implements OnInit {
   @Input() data: any;
   imgUrl: string = myAppConfig.tmdb.imgUrl;
+  selectedImage: any;
+  openPopUp: boolean = false;
   constructor() {}
 
-  ngOnInit(): void {
-    console.log(this.data);
+  ngOnInit(): void {}
+
+  ngDestory(){
+    this.data=null;
+  }
+  openModal(back_path: any) {
+    this.openPopUp = true;
+    this.selectedImage = back_path;
+  }
+  resetData(event: boolean) {
+    this.selectedImage = {};
+    this.openPopUp = !event;
   }
 }

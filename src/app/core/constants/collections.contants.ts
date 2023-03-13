@@ -111,7 +111,4 @@ export const COLLECTIONS = [
   { id: '52985' },
   { id: '85943' },
   { id: '52984' },
-  { id: '' },
-  { id: '' },
-  { id: '' },
 ];

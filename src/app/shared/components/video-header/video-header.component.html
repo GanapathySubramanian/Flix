@@ -66,7 +66,7 @@
       </a>
       <h3 class="text-white" (click)="stopTrailer()">
         <div class="mt-5" *ngIf="data.logoList">
-          <img id="logo-img" src="{{ imgUrl + data.logoList.file_path }}" />
+          <img id="logo-img" src="{{ highQualityImgUrl + data.logoList.file_path }}" />
         </div>
         <span *ngIf="!data.logoList">{{ data.original_title }}</span>
       </h3>
@@ -92,7 +92,7 @@
           /></ng-template>
           <ng-template #elseBlock
             ><img
-              [attr.src]="imgUrl + data.poster_path"
+              [attr.src]="highQualityImgUrl + data.poster_path"
               alt="{{ data.original_title }}"
               data-aos="fade-down"
           /></ng-template>
@@ -123,7 +123,7 @@
               </span>
   
               <div class="mt-5" *ngIf="data.logoList != null" data-aos="fade-down" >
-                <img id="logo-img" src="{{ imgUrl + data.logoList.file_path }}" />
+                <img id="logo-img" src="{{ highQualityImgUrl + data.logoList.file_path }}" />
               </div>
             </div>
             <div class="header-detail" data-aos="fade-down" data-aos-anchor-placement="top-bottom" >
@@ -195,7 +195,7 @@
               >
                 <span *ngIf="stream.logo_path">
                   <img
-                    src="{{ imgUrl + stream.logo_path }}"
+                    src="{{ highQualityImgUrl + stream.logo_path }}"
                     class="network-img"
                     style="width: 100px; height: 40px; margin: 10px"
                   />
@@ -268,10 +268,10 @@
 
 <section class="sm-video-header">
   <div class="image" data-aos="zoom-in">
-    <img [src]="imgUrl+data.backdrop_path" alt="" style="width:100%;border-radius:0% 0% 0% 0%;">
+    <img [src]="highQualityImgUrl+data.backdrop_path" alt="" style="width:100%;border-radius:0% 0% 0% 0%;">
     <div class="poster-path">
-      <img data-aos="zoom-in" *ngIf="!isCarousel"[src]="imgUrl+data.poster_path" alt="" style="height:200px;width:150px;border-radius: 30px;position:absolute;margin-left:125px;margin-top:-150px">
-      <img data-aos="zoom-in" *ngIf="isCarousel" [src]="imgUrl+data.poster_path" alt="" style="height:200px;width:150px;border-radius: 30px;position:absolute; margin-left: -70px; margin-top: -150px;">
+      <img data-aos="zoom-in" *ngIf="!isCarousel"[src]="highQualityImgUrl+data.poster_path" alt="" style="height:200px;width:150px;border-radius: 30px;position:absolute;margin-left:125px;margin-top:-150px">
+      <img data-aos="zoom-in" *ngIf="isCarousel" [src]="highQualityImgUrl+data.poster_path" alt="" style="height:200px;width:150px;border-radius: 30px;position:absolute; margin-left: -70px; margin-top: -150px;">
     </div>
   </div>
   <div class="movie-details" style="margin-top:70px">
@@ -332,7 +332,7 @@
         >
           <span *ngIf="stream.logo_path">
             <img
-              src="{{ imgUrl + stream.logo_path }}"
+              src="{{ highQualityImgUrl + stream.logo_path }}"
               class="network-img"
               style="width: 100px; height: 40px; margin: 10px"
             />

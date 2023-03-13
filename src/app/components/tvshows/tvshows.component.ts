@@ -66,7 +66,7 @@ export class TvshowsComponent implements OnInit {
     this.getOrder();
     this.getNetwork();
     this.gettvshows();
-    this.getCountries();
+    // this.getCountries();
   }
 
   getOrder() {
@@ -349,10 +349,10 @@ export class TvshowsComponent implements OnInit {
       this.tvshowList.forEach((movies: any, index) => {
         movies.background_image = this.highqualityImgUrl + movies.backdrop_path;
         movies.no_animation = true;
-        if (index < 10) {
-          this.getTvshowImages(movies.id, index);
-          this.topTvshowList.push(movies);
-        }
+        // if (index < 10) {
+        //   this.getTvshowImages(movies.id, index);
+        //   this.topTvshowList.push(movies);
+        // }
       });
 
       if (data.total_pages == page) {

@@ -1,7 +1,7 @@
 <h4 class="movie-heading mt-5">{{ data.original_title }} VIDEOS</h4>
 <div *ngIf="data.videoList?.length <= 0; then novideo; else video"></div>
 <ng-template #video>
-  <div class="lg-carousel">
+  <!-- <div class="lg-carousel">
     <carousel
       class="text-center"
       [cellWidth]="1400"
@@ -68,7 +68,42 @@
         ></iframe>
       </div>
     </carousel>
+  </div> -->
+
+
+  <div class="row">
+    <div
+      class="col-lg-3 col-sm-12 col-md-12 mt-5"
+      *ngFor="let video of data.videoList"
+    >
+      <span
+        class="pe-auto video-data"
+        style="cursor: pointer"
+        (click)="openModal(video)"
+        data-aos="fade-down"
+        ><img
+          [src]="video.videoThumbnail"
+          width="100%"
+          height="100%"
+        data-aos="fade-down"
+
+      />
+    </span>
+    <div class="play_zin1m" style="
+    position: absolute;
+    margin-top: -143px;
+    margin-left: 140px;
+    cursor: pointer;
+    "
+
+    (click)="openModal(video)"
+    data-aos="fade-down"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 55 55"><circle cx="27.5" cy="27.5" r="26.75" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></circle><path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.97 40.81L40.64 27.5 20.97 14.19v26.62z"></path></svg>
+    </div>
+    </div>
   </div>
+  
 </ng-template>
 <ng-template #novideo>
   <div id="no-record_images">
@@ -77,3 +112,13 @@
     </h5>
   </div>
 </ng-template>
+
+<ng-container *ngIf="openPopUp">
+  <app-pop-up-modal
+    [openModal]="openPopUp"
+    [data]="selectedImage"
+    [isImage]="false"
+    [isVideo]="true"
+    (resetData)="resetData($event)"
+  ></app-pop-up-modal>
+</ng-container>

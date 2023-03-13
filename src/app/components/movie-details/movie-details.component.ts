@@ -1,12 +1,9 @@
-import { Component, OnInit, Inject, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter } from 'rxjs';
-import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 import { MovieDetails } from 'src/app/core/interface/movie-details';
 import myAppConfig from 'src/app/core/config/my-app-config';
 import { MoviesService } from 'src/app/core/services/movies.service';
-import { common } from 'src/app/core/interface/common';
 
 var movie_id = 0;
 @Component({
@@ -33,11 +30,13 @@ export class MovieDetailsComponent implements OnInit {
     movie_id = id;
 
     this.movieDetails.crewList = [];
-  }
-  ngOnInit(): void {
     this.router?.navigateByUrl('/moviedetails/' + movie_id);
+    this.getMovieDetails(movie_id);    
+  }
+  ngOnInit(): void {}
 
-    this.getMovieDetails(movie_id);
+  ngDestroy(){
+    this.movieDetails={} as MovieDetails;
   }
 
   getMovieDetails(id: number) {
@@ -111,10 +110,14 @@ export class MovieDetailsComponent implements OnInit {
     let videos: any;
     this.movieservice.videoData.subscribe((data) => {
       videos = data;
-      console.log(data);
-
+      this.movieDetails.videoList=[];
       this.movieDetails.videoList = videos.results;
 
+      if(this.movieDetails.videoList.length>0){
+        this.movieDetails.videoList.forEach((video:any) => {
+          video.videoThumbnail=myAppConfig.tmdb.thumbnailUrl+video.key+'/0.jpg';
+        });
+      }
       for (let i = 0; i < this.movieDetails.videoList.length; i++) {
         if (this.movieDetails.videoList[i].key) {
           if ((this.movieDetails.videoList[i].type = 'Teaser')) {
@@ -124,6 +127,7 @@ export class MovieDetailsComponent implements OnInit {
                   this.movieDetails.videoList[i].key +
                   '?modestbranding=0&controls=0&fs=0&loop=1&showinfo=0&autoplay=1&mute=1&enablejsapi=1'
               );
+              
           } else if ((this.movieDetails.videoList[i].type = 'Trailer')) {
             this.background_video =
               this._sanitizer.bypassSecurityTrustResourceUrl(
@@ -138,6 +142,7 @@ export class MovieDetailsComponent implements OnInit {
             );
         } else {
           this.movieDetails.videoList[i].key = null;
+          this.movieDetails.videoList[i].videoThumbnail=null;
         }
       }
     });
@@ -258,7 +263,13 @@ export class MovieDetailsComponent implements OnInit {
     this.movieservice.moviereviewData.subscribe((data) => {
       tempreviewData = data;
 
-      this.movieDetails.reviewList = tempreviewData.results;
+      tempreviewData.results.forEach((review:any) => {
+        if(review.author_details.avatar_path){
+          let avatar_path=this.imgUrl+review.author_details.avatar_path;
+          review.author_details.avatar_path=avatar_path;
+        }
+      });
+      this.movieDetails.reviewList=tempreviewData.results;      
     });
   }
 
@@ -290,12 +301,19 @@ export class MovieDetailsComponent implements OnInit {
 
       this.movieDetails.posterList = tempimagesData.posters;
 
-      //Movie Logo Images
-      if (tempimagesData.logos.length < 0) {
-        this.movieDetails.logoList.file_path = null;
-      } else {
-        this.movieDetails.logoList = tempimagesData.logos[0];
+      let englishLogos:any[]=[];
+      if(tempimagesData.logos.length>0){
+        tempimagesData?.logos.forEach((logo:any) => {
+          if(logo.iso_639_1=='en'){
+            englishLogos.push(logo);
+          }
+        });
       }
+
+      if(englishLogos.length>0){
+        this.movieDetails.logoList=englishLogos[0];
+      }       
+      
     });
   }
 

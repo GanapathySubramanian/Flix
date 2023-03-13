@@ -10,6 +10,7 @@ export default {
     imgUrl: 'https://image.tmdb.org/t/p/w500/',
     highQualityImgUrl: 'https://image.tmdb.org/t/p/original',
     videoUrl: 'https://www.youtube.com/embed/',
+    thumbnailUrl:'https://img.youtube.com/vi/',
     genreUrl:'https://api.themoviedb.org/3/genre/'
   },
 };
