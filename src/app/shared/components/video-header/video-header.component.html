@@ -268,9 +268,10 @@
 
 <section class="sm-video-header">
   <div class="image" data-aos="zoom-in">
-    <img [src]="imgUrl+data.backdrop_path" alt="" style="height:300px;width:100%;border-radius:0% 0% 0% 0%;">
+    <img [src]="imgUrl+data.backdrop_path" alt="" style="width:100%;border-radius:0% 0% 0% 0%;">
     <div class="poster-path">
-      <img data-aos="zoom-in" [src]="imgUrl+data.poster_path" alt="" style="height:200px;width:150px;border-radius: 30px;position:absolute;margin-left:115px;margin-top:-150px">
+      <img data-aos="zoom-in" *ngIf="!isCarousel"[src]="imgUrl+data.poster_path" alt="" style="height:200px;width:150px;border-radius: 30px;position:absolute;margin-left:140px;margin-top:-150px">
+      <img data-aos="zoom-in" *ngIf="isCarousel" [src]="imgUrl+data.poster_path" alt="" style="height:200px;width:150px;border-radius: 30px;position:absolute; margin-left: -70px; margin-top: -150px;">
     </div>
   </div>
   <div class="movie-details" style="margin-top:70px">

@@ -10,6 +10,7 @@ export class VideoHeaderComponent implements OnInit {
   @Input() data: any = {};
   imgUrl: string = myAppConfig.tmdb.highQualityImgUrl;
   @Input() background_video: any;
+  @Input() isCarousel:boolean=false;
   playVideo: boolean = false;
   constructor() {}
 
