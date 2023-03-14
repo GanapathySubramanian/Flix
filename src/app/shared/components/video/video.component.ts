@@ -15,8 +15,8 @@ export class VideoComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  ngDestory(){
-    this.data=null;
+  ngDestory() {
+    this.data = null;
   }
   openModal(back_path: any) {
     this.openPopUp = true;

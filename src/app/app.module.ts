@@ -12,7 +12,7 @@ import { TvshowsComponent } from './components/tvshows/tvshows.component';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { TvshowDetailsComponent } from './components/tvshow-details/tvshow-details.component';
-import { TvshowEpisodesComponent } from './components/tvshow-episodes/tvshow-episodes.component';
+import { TvshowEpisodesComponent } from './components/tvshow-episode/tvshow-episodes.component';
 import { PersonDetailsComponent } from './components/person-details/person-details.component';
 import { PersonsComponent } from './components/persons/persons.component';
 import { SharedModule } from './shared/shared.module';
@@ -46,9 +46,9 @@ import { CollectionDetailsComponent } from './components/collection-details/coll
     NgbModule,
     ReactiveFormsModule,
     IvyCarouselModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

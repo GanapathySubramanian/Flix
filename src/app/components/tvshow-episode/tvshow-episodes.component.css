@@ -100,7 +100,10 @@ main {
   transform: translateY(101%);
   transition: all 1s ease-in-out;
 }
-
+hr {
+  color: var(--base-white);
+  height: 2px;
+}
 .tvshows-season:hover .season-overview {
   transform: translateY(0);
 }

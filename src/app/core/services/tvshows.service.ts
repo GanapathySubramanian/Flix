@@ -299,6 +299,9 @@ export class TvshowsService {
   private episodeSource = new Subject();
   episodeData = this.episodeSource.asObservable();
 
+  private seasonVideosSource = new Subject();
+  seasonVideosData = this.seasonVideosSource.asObservable();
+
   constructor(private http: HttpClient) {}
 
   getGenreList(): Observable<any[]> {
@@ -404,6 +407,13 @@ export class TvshowsService {
     this.http.get(url).subscribe((res) => {
       epi = res;
       this.episodeSource.next(epi);
+    });
+  }
+  getSeasonVideos(url: any) {
+    let epi: any;
+    this.http.get(url).subscribe((res) => {
+      epi = res;
+      this.seasonVideosSource.next(epi);
     });
   }
 }

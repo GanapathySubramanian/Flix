@@ -8,7 +8,7 @@ import { MoviesComponent } from './components/movies/movies.component';
 import { PersonDetailsComponent } from './components/person-details/person-details.component';
 import { PersonsComponent } from './components/persons/persons.component';
 import { TvshowDetailsComponent } from './components/tvshow-details/tvshow-details.component';
-import { TvshowEpisodesComponent } from './components/tvshow-episodes/tvshow-episodes.component';
+import { TvshowEpisodesComponent } from './components/tvshow-episode/tvshow-episodes.component';
 import { TvshowsComponent } from './components/tvshows/tvshows.component';
 
 const routes: Routes = [
