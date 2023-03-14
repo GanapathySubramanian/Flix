@@ -39,6 +39,8 @@ export class CollectionDetailsComponent implements OnInit {
     this.movieservice.getMovieDetails(api_url);
     this.movieservice.moviedetailsData.subscribe((data) => {
       this.collectionDetails = data;
+      console.log(data);
+
       let parts = this.collectionDetails.parts;
       let result = this.sort_by_key(parts, 'release_date');
       this.collectionDetails.parts = result;

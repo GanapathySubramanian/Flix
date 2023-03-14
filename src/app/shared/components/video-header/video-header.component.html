@@ -66,29 +66,35 @@
       </a>
       <h3 class="text-white" (click)="stopTrailer()">
         <div class="mt-5" *ngIf="data.logoList">
-          <img id="logo-img" src="{{ highQualityImgUrl + data.logoList.file_path }}" />
+          <img
+            id="logo-img"
+            src="{{ highQualityImgUrl + data.logoList.file_path }}"
+          />
         </div>
         <span *ngIf="!data.logoList">{{ data.original_title }}</span>
       </h3>
     </div>
   </section>
-  
+
   <section *ngIf="!playVideo">
     <div
       class="header"
       id="i"
       [style.backgroundImage]="'url(' + data.background_image + ')'"
     ></div>
-  
+
     <div class="header-content">
       <div class="left-img">
-        <div class="header-img" >
+        <div class="header-img">
           <div
             *ngIf="data.poster_path == null; then thenBlock; else elseBlock"
           ></div>
-        
+
           <ng-template #thenBlock
-            ><img src="assets/images/no-image.png" alt="figure" class="no-image"
+            ><img
+              src="assets/images/no-image.png"
+              alt="figure"
+              class="no-image"
           /></ng-template>
           <ng-template #elseBlock
             ><img
@@ -103,7 +109,10 @@
         <div class="home-slide-item-content">
           <div class="items">
             <div class="item-title">
-              <span *ngIf="!data.logoList" data-aos="fade-down" data-aos-easing="linear"
+              <span
+                *ngIf="!data.logoList"
+                data-aos="fade-down"
+                data-aos-easing="linear"
               >
                 <span
                   *ngIf="data.title"
@@ -121,15 +130,26 @@
                   >{{ data.original_title }}</span
                 >
               </span>
-  
-              <div class="mt-5" *ngIf="data.logoList != null" data-aos="fade-down" >
-                <img id="logo-img" src="{{ highQualityImgUrl + data.logoList.file_path }}" />
+
+              <div
+                class="mt-5"
+                *ngIf="data.logoList != null"
+                data-aos="fade-down"
+              >
+                <img
+                  id="logo-img"
+                  src="{{ highQualityImgUrl + data.logoList.file_path }}"
+                />
               </div>
             </div>
-            <div class="header-detail" data-aos="fade-down" data-aos-anchor-placement="top-bottom" >
-              <div class="rating" *ngIf="data.vote_average" >
+            <div
+              class="header-detail"
+              data-aos="fade-down"
+              data-aos-anchor-placement="top-bottom"
+            >
+              <div class="rating" *ngIf="data.vote_average">
                 <img src="assets/images/IMDb-icon.png" alt="imbd" />
-  
+
                 <span
                   *ngIf="data.vote_average"
                   [ngClass]="{
@@ -154,7 +174,11 @@
                 {{ data.first_air_date | date }}</span
               >
             </div>
-            <div class="header-detail text-danger" *ngIf="data.genre" data-aos="fade-down" >
+            <div
+              class="header-detail text-danger"
+              *ngIf="data.genre"
+              data-aos="fade-down"
+            >
               <span
                 *ngFor="let genre of data.genre; let i = index"
                 class="badge text-bg-danger color-white bg-danger rounded m-2"
@@ -162,7 +186,11 @@
                 {{ genre.name }}
               </span>
             </div>
-            <div class="header-detail text-danger" *ngIf="data.genre_ids" data-aos="fade-down" >
+            <div
+              class="header-detail text-danger"
+              *ngIf="data.genre_ids"
+              data-aos="fade-down"
+            >
               <span
                 *ngFor="let genre of data.genre_ids; let i = index"
                 class="badge text-bg-danger color-white bg-danger rounded m-2"
@@ -170,14 +198,19 @@
                 {{ genre.name }}
               </span>
             </div>
-            <div class="item-overview" >
+            <div class="item-overview">
               <p data-aos="fade-down">{{ data.overview }}</p>
             </div>
-            <div class="production text-white text-wrap mt-2" data-aos="fade-down" >
+            <div
+              class="production text-white text-wrap mt-2"
+              data-aos="fade-down"
+            >
               <span *ngIf="data?.production_companies?.length > 0"
                 >Production :
               </span>
-              <span *ngFor="let prod of data.production_companies; let i = index">
+              <span
+                *ngFor="let prod of data.production_companies; let i = index"
+              >
                 <span
                   >{{ prod.name
                   }}<span *ngIf="data.production_companies.length != i + 1">
@@ -186,8 +219,11 @@
                 >
               </span>
             </div>
-  
-            <div class="streaming text-white text-wrap mt-2" data-aos="fade-down" >
+
+            <div
+              class="streaming text-white text-wrap mt-2"
+              data-aos="fade-down"
+            >
               <span *ngIf="data?.networks?.length > 0"> Streaming On : </span>
               <span
                 *ngFor="let stream of data.networks; let i = index"
@@ -206,13 +242,12 @@
                 </span>
               </span>
             </div>
-  
+
             <div
               class="wrapper-watchnow"
               *ngIf="background_video"
               style="cursor: pointer"
               data-aos="fade-down"
-              
             >
               <a class="play playBut" (click)="playTrailer()">
                 <div style="display: inline-block; width: 50px">
@@ -258,25 +293,119 @@
                 Watch Trailer
               </a>
             </div>
+
+            <div
+              class="wrapper-watchnow"
+              style="cursor: pointer"
+              data-aos="fade-down"
+              *ngIf="!background_video"
+            >
+              <a class="play playBut" [href]="data?.watchprovider">
+                <div style="display: inline-block; width: 50px">
+                  <svg
+                    id="playBtn"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+                    x="0px"
+                    y="0px"
+                    width="213.7px"
+                    height="213.7px"
+                    viewBox="0 0 213.7 213.7"
+                    enable-background="new 0 0 213.7 213.7"
+                    xml:space="preserve"
+                  >
+                    <polygon
+                      class="triangle"
+                      id="XMLID_18_"
+                      fill="none"
+                      stroke-width="7"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-miterlimit="10"
+                      points="
+                                                  73.5,62.5 148.5,105.8 73.5,149.1 "
+                    />
+                    <circle
+                      class="circle"
+                      id="XMLID_17_"
+                      fill="none"
+                      stroke-width="7"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-miterlimit="10"
+                      cx="106.8"
+                      cy="106.8"
+                      r="103.3"
+                    />
+                  </svg>
+                </div>
+                Watch Now
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
-  
 </section>
 
 <section class="sm-video-header">
   <div class="image" data-aos="zoom-in">
-    <img [src]="highQualityImgUrl+data.backdrop_path" alt="" style="width:100%;border-radius:0% 0% 0% 0%;">
+    <img
+      [src]="highQualityImgUrl + data.backdrop_path"
+      alt=""
+      style="width: 100%; border-radius: 0% 0% 0% 0%"
+    />
     <div class="poster-path">
-      <img data-aos="zoom-in" *ngIf="!isCarousel"[src]="highQualityImgUrl+data.poster_path" alt="" style="height:200px;width:150px;border-radius: 30px;position:absolute;margin-left:125px;margin-top:-150px">
-      <img data-aos="zoom-in" *ngIf="isCarousel" [src]="highQualityImgUrl+data.poster_path" alt="" style="height:200px;width:150px;border-radius: 30px;position:absolute; margin-left: -70px; margin-top: -150px;">
+      <img
+        data-aos="zoom-in"
+        *ngIf="!isCarousel"
+        [src]="highQualityImgUrl + data.poster_path"
+        alt=""
+        style="
+          height: 200px;
+          width: 150px;
+          border-radius: 30px;
+          position: absolute;
+          margin-left: 125px;
+          margin-top: -150px;
+        "
+      />
+      <img
+        data-aos="zoom-in"
+        *ngIf="isCarousel"
+        [src]="highQualityImgUrl + data.poster_path"
+        alt=""
+        style="
+          height: 200px;
+          width: 150px;
+          border-radius: 30px;
+          position: absolute;
+          margin-left: -70px;
+          margin-top: -150px;
+        "
+      />
     </div>
   </div>
-  <div class="movie-details" style="margin-top:70px">
-    <h4 class="d-flex justify-content-center" style="color:red" data-aos="fade-down">{{data.original_title}}</h4>
-    <div class="header-detail text-danger d-flex justify-content-center" *ngIf="data.genre" data-aos="fade-down" >
+  <div class="movie-details" style="margin-top: 70px">
+    <h4
+      class="d-flex justify-content-center"
+      style="color: red"
+      data-aos="fade-down"
+    >
+      <span *ngIf="data.original_title">
+        {{ data.original_title }}
+        <span *ngIf="data.title"> - {{ data.title }}</span></span
+      >
+      <span *ngIf="!data.original_title && data.name">{{ data.name }}</span>
+    </h4>
+    <div
+      class="header-detail text-danger d-flex justify-content-center"
+      *ngIf="data.genre"
+      data-aos="fade-down"
+    >
       <span
         *ngFor="let genre of data.genre; let i = index"
         class="badge text-bg-danger color-white bg-danger rounded m-2"
@@ -284,7 +413,11 @@
         {{ genre.name }}
       </span>
     </div>
-    <div class="header-detail text-danger d-flex justify-content-center" *ngIf="data.genre_ids" data-aos="fade-down" >
+    <div
+      class="header-detail text-danger d-flex justify-content-center"
+      *ngIf="data.genre_ids"
+      data-aos="fade-down"
+    >
       <span
         *ngFor="let genre of data.genre_ids; let i = index"
         class="badge text-bg-danger color-white bg-danger rounded m-2"
@@ -292,44 +425,88 @@
         {{ genre.name }}
       </span>
     </div>
-    <div class="d-flex justify-content-center" style="color:#fff;font-size: 13px;" >
-      <div class="release_date d-flex justify-content-center"style="flex-direction:column;margin-right:20px;" data-aos="fade-down">
+    <div
+      class="d-flex justify-content-center"
+      style="color: #fff; font-size: 13px"
+    >
+      <div
+        class="release_date d-flex justify-content-center"
+        style="flex-direction: column; margin-right: 20px"
+        data-aos="fade-down"
+        *ngIf="data.first_air_date || data.release_date"
+      >
         <span>Release Date</span>
-        <span>2022-12-07</span>
+        <span *ngIf="data.first_air_date">{{
+          data.first_air_date | date
+        }}</span>
+        <span *ngIf="data.release_date">{{ data.release_date | date }}</span>
       </div>
-      <div class="release_date d-flex justify-content-center"style="flex-direction:column;margin-right:20px;" data-aos="fade-down">
+      <div
+        class="release_date d-flex justify-content-center"
+        style="flex-direction: column; margin-right: 20px"
+        data-aos="fade-down"
+        *ngIf="data.runtime || data.avg_run_time"
+      >
         <span>Duration</span>
-        <span>103 min</span>
+        <span *ngIf="data.runtime">{{ data.runtime + " min(s)" }}</span>
+        <span *ngIf="data.avg_run_time">{{
+          data.avg_run_time + " min(s)"
+        }}</span>
       </div>
-      <div class="release_date d-flex justify-content-center"style="flex-direction:column;margin-right:20px;" data-aos="fade-down">
+      <div
+        class="release_date d-flex justify-content-center"
+        style="flex-direction: column; margin-right: 20px"
+        data-aos="fade-down"
+        *ngIf="data.vote_average"
+      >
         <span>Vote Avg</span>
-        <span>8.393</span>
+        <span>{{ data.vote_average }}</span>
       </div>
-      <div class="release_date d-flex justify-content-center"style="flex-direction:column;margin-right:20px;" data-aos="fade-down">
+      <div
+        class="release_date d-flex justify-content-center"
+        style="flex-direction: column; margin-right: 20px"
+        data-aos="fade-down"
+        *ngIf="data.vote_count"
+      >
         <span>Votes</span>
-        <span>4513</span>
+        <span>{{ data.vote_count }}</span>
+      </div>
+      <div
+        class="release_date d-flex justify-content-center"
+        style="flex-direction: column; margin-right: 20px"
+        data-aos="fade-down"
+        *ngIf="!data.vote_count && data.status"
+      >
+        <span>Status</span>
+        <span>{{ data.status }}</span>
       </div>
     </div>
 
-    <div class="rating d-flex justify-content-center mt-1" data-aos="fade-down">
+    <div
+      class="rating d-flex justify-content-center mt-1"
+      data-aos="fade-down"
+      style="color: red"
+      *ngIf="data.vote_average"
+    >
       <ngb-rating
-      [max]="10"
-      [(rate)]="data.vote_average"
-      [readonly]="true"
-    ></ngb-rating>
+        [max]="10"
+        [(rate)]="data.vote_average"
+        [readonly]="true"
+      ></ngb-rating>
     </div>
 
     <div class="overview m-2 text-white text-center" data-aos="fade-down">
-      <h5 style="color:red">Overview</h5>
-      <span class="">{{data.overview}}</span>
+      <h5 style="color: red">Overview</h5>
+      <span class="">{{ data.overview }}</span>
     </div>
-    <div class="overview m-2 text-white text-center" data-aos="fade-down" *ngIf="data?.networks?.length > 0">
-      <h5 style="color:red" class="text-center" >Streaming On</h5>
-      <div class="streaming text-white text-wrap mt-2" data-aos="fade-down" >
-        <span
-          *ngFor="let stream of data.networks; let i = index"
-          class="pl-2"
-        >
+    <div
+      class="overview m-2 text-white text-center"
+      data-aos="fade-down"
+      *ngIf="data?.networks?.length > 0"
+    >
+      <h5 style="color: red" class="text-center">Streaming On</h5>
+      <div class="streaming text-white text-wrap mt-2" data-aos="fade-down">
+        <span *ngFor="let stream of data.networks; let i = index" class="pl-2">
           <span *ngIf="stream.logo_path">
             <img
               src="{{ highQualityImgUrl + stream.logo_path }}"
@@ -343,6 +520,56 @@
           </span>
         </span>
       </div>
+    </div>
+
+    <div
+      class="wrapper-watchnow"
+      style="cursor: pointer; display: flex; justify-content: center"
+      data-aos="fade-down"
+    >
+      <a class="play playBut" [href]="data?.watchprovider">
+        <div style="display: inline-block; width: 50px">
+          <svg
+            id="playBtn"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+            x="0px"
+            y="0px"
+            width="213.7px"
+            height="213.7px"
+            viewBox="0 0 213.7 213.7"
+            enable-background="new 0 0 213.7 213.7"
+            xml:space="preserve"
+          >
+            <polygon
+              class="triangle"
+              id="XMLID_18_"
+              fill="none"
+              stroke-width="7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-miterlimit="10"
+              points="
+                                          73.5,62.5 148.5,105.8 73.5,149.1 "
+            />
+            <circle
+              class="circle"
+              id="XMLID_17_"
+              fill="none"
+              stroke-width="7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-miterlimit="10"
+              cx="106.8"
+              cy="106.8"
+              r="103.3"
+            />
+          </svg>
+        </div>
+        Watch Now
+      </a>
     </div>
   </div>
 </section>

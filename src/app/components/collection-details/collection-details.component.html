@@ -3,7 +3,7 @@
     <app-video-header [data]="collectionDetails"></app-video-header>
   </section>
 
-  <main id="main">
+  <!-- <main id="main">
     <div class="tvshow-poster-img">
       <div
         *ngIf="collectionDetails.poster_path == null; then NoImg; else Img"
@@ -15,7 +15,7 @@
         ><img [attr.src]="highQualityImgUrl + collectionDetails.poster_path"
       /></ng-template>
     </div>
-  </main>
+  </main> -->
 
   <div class="text-center mt-5" *ngIf="collectionDetails.logoList != null">
     <img

@@ -11,12 +11,12 @@ export class VideoHeaderComponent implements OnInit {
   highQualityImgUrl: string = myAppConfig.tmdb.highQualityImgUrl;
   imgUrl: string = myAppConfig.tmdb.imgUrl;
   @Input() background_video: any;
-  @Input() isCarousel:boolean=false;
+  @Input() isCarousel: boolean = false;
   playVideo: boolean = false;
   constructor() {}
 
-  ngOnInit(): void {   
-     this.data.vote_average=(this.data.vote_average*50)/100;
+  ngOnInit(): void {
+    console.log(this.data);
   }
   playTrailer() {
     this.playVideo = true;

@@ -77,7 +77,7 @@ export class NavBarComponent implements OnInit {
     } else {
       this.lapdevice = false;
     }
-    if (this.scrWidth <= 500) {
+    if (this.scrWidth <= 820) {
       this.mobiledevice = true;
     } else {
       this.mobiledevice = false;
