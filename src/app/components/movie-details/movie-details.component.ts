@@ -265,8 +265,13 @@ export class MovieDetailsComponent implements OnInit {
 
       tempreviewData.results.forEach((review:any) => {
         if(review.author_details.avatar_path){
-          let avatar_path=this.imgUrl+review.author_details.avatar_path;
-          review.author_details.avatar_path=avatar_path;
+          if(review.author_details.avatar_path[0]=='/' && review.author_details.avatar_path[1]=='h' && review.author_details.avatar_path[2]=='t' && review.author_details.avatar_path[3]=='t' && review.author_details.avatar_path[4]=='p'){
+            let avatar_path=review.author_details.avatar_path.substring(1);
+            review.author_details.avatar_path=avatar_path;
+          }else if(review.author_details.avatar_path[0]!=='h' && review.author_details.avatar_path[1]!=='t' && review.author_details.avatar_path[2]!=='t' && review.author_details.avatar_path[3]!=='p'){
+            let avatar_path=this.imgUrl+review.author_details.avatar_path;
+            review.author_details.avatar_path=avatar_path;
+          }
         }
       });
       this.movieDetails.reviewList=tempreviewData.results;      
