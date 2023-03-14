@@ -69,8 +69,8 @@ main {
 .tvshows-season-info h3 {
   margin-top: 0;
 }
-/* 
-.tvshows-season-infos span {
+
+/* .tvshows-season-infos span {
   background-color: var(--primary-color);
   transition: background-color 2s;
   padding: 0.25rem;

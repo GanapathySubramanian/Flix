@@ -1,0 +1,93 @@
+<div class="tvshow-season" style="margin-top: 80px">
+  <div class="logo text-center">
+    <div *ngIf="noLogos; then thenBlock; else elseBlock"></div>
+    <ng-template #thenBlock>
+      <h4 class="text-center text-warning">{{ tvshow_name }}</h4>
+    </ng-template>
+    <ng-template #elseBlock>
+      <img id="movie-logo" src="{{ imgUrl + logos.file_path }}" />
+    </ng-template>
+  </div>
+
+  <h4 class="text-center text-warning mt-5">{{ episodes.name | uppercase }}</h4>
+
+  <h4 class="tvshows-heading mt-5">EPISODES</h4>
+  <!-- <p class="text-white h4 text-center">Click the Seasons to know more</p> -->
+  <main>
+    <div
+      class="tvshows-season"
+      *ngFor="let e of episodes.episodes; let i = index"
+      [routerLink]="[
+        '/tvshow-episode',
+        tvshow_id,
+        e.season_number,
+        i + 1,
+        e.name
+      ]"
+    >
+      <div *ngIf="e.still_path == null; then thenBlock; else elseBlock"></div>
+      <ng-template #thenBlock
+        ><img src="assets/images/no-image.png" class="no-image"
+      /></ng-template>
+      <ng-template #elseBlock
+        ><img src="{{ imgUrl + e.still_path }}"
+      /></ng-template>
+
+      <div class="tvshows-season-info">
+        <span
+          >{{ e.episode_number + ". "
+          }}<span class="text-bold">{{ e.name }}</span></span
+        >
+      </div>
+      <div class="tvshows-season-infos" *ngIf="e.vote_average">
+        <ngb-rating
+          [max]="10"
+          [(rate)]="e.vote_average"
+          [readonly]="false"
+          [ngClass]="{
+            red: e.vote_average <= 5,
+            orange: e.vote_average >= 5 && e.vote_average < 8,
+            green: e.vote_average >= 8
+          }"
+        ></ngb-rating>
+        <span
+          [ngClass]="{
+            red: e.vote_average <= 5,
+            orange: e.vote_average >= 5 && e.vote_average < 8,
+            green: e.vote_average >= 8
+          }"
+          >{{ float2int((e.vote_average / 10) * 100) + "%" }}</span
+        >
+      </div>
+
+      <div class="tvshows-season-infos">
+        <h6>
+          <span *ngIf="e.air_date">{{ e.air_date | date }}</span>
+          <span *ngIf="e.air_date && e.runtime">/</span>
+          <span *ngIf="e.runtime">
+            {{ e?.runtime + " min" || 0 + " min" }}
+          </span>
+        </h6>
+      </div>
+      <div class="season-overview">
+        <h3 class="text-warning" style="font-family: Monoton">Overview</h3>
+        <span class="text-secondary">
+          <span *ngIf="e.overview != null">
+            <span *ngIf="e.overview?.length <= 300">{{ e.overview }}</span>
+            <span *ngIf="e.overview?.length > 300">{{
+              e.overview.substring(0, 300) + "..."
+            }}</span>
+          </span>
+          <span *ngIf="e.overview == null || e.overview == ''"
+            >Overview not available for episode {{ e.episode_number }}</span
+          >
+        </span>
+      </div>
+    </div>
+    <hr />
+
+    <div class="videos" style="padding-left: 20px; padding-right: 20px">
+      <app-video [data]="tvshow_season_details"></app-video>
+    </div>
+  </main>
+</div>

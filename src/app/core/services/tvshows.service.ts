@@ -299,8 +299,14 @@ export class TvshowsService {
   private episodeSource = new Subject();
   episodeData = this.episodeSource.asObservable();
 
+  private seasonSource = new Subject();
+  seasonData = this.seasonSource.asObservable();
+
   private seasonVideosSource = new Subject();
   seasonVideosData = this.seasonVideosSource.asObservable();
+
+  private episodeVideosSource = new Subject();
+  episodeVideoData = this.episodeVideosSource.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -409,11 +415,26 @@ export class TvshowsService {
       this.episodeSource.next(epi);
     });
   }
+  getSeason(url: any) {
+    let epi: any;
+    this.http.get(url).subscribe((res) => {
+      epi = res;
+      this.seasonSource.next(epi);
+    });
+  }
   getSeasonVideos(url: any) {
     let epi: any;
     this.http.get(url).subscribe((res) => {
       epi = res;
       this.seasonVideosSource.next(epi);
+    });
+  }
+
+  getEpisodeVideos(url: any) {
+    let epi: any;
+    this.http.get(url).subscribe((res) => {
+      epi = res;
+      this.episodeVideosSource.next(epi);
     });
   }
 }

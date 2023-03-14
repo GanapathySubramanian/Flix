@@ -38,3 +38,55 @@ h5 {
     display: none;
   }
 }
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  opacity: 0.3;
+  transition: .3s ease;
+  background-color: transparent;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+
+
+.overlay:hover {
+  opacity: 0.7;
+}
+
+.play-icon {
+  position: absolute;
+  color: black;
+  font-size: 2rem;
+  cursor: pointer;
+  left: 50%;
+  bottom: 50%;
+}
+
+.fa-heart {
+  position: absolute;
+  z-index: 2;
+  color: red;
+  position: absolute;
+}

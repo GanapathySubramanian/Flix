@@ -40,7 +40,7 @@
           class="tvshow"
           *ngFor="let e of tvshowDetails.seasons; let i = index"
           [routerLink]="[
-            '/tvshow-episode',
+            '/tvshow-season',
             tvshowDetails.id,
             e.season_number,
             tvshowDetails.original_title
@@ -144,7 +144,7 @@
       </ng-template>
     </div>
     <hr />
-    
+
     <div class="sim_tvshow">
       <h4 class="tvshow-heading mt-5">RECOMMENDED TVSHOW</h4>
       <h5 class="h5 text-center">Click the tvshow to know more</h5>
@@ -211,6 +211,5 @@
     <div class="reviews-section">
       <app-review [data]="tvshowDetails"></app-review>
     </div>
-    
   </div>
 </div>

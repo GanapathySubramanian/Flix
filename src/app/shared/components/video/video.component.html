@@ -71,24 +71,24 @@
   </div> -->
 
 
-  <div class="row">
+  <div class="row" style="justify-content: center;">
+    
+    
     <div
-      class="col-lg-3 col-sm-12 col-md-12 mt-5"
+      class="col-lg-3 col-sm-12 col-md-12 mt-1"
       *ngFor="let video of data.videoList"
     >
-      <span
-        class="pe-auto video-data"
-        style="cursor: pointer"
-        (click)="openModal(video)"
-        data-aos="fade-down"
-        ><img
+    <div class="container"
+    (click)="openModal(video)"
+    >
+      <img
           [src]="video.videoThumbnail"
           width="100%"
           height="100%"
         data-aos="fade-down"
 
       />
-    </span>
+    </div>
     <div class="play_zin1m" style="
     position: absolute;
     margin-top: -143px;
@@ -101,7 +101,10 @@
     >
       <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 55 55"><circle cx="27.5" cy="27.5" r="26.75" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></circle><path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.97 40.81L40.64 27.5 20.97 14.19v26.62z"></path></svg>
     </div>
-    </div>
+    
+  
+  
+  </div>
   </div>
   
 </ng-template>

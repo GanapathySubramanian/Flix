@@ -9,6 +9,7 @@ import { PersonDetailsComponent } from './components/person-details/person-detai
 import { PersonsComponent } from './components/persons/persons.component';
 import { TvshowDetailsComponent } from './components/tvshow-details/tvshow-details.component';
 import { TvshowEpisodesComponent } from './components/tvshow-episode/tvshow-episodes.component';
+import { TvshowSeasonsComponent } from './components/tvshow-seasons/tvshow-seasons.component';
 import { TvshowsComponent } from './components/tvshows/tvshows.component';
 
 const routes: Routes = [
@@ -57,8 +58,12 @@ const routes: Routes = [
     component: PersonDetailsComponent,
   },
   {
-    path: 'tvshow-episode/:tvshowid/:season/:tvshow_name',
+    path: 'tvshow-episode/:tvshowid/:season/:episode/:tvshow_name',
     component: TvshowEpisodesComponent,
+  },
+  {
+    path: 'tvshow-season/:tvshowid/:season/:tvshow_name',
+    component: TvshowSeasonsComponent,
   },
   {
     path: '**',
