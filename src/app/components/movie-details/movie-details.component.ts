@@ -41,74 +41,32 @@ export class MovieDetailsComponent implements OnInit {
 
   getMovieDetails(id: number) {
     // To get the movie details
-    let api_url =
-      myAppConfig.tmdb.movieBaseUrl +
-      '/movie/' +
-      id +
-      '?' +
-      myAppConfig.tmdb.apikey;
-    this.getMovieDetailsData(api_url);
+
+    this.getMovieDetailsData(id);
 
     //To get the movie images
-    let backdrop_url =
-      myAppConfig.tmdb.movieBaseUrl +
-      '/movie/' +
-      movie_id +
-      '/images?' +
-      myAppConfig.tmdb.apikey;
-    this.getMovieImages(backdrop_url);
+
+    this.getMovieImages(id);
 
     //To get the reviews
-    let reviews_url =
-      myAppConfig.tmdb.movieBaseUrl +
-      '/movie/' +
-      movie_id +
-      '/reviews?' +
-      myAppConfig.tmdb.apikey;
-    this.getReviews(reviews_url);
+    this.getReviews(id);
 
     //To get the crew and cast details
-    let credits_url =
-      myAppConfig.tmdb.movieBaseUrl +
-      '/movie/' +
-      movie_id +
-      '/credits?' +
-      myAppConfig.tmdb.apikey;
-    this.getCredits(credits_url);
+    this.getCredits(id);
 
     //To get the similar movies details
-    let similar_url =
-      myAppConfig.tmdb.movieBaseUrl +
-      '/movie/' +
-      movie_id +
-      '/similar?' +
-      myAppConfig.tmdb.apikey;
-    this.getSimilarMovie(similar_url);
+    this.getSimilarMovie(id);
 
     //To get the Recommended movies details
-    let recmovie_url =
-      myAppConfig.tmdb.movieBaseUrl +
-      '/movie/' +
-      movie_id +
-      '/recommendations?' +
-      myAppConfig.tmdb.apikey;
-    this.getRecMovies(recmovie_url);
+    this.getRecMovies(id);
 
-    //To get the videos
-    let video_url =
-      myAppConfig.tmdb.movieBaseUrl +
-      '/movie/' +
-      movie_id +
-      '/videos?' +
-      myAppConfig.tmdb.apikey;
-    this.getvideo(video_url);
+    //To get the videos;
+    this.getvideo(id);
   }
 
-  getvideo(video_url: string) {
-    this.movieservice.getVideos(video_url);
-
+  getvideo(movie_id: number) {
     let videos: any;
-    this.movieservice.videoData.subscribe((data) => {
+    this.movieservice.getVideos(movie_id).subscribe((data) => {
       videos = data;
       this.movieDetails.videoList = [];
       this.movieDetails.videoList = videos.results;
@@ -149,21 +107,17 @@ export class MovieDetailsComponent implements OnInit {
       }
     });
   }
-  getWatchprovider(watch_provider: string) {
-    this.movieservice.getWatchProviders(watch_provider);
-
+  getWatchprovider(movie_id: number) {
     let watch: any;
-    this.movieservice.watchData.subscribe((data) => {
+    this.movieservice.getWatchProviders(movie_id).subscribe((data) => {
       watch = data;
       this.movieDetails.watchprovider = watch.results.IN[0]?.link;
     });
   }
 
-  getRecMovies(recmovie_url: string) {
-    this.movieservice.getRecommendedMovies(recmovie_url);
-
+  getRecMovies(movie_id: number) {
     let recmovie: any;
-    this.movieservice.recmovieData.subscribe((data: any) => {
+    this.movieservice.getRecommendedMovies(movie_id).subscribe((data: any) => {
       recmovie = data.results;
 
       for (let i = 0; i < recmovie.length; i++) {
@@ -176,11 +130,9 @@ export class MovieDetailsComponent implements OnInit {
     });
   }
 
-  getSimilarMovie(similar_url: string) {
-    this.movieservice.getSimilarMovies(similar_url);
-
+  getSimilarMovie(movie_id: number) {
     let similarmovie: any;
-    this.movieservice.similarmovieData.subscribe((data) => {
+    this.movieservice.getSimilarMovies(movie_id).subscribe((data) => {
       similarmovie = data;
 
       for (let i = 0; i < similarmovie.results.length; i++) {
@@ -193,11 +145,9 @@ export class MovieDetailsComponent implements OnInit {
     });
   }
 
-  getCredits(credits_url: string) {
-    this.movieservice.getMovieCredits(credits_url);
-
+  getCredits(movie_id: number) {
     let tempcreditData: any;
-    this.movieservice.moviecreditData.subscribe((data) => {
+    this.movieservice.getMovieCredits(movie_id).subscribe((data) => {
       tempcreditData = data;
 
       let castList = tempcreditData.cast;
@@ -258,11 +208,9 @@ export class MovieDetailsComponent implements OnInit {
     return c_data;
   }
 
-  getReviews(reviews_url: string) {
-    this.movieservice.getMovieReviews(reviews_url);
-
+  getReviews(movie_id: number) {
     let tempreviewData: any;
-    this.movieservice.moviereviewData.subscribe((data) => {
+    this.movieservice.getMovieReviews(movie_id).subscribe((data) => {
       tempreviewData = data;
 
       tempreviewData.results.forEach((review: any) => {
@@ -291,11 +239,9 @@ export class MovieDetailsComponent implements OnInit {
     });
   }
 
-  getMovieImages(backdrop_url: string) {
-    this.movieservice.getAllImages(backdrop_url);
-
+  getMovieImages(movie_id: number) {
     let tempimagesData: any;
-    this.movieservice.movieallImageData.subscribe((data) => {
+    this.movieservice.getAllImages(movie_id).subscribe((data) => {
       tempimagesData = data;
 
       if (tempimagesData.backdrops.length == '0') {
@@ -334,11 +280,9 @@ export class MovieDetailsComponent implements OnInit {
     });
   }
 
-  getMovieDetailsData(url: string) {
-    this.movieservice.getMovieDetails(url);
-
+  getMovieDetailsData(id: number) {
     let tempMovieDetails: any;
-    this.movieservice.moviedetailsData.subscribe((data) => {
+    this.movieservice.getMovieDetails(id).subscribe((data) => {
       tempMovieDetails = data;
 
       //Default Movie Details
@@ -365,13 +309,7 @@ export class MovieDetailsComponent implements OnInit {
       this.movieDetails.vote_average = tempMovieDetails.vote_average;
 
       if (tempMovieDetails.homepage == '') {
-        var watch_provider =
-          myAppConfig.tmdb.movieBaseUrl +
-          '/movie/' +
-          movie_id +
-          '/watch/providers?' +
-          myAppConfig.tmdb.apikey;
-        this.getWatchprovider(watch_provider);
+        this.getWatchprovider(movie_id);
       } else {
         this.movieDetails.watchprovider = tempMovieDetails.homepage;
       }

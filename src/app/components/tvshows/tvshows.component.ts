@@ -87,12 +87,7 @@ export class TvshowsComponent implements OnInit {
   }
 
   getCountries() {
-    var country_url =
-      myAppConfig.tmdb.movieBaseUrl +
-      '/configuration/countries?' +
-      myAppConfig.tmdb.apikey;
-    this.movieservice.getCountry(country_url);
-    this.movieservice.countryData.subscribe((data) => {
+    this.movieservice.getCountry().subscribe((data) => {
       this.countryList = data;
     });
   }
@@ -117,10 +112,8 @@ export class TvshowsComponent implements OnInit {
   }
 
   loadTvshow(movieName: string) {
-    this.tvshowservice.getSearchTvshows(movieName);
-
     let tempSearchList: any;
-    this.tvshowservice.searchtvshowsData.subscribe((data) => {
+    this.tvshowservice.getSearchTvshows(movieName).subscribe((data) => {
       tempSearchList = data;
       this.searchList = tempSearchList.results;
     });
@@ -337,10 +330,8 @@ export class TvshowsComponent implements OnInit {
   }
 
   gettvshowsData(api_url: string) {
-    this.tvshowservice.getallTvshows(api_url);
-
     let tempTvshowList: any;
-    this.tvshowservice.tvshowsData.subscribe((data: any) => {
+    this.tvshowservice.getallTvshows(api_url).subscribe((data: any) => {
       tempTvshowList = data.results;
       this.tvshowList = [];
       this.tvshowList = tempTvshowList;
@@ -369,16 +360,9 @@ export class TvshowsComponent implements OnInit {
     });
   }
 
-  getTvshowImages(id: string, index: number) {
-    let backdrop_url =
-      myAppConfig.tmdb.movieBaseUrl +
-      '/tv/' +
-      id +
-      '/images?' +
-      myAppConfig.tmdb.apikey;
-    this.movieservice.getAllImages(backdrop_url);
+  getTvshowImages(id: number, index: number) {
     let tempimagesData: any;
-    this.movieservice.movieallImageData.subscribe((data: any) => {
+    this.movieservice.getAllImages(id).subscribe((data: any) => {
       if (data.id === id) {
         tempimagesData = data;
         //Movie Logo Images

@@ -50,11 +50,10 @@ export class TvshowSeasonsComponent implements OnInit {
     this.getEpisodeVideoData(api_url);
   }
   getEpisodeVideoData(api_url: string) {
-    this.tvshowservice.getSeasonVideos(api_url);
     this.tvshow_season_details.original_title =
       this.tvshow_name + ' Season ' + this.season_no;
     let epi: any;
-    this.tvshowservice.seasonVideosData.subscribe((data) => {
+    this.tvshowservice.getSeasonVideos(api_url).subscribe((data) => {
       epi = data;
 
       this.tvshow_season_details.videoList = [];
@@ -96,13 +95,11 @@ export class TvshowSeasonsComponent implements OnInit {
       this.tvshow_id +
       '/images?' +
       myAppConfig.tmdb.apikey;
-    this.getAllimages(logo_url);
+    this.getAllimages(this.tvshow_id);
   }
-  getAllimages(logo_url: string) {
-    this.tvshowservice.getAllImages(logo_url);
-
+  getAllimages(tvshow_id: number) {
     let tempimagesData: any;
-    this.tvshowservice.tvshowallImageData.subscribe((data) => {
+    this.tvshowservice.getAllImages(tvshow_id).subscribe((data) => {
       tempimagesData = data;
 
       //Tvshow Logo Images
@@ -115,13 +112,9 @@ export class TvshowSeasonsComponent implements OnInit {
     });
   }
   getEpisodesData(api_url: string) {
-    this.tvshowservice.getSeason(api_url);
-
     let epi: any;
-    this.tvshowservice.seasonData.subscribe((data) => {
+    this.tvshowservice.getSeason(api_url).subscribe((data) => {
       epi = data;
-      console.log(data);
-
       this.episodes = epi;
     });
   }

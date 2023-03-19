@@ -37,20 +37,11 @@ export class TvshowDetailsComponent implements OnInit {
 
   getTvshowDetails(tvshow_id: number) {
     // To get the Tvshow details
-    let api_url =
-      myAppConfig.tmdb.tvshowDetailsBaseUrl +
-      tvshow_id +
-      '?' +
-      myAppConfig.tmdb.apikey;
-    this.gettvshowDetailsData(api_url);
+
+    this.gettvshowDetailsData(tvshow_id);
 
     //To get the Tvshow images
-    let backdrop_url =
-      myAppConfig.tmdb.tvshowDetailsBaseUrl +
-      tvshow_id +
-      '/images?' +
-      myAppConfig.tmdb.apikey;
-    this.gettvshowImages(backdrop_url);
+    this.gettvshowImages(tvshow_id);
 
     //To get the reviews
     let reviews_url =
@@ -94,10 +85,8 @@ export class TvshowDetailsComponent implements OnInit {
   }
 
   getvideo(video_url: string) {
-    this.tvshowservice.getVideos(video_url);
-
     let videos: any;
-    this.tvshowservice.videoData.subscribe((data) => {
+    this.tvshowservice.getVideos(video_url).subscribe((data) => {
       videos = data;
 
       this.tvshowDetails.videoList = videos.results;
@@ -136,37 +125,35 @@ export class TvshowDetailsComponent implements OnInit {
   }
 
   getRectvshows(rectvshow_url: string) {
-    this.tvshowservice.getRecommendedtvshows(rectvshow_url);
-
     let rectvshow: any;
-    this.tvshowservice.rectvshowData.subscribe((data) => {
-      rectvshow = data;
+    this.tvshowservice
+      .getRecommendedtvshows(rectvshow_url)
+      .subscribe((data) => {
+        rectvshow = data;
 
-      for (let i = 0; i < rectvshow.results.length; i++) {
-        if (rectvshow.results[i].poster_path == null) {
-          rectvshow.results[i].poster_path = 'Empty';
+        for (let i = 0; i < rectvshow.results.length; i++) {
+          if (rectvshow.results[i].poster_path == null) {
+            rectvshow.results[i].poster_path = 'Empty';
+          }
         }
-      }
-      this.tvshowDetails.rectvshowList = rectvshow.results;
-      let rec_tvshow = rectvshow.results;
-      this.tvshowDetails.similartvshowList = rec_tvshow;
-      for (let i = 0; i < rec_tvshow.length; i++) {
-        this.tvshowDetails.rectvshowList[i].id = rec_tvshow[i].id;
-        this.tvshowDetails.rectvshowList[i].title = rec_tvshow[i].name;
-        this.tvshowDetails.rectvshowList[i].poster_path =
-          rec_tvshow[i].poster_path;
-        this.tvshowDetails.rectvshowList[i].vote_average =
-          rec_tvshow[i].vote_average;
-        this.tvshowDetails.rectvshowList[i].release_date =
-          rec_tvshow[i].first_air_date;
-      }
-    });
+        this.tvshowDetails.rectvshowList = rectvshow.results;
+        let rec_tvshow = rectvshow.results;
+        this.tvshowDetails.similartvshowList = rec_tvshow;
+        for (let i = 0; i < rec_tvshow.length; i++) {
+          this.tvshowDetails.rectvshowList[i].id = rec_tvshow[i].id;
+          this.tvshowDetails.rectvshowList[i].title = rec_tvshow[i].name;
+          this.tvshowDetails.rectvshowList[i].poster_path =
+            rec_tvshow[i].poster_path;
+          this.tvshowDetails.rectvshowList[i].vote_average =
+            rec_tvshow[i].vote_average;
+          this.tvshowDetails.rectvshowList[i].release_date =
+            rec_tvshow[i].first_air_date;
+        }
+      });
   }
   getSimilartvshow(similar_url: string) {
-    this.tvshowservice.getSimilartvshows(similar_url);
-
     let similartvshow: any;
-    this.tvshowservice.similartvshowData.subscribe((data) => {
+    this.tvshowservice.getSimilartvshows(similar_url).subscribe((data) => {
       similartvshow = data;
       for (let i = 0; i < similartvshow.results.length; i++) {
         if (similartvshow.results[i].poster_path == null) {
@@ -190,10 +177,8 @@ export class TvshowDetailsComponent implements OnInit {
   }
 
   getCredits(credits_url: string) {
-    this.tvshowservice.gettvshowCredits(credits_url);
-
     let tempcreditData: any;
-    this.tvshowservice.tvshowcreditData.subscribe((data) => {
+    this.tvshowservice.gettvshowCredits(credits_url).subscribe((data) => {
       tempcreditData = data;
 
       let castList = tempcreditData.cast;
@@ -222,10 +207,8 @@ export class TvshowDetailsComponent implements OnInit {
   }
 
   getReviews(reviews_url: string) {
-    this.tvshowservice.gettvshowReviews(reviews_url);
-
     let tempreviewData: any;
-    this.tvshowservice.tvshowreviewData.subscribe((data) => {
+    this.tvshowservice.gettvshowReviews(reviews_url).subscribe((data) => {
       tempreviewData = data;
 
       tempreviewData.results.forEach((review: any) => {
@@ -249,11 +232,9 @@ export class TvshowDetailsComponent implements OnInit {
     });
   }
 
-  gettvshowImages(backdrop_url: string) {
-    this.tvshowservice.getAllImages(backdrop_url);
-
+  gettvshowImages(tvshow_id: number) {
     let tempimagesData: any;
-    this.tvshowservice.tvshowallImageData.subscribe((data) => {
+    this.tvshowservice.getAllImages(tvshow_id).subscribe((data) => {
       tempimagesData = data;
 
       if (tempimagesData.backdrops.length == '0') {
@@ -292,11 +273,9 @@ export class TvshowDetailsComponent implements OnInit {
     });
   }
 
-  gettvshowDetailsData(url: any) {
-    this.tvshowservice.gettvshowDetails(url);
-
+  gettvshowDetailsData(id: number) {
     let tempTvshowDetails: any;
-    this.tvshowservice.tvshowdetailsData.subscribe((data) => {
+    this.tvshowservice.gettvshowDetails(id).subscribe((data) => {
       tempTvshowDetails = data;
 
       //Default Tvshow Details
@@ -358,10 +337,8 @@ export class TvshowDetailsComponent implements OnInit {
   }
 
   getWatchprovider(watch_provider: string) {
-    this.tvshowservice.getWatchProviders(watch_provider);
-
     let watch: any;
-    this.tvshowservice.watchData.subscribe((data) => {
+    this.tvshowservice.getWatchProviders(watch_provider).subscribe((data) => {
       watch = data;
       this.tvshowDetails.watchprovider = watch.results.IN.link;
     });

@@ -23,21 +23,10 @@ export class CollectionDetailsComponent implements OnInit {
     collection_Id = id;
   }
   ngOnInit(): void {
-    this.getCollectionDetails(collection_Id);
+    this.getCollectionData(collection_Id);
   }
-  getCollectionDetails(id: number) {
-    var api_url =
-      myAppConfig.tmdb.movieBaseUrl +
-      '/collection/' +
-      id +
-      '?' +
-      myAppConfig.tmdb.apikey;
-
-    this.getCollectionData(api_url);
-  }
-  getCollectionData(api_url: string) {
-    this.movieservice.getMovieDetails(api_url);
-    this.movieservice.moviedetailsData.subscribe((data) => {
+  getCollectionData(id: number) {
+    this.movieservice.getCollectionDetails(id).subscribe((data) => {
       this.collectionDetails = data;
       console.log(data);
 

@@ -21,7 +21,7 @@ export class TvshowEpisodesComponent implements OnInit {
   logos: any = [];
   tvshow_season_details: any = {} as any;
   noLogos: boolean = false;
-  episode_id=0;
+  episode_id = 0;
   stills: any;
   constructor(
     private route: ActivatedRoute,
@@ -52,16 +52,16 @@ export class TvshowEpisodesComponent implements OnInit {
       '/season/' +
       season_id +
       '/episode/' +
-      this.episode_id+
-    '/videos?' + myAppConfig.tmdb.apikey;
+      this.episode_id +
+      '/videos?' +
+      myAppConfig.tmdb.apikey;
     this.getEpisodeVideoData(api_url);
   }
   getEpisodeVideoData(api_url: string) {
-    this.tvshowservice.getEpisodeVideos(api_url);
     this.tvshow_season_details.original_title =
       this.tvshow_name + ' Episode ' + this.episodes;
     let epi: any;
-    this.tvshowservice.episodeVideoData.subscribe((data) => {
+    this.tvshowservice.getEpisodeVideos(api_url).subscribe((data) => {
       epi = data;
       this.tvshow_season_details.videoList = [];
       this.tvshow_season_details.videoList = epi.results;
@@ -94,44 +94,34 @@ export class TvshowEpisodesComponent implements OnInit {
       '/season/' +
       season_id +
       '/episode/' +
-      this.episode_id+
-    '?' + myAppConfig.tmdb.apikey;
-    this.getEpisodesData(api_url);
-    let logo_url =
-      myAppConfig.tmdb.tvshowDetailsBaseUrl +
-      tvshow_id +
-      '/season/' +
-      season_id +
-      '/episode/' +
       this.episode_id +
-      '/images?' +
+      '?' +
       myAppConfig.tmdb.apikey;
-    this.getAllimages(logo_url);
+    this.getEpisodesData(api_url);
+
+    this.getAllimages(tvshow_id, season_id, this.episode_id);
   }
-  getAllimages(logo_url: string) {
-    this.tvshowservice.getAllImages(logo_url);
-
+  getAllimages(tvshow_id: number, season_id: number, episode_id: number) {
     let tempimagesData: any;
-    this.tvshowservice.tvshowallImageData.subscribe((data:any) => {
-      tempimagesData = data;
+    this.tvshowservice
+      .getAllImagesForEpisodes(tvshow_id, season_id, episode_id)
+      .subscribe((data: any) => {
+        tempimagesData = data;
 
-      //Tvshow Logo Images
-      // if (tempimagesData?.logos.length <= 0) {
-      //   this.noLogos = true;
-      // } else {
-      //   this.noLogos = false;
-      //   this.logos = tempimagesData?.logos[0];
-      // }
-      this.stills=tempimagesData.stills;
-    });
+        //Tvshow Logo Images
+        // if (tempimagesData?.logos.length <= 0) {
+        //   this.noLogos = true;
+        // } else {
+        //   this.noLogos = false;
+        //   this.logos = tempimagesData?.logos[0];
+        // }
+        this.stills = tempimagesData.stills;
+      });
   }
   getEpisodesData(api_url: string) {
-    this.tvshowservice.getEpisodes(api_url);
     let epi: any;
-    this.tvshowservice.episodeData.subscribe((data) => {
+    this.tvshowservice.getEpisodes(api_url).subscribe((data) => {
       epi = data;
-      console.log(data);
-      
       this.episodes = epi;
     });
   }

@@ -103,9 +103,8 @@ export class HomeComponent implements OnInit {
   }
 
   getTrendingShowInPrimeData(url: string) {
-    this.movieService.getTrendingShowInPrime(url);
     let temptvhsowList: any;
-    this.movieService.trendingInPrimeData.subscribe((data: any) => {
+    this.movieService.getTrendingShowInPrime(url).subscribe((data: any) => {
       temptvhsowList = data.results;
       temptvhsowList.forEach((movies: any, index: number) => {
         if (movies.backdrop_path !== null) {
@@ -125,9 +124,8 @@ export class HomeComponent implements OnInit {
     });
   }
   getUpcomingMovieData(url: string) {
-    this.movieService.getUpcomingMovies(url);
     let tempMoviesList: any;
-    this.movieService.upcomingData.subscribe((data: any) => {
+    this.movieService.getUpcomingMovies(url).subscribe((data: any) => {
       tempMoviesList = data.results;
       tempMoviesList.forEach((movies: any, index: number) => {
         if (movies.backdrop_path !== null) {
@@ -145,9 +143,8 @@ export class HomeComponent implements OnInit {
     });
   }
   getTrendingShowInNetflixData(url: string) {
-    this.tvshowService.getUpcomingTvshows(url);
     let tempMoviesList: any;
-    this.tvshowService.upcomingTvshowData.subscribe((data: any) => {
+    this.tvshowService.getUpcomingTvshows(url).subscribe((data: any) => {
       tempMoviesList = data.results;
       tempMoviesList.forEach((movies: any, index: number) => {
         if (movies.backdrop_path !== null) {
@@ -165,9 +162,8 @@ export class HomeComponent implements OnInit {
     });
   }
   getTopGrossingMovieData(url: string) {
-    this.movieService.getTopGrossingMovies(url);
     let tempMoviesList: any;
-    this.movieService.topGrossingData.subscribe((data: any) => {
+    this.movieService.getTopGrossingMovies(url).subscribe((data: any) => {
       tempMoviesList = data.results;
       tempMoviesList.forEach((movies: any, index: number) => {
         if (movies.backdrop_path !== null) {
@@ -183,9 +179,8 @@ export class HomeComponent implements OnInit {
     });
   }
   getMoviesData(url: string) {
-    this.movieService.getallMovies(url);
     let tempMoviesList: any;
-    this.movieService.moviesData.subscribe((data: any) => {
+    this.movieService.getallMovies(url).subscribe((data: any) => {
       tempMoviesList = data.results;
       tempMoviesList.forEach((movies: any, index: number) => {
         if (movies.backdrop_path !== null) {
@@ -207,9 +202,8 @@ export class HomeComponent implements OnInit {
   }
 
   getTvshowsData(api_url: string) {
-    this.tvshowService.getallTvshows(api_url);
     let tempTvshowList: any;
-    this.tvshowService.tvshowsData.subscribe((data: any) => {
+    this.tvshowService.getallTvshows(api_url).subscribe((data: any) => {
       tempTvshowList = data.results;
       tempTvshowList.forEach((tvshow: any, index: number) => {
         if (tvshow.backdrop_path !== null) {
@@ -232,60 +226,45 @@ export class HomeComponent implements OnInit {
   }
 
   getTvshowImages(tvshow: any) {
-    let backdrop_url =
-      myAppConfig.tmdb.movieBaseUrl +
-      '/tv/' +
-      tvshow.id +
-      '/images?' +
-      myAppConfig.tmdb.apikey;
-    this.movieService.getAllImages(backdrop_url);
     let tempimagesData: any;
-    this.movieService.movieallImageData.subscribe((data: any) => {
+    this.movieService.getAllImages(tvshow.id).subscribe((data: any) => {
       tempimagesData = data;
       if (data.id === tvshow.id) {
-        let englishLogos:any[]=[];
-        if(tempimagesData.logos.length>0){
-          tempimagesData?.logos.forEach((logo:any) => {
-            if(logo.iso_639_1=='en'){
+        let englishLogos: any[] = [];
+        if (tempimagesData.logos.length > 0) {
+          tempimagesData?.logos.forEach((logo: any) => {
+            if (logo.iso_639_1 == 'en') {
               englishLogos.push(logo);
             }
           });
         }
 
-        if(englishLogos.length>0){
-          tvshow.logoList=englishLogos[0];
-        }       
-       this.topMoviesList.push(tvshow);
+        if (englishLogos.length > 0) {
+          tvshow.logoList = englishLogos[0];
+        }
+        this.topMoviesList.push(tvshow);
       }
     });
   }
 
-  getMovieImages(movie:any) {
-    let backdrop_url =
-      myAppConfig.tmdb.movieBaseUrl +
-      '/movie/' +
-      movie.id +
-      '/images?' +
-      myAppConfig.tmdb.apikey;
-    this.movieService.getAllImages(backdrop_url);
+  getMovieImages(movie: any) {
     let tempimagesData: any;
-    this.movieService.movieallImageData.subscribe((data: any) => {
+    this.movieService.getAllImages(movie.id).subscribe((data: any) => {
       if (data.id === movie.id) {
         tempimagesData = data;
-        let englishLogos:any[]=[];
-        if(tempimagesData.logos.length>0){
-          tempimagesData?.logos.forEach((logo:any) => {
-            
-            if(logo.iso_639_1=='en'){
+        let englishLogos: any[] = [];
+        if (tempimagesData.logos.length > 0) {
+          tempimagesData?.logos.forEach((logo: any) => {
+            if (logo.iso_639_1 == 'en') {
               englishLogos.push(logo);
             }
           });
         }
-        if(englishLogos.length>0){
-          movie.logoList=englishLogos[0];
-        }   
-        
-       this.topMoviesList.push(movie);
+        if (englishLogos.length > 0) {
+          movie.logoList = englishLogos[0];
+        }
+
+        this.topMoviesList.push(movie);
       }
     });
   }

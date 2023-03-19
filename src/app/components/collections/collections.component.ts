@@ -3,7 +3,7 @@ import { MoviesService } from 'src/app/core/services/movies.service';
 import myAppConfig from 'src/app/core/config/my-app-config';
 import { FormControl, FormGroup } from '@angular/forms';
 import { common } from 'src/app/core/interface/common';
-import { COLLECTIONS } from 'src/app/core/constants/collections.contants';
+import { COLLECTIONS } from 'src/app/core/constants/collections.constants';
 var sort_by_desc = 'popularity.desc',
   page = 1,
   Search_value = '',
@@ -66,9 +66,8 @@ export class CollectionsComponent implements OnInit {
     // this.getMoviesData(api_url);
   }
   getCollectionsdetails(api_url: string) {
-    this.movieservice.getallMovies(api_url);
     let tempMoviesList: any;
-    this.movieservice.moviesData.subscribe((data: any) => {
+    this.movieservice.getallMovies(api_url).subscribe((data: any) => {
       if (!this.movieList.includes(data)) {
         this.movieList.push(data);
       }
@@ -109,9 +108,8 @@ export class CollectionsComponent implements OnInit {
     }
   }
   loadMovies(movieName: string) {
-    this.movieservice.getSearchMovies(movieName);
     let tempSearchList: any;
-    this.movieservice.searchmoviesData.subscribe((data) => {
+    this.movieservice.getSearchMovies(movieName).subscribe((data) => {
       tempSearchList = data;
       this.searchList = tempSearchList.results;
     });
@@ -202,9 +200,8 @@ export class CollectionsComponent implements OnInit {
   // }
 
   getMoviesData(url: any) {
-    this.movieservice.getallMovies(url);
     let tempMoviesList: any;
-    this.movieservice.moviesData.subscribe((data: any) => {
+    this.movieservice.getallMovies(url).subscribe((data: any) => {
       tempMoviesList = data.results;
       this.movieList = [];
       this.movieList = tempMoviesList;

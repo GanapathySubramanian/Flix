@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
+import myAppConfig from '../config/my-app-config';
 
 @Injectable({
   providedIn: 'root',
@@ -253,61 +254,6 @@ export class TvshowsService {
     },
   ]);
 
-  private tvshowSource = new Subject();
-  tvshowsData = this.tvshowSource.asObservable();
-
-  private searchtvshowSource = new Subject();
-  searchtvshowsData = this.searchtvshowSource.asObservable();
-
-  //Particular tvshow details
-  private tvshowdetailSource = new Subject();
-  tvshowdetailsData = this.tvshowdetailSource.asObservable();
-
-  //backdrop image
-  private tvshowallImagesSource = new Subject();
-  tvshowallImageData = this.tvshowallImagesSource.asObservable();
-
-  //tvshow review
-  private tvshowreviewSource = new Subject();
-  tvshowreviewData = this.tvshowreviewSource.asObservable();
-
-  //tvshow review
-  private upcomingTvshowSource = new Subject();
-  upcomingTvshowData = this.upcomingTvshowSource.asObservable();
-
-  //tvshow credit
-  private tvshowcreditSource = new Subject();
-  tvshowcreditData = this.tvshowcreditSource.asObservable();
-
-  //similar tvshow
-  private similartvshowSource = new Subject();
-  similartvshowData = this.similartvshowSource.asObservable();
-
-  //Recommended tvshow
-  private rectvshowSource = new Subject();
-  rectvshowData = this.rectvshowSource.asObservable();
-
-  //Videos
-  private videoSource = new Subject();
-  videoData = this.videoSource.asObservable();
-
-  //Watch providers
-  private watchSource = new Subject();
-  watchData = this.watchSource.asObservable();
-
-  //Episodes
-  private episodeSource = new Subject();
-  episodeData = this.episodeSource.asObservable();
-
-  private seasonSource = new Subject();
-  seasonData = this.seasonSource.asObservable();
-
-  private seasonVideosSource = new Subject();
-  seasonVideosData = this.seasonVideosSource.asObservable();
-
-  private episodeVideosSource = new Subject();
-  episodeVideoData = this.episodeVideosSource.asObservable();
-
   constructor(private http: HttpClient) {}
 
   getGenreList(): Observable<any[]> {
@@ -322,119 +268,85 @@ export class TvshowsService {
     return this.networks;
   }
 
-  getSearchTvshows(url: any) {
-    let searchtvshows: any;
-    this.http.get(url).subscribe((res) => {
-      searchtvshows = res;
-      this.searchtvshowSource.next(searchtvshows);
-    });
+  getSearchTvshows(url: any): Observable<any> {
+    return this.http.get(url);
   }
-  getallTvshows(url: any) {
-    let tvshow: any;
-    this.http.get(url).subscribe((res) => {
-      tvshow = res;
-      this.tvshowSource.next(tvshow);
-    });
+  getallTvshows(url: any): Observable<any> {
+    return this.http.get(url);
   }
 
-  gettvshowDetails(url: any) {
-    let tvshowdetails: any;
-    this.http.get(url).subscribe((res) => {
-      tvshowdetails = res;
-      this.tvshowdetailSource.next(tvshowdetails);
-    });
+  gettvshowDetails(tvshow_id: number): Observable<any> {
+    let api_url =
+      myAppConfig.tmdb.tvshowDetailsBaseUrl +
+      tvshow_id +
+      '?' +
+      myAppConfig.tmdb.apikey;
+    return this.http.get(api_url);
   }
 
-  getAllImages(url: any) {
-    let tvshowimage: any;
-    this.http.get(url).subscribe((res) => {
-      tvshowimage = res;
-      this.tvshowallImagesSource.next(tvshowimage);
-    });
+  getAllImages(tvshow_id: number): Observable<any> {
+    let backdrop_url =
+      myAppConfig.tmdb.tvshowDetailsBaseUrl +
+      tvshow_id +
+      '/images?' +
+      myAppConfig.tmdb.apikey;
+    return this.http.get(backdrop_url);
+  }
+  getAllImagesForEpisodes(
+    tvshow_id: number,
+    season_id: number,
+    episode_id: number
+  ): Observable<any> {
+    let logo_url =
+      myAppConfig.tmdb.tvshowDetailsBaseUrl +
+      tvshow_id +
+      '/season/' +
+      season_id +
+      '/episode/' +
+      episode_id +
+      '/images?' +
+      myAppConfig.tmdb.apikey;
+    return this.http.get(logo_url);
   }
 
-  gettvshowReviews(url: any) {
-    let tvshowreview: any;
-    this.http.get(url).subscribe((res) => {
-      tvshowreview = res;
-      this.tvshowreviewSource.next(tvshowreview);
-    });
+  gettvshowReviews(url: any): Observable<any> {
+    return this.http.get(url);
   }
 
-  getUpcomingTvshows(url: any) {
-    let upcomingTvshow: any;
-    this.http.get(url).subscribe((res) => {
-      upcomingTvshow = res;
-      this.upcomingTvshowSource.next(upcomingTvshow);
-    });
+  getUpcomingTvshows(url: any): Observable<any> {
+    return this.http.get(url);
   }
-  gettvshowCredits(url: any) {
-    let tvshowcredit: any;
-    this.http.get(url).subscribe((res) => {
-      tvshowcredit = res;
-      this.tvshowcreditSource.next(tvshowcredit);
-    });
+  gettvshowCredits(url: any): Observable<any> {
+    return this.http.get(url);
   }
 
-  getSimilartvshows(url: any) {
-    let similartvshow: any;
-    this.http.get(url).subscribe((res) => {
-      similartvshow = res;
-      this.similartvshowSource.next(similartvshow);
-    });
+  getSimilartvshows(url: any): Observable<any> {
+    return this.http.get(url);
   }
 
-  getRecommendedtvshows(url: any) {
-    let rectvshow: any;
-    this.http.get(url).subscribe((res) => {
-      rectvshow = res;
-      this.rectvshowSource.next(rectvshow);
-    });
+  getRecommendedtvshows(url: any): Observable<any> {
+    return this.http.get(url);
   }
 
-  getVideos(url: any) {
-    let videos: any;
-    this.http.get(url).subscribe((res) => {
-      videos = res;
-      this.videoSource.next(videos);
-    });
+  getVideos(url: any): Observable<any> {
+    return this.http.get(url);
   }
 
-  getWatchProviders(url: any) {
-    let watchprovider: any;
-    this.http.get(url).subscribe((res) => {
-      watchprovider = res;
-      this.watchSource.next(watchprovider);
-    });
+  getWatchProviders(url: any): Observable<any> {
+    return this.http.get(url);
   }
 
-  getEpisodes(url: any) {
-    let epi: any;
-    this.http.get(url).subscribe((res) => {
-      epi = res;
-      this.episodeSource.next(epi);
-    });
+  getEpisodes(url: any): Observable<any> {
+    return this.http.get(url);
   }
-  getSeason(url: any) {
-    let epi: any;
-    this.http.get(url).subscribe((res) => {
-      epi = res;
-      this.seasonSource.next(epi);
-    });
+  getSeason(url: any): Observable<any> {
+    return this.http.get(url);
   }
-  getSeasonVideos(url: any) {
-    let epi: any;
-    this.http.get(url).subscribe((res) => {
-      epi = res;
-      this.seasonVideosSource.next(epi);
-    });
+  getSeasonVideos(url: any): Observable<any> {
+    return this.http.get(url);
   }
 
-  getEpisodeVideos(url: any) {
-    let epi: any;
-    this.http.get(url).subscribe((res) => {
-      epi = res;
-      this.episodeVideosSource.next(epi);
-    });
+  getEpisodeVideos(url: any): Observable<any> {
+    return this.http.get(url);
   }
 }

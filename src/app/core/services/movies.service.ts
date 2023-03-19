@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, of, Subject } from 'rxjs';
+import myAppConfig from '../config/my-app-config';
 
 @Injectable({
   providedIn: 'root',
@@ -41,73 +42,15 @@ export class MoviesService {
     { order: 'revenue.desc', desc: 'Top Grossing' },
     { order: 'revenue.asc', desc: 'Low Grossing' },
   ]);
-  //Movies List
-  private movieSource = new Subject();
-  moviesData = this.movieSource.asObservable();
-
-  //Search Movies List
-  private searchmovieSource = new Subject();
-  searchmoviesData = this.searchmovieSource.asObservable();
-
-  //Upcoming Movies List
-  private upcomingSource = new Subject();
-  upcomingData = this.upcomingSource.asObservable();
-
-  private trendingSource = new Subject();
-  trendingInPrimeData = this.trendingSource.asObservable();
-
-  //Upcoming Movies List
-  private topgrossingSource = new Subject();
-  topGrossingData = this.topgrossingSource.asObservable();
-
-  //Particular Movie details
-  private moviedetailSource = new Subject();
-  moviedetailsData = this.moviedetailSource.asObservable();
-
-  //Collections Movie details
-  private collectionSource = new Subject();
-  collectionData = this.collectionSource.asObservable();
-
-  //backdrop image
-  private movieallImagesSource = new Subject();
-  movieallImageData = this.movieallImagesSource.asObservable();
-
-  //movie review
-  private moviereviewSource = new Subject();
-  moviereviewData = this.moviereviewSource.asObservable();
-
-  //movie credit
-  private moviecreditSource = new Subject();
-  moviecreditData = this.moviecreditSource.asObservable();
-
-  //similar movie
-  private similarmovieSource = new Subject();
-  similarmovieData = this.similarmovieSource.asObservable();
-
-  //Recommended movie
-  private recmovieSource = new Subject();
-  recmovieData = this.recmovieSource.asObservable();
-
-  //Videos
-  private videoSource = new Subject();
-  videoData = this.videoSource.asObservable();
-
-  //Watch providers
-  private watchSource = new Subject();
-  watchData = this.watchSource.asObservable();
-
-  //Watch providers
-  private countrySource = new Subject();
-  countryData = this.countrySource.asObservable();
 
   constructor(private http: HttpClient) {}
 
-  getCountry(url: any) {
-    let country: any;
-    this.http.get(url).subscribe((res) => {
-      country = res;
-      this.countrySource.next(country);
-    });
+  getCountry(): Observable<any> {
+    var country_url =
+      myAppConfig.tmdb.movieBaseUrl +
+      '/configuration/countries?' +
+      myAppConfig.tmdb.apikey;
+    return this.http.get(country_url);
   }
 
   getGenreList(): Observable<any[]> {
@@ -118,113 +61,114 @@ export class MoviesService {
     return this.sortBy;
   }
 
-  getSearchMovies(url: any) {
-    let searchmovies: any;
-    this.http.get(url).subscribe((res) => {
-      searchmovies = res;
-      this.searchmovieSource.next(searchmovies);
-    });
+  getSearchMovies(url: any): Observable<any> {
+    return this.http.get(url);
   }
 
-  getallMovies(url: any) {
-    let movies: any;
-    this.http.get(url).subscribe((res) => {
-      movies = res;
-      this.movieSource.next(movies);
-    });
+  getallMovies(url: any): Observable<any> {
+    return this.http.get(url);
   }
 
-  getTopGrossingMovies(url: any) {
-    let topgrossing: any;
-    this.http.get(url).subscribe((res) => {
-      topgrossing = res;
-      this.topgrossingSource.next(topgrossing);
-    });
+  getTopGrossingMovies(url: any): Observable<any> {
+    return this.http.get(url);
   }
 
-  getUpcomingMovies(url: any) {
-    let upcomings: any;
-    this.http.get(url).subscribe((res) => {
-      upcomings = res;
-      this.upcomingSource.next(upcomings);
-    });
+  getUpcomingMovies(url: any): Observable<any> {
+    return this.http.get(url);
   }
 
-  getTrendingShowInPrime(url: any) {
-    let trending: any;
-    this.http.get(url).subscribe((res) => {
-      trending = res;
-      this.trendingSource.next(trending);
-    });
+  getTrendingShowInPrime(url: any): Observable<any> {
+    return this.http.get(url);
   }
-  getMovieDetails(url: any) {
-    let moviedetails: any;
-    this.http.get(url).subscribe((res) => {
-      moviedetails = res;
-      this.moviedetailSource.next(moviedetails);
-    });
+  getMovieDetails(movie_id: number): Observable<any> {
+    let api_url =
+      myAppConfig.tmdb.movieBaseUrl +
+      '/movie/' +
+      movie_id +
+      '?' +
+      myAppConfig.tmdb.apikey;
+    return this.http.get(api_url);
   }
   getAllCollections(url: any) {
-    let collectiondetails: any;
-    this.http.get(url).subscribe((res) => {
-      collectiondetails = res;
-      this.collectionSource.next(collectiondetails);
-    });
+    return this.http.get(url);
   }
 
-  getAllImages(url: any) {
-    let movieimage: any;
-    this.http.get(url).subscribe((res) => {
-      movieimage = res;
-      this.movieallImagesSource.next(movieimage);
-    });
+  getCollectionDetails(id: number): Observable<any> {
+    var api_url =
+      myAppConfig.tmdb.movieBaseUrl +
+      '/collection/' +
+      id +
+      '?' +
+      myAppConfig.tmdb.apikey;
+    return this.http.get(api_url);
+  }
+  getAllImages(movie_id: number): Observable<any> {
+    let backdrop_url =
+      myAppConfig.tmdb.movieBaseUrl +
+      '/movie/' +
+      movie_id +
+      '/images?' +
+      myAppConfig.tmdb.apikey;
+    return this.http.get(backdrop_url);
   }
 
-  getMovieReviews(url: any) {
-    let moviereview: any;
-    this.http.get(url).subscribe((res) => {
-      moviereview = res;
-      this.moviereviewSource.next(moviereview);
-    });
+  getMovieReviews(movie_id: number): Observable<any> {
+    let reviews_url =
+      myAppConfig.tmdb.movieBaseUrl +
+      '/movie/' +
+      movie_id +
+      '/reviews?' +
+      myAppConfig.tmdb.apikey;
+    return this.http.get(reviews_url);
   }
 
-  getMovieCredits(url: any) {
-    let moviecredit: any;
-    this.http.get(url).subscribe((res) => {
-      moviecredit = res;
-      this.moviecreditSource.next(moviecredit);
-    });
+  getMovieCredits(movie_id: number): Observable<any> {
+    let credits_url =
+      myAppConfig.tmdb.movieBaseUrl +
+      '/movie/' +
+      movie_id +
+      '/credits?' +
+      myAppConfig.tmdb.apikey;
+    return this.http.get(credits_url);
   }
 
-  getSimilarMovies(url: any) {
-    let similarmovie: any;
-    this.http.get(url).subscribe((res) => {
-      similarmovie = res;
-      this.similarmovieSource.next(similarmovie);
-    });
+  getSimilarMovies(movie_id: number): Observable<any> {
+    let similar_url =
+      myAppConfig.tmdb.movieBaseUrl +
+      '/movie/' +
+      movie_id +
+      '/similar?' +
+      myAppConfig.tmdb.apikey;
+    return this.http.get(similar_url);
   }
 
-  getRecommendedMovies(url: any) {
-    let recmovie: any;
-    this.http.get(url).subscribe((res) => {
-      recmovie = res;
-      this.recmovieSource.next(recmovie);
-    });
+  getRecommendedMovies(movie_id: number): Observable<any> {
+    let recmovie_url =
+      myAppConfig.tmdb.movieBaseUrl +
+      '/movie/' +
+      movie_id +
+      '/recommendations?' +
+      myAppConfig.tmdb.apikey;
+    return this.http.get(recmovie_url);
   }
 
-  getVideos(url: any) {
-    let videos: any;
-    this.http.get(url).subscribe((res) => {
-      videos = res;
-      this.videoSource.next(videos);
-    });
+  getVideos(movie_id: number): Observable<any> {
+    let URL =
+      myAppConfig.tmdb.movieBaseUrl +
+      '/movie/' +
+      movie_id +
+      '/videos?' +
+      myAppConfig.tmdb.apikey;
+    return this.http.get(URL);
   }
 
-  getWatchProviders(url: any) {
-    let watchprovider: any;
-    this.http.get(url).subscribe((res) => {
-      watchprovider = res;
-      this.watchSource.next(watchprovider);
-    });
+  getWatchProviders(movie_id: number): Observable<any> {
+    var watch_provider =
+      myAppConfig.tmdb.movieBaseUrl +
+      '/movie/' +
+      movie_id +
+      '/watch/providers?' +
+      myAppConfig.tmdb.apikey;
+    return this.http.get(watch_provider);
   }
 }

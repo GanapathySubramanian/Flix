@@ -57,12 +57,7 @@ export class MoviesComponent implements OnInit {
   }
 
   getCountries() {
-    var country_url =
-      myAppConfig.tmdb.movieBaseUrl +
-      '/configuration/countries?' +
-      myAppConfig.tmdb.apikey;
-    this.movieservice.getCountry(country_url);
-    this.movieservice.countryData.subscribe((data) => {
+    this.movieservice.getCountry().subscribe((data) => {
       this.countryList = data;
     });
   }
@@ -92,10 +87,8 @@ export class MoviesComponent implements OnInit {
     }
   }
   loadMovies(movieName: string) {
-    this.movieservice.getSearchMovies(movieName);
-
     let tempSearchList: any;
-    this.movieservice.searchmoviesData.subscribe((data) => {
+    this.movieservice.getSearchMovies(movieName).subscribe((data) => {
       tempSearchList = data;
       this.searchList = tempSearchList.results;
     });
@@ -304,10 +297,8 @@ export class MoviesComponent implements OnInit {
   }
 
   getMoviesData(url: any) {
-    this.movieservice.getallMovies(url);
-
     let tempMoviesList: any;
-    this.movieservice.moviesData.subscribe((data: any) => {
+    this.movieservice.getallMovies(url).subscribe((data: any) => {
       tempMoviesList = data.results;
       this.movieList = [];
       this.movieList = tempMoviesList;
@@ -335,16 +326,9 @@ export class MoviesComponent implements OnInit {
     });
   }
 
-  getMovieImages(id: string, index: number) {
-    let backdrop_url =
-      myAppConfig.tmdb.movieBaseUrl +
-      '/movie/' +
-      id +
-      '/images?' +
-      myAppConfig.tmdb.apikey;
-    this.movieservice.getAllImages(backdrop_url);
+  getMovieImages(id: number, index: number) {
     let tempimagesData: any;
-    this.movieservice.movieallImageData.subscribe((data: any) => {
+    this.movieservice.getAllImages(id).subscribe((data: any) => {
       if (data.id === id) {
         tempimagesData = data;
         //Movie Logo Images

@@ -16,9 +16,7 @@ export class VideoHeaderComponent implements OnInit {
   constructor() {}
   @ViewChild('myFrame') myFrame: any;
 
-  ngOnInit(): void {
-    console.log(this.data);
-  }
+  ngOnInit(): void {}
   playTrailer() {
     this.playVideo = true;
     this.myFrame?.nativeElement.contentWindow.postMessage(
