@@ -77,17 +77,11 @@ export class MovieDetailsComponent implements OnInit {
             myAppConfig.tmdb.thumbnailUrl + video.key + '/0.jpg';
         });
       }
+      console.log(this.movieDetails.videoList);
+
       for (let i = 0; i < this.movieDetails.videoList.length; i++) {
         if (this.movieDetails.videoList[i].key) {
-          if ((this.movieDetails.videoList[i].type = 'Teaser')) {
-            this.background_video =
-              this._sanitizer.bypassSecurityTrustResourceUrl(
-                myAppConfig.tmdb.videoUrl +
-                  this.movieDetails.videoList[i].key +
-                  '?autoplay=1&controls=0'
-                // '?modestbranding=0&controls=0&fs=0&loop=1&showinfo=0&autoplay=1&mute=1&enablejsapi=1'
-              );
-          } else if ((this.movieDetails.videoList[i].type = 'Trailer')) {
+          if (this.movieDetails.videoList[i].type == 'Trailer') {
             this.background_video =
               this._sanitizer.bypassSecurityTrustResourceUrl(
                 myAppConfig.tmdb.videoUrl +
@@ -96,6 +90,7 @@ export class MovieDetailsComponent implements OnInit {
                 // '?modestbranding=0&controls=0&fs=0&loop=1&showinfo=0&autoplay=1&mute=1&enablejsapi=1'
               );
           }
+
           this.movieDetails.videoList[i].key =
             this._sanitizer.bypassSecurityTrustResourceUrl(
               myAppConfig.tmdb.videoUrl + this.movieDetails.videoList[i].key
@@ -103,6 +98,18 @@ export class MovieDetailsComponent implements OnInit {
         } else {
           this.movieDetails.videoList[i].key = null;
           this.movieDetails.videoList[i].videoThumbnail = null;
+        }
+
+        if (!this.background_video) {
+          if ((this.movieDetails.videoList[i].type = 'Teaser')) {
+            this.background_video =
+              this._sanitizer.bypassSecurityTrustResourceUrl(
+                myAppConfig.tmdb.videoUrl +
+                  this.movieDetails.videoList[i].key +
+                  '?autoplay=1&controls=0'
+                // '?modestbranding=0&controls=0&fs=0&loop=1&showinfo=0&autoplay=1&mute=1&enablejsapi=1'
+              );
+          }
         }
       }
     });
