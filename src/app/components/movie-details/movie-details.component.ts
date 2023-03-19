@@ -90,18 +90,14 @@ export class MovieDetailsComponent implements OnInit {
                 // '?modestbranding=0&controls=0&fs=0&loop=1&showinfo=0&autoplay=1&mute=1&enablejsapi=1'
               );
           }
-
-          this.movieDetails.videoList[i].key =
-            this._sanitizer.bypassSecurityTrustResourceUrl(
-              myAppConfig.tmdb.videoUrl + this.movieDetails.videoList[i].key
-            );
         } else {
           this.movieDetails.videoList[i].key = null;
           this.movieDetails.videoList[i].videoThumbnail = null;
         }
 
         if (!this.background_video) {
-          if ((this.movieDetails.videoList[i].type = 'Teaser')) {
+          if (this.movieDetails.videoList[i].type == 'Teaser') {
+            console.log(this.movieDetails.videoList[i]);
             this.background_video =
               this._sanitizer.bypassSecurityTrustResourceUrl(
                 myAppConfig.tmdb.videoUrl +
@@ -111,6 +107,11 @@ export class MovieDetailsComponent implements OnInit {
               );
           }
         }
+
+        this.movieDetails.videoList[i].key =
+          this._sanitizer.bypassSecurityTrustResourceUrl(
+            myAppConfig.tmdb.videoUrl + this.movieDetails.videoList[i].key
+          );
       }
     });
   }
