@@ -76,10 +76,8 @@ export class PersonsComponent implements OnInit {
     }
   }
   loadPeoples(personName: string) {
-    this.peopleservice.getSearchPeoples(personName);
-
     let tempSearchList: any;
-    this.peopleservice.searchpersonData.subscribe((data) => {
+    this.peopleservice.getSearchPeoples(personName).subscribe((data) => {
       tempSearchList = data;
       this.searchList = tempSearchList.results;
     });
@@ -194,33 +192,33 @@ export class PersonsComponent implements OnInit {
   }
 
   getPeoplesData(apiurl: any) {
-    this.peopleservice.getPopularPeopleDetails(apiurl);
-
     let temppeopleList: any;
-    this.peopleservice.peoplesData.subscribe((data: any) => {
-      temppeopleList = data.results;
+    this.peopleservice
+      .getPopularPeopleDetails(apiurl)
+      .subscribe((data: any) => {
+        temppeopleList = data.results;
 
-      this.peopleList = [];
-      for (let i = 0; i < temppeopleList.length; i++) {
-        this.peopleList[i] = {} as common;
-        this.peopleList[i].id = temppeopleList[i].id;
-        this.peopleList[i].title = temppeopleList[i].name;
-        this.peopleList[i].popularity = temppeopleList[i].popularity;
-        this.peopleList[i].poster_path = temppeopleList[i].profile_path;
-        this.peopleList[i].job = temppeopleList[i].known_for_department;
-      }
-      if (data.total_pages == page) {
-        this.isdisablenext = true;
-      } else {
-        this.isdisablenext = false;
-      }
+        this.peopleList = [];
+        for (let i = 0; i < temppeopleList.length; i++) {
+          this.peopleList[i] = {} as common;
+          this.peopleList[i].id = temppeopleList[i].id;
+          this.peopleList[i].title = temppeopleList[i].name;
+          this.peopleList[i].popularity = temppeopleList[i].popularity;
+          this.peopleList[i].poster_path = temppeopleList[i].profile_path;
+          this.peopleList[i].job = temppeopleList[i].known_for_department;
+        }
+        if (data.total_pages == page) {
+          this.isdisablenext = true;
+        } else {
+          this.isdisablenext = false;
+        }
 
-      if (page == 1) {
-        this.isdisableprev = true;
-      } else {
-        this.isdisableprev = false;
-      }
-    });
+        if (page == 1) {
+          this.isdisableprev = true;
+        } else {
+          this.isdisableprev = false;
+        }
+      });
   }
 
   float2int(value: any) {

@@ -58,10 +58,8 @@ export class PersonDetailsComponent implements OnInit {
   }
 
   getExternalid(external_ids: string) {
-    this.peopleservice.getSocialLinks(external_ids);
-
     let tempsociallinks: any;
-    this.peopleservice.socialData.subscribe((data) => {
+    this.peopleservice.getSocialLinks(external_ids).subscribe((data) => {
       tempsociallinks = data;
 
       this.personDetails.facebook_id = tempsociallinks.facebook_id;
@@ -75,10 +73,8 @@ export class PersonDetailsComponent implements OnInit {
   }
 
   getCredits(movie_tvshows_credit: string) {
-    this.peopleservice.getCredits(movie_tvshows_credit);
-
     let tempcredit: any;
-    this.peopleservice.creditData.subscribe((data) => {
+    this.peopleservice.getCredits(movie_tvshows_credit).subscribe((data) => {
       tempcredit = data;
 
       // this.castMovieList=tempcredit.cast;
@@ -172,10 +168,8 @@ export class PersonDetailsComponent implements OnInit {
     return c_data;
   }
   getPersonDetailsData(api_url: string) {
-    this.peopleservice.getPersonDetails(api_url);
-
     let temppersondetails: any;
-    this.peopleservice.personData.subscribe((data) => {
+    this.peopleservice.getPersonDetails(api_url).subscribe((data) => {
       temppersondetails = data;
 
       this.personDetails.biography = temppersondetails.biography;
