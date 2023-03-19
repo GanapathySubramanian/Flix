@@ -31,12 +31,12 @@ export class MovieDetailsComponent implements OnInit {
 
     this.movieDetails.crewList = [];
     this.router?.navigateByUrl('/moviedetails/' + movie_id);
-    this.getMovieDetails(movie_id);    
+    this.getMovieDetails(movie_id);
   }
   ngOnInit(): void {}
 
-  ngDestroy(){
-    this.movieDetails={} as MovieDetails;
+  ngDestroy() {
+    this.movieDetails = {} as MovieDetails;
   }
 
   getMovieDetails(id: number) {
@@ -110,12 +110,13 @@ export class MovieDetailsComponent implements OnInit {
     let videos: any;
     this.movieservice.videoData.subscribe((data) => {
       videos = data;
-      this.movieDetails.videoList=[];
+      this.movieDetails.videoList = [];
       this.movieDetails.videoList = videos.results;
 
-      if(this.movieDetails.videoList.length>0){
-        this.movieDetails.videoList.forEach((video:any) => {
-          video.videoThumbnail=myAppConfig.tmdb.thumbnailUrl+video.key+'/0.jpg';
+      if (this.movieDetails.videoList.length > 0) {
+        this.movieDetails.videoList.forEach((video: any) => {
+          video.videoThumbnail =
+            myAppConfig.tmdb.thumbnailUrl + video.key + '/0.jpg';
         });
       }
       for (let i = 0; i < this.movieDetails.videoList.length; i++) {
@@ -125,15 +126,16 @@ export class MovieDetailsComponent implements OnInit {
               this._sanitizer.bypassSecurityTrustResourceUrl(
                 myAppConfig.tmdb.videoUrl +
                   this.movieDetails.videoList[i].key +
-                  '?modestbranding=0&controls=0&fs=0&loop=1&showinfo=0&autoplay=1&mute=1&enablejsapi=1'
+                  '?autoplay=1&controls=0'
+                // '?modestbranding=0&controls=0&fs=0&loop=1&showinfo=0&autoplay=1&mute=1&enablejsapi=1'
               );
-              
           } else if ((this.movieDetails.videoList[i].type = 'Trailer')) {
             this.background_video =
               this._sanitizer.bypassSecurityTrustResourceUrl(
                 myAppConfig.tmdb.videoUrl +
                   this.movieDetails.videoList[i].key +
-                  '?modestbranding=0&controls=0&fs=0&loop=1&showinfo=0&autoplay=1&mute=1&enablejsapi=1'
+                  '?autoplay=1&controls=0'
+                // '?modestbranding=0&controls=0&fs=0&loop=1&showinfo=0&autoplay=1&mute=1&enablejsapi=1'
               );
           }
           this.movieDetails.videoList[i].key =
@@ -142,7 +144,7 @@ export class MovieDetailsComponent implements OnInit {
             );
         } else {
           this.movieDetails.videoList[i].key = null;
-          this.movieDetails.videoList[i].videoThumbnail=null;
+          this.movieDetails.videoList[i].videoThumbnail = null;
         }
       }
     });
@@ -263,18 +265,29 @@ export class MovieDetailsComponent implements OnInit {
     this.movieservice.moviereviewData.subscribe((data) => {
       tempreviewData = data;
 
-      tempreviewData.results.forEach((review:any) => {
-        if(review.author_details.avatar_path){
-          if(review.author_details.avatar_path[0]=='/' && review.author_details.avatar_path[1]=='h' && review.author_details.avatar_path[2]=='t' && review.author_details.avatar_path[3]=='t' && review.author_details.avatar_path[4]=='p'){
-            let avatar_path=review.author_details.avatar_path.substring(1);
-            review.author_details.avatar_path=avatar_path;
-          }else if(review.author_details.avatar_path[0]!=='h' && review.author_details.avatar_path[1]!=='t' && review.author_details.avatar_path[2]!=='t' && review.author_details.avatar_path[3]!=='p'){
-            let avatar_path=this.imgUrl+review.author_details.avatar_path;
-            review.author_details.avatar_path=avatar_path;
+      tempreviewData.results.forEach((review: any) => {
+        if (review.author_details.avatar_path) {
+          if (
+            review.author_details.avatar_path[0] == '/' &&
+            review.author_details.avatar_path[1] == 'h' &&
+            review.author_details.avatar_path[2] == 't' &&
+            review.author_details.avatar_path[3] == 't' &&
+            review.author_details.avatar_path[4] == 'p'
+          ) {
+            let avatar_path = review.author_details.avatar_path.substring(1);
+            review.author_details.avatar_path = avatar_path;
+          } else if (
+            review.author_details.avatar_path[0] !== 'h' &&
+            review.author_details.avatar_path[1] !== 't' &&
+            review.author_details.avatar_path[2] !== 't' &&
+            review.author_details.avatar_path[3] !== 'p'
+          ) {
+            let avatar_path = this.imgUrl + review.author_details.avatar_path;
+            review.author_details.avatar_path = avatar_path;
           }
         }
       });
-      this.movieDetails.reviewList=tempreviewData.results;      
+      this.movieDetails.reviewList = tempreviewData.results;
     });
   }
 
@@ -306,19 +319,18 @@ export class MovieDetailsComponent implements OnInit {
 
       this.movieDetails.posterList = tempimagesData.posters;
 
-      let englishLogos:any[]=[];
-      if(tempimagesData.logos.length>0){
-        tempimagesData?.logos.forEach((logo:any) => {
-          if(logo.iso_639_1=='en'){
+      let englishLogos: any[] = [];
+      if (tempimagesData.logos.length > 0) {
+        tempimagesData?.logos.forEach((logo: any) => {
+          if (logo.iso_639_1 == 'en') {
             englishLogos.push(logo);
           }
         });
       }
 
-      if(englishLogos.length>0){
-        this.movieDetails.logoList=englishLogos[0];
-      }       
-      
+      if (englishLogos.length > 0) {
+        this.movieDetails.logoList = englishLogos[0];
+      }
     });
   }
 

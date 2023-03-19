@@ -292,7 +292,7 @@ path.two {
     display: none;
   }
 }
-.sm-video-header{
+.sm-video-header {
   display: none;
 }
 @media only screen and (max-width: 1500px) {
@@ -303,20 +303,19 @@ path.two {
   .right-content {
     width: 50%;
   }
-  .lg-video-header{
+  .lg-video-header {
     display: block;
   }
-  .sm-video-header{
+  .sm-video-header {
     display: none;
   }
 }
 
 @media only screen and (max-width: 1077px) {
-
-  .lg-video-header{
+  .lg-video-header {
     display: none;
   }
-  .sm-video-header{
+  .sm-video-header {
     display: block;
   }
 }

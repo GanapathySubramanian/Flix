@@ -1,12 +1,23 @@
 <section class="lg-video-header">
   <section class="showcase" *ngIf="background_video && playVideo">
     <div class="videoContainer text-white">
-      <iframe
+      <!-- <iframe
+        #myFrame
         class="videoContainer__video"
         width="1920"
         height="1080"
         [src]="background_video"
         frameborder="0"
+      ></iframe> -->
+      <iframe
+        frameborder="0"
+        allowfullscreen="1"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        title="YouTube video player"
+        width="100%"
+        height="100%"
+        [src]="background_video"
+        data-gtm-yt-inspected-6="true"
       ></iframe>
     </div>
     <div class="overlay-b"></div>
@@ -67,7 +78,7 @@
       <h3 class="text-white" (click)="stopTrailer()">
         <div class="mt-5" *ngIf="data.logoList">
           <img
-            id="logo-img"
+            style="width: 20%; height: 20%"
             src="{{ highQualityImgUrl + data.logoList.file_path }}"
           />
         </div>
@@ -225,7 +236,7 @@
               data-aos="fade-down"
             >
               <span *ngIf="data?.networks?.length > 0"> Streaming On : </span>
-              <span
+              <!-- <span
                 *ngFor="let stream of data.networks; let i = index"
                 class="pl-2"
               >
@@ -240,109 +251,120 @@
                   <span>{{ stream.name }}</span>
                   <span *ngIf="data.networks.length != i + 1"> , </span>
                 </span>
+              </span> -->
+              <span
+                *ngFor="let stream of data.networks; let i = index"
+                class="pl-2"
+              >
+                <span>
+                  <span>{{ stream.name }}</span>
+                  <span *ngIf="data.networks.length != i + 1"> , </span>
+                </span>
               </span>
             </div>
 
-            <div
-              class="wrapper-watchnow"
-              *ngIf="background_video"
-              style="cursor: pointer"
-              data-aos="fade-down"
-            >
-              <a class="play playBut" (click)="playTrailer()">
-                <div style="display: inline-block; width: 50px">
-                  <svg
-                    id="playBtn"
-                    version="1.1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-                    x="0px"
-                    y="0px"
-                    width="213.7px"
-                    height="213.7px"
-                    viewBox="0 0 213.7 213.7"
-                    enable-background="new 0 0 213.7 213.7"
-                    xml:space="preserve"
-                  >
-                    <polygon
-                      class="triangle"
-                      id="XMLID_18_"
-                      fill="none"
-                      stroke-width="7"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-miterlimit="10"
-                      points="
+            <div class="watch-now d-flex">
+              <div
+                class="wrapper-watchnow"
+                *ngIf="background_video"
+                style="cursor: pointer; margin-right: 25px"
+                data-aos="fade-down"
+              >
+                <a class="play playBut" (click)="playTrailer()">
+                  <div style="display: inline-block; width: 50px">
+                    <svg
+                      id="playBtn"
+                      version="1.1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+                      x="0px"
+                      y="0px"
+                      width="213.7px"
+                      height="213.7px"
+                      viewBox="0 0 213.7 213.7"
+                      enable-background="new 0 0 213.7 213.7"
+                      xml:space="preserve"
+                    >
+                      <polygon
+                        class="triangle"
+                        id="XMLID_18_"
+                        fill="none"
+                        stroke-width="7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-miterlimit="10"
+                        points="
                                           73.5,62.5 148.5,105.8 73.5,149.1 "
-                    />
-                    <circle
-                      class="circle"
-                      id="XMLID_17_"
-                      fill="none"
-                      stroke-width="7"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-miterlimit="10"
-                      cx="106.8"
-                      cy="106.8"
-                      r="103.3"
-                    />
-                  </svg>
-                </div>
-                Watch Trailer
-              </a>
-            </div>
+                      />
+                      <circle
+                        class="circle"
+                        id="XMLID_17_"
+                        fill="none"
+                        stroke-width="7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-miterlimit="10"
+                        cx="106.8"
+                        cy="106.8"
+                        r="103.3"
+                      />
+                    </svg>
+                  </div>
+                  Watch Trailer
+                </a>
+              </div>
 
-            <div
-              class="wrapper-watchnow"
-              style="cursor: pointer"
-              data-aos="fade-down"
-              *ngIf="!background_video"
-            >
-              <a class="play playBut" [href]="data?.watchprovider">
-                <div style="display: inline-block; width: 50px">
-                  <svg
-                    id="playBtn"
-                    version="1.1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-                    x="0px"
-                    y="0px"
-                    width="213.7px"
-                    height="213.7px"
-                    viewBox="0 0 213.7 213.7"
-                    enable-background="new 0 0 213.7 213.7"
-                    xml:space="preserve"
-                  >
-                    <polygon
-                      class="triangle"
-                      id="XMLID_18_"
-                      fill="none"
-                      stroke-width="7"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-miterlimit="10"
-                      points="
+              <div
+                class="wrapper-watchnow"
+                style="cursor: pointer"
+                data-aos="fade-down"
+                *ngIf="data.watchprovider"
+              >
+                <a class="play playBut" [href]="data?.watchprovider">
+                  <div style="display: inline-block; width: 50px">
+                    <svg
+                      id="playBtn"
+                      version="1.1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+                      x="0px"
+                      y="0px"
+                      width="213.7px"
+                      height="213.7px"
+                      viewBox="0 0 213.7 213.7"
+                      enable-background="new 0 0 213.7 213.7"
+                      xml:space="preserve"
+                    >
+                      <polygon
+                        class="triangle"
+                        id="XMLID_18_"
+                        fill="none"
+                        stroke-width="7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-miterlimit="10"
+                        points="
                                                   73.5,62.5 148.5,105.8 73.5,149.1 "
-                    />
-                    <circle
-                      class="circle"
-                      id="XMLID_17_"
-                      fill="none"
-                      stroke-width="7"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-miterlimit="10"
-                      cx="106.8"
-                      cy="106.8"
-                      r="103.3"
-                    />
-                  </svg>
-                </div>
-                Watch Now
-              </a>
+                      />
+                      <circle
+                        class="circle"
+                        id="XMLID_17_"
+                        fill="none"
+                        stroke-width="7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-miterlimit="10"
+                        cx="106.8"
+                        cy="106.8"
+                        r="103.3"
+                      />
+                    </svg>
+                  </div>
+                  Watch Now
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -507,14 +529,14 @@
       <h5 style="color: red" class="text-center">Streaming On</h5>
       <div class="streaming text-white text-wrap mt-2" data-aos="fade-down">
         <span *ngFor="let stream of data.networks; let i = index" class="pl-2">
-          <span *ngIf="stream.logo_path">
+          <!-- <span *ngIf="stream.logo_path">
             <img
               src="{{ highQualityImgUrl + stream.logo_path }}"
               class="network-img"
               style="width: 100px; height: 40px; margin: 10px"
             />
-          </span>
-          <span *ngIf="!stream.logo_path">
+          </span> -->
+          <span>
             <span>{{ stream.name }}</span>
             <span *ngIf="data.networks.length != i + 1"> , </span>
           </span>
