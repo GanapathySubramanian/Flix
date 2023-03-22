@@ -454,8 +454,7 @@
     >
       <span *ngIf="data.original_title">
         {{ data.original_title }}
-        <span *ngIf="data.title"> - {{ data.title }}</span></span
-      >
+      </span>
       <span *ngIf="!data.original_title && data.name">{{ data.name }}</span>
     </h4>
     <div
@@ -583,6 +582,7 @@
       class="wrapper-watchnow"
       style="cursor: pointer; display: flex; justify-content: center"
       data-aos="fade-down"
+      *ngIf="data.watchprovider"
     >
       <a class="play playBut" [href]="data?.watchprovider">
         <div style="display: inline-block; width: 50px">
@@ -627,6 +627,42 @@
         </div>
         Watch Now
       </a>
+    </div>
+
+    <div
+      class="wrapper-watchnow mt-4"
+      style="cursor: pointer"
+      data-aos="fade-down"
+    >
+      <span
+        class="play playBut"
+        *ngIf="inWatchList"
+        (click)="removeFromWatchList(data)"
+      >
+        <div style="display: inline-block; width: 50px">
+          <!-- <i class="fa-regular fa-circle-check fa-2xl"></i> -->
+          <img
+            src="../../../../assets/images/tick-circle.svg"
+            alt=""
+            width="100%"
+          />
+        </div>
+        WATCH LIST
+      </span>
+      <span
+        class="play playBut"
+        (click)="addTowatchList(data)"
+        *ngIf="!inWatchList"
+      >
+        <div style="display: inline-block; width: 50px">
+          <img
+            src="../../../../assets/images/plus-circle.svg"
+            alt=""
+            width="90%"
+          />
+        </div>
+        WATCH LIST
+      </span>
     </div>
   </div>
 </section>

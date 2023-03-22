@@ -1,4 +1,7 @@
 <div class="movies-section" style="margin-top: 80px">
+  <div class="movie-filter-details" *ngIf="movieList.length > 0">
+    <h5 class="text-center filtered-value">My Watch List</h5>
+  </div>
   <main id="main">
     <div class="movie" id="movie" *ngFor="let movie of movieList">
       <span [routerLink]="['/' + movie.detailsAbout + 'details', movie.id]">
@@ -6,4 +9,8 @@
       </span>
     </div>
   </main>
+</div>
+
+<div *ngIf="movieList.length <= 0" style="height: 80vh">
+  <h3 class="filtered-value text-center">Your Watchlist is currently empty</h3>
 </div>

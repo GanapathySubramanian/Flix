@@ -31,6 +31,11 @@ export class VideoHeaderComponent implements OnInit {
     if (this.watchList.some((movie) => movie.id == this.id)) {
       this.inWatchList = true;
     }
+    if (this.data?.id) {
+      if (this.watchList.some((movie) => movie.id == this.data.id)) {
+        this.inWatchList = true;
+      }
+    }
   }
   playTrailer() {
     this.playVideo = true;
@@ -47,6 +52,8 @@ export class VideoHeaderComponent implements OnInit {
     );
   }
   addTowatchList(result: any) {
+    console.log(result);
+
     let movieTvShowDetail = {
       backdrop_path: result.backdrop_path,
       id: result.id,
@@ -73,11 +80,12 @@ export class VideoHeaderComponent implements OnInit {
       vote_average: result.vote_average,
       watchprovider: result.watchprovider,
       background_image: result.background_image,
-      detailsAbout: result.no_of_seasons
-        ? 'tvshow'
-        : result.parts
-        ? 'collection'
-        : 'movie',
+      detailsAbout:
+        result.no_of_seasons || result.avg_run_time || result.first_air_date
+          ? 'tvshow'
+          : result.parts
+          ? 'collection'
+          : 'movie',
     };
     if (
       !this.watchList.some((details) => details.id === movieTvShowDetail.id)

@@ -7,7 +7,7 @@
       transitionTimingFunction="ease-in-out"
       [height]="800"
       [arrows]="false"
-      [autoplay]="false"
+      [autoplay]="true"
       [autoplayInterval]="5000"
       [pauseOnHover]="false"
       [loop]="true"
@@ -17,7 +17,10 @@
         *ngFor="let movieDetails of topMoviesList"
       >
         <section class="header">
-          <app-video-header [data]="movieDetails" [isCarousel]="true"></app-video-header>
+          <app-video-header
+            [data]="movieDetails"
+            [isCarousel]="true"
+          ></app-video-header>
         </section>
       </div>
     </carousel>

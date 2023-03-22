@@ -25,11 +25,6 @@
   </main> -->
 
   <div class="tvshow-content">
-    <div class="Backdropimages">
-      <app-backdrop [data]="tvshowDetails"></app-backdrop>
-    </div>
-    <hr />
-
     <div class="seasons-section">
       <h4 class="tvshow-heading mt-5">
         {{ tvshowDetails.original_title }} SEASONS
@@ -78,6 +73,11 @@
           </div>
         </div>
       </main>
+    </div>
+    <hr />
+
+    <div class="Backdropimages">
+      <app-backdrop [data]="tvshowDetails"></app-backdrop>
     </div>
     <hr />
 

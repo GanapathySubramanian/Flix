@@ -115,7 +115,9 @@ export class TvshowDetailsComponent implements OnInit {
           }
           this.tvshowDetails.videoList[i].key =
             this._sanitizer.bypassSecurityTrustResourceUrl(
-              myAppConfig.tmdb.videoUrl + this.tvshowDetails.videoList[i].key
+              myAppConfig.tmdb.videoUrl +
+                this.tvshowDetails.videoList[i].key +
+                '?autoplay=1'
             );
         } else {
           this.tvshowDetails.videoList[i].key = null;
