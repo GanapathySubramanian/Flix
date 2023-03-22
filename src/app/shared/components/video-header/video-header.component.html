@@ -366,6 +366,41 @@
                 </a>
               </div>
             </div>
+            <div
+              class="wrapper-watchnow mt-4"
+              style="cursor: pointer"
+              data-aos="fade-down"
+            >
+              <span
+                class="play playBut"
+                *ngIf="inWatchList"
+                (click)="removeFromWatchList(data)"
+              >
+                <div style="display: inline-block; width: 50px">
+                  <!-- <i class="fa-regular fa-circle-check fa-2xl"></i> -->
+                  <img
+                    src="../../../../assets/images/tick-circle.svg"
+                    alt=""
+                    width="100%"
+                  />
+                </div>
+                WATCH LIST
+              </span>
+              <span
+                class="play playBut"
+                (click)="addTowatchList(data)"
+                *ngIf="!inWatchList"
+              >
+                <div style="display: inline-block; width: 50px">
+                  <img
+                    src="../../../../assets/images/plus-circle.svg"
+                    alt=""
+                    width="90%"
+                  />
+                </div>
+                WATCH LIST
+              </span>
+            </div>
           </div>
         </div>
       </div>

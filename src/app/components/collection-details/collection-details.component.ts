@@ -28,8 +28,6 @@ export class CollectionDetailsComponent implements OnInit {
   getCollectionData(id: number) {
     this.movieservice.getCollectionDetails(id).subscribe((data) => {
       this.collectionDetails = data;
-      console.log(data);
-
       let parts = this.collectionDetails.parts;
       let result = this.sort_by_key(parts, 'release_date');
       this.collectionDetails.parts = result;

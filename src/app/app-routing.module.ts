@@ -11,6 +11,7 @@ import { TvshowDetailsComponent } from './components/tvshow-details/tvshow-detai
 import { TvshowEpisodesComponent } from './components/tvshow-episode/tvshow-episodes.component';
 import { TvshowSeasonsComponent } from './components/tvshow-seasons/tvshow-seasons.component';
 import { TvshowsComponent } from './components/tvshows/tvshows.component';
+import { WatchListComponent } from './components/watch-list/watch-list.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'peoples',
     component: PersonsComponent,
+  },
+  {
+    path: 'mylist',
+    component: WatchListComponent,
   },
   {
     path: 'moviedetails/:id',

@@ -22,6 +22,7 @@ import { HomeComponent } from './components/home/home.component';
 import { CollectionsComponent } from './components/collections/collections.component';
 import { CollectionDetailsComponent } from './components/collection-details/collection-details.component';
 import { TvshowSeasonsComponent } from './components/tvshow-seasons/tvshow-seasons.component';
+import { WatchListComponent } from './components/watch-list/watch-list.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { TvshowSeasonsComponent } from './components/tvshow-seasons/tvshow-seaso
     CollectionsComponent,
     CollectionDetailsComponent,
     TvshowSeasonsComponent,
+    WatchListComponent,
   ],
   imports: [
     BrowserModule,

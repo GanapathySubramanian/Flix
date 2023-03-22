@@ -77,8 +77,6 @@ export class MovieDetailsComponent implements OnInit {
             myAppConfig.tmdb.thumbnailUrl + video.key + '/0.jpg';
         });
       }
-      console.log(this.movieDetails.videoList);
-
       for (let i = 0; i < this.movieDetails.videoList.length; i++) {
         if (this.movieDetails.videoList[i].key) {
           if (this.movieDetails.videoList[i].type == 'Trailer') {
@@ -97,7 +95,6 @@ export class MovieDetailsComponent implements OnInit {
 
         if (!this.background_video) {
           if (this.movieDetails.videoList[i].type == 'Teaser') {
-            console.log(this.movieDetails.videoList[i]);
             this.background_video =
               this._sanitizer.bypassSecurityTrustResourceUrl(
                 myAppConfig.tmdb.videoUrl +
@@ -110,7 +107,9 @@ export class MovieDetailsComponent implements OnInit {
 
         this.movieDetails.videoList[i].key =
           this._sanitizer.bypassSecurityTrustResourceUrl(
-            myAppConfig.tmdb.videoUrl + this.movieDetails.videoList[i].key
+            myAppConfig.tmdb.videoUrl +
+              this.movieDetails.videoList[i].key +
+              '?autoplay=1'
           );
       }
     });
@@ -119,7 +118,7 @@ export class MovieDetailsComponent implements OnInit {
     let watch: any;
     this.movieservice.getWatchProviders(movie_id).subscribe((data) => {
       watch = data;
-      this.movieDetails.watchprovider = watch.results.IN[0]?.link;
+      this.movieDetails.watchprovider = watch?.results?.IN[0]?.link;
     });
   }
 

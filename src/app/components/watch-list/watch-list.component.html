@@ -1,0 +1,9 @@
+<div class="movies-section" style="margin-top: 80px">
+  <main id="main">
+    <div class="movie" id="movie" *ngFor="let movie of movieList">
+      <span [routerLink]="['/' + movie.detailsAbout + 'details', movie.id]">
+        <app-card [data]="movie"></app-card>
+      </span>
+    </div>
+  </main>
+</div>
