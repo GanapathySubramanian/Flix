@@ -77,7 +77,8 @@ export class TvshowEpisodesComponent implements OnInit {
           this.tvshow_season_details.videoList[i].key =
             this._sanitizer.bypassSecurityTrustResourceUrl(
               myAppConfig.tmdb.videoUrl +
-                this.tvshow_season_details.videoList[i].key
+                this.tvshow_season_details.videoList[i].key +
+                '?autoplay=1'
             );
         } else {
           this.tvshow_season_details.videoList[i].key = null;
