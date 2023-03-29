@@ -184,12 +184,13 @@
     </table>
     <hr />
     <h5 class="text-center" style="color: red">Movies Acted</h5>
+    <h5 class="h5 text-center text-white"  *ngIf="castMovieList.length >0">Click the movies to know more</h5>
+
     <main id="main">
       <div
         *ngIf="castMovieList.length <= 0; then nocastmovie; else castmoviedata"
       ></div>
       <ng-template #castmoviedata>
-        <h5 class="h5 text-center text-white">Click the movies to know more</h5>
         <div
           class="person"
           *ngFor="let temp of castMovieList"
@@ -209,12 +210,11 @@
     <hr />
 
     <h5 class="text-center" style="color: red">Tvshows Acted</h5>
+    <h5 class="h5 text-center text-white"  *ngIf="castTvList.length >0"> Click the tvshows to know more</h5>
+
     <main id="main">
       <div *ngIf="castTvList.length <= 0; then nocasttv; else casttvdata"></div>
       <ng-template #casttvdata>
-        <h5 class="h5 text-center text-white">
-          Click the tvshows to know more
-        </h5>
         <div
           class="person"
           *ngFor="let temp1 of castTvList"
@@ -234,12 +234,15 @@
     <hr />
 
     <h4 class="text-center" style="color: red">As Crew in Movies</h4>
+  <h5 class="h5 text-center text-white" *ngIf="crewMovieList.length > 0;">Click the movies to know more</h5>
+
+    <div
+    *ngIf="crewMovieList.length <= 0; then nocrewmovie; else crewmoviedata"
+  ></div>
+
     <main id="main">
-      <div
-        *ngIf="crewMovieList.length <= 0; then nocrewmovie; else crewmoviedata"
-      ></div>
+    
       <ng-template #crewmoviedata>
-        <h5 class="h5 text-center text-white">Click the movies to know more</h5>
 
         <div
           class="person crew-tvshow"
@@ -260,10 +263,11 @@
     <hr />
 
     <h5 class="text-center" style="color: red">As Crew in Tvshows</h5>
+    <div *ngIf="crewTvList.length <= 0; then nocrewtv; else crewtvdata"></div>
+    <p class="h5 text-center text-white"  *ngIf="crewTvList.length > 0">Click the tvshows to know more</p>
+
     <main id="main">
-      <div *ngIf="crewTvList.length <= 0; then nocrewtv; else crewtvdata"></div>
       <ng-template #crewtvdata>
-        <p class="h5 text-center text-white">Click the tvshows to know more</p>
         <div
           class="person crew-tvshow"
           *ngFor="let crew_data of crewTvList"
