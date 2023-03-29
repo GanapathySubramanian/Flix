@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
 import myAppConfig from '../config/my-app-config';
+import { URL_CONSTANTS } from '../constants/url.constants';
 
 @Injectable({
   providedIn: 'root',
@@ -276,60 +277,41 @@ export class TvshowsService {
   }
 
   gettvshowDetails(tvshow_id: number): Observable<any> {
-    let api_url =
-      myAppConfig.tmdb.tvshowDetailsBaseUrl +
-      tvshow_id +
-      '?' +
-      myAppConfig.tmdb.apikey;
-    return this.http.get(api_url);
+    return this.http.get(URL_CONSTANTS.GET_TVSHOW_BY_ID(tvshow_id));
   }
 
   getAllImages(tvshow_id: number): Observable<any> {
-    let backdrop_url =
-      myAppConfig.tmdb.tvshowDetailsBaseUrl +
-      tvshow_id +
-      '/images?' +
-      myAppConfig.tmdb.apikey;
-    return this.http.get(backdrop_url);
+    return this.http.get(URL_CONSTANTS.GET_TVSHOW_IMAGES_BY_ID(tvshow_id));
   }
   getAllImagesForEpisodes(
     tvshow_id: number,
     season_id: number,
     episode_id: number
   ): Observable<any> {
-    let logo_url =
-      myAppConfig.tmdb.tvshowDetailsBaseUrl +
-      tvshow_id +
-      '/season/' +
-      season_id +
-      '/episode/' +
-      episode_id +
-      '/images?' +
-      myAppConfig.tmdb.apikey;
-    return this.http.get(logo_url);
+    return this.http.get(URL_CONSTANTS.GET_TVSHOW_IMAGES_BY_SEASON_ID(tvshow_id,season_id,episode_id));
   }
 
-  gettvshowReviews(url: any): Observable<any> {
-    return this.http.get(url);
+  gettvshowReviews(tvshow_id: number): Observable<any> {
+    return this.http.get(URL_CONSTANTS.GET_TVSHOW_REVIEWS_BY_ID(tvshow_id));
   }
 
   getUpcomingTvshows(url: any): Observable<any> {
     return this.http.get(url);
   }
-  gettvshowCredits(url: any): Observable<any> {
-    return this.http.get(url);
+  gettvshowCredits(tvshow_id: number): Observable<any> {
+    return this.http.get(URL_CONSTANTS.GET_TVSHOW_CREDITS_BY_ID(tvshow_id));
   }
 
-  getSimilartvshows(url: any): Observable<any> {
-    return this.http.get(url);
+  getSimilartvshows(tvshow_id: number): Observable<any> {
+    return this.http.get(URL_CONSTANTS.GET_TVSHOW_SIMILAR_BY_ID(tvshow_id));
   }
 
-  getRecommendedtvshows(url: any): Observable<any> {
-    return this.http.get(url);
+  getRecommendedtvshows(tvshow_id: number): Observable<any> {
+    return this.http.get(URL_CONSTANTS.GET_TVSHOW_RECOMMENDED_BY_ID(tvshow_id));
   }
 
-  getVideos(url: any): Observable<any> {
-    return this.http.get(url);
+  getVideos(tvshow_id: number): Observable<any> {
+    return this.http.get(URL_CONSTANTS.GET_TVSHOW_VIDEOS_BY_ID(tvshow_id));
   }
 
   getWatchProviders(url: any): Observable<any> {

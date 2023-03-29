@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, of, Subject } from 'rxjs';
 import myAppConfig from '../config/my-app-config';
+import { URL_CONSTANTS } from '../constants/url.constants';
 
 @Injectable({
   providedIn: 'root',
@@ -81,94 +82,40 @@ export class MoviesService {
     return this.http.get(url);
   }
   getMovieDetails(movie_id: number): Observable<any> {
-    let api_url =
-      myAppConfig.tmdb.movieBaseUrl +
-      '/movie/' +
-      movie_id +
-      '?' +
-      myAppConfig.tmdb.apikey;
-    return this.http.get(api_url);
+    return this.http.get(URL_CONSTANTS.GET_MOVIE_BY_ID(movie_id));
   }
   getAllCollections(url: any) {
     return this.http.get(url);
   }
 
   getCollectionDetails(id: number): Observable<any> {
-    var api_url =
-      myAppConfig.tmdb.movieBaseUrl +
-      '/collection/' +
-      id +
-      '?' +
-      myAppConfig.tmdb.apikey;
-    return this.http.get(api_url);
+    return this.http.get(URL_CONSTANTS.GET_COLLECTION_BY_ID(id));
   }
   getAllImages(movie_id: number): Observable<any> {
-    let backdrop_url =
-      myAppConfig.tmdb.movieBaseUrl +
-      '/movie/' +
-      movie_id +
-      '/images?' +
-      myAppConfig.tmdb.apikey;
-    return this.http.get(backdrop_url);
+    return this.http.get(URL_CONSTANTS.GET_MOVIE_IMAGES_BY_ID(movie_id));
   }
 
   getMovieReviews(movie_id: number): Observable<any> {
-    let reviews_url =
-      myAppConfig.tmdb.movieBaseUrl +
-      '/movie/' +
-      movie_id +
-      '/reviews?' +
-      myAppConfig.tmdb.apikey;
-    return this.http.get(reviews_url);
+    return this.http.get(URL_CONSTANTS.GET_MOVIE_REVIEWS_BY_ID(movie_id));
   }
 
   getMovieCredits(movie_id: number): Observable<any> {
-    let credits_url =
-      myAppConfig.tmdb.movieBaseUrl +
-      '/movie/' +
-      movie_id +
-      '/credits?' +
-      myAppConfig.tmdb.apikey;
-    return this.http.get(credits_url);
+    return this.http.get(URL_CONSTANTS.GET_MOVIE_CREDITS_BY_ID(movie_id));
   }
 
   getSimilarMovies(movie_id: number): Observable<any> {
-    let similar_url =
-      myAppConfig.tmdb.movieBaseUrl +
-      '/movie/' +
-      movie_id +
-      '/similar?' +
-      myAppConfig.tmdb.apikey;
-    return this.http.get(similar_url);
+    return this.http.get(URL_CONSTANTS.GET_MOVIE_SIMILAR_BY_ID(movie_id));
   }
 
   getRecommendedMovies(movie_id: number): Observable<any> {
-    let recmovie_url =
-      myAppConfig.tmdb.movieBaseUrl +
-      '/movie/' +
-      movie_id +
-      '/recommendations?' +
-      myAppConfig.tmdb.apikey;
-    return this.http.get(recmovie_url);
+    return this.http.get(URL_CONSTANTS.GET_MOVIE_RECOMMENDED_BY_ID(movie_id));
   }
 
   getVideos(movie_id: number): Observable<any> {
-    let URL =
-      myAppConfig.tmdb.movieBaseUrl +
-      '/movie/' +
-      movie_id +
-      '/videos?' +
-      myAppConfig.tmdb.apikey;
-    return this.http.get(URL);
+    return this.http.get(URL_CONSTANTS.GET_MOVIE_VIDEOS_BY_ID(movie_id));
   }
 
   getWatchProviders(movie_id: number): Observable<any> {
-    var watch_provider =
-      myAppConfig.tmdb.movieBaseUrl +
-      '/movie/' +
-      movie_id +
-      '/watch/providers?' +
-      myAppConfig.tmdb.apikey;
-    return this.http.get(watch_provider);
+    return this.http.get(URL_CONSTANTS.GET_MOVIE_WATCH_PROVIDER_BY_ID(movie_id));
   }
 }
