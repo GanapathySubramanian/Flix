@@ -93,11 +93,11 @@
 
     <div class="cast-section">
       <h4 class="tvshow-heading mt-5">CAST</h4>
-      <h5 class="h5 text-center">Click the Person to know more</h5>
       <div
         *ngIf="tvshowDetails.castList?.length <= 0; then nocast; else castdata"
       ></div>
       <ng-template #castdata>
+        <h5 class="h5 text-center">Click the Person to know more</h5>
         <main class="cast">
           <div
             class="tvshow btn-container"
@@ -120,11 +120,11 @@
 
     <div class="crew-section">
       <h4 class="tvshow-heading mt-5">CREW</h4>
-      <h5 class="h5 text-center">Click the Person to know more</h5>
       <div
         *ngIf="tvshowDetails.crewList?.length <= 0; then nocrew; else crewdata"
       ></div>
       <ng-template #crewdata>
+        <h5 class="h5 text-center">Click the Person to know more</h5>
         <main class="cast">
           <div
             class="tvshow btn-container"
@@ -147,7 +147,6 @@
 
     <div class="sim_tvshow">
       <h4 class="tvshow-heading mt-5">RECOMMENDED TVSHOW</h4>
-      <h5 class="h5 text-center">Click the tvshow to know more</h5>
       <div
         *ngIf="
           tvshowDetails.rectvshowList?.length <= 0;
@@ -156,6 +155,7 @@
         "
       ></div>
       <ng-template #rectvshow>
+        <h5 class="h5 text-center">Click the tvshow to know more</h5>
         <main class="s_tvshow">
           <div
             class="tvshow rec-tvshow"
@@ -179,7 +179,6 @@
 
     <div class="sim_tvshow-section">
       <h4 class="tvshow-heading mt-5">SIMILAR TVSHOW</h4>
-      <h5 class="h5 text-center">Click the tvshow to know more</h5>
 
       <div
         *ngIf="
@@ -189,6 +188,7 @@
         "
       ></div>
       <ng-template #simtvshowdata>
+        <h5 class="h5 text-center">Click the tvshow to know more</h5>
         <main class="s_tvshow">
           <div
             class="tvshow sim-tvshow"

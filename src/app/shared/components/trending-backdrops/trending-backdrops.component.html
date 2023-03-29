@@ -1,21 +1,12 @@
-<div class="topMovies-container" >
+<div class="topMovies-container">
   <h4 class="details-header">{{ title }}</h4>
   <ng-container *ngIf="trendingList.length > 0">
-    <carousel
-      class="text-center"
-      [transitionDuration]="800"
-      transitionTimingFunction="ease-in-out"
-      [height]="250"
-      [margin]="20"
-      [cellWidth]="300"
-      [arrows]="true"
-      [pauseOnHover]="false"
-      [loop]="true"
-      [dots]="false"
-      [arrowsOutside]="false"
-      [arrowsTheme]="'dark'"
-    >
-      <div class="carousel-cell video" *ngFor="let trending of trendingList">
+    <div class="row card-horizontal-scroll">
+      <div
+        class="carousel-cell video cursor-pointer"
+        *ngFor="let trending of trendingList"
+        style="cursor: pointer; margin-left: 20px"
+      >
         <div
           class="img"
           [routerLink]="[
@@ -35,26 +26,32 @@
               src="assets/images/no-image.png"
               alt="figure"
               class="no-image"
+              style="height: 200px"
           /></ng-template>
           <ng-template #elseBlock>
             <img
               [attr.src]="highQualityImgUrl + trending.backdrop_path"
               alt="{{ trending.original_title }}"
               data-aos="zoom-in"
+              style="height: 200px"
           /></ng-template>
           <div
-            class="title position-absolute d-flex justify-content-center align-items-center text-white"
-            style="margin-top: -30px; text-align: center; margin-left: 20px"
+            class="title position-relative text-white"
+            style="margin-top: -30px; margin-left: 20px"
           >
             <div class="title-name" *ngIf="trending.name" data-aos="fade-left">
               {{ trending.name }}
             </div>
-            <div class="title-name" *ngIf="trending.title" data-aos="fade-right">
+            <div
+              class="title-name"
+              *ngIf="trending.title"
+              data-aos="fade-right"
+            >
               {{ trending.title }}
             </div>
           </div>
         </div>
       </div>
-    </carousel>
+    </div>
   </ng-container>
 </div>

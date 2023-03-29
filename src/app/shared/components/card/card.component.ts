@@ -14,10 +14,7 @@ export class CardComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-    console.log(this.data);
-  }
-
+  ngOnInit(): void {}
   float2int(value: any) {
     return value | 0;
   }

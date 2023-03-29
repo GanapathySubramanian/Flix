@@ -52,8 +52,6 @@ export class VideoHeaderComponent implements OnInit {
     );
   }
   addTowatchList(result: any) {
-    console.log(result);
-
     let movieTvShowDetail = {
       backdrop_path: result.backdrop_path,
       id: result.id,

@@ -23,7 +23,6 @@
   </main> -->
 
   <div class="movie-content">
-
     <div class="Backdropimages">
       <app-backdrop [data]="movieDetails"></app-backdrop>
     </div>
@@ -41,11 +40,11 @@
 
     <div class="cast-section">
       <h4 class="movie-heading mt-5">CAST</h4>
-      <h5 class="h5 text-center">Click the Person to know more</h5>
       <div
         *ngIf="movieDetails.castList?.length <= 0; then nocast; else castdata"
       ></div>
       <ng-template #castdata>
+        <h5 class="h5 text-center">Click the Person to know more</h5>
         <main class="cast">
           <div
             class="movie btn-container"
@@ -69,11 +68,12 @@
 
     <div class="crew-section">
       <h4 class="movie-heading mt-5">CREW</h4>
-      <h5 class="h5 text-center">Click the Person to know more</h5>
       <div
         *ngIf="movieDetails.crewList?.length <= 0; then nocrew; else crewdata"
       ></div>
       <ng-template #crewdata>
+        <h5 class="h5 text-center">Click the Person to know more</h5>
+
         <main class="cast">
           <div
             class="movie btn-container"
@@ -96,7 +96,6 @@
 
     <div class="sim_movies">
       <h4 class="movie-heading mt-5">RECOMMENDED MOVIES</h4>
-      <h5 class="h5 text-center">Click the movie to know more</h5>
       <div
         *ngIf="
           movieDetails.recmovieList?.length <= 0;
@@ -105,6 +104,8 @@
         "
       ></div>
       <ng-template #recmovie>
+        <h5 class="h5 text-center">Click the movie to know more</h5>
+
         <main class="s_movies">
           <div
             class="movie rec-movies"
@@ -128,8 +129,6 @@
 
     <div class="sim_movies-section">
       <h4 class="movie-heading mt-5">SIMILAR MOVIES</h4>
-      <h5 class="h5 text-center">Click the movie to know more</h5>
-
       <div
         *ngIf="
           movieDetails.similarmovieList?.length <= 0;
@@ -138,6 +137,7 @@
         "
       ></div>
       <ng-template #simmoviedata>
+        <h5 class="h5 text-center">Click the movie to know more</h5>
         <main class="s_movies">
           <div
             class="movie sim-movies"
@@ -160,6 +160,5 @@
     <div class="reviews-section">
       <app-review [data]="movieDetails"></app-review>
     </div>
-    
   </div>
 </div>
