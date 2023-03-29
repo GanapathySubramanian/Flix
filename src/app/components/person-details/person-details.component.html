@@ -184,13 +184,14 @@
     </table>
     <hr />
     <h5 class="text-center" style="color: red">Movies Acted</h5>
-    <h5 class="h5 text-center text-white"  *ngIf="castMovieList.length >0">Click the movies to know more</h5>
 
-    <main id="main">
       <div
         *ngIf="castMovieList.length <= 0; then nocastmovie; else castmoviedata"
       ></div>
       <ng-template #castmoviedata>
+    <h5 class="h5 text-center text-white" >Click the movies to know more</h5>
+    <main id="main">
+
         <div
           class="person"
           *ngFor="let temp of castMovieList"
@@ -198,6 +199,7 @@
         >
           <app-card [data]="temp"></app-card>
         </div>
+        </main>
       </ng-template>
       <ng-template #nocastmovie>
         <div id="no-record_found_cast_movie">
@@ -206,15 +208,15 @@
           </h5>
         </div>
       </ng-template>
-    </main>
     <hr />
 
     <h5 class="text-center" style="color: red">Tvshows Acted</h5>
-    <h5 class="h5 text-center text-white"  *ngIf="castTvList.length >0"> Click the tvshows to know more</h5>
 
-    <main id="main">
       <div *ngIf="castTvList.length <= 0; then nocasttv; else casttvdata"></div>
       <ng-template #casttvdata>
+    <h5 class="h5 text-center text-white"  > Click the tvshows to know more</h5>
+    <main id="main">
+
         <div
           class="person"
           *ngFor="let temp1 of castTvList"
@@ -222,6 +224,8 @@
         >
           <app-card [data]="temp1"></app-card>
         </div>
+    </main>
+
       </ng-template>
       <ng-template #nocasttv>
         <div id="no-record_found_cast_tv">
@@ -230,19 +234,18 @@
           </h5>
         </div>
       </ng-template>
-    </main>
     <hr />
 
     <h4 class="text-center" style="color: red">As Crew in Movies</h4>
-  <h5 class="h5 text-center text-white" *ngIf="crewMovieList.length > 0;">Click the movies to know more</h5>
 
     <div
     *ngIf="crewMovieList.length <= 0; then nocrewmovie; else crewmoviedata"
   ></div>
 
-    <main id="main">
     
       <ng-template #crewmoviedata>
+        <h5 class="h5 text-center text-white" >Click the movies to know more</h5>
+        <main id="main">
 
         <div
           class="person crew-tvshow"
@@ -251,6 +254,8 @@
         >
           <app-card [data]="crew_data"></app-card>
         </div>
+    </main>
+
       </ng-template>
       <ng-template #nocrewmovie>
         <div id="no-record_found_crew_movie">
@@ -259,22 +264,23 @@
           </h5>
         </div>
       </ng-template>
-    </main>
     <hr />
 
     <h5 class="text-center" style="color: red">As Crew in Tvshows</h5>
     <div *ngIf="crewTvList.length <= 0; then nocrewtv; else crewtvdata"></div>
-    <p class="h5 text-center text-white"  *ngIf="crewTvList.length > 0">Click the tvshows to know more</p>
 
-    <main id="main">
       <ng-template #crewtvdata>
-        <div
-          class="person crew-tvshow"
-          *ngFor="let crew_data of crewTvList"
-          [routerLink]="['/tvshowdetails', crew_data.id]"
-        >
-          <app-card [data]="crew_data"></app-card>
-        </div>
+    <p class="h5 text-center text-white"  >Click the tvshows to know more</p>
+        <main id="main">
+            <div
+              class="person crew-tvshow"
+              *ngFor="let crew_data of crewTvList"
+              [routerLink]="['/tvshowdetails', crew_data.id]"
+            >
+              <app-card [data]="crew_data"></app-card>
+            </div>
+        </main>
+
       </ng-template>
       <ng-template #nocrewtv>
         <div id="no-record_found_crew_tv">
@@ -283,6 +289,5 @@
           </h5>
         </div>
       </ng-template>
-    </main>
   </div>
 </div>
