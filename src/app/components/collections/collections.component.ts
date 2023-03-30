@@ -53,21 +53,14 @@ export class CollectionsComponent implements OnInit {
   }
   getCollections() {
     this.collectionData.forEach((collection) => {
-      var api_url =
-        myAppConfig.tmdb.baseUrl +
-        'collection/' +
-        collection.id +
-        '?' +
-        myAppConfig.tmdb.apikey;
-
-      this.getCollectionsdetails(api_url);
+      this.getCollectionsdetails(collection.id);
     });
 
     // this.getMoviesData(api_url);
   }
-  getCollectionsdetails(api_url: string) {
+  getCollectionsdetails(id: number) {
     let tempMoviesList: any;
-    this.movieservice.getallMovies(api_url).subscribe((data: any) => {
+    this.movieservice.getCollectionDetails(id).subscribe((data: any) => {
       if (!this.movieList.includes(data)) {
         this.movieList.push(data);
       }

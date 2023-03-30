@@ -74,6 +74,7 @@ export class MoviesService {
     return this.http.get(url);
   }
 
+  
   getTopGrossingMovies(url: any): Observable<any> {
     return this.http.get(url);
   }
