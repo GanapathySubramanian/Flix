@@ -99,7 +99,9 @@ export class MoviesService {
   getAllImages(movie_id: number): Observable<any> {
     return this.http.get(URL_CONSTANTS.GET_MOVIE_IMAGES_BY_ID(movie_id));
   }
-
+  getTvshowImages(movie_id: number): Observable<any> {
+    return this.http.get(URL_CONSTANTS.GET_TVSHOW_IMAGES_BY_ID(movie_id));
+  }
   getMovieReviews(movie_id: number): Observable<any> {
     return this.http.get(URL_CONSTANTS.GET_MOVIE_REVIEWS_BY_ID(movie_id));
   }
