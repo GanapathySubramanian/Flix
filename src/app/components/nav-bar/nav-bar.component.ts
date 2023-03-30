@@ -12,6 +12,7 @@ export class NavBarComponent implements OnInit {
   component: string = 'navbar';
   windoscrolling: boolean = false;
   lapdevice: boolean = false;
+  splashScreen: boolean=true;
   constructor() {
     this.getScreenSize();
     let scrollPrecentage = () => {
@@ -26,9 +27,17 @@ export class NavBarComponent implements OnInit {
     };
     window.onscroll = scrollPrecentage;
     window.onload = scrollPrecentage;
+
+    
   }
 
-  ngOnInit(): void {}
+  
+  ngOnInit(): void {
+
+    setTimeout(() => {
+      this.splashScreen=false;
+    }, 3000);
+  }
 
   onActivate(event: any) {
     // window.scroll(0,0);

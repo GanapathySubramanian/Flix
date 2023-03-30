@@ -1,50 +1,4 @@
-<!-- <nav
-  class="navbar navbar-expand navbar-dark shadow-5-strong mb-2"
-  aria-label="Second navbar example"
->
-  <div class="container-fluid">
-    <div class="collapse navbar-collapse" id="navbarsExample02">
-      <a class="play playBut" href="">
-        <div style="display: inline; width: 50px">
-          <img
-            src="../../../assets/images/logo.gif"
-            alt=""
-            class="playBut"
-            style="margin-top: -16px"
-          />
-        </div>
-        FLIX
-      </a>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/movies" routerLinkActive="active"
-              >MOVIES</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/tvshows" routerLinkActive="active"
-              >TVSHOWS</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              routerLink="/collections"
-              routerLinkActive="active"
-              >COLLECTIONS</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/peoples" routerLinkActive="active"
-              >PEOPLES</a
-            >
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</nav> -->
+
 
 <nav
   class="navigation navbar navbar-expand navbar-dark shadow-5-strong"
@@ -115,11 +69,24 @@
     <i class="fa-solid fa-arrow-up"></i>
   </span>
 </div>
-<div class="main-content">
+
+
+
+
+<div class="main-content" *ngIf="!splashScreen">
   <router-outlet (activate)="onActivate($event)"></router-outlet>
 </div>
+
+<div class="app-loading" *ngIf="splashScreen" style="height:85vh">
+  <div class="logo">
+    <!-- <img src="assets/images/logo.svg" alt=""> -->
+  </div>
+  <svg class="spinner" viewBox="25 25 50 50" stroke="red">
+    <circle class="path" cx="50" cy="50" r="20" stroke="red" fill="none" stroke-width="1" stroke-miterlimit="10" />
+  </svg>
+</div> 
 <!--==footer==============================-->
-<footer style="margin-top: 30px">
+<footer style="margin-top: 30px" *ngIf="!splashScreen">
   <!--footer-logo--->
   <a href="index.html" class="logo"> FLIX<span>hd</span> </a>
   <!--copyright----->
@@ -127,3 +94,5 @@
     Copyright 2021 - Done By Ganapathy Subramanian ❤️
   </span>
 </footer>
+
+
