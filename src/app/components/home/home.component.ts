@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit {
   getPopularMovies() {
     let api_url =
       myAppConfig.tmdb.baseUrl +
-      '/discover/movie?sort_by=popularity.desc' +
+      'discover/movie?sort_by=popularity.desc' +
       '&' +
       myAppConfig.tmdb.apikey +
       '&page=1';
@@ -87,7 +87,7 @@ export class HomeComponent implements OnInit {
   getUpcomingMovies() {
     let api_url =
       myAppConfig.tmdb.baseUrl +
-      '/movie/upcoming?' +
+      'movie/upcoming?' +
       myAppConfig.tmdb.apikey +
       '&page=1';
     this.getUpcomingMovieData(api_url);
@@ -95,7 +95,7 @@ export class HomeComponent implements OnInit {
   getTopGrossingMovies() {
     let api_url =
       myAppConfig.tmdb.baseUrl +
-      '/discover/movie?sort_by=revenue.desc' +
+      'discover/movie?sort_by=revenue.desc' +
       '&' +
       myAppConfig.tmdb.apikey +
       '&page=1';

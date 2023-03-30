@@ -55,7 +55,7 @@ export class CollectionsComponent implements OnInit {
     this.collectionData.forEach((collection) => {
       var api_url =
         myAppConfig.tmdb.baseUrl +
-        '/collection/' +
+        'collection/' +
         collection.id +
         '?' +
         myAppConfig.tmdb.apikey;
@@ -94,7 +94,7 @@ export class CollectionsComponent implements OnInit {
       Ele2?.classList.remove('d-none');
       let SEA_URL =
         myAppConfig.tmdb.baseUrl +
-        '/search/collection?' +
+        'search/collection?' +
         myAppConfig.tmdb.apikey +
         '&query=' +
         this.findthismovie +
@@ -124,7 +124,7 @@ export class CollectionsComponent implements OnInit {
       this.sortby_value = Search_value;
       let SEARCH_URL =
         myAppConfig.tmdb.baseUrl +
-        '/search/collection?' +
+        'search/collection?' +
         myAppConfig.tmdb.apikey +
         '&query=' +
         Search_value +
@@ -140,7 +140,7 @@ export class CollectionsComponent implements OnInit {
       this.country_value = '';
       let api_url =
         myAppConfig.tmdb.baseUrl +
-        '/search/collection?' +
+        'search/collection?' +
         myAppConfig.tmdb.apikey +
         '&page=' +
         page;

@@ -72,7 +72,7 @@ export class MoviesComponent implements OnInit {
       Ele2?.classList.remove('d-none');
       let SEA_URL =
         myAppConfig.tmdb.baseUrl +
-        '/search/movie?' +
+        'search/movie?' +
         myAppConfig.tmdb.apikey +
         '&query=' +
         this.findthismovie +
@@ -113,7 +113,7 @@ export class MoviesComponent implements OnInit {
     this.sortby_value = 'Trending Now';
     let apiurl =
       myAppConfig.tmdb.baseUrl +
-      '/discover/movie?sort_by=' +
+      'discover/movie?sort_by=' +
       sort_by_desc +
       '&' +
       myAppConfig.tmdb.apikey +
@@ -131,7 +131,7 @@ export class MoviesComponent implements OnInit {
       this.sortby_value = Search_value;
       let SEARCH_URL =
         myAppConfig.tmdb.baseUrl +
-        '/search/movie?' +
+        'search/movie?' +
         myAppConfig.tmdb.apikey +
         '&query=' +
         Search_value +
@@ -147,7 +147,7 @@ export class MoviesComponent implements OnInit {
       this.country_value = '';
       let api_url =
         myAppConfig.tmdb.baseUrl +
-        '/discover/movie?sort_by=' +
+        'discover/movie?sort_by=' +
         sort_by_desc +
         '&' +
         myAppConfig.tmdb.apikey +
@@ -207,7 +207,7 @@ export class MoviesComponent implements OnInit {
     if (sort_by_desc == 'upcoming.desc') {
       let api_url =
         myAppConfig.tmdb.baseUrl +
-        '/movie/upcoming?' +
+        'movie/upcoming?' +
         myAppConfig.tmdb.apikey +
         '&page=' +
         page +
@@ -219,7 +219,7 @@ export class MoviesComponent implements OnInit {
     } else if (sort_by_desc == 'nowplaying.desc') {
       let api_url =
         myAppConfig.tmdb.baseUrl +
-        '/movie/now_playing?' +
+        'movie/now_playing?' +
         myAppConfig.tmdb.apikey +
         '&page=' +
         page +
@@ -231,7 +231,7 @@ export class MoviesComponent implements OnInit {
     } else {
       let sort_api_url =
         myAppConfig.tmdb.baseUrl +
-        '/discover/movie?sort_by=' +
+        'discover/movie?sort_by=' +
         sort_by_desc +
         '&' +
         myAppConfig.tmdb.apikey +
@@ -280,7 +280,7 @@ export class MoviesComponent implements OnInit {
       }
       var page_api_url =
         myAppConfig.tmdb.baseUrl +
-        '/search/movie?' +
+        'search/movie?' +
         myAppConfig.tmdb.apikey +
         '&query=' +
         Search_value +

@@ -49,7 +49,7 @@ export class MoviesService {
   getCountry(): Observable<any> {
     var country_url =
       myAppConfig.tmdb.baseUrl +
-      '/configuration/countries?' +
+      'configuration/countries?' +
       myAppConfig.tmdb.apikey;
     return this.http.get(country_url);
   }

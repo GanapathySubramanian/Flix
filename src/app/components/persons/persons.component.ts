@@ -58,7 +58,7 @@ export class PersonsComponent implements OnInit {
       Ele2?.classList.remove('d-none');
       let SEA_URL =
         myAppConfig.tmdb.baseUrl +
-        '/search/person?' +
+        'search/person?' +
         myAppConfig.tmdb.apikey +
         '&query=' +
         this.findthispeoples +
@@ -98,7 +98,7 @@ export class PersonsComponent implements OnInit {
       this.sortby_value = Search_value;
       this.getPeoplesData(
         myAppConfig.tmdb.baseUrl +
-          '/search/person?' +
+          'search/person?' +
           myAppConfig.tmdb.apikey +
           '&query=' +
           Search_value +
@@ -115,7 +115,7 @@ export class PersonsComponent implements OnInit {
       this.sortby_value = Search_value;
       let SEARCH_URL =
         myAppConfig.tmdb.baseUrl +
-        '/search/person?' +
+        'search/person?' +
         myAppConfig.tmdb.apikey +
         '&query=' +
         Search_value +
@@ -175,7 +175,7 @@ export class PersonsComponent implements OnInit {
       }
       let SEARCH_URL =
         myAppConfig.tmdb.baseUrl +
-        '/search/person?' +
+        'search/person?' +
         myAppConfig.tmdb.apikey +
         '&query=' +
         Search_value +
