@@ -48,7 +48,7 @@ export class MoviesService {
 
   getCountry(): Observable<any> {
     var country_url =
-      myAppConfig.tmdb.movieBaseUrl +
+      myAppConfig.tmdb.baseUrl +
       '/configuration/countries?' +
       myAppConfig.tmdb.apikey;
     return this.http.get(country_url);
@@ -64,6 +64,10 @@ export class MoviesService {
 
   getSearchMovies(url: any): Observable<any> {
     return this.http.get(url);
+  }
+
+  getTrendingALLByDay():Observable<any>{
+    return this.http.get(URL_CONSTANTS.GET_TRENDING_ALL_DAY);
   }
 
   getallMovies(url: any): Observable<any> {

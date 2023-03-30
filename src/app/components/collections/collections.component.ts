@@ -54,7 +54,7 @@ export class CollectionsComponent implements OnInit {
   getCollections() {
     this.collectionData.forEach((collection) => {
       var api_url =
-        myAppConfig.tmdb.movieBaseUrl +
+        myAppConfig.tmdb.baseUrl +
         '/collection/' +
         collection.id +
         '?' +
@@ -93,7 +93,7 @@ export class CollectionsComponent implements OnInit {
       let Ele2 = window.document.getElementById('search-list-sm');
       Ele2?.classList.remove('d-none');
       let SEA_URL =
-        myAppConfig.tmdb.movieBaseUrl +
+        myAppConfig.tmdb.baseUrl +
         '/search/collection?' +
         myAppConfig.tmdb.apikey +
         '&query=' +
@@ -123,7 +123,7 @@ export class CollectionsComponent implements OnInit {
     if (Search_value) {
       this.sortby_value = Search_value;
       let SEARCH_URL =
-        myAppConfig.tmdb.movieBaseUrl +
+        myAppConfig.tmdb.baseUrl +
         '/search/collection?' +
         myAppConfig.tmdb.apikey +
         '&query=' +
@@ -139,7 +139,7 @@ export class CollectionsComponent implements OnInit {
       this.sortby_value = 'Trending Now';
       this.country_value = '';
       let api_url =
-        myAppConfig.tmdb.movieBaseUrl +
+        myAppConfig.tmdb.baseUrl +
         '/search/collection?' +
         myAppConfig.tmdb.apikey +
         '&page=' +
@@ -182,7 +182,7 @@ export class CollectionsComponent implements OnInit {
   //       this.page_no = page;
   //     }
   //     var page_api_url =
-  //       myAppConfig.tmdb.movieBaseUrl +
+  //       myAppConfig.tmdb.baseUrl +
   //       '/search/collection?' +
   //       myAppConfig.tmdb.apikey +
   //       '&query=' +

@@ -71,7 +71,7 @@ export class MoviesComponent implements OnInit {
       let Ele2 = window.document.getElementById('search-list-sm');
       Ele2?.classList.remove('d-none');
       let SEA_URL =
-        myAppConfig.tmdb.movieBaseUrl +
+        myAppConfig.tmdb.baseUrl +
         '/search/movie?' +
         myAppConfig.tmdb.apikey +
         '&query=' +
@@ -112,7 +112,7 @@ export class MoviesComponent implements OnInit {
     sort_by_desc = 'popularity.desc';
     this.sortby_value = 'Trending Now';
     let apiurl =
-      myAppConfig.tmdb.movieBaseUrl +
+      myAppConfig.tmdb.baseUrl +
       '/discover/movie?sort_by=' +
       sort_by_desc +
       '&' +
@@ -130,7 +130,7 @@ export class MoviesComponent implements OnInit {
     if (Search_value) {
       this.sortby_value = Search_value;
       let SEARCH_URL =
-        myAppConfig.tmdb.movieBaseUrl +
+        myAppConfig.tmdb.baseUrl +
         '/search/movie?' +
         myAppConfig.tmdb.apikey +
         '&query=' +
@@ -146,7 +146,7 @@ export class MoviesComponent implements OnInit {
       this.sortby_value = 'Trending Now';
       this.country_value = '';
       let api_url =
-        myAppConfig.tmdb.movieBaseUrl +
+        myAppConfig.tmdb.baseUrl +
         '/discover/movie?sort_by=' +
         sort_by_desc +
         '&' +
@@ -206,7 +206,7 @@ export class MoviesComponent implements OnInit {
   getFilterContent() {
     if (sort_by_desc == 'upcoming.desc') {
       let api_url =
-        myAppConfig.tmdb.movieBaseUrl +
+        myAppConfig.tmdb.baseUrl +
         '/movie/upcoming?' +
         myAppConfig.tmdb.apikey +
         '&page=' +
@@ -218,7 +218,7 @@ export class MoviesComponent implements OnInit {
       this.getMoviesData(api_url);
     } else if (sort_by_desc == 'nowplaying.desc') {
       let api_url =
-        myAppConfig.tmdb.movieBaseUrl +
+        myAppConfig.tmdb.baseUrl +
         '/movie/now_playing?' +
         myAppConfig.tmdb.apikey +
         '&page=' +
@@ -230,7 +230,7 @@ export class MoviesComponent implements OnInit {
       this.getMoviesData(api_url);
     } else {
       let sort_api_url =
-        myAppConfig.tmdb.movieBaseUrl +
+        myAppConfig.tmdb.baseUrl +
         '/discover/movie?sort_by=' +
         sort_by_desc +
         '&' +
@@ -279,7 +279,7 @@ export class MoviesComponent implements OnInit {
         this.page_no = page;
       }
       var page_api_url =
-        myAppConfig.tmdb.movieBaseUrl +
+        myAppConfig.tmdb.baseUrl +
         '/search/movie?' +
         myAppConfig.tmdb.apikey +
         '&query=' +

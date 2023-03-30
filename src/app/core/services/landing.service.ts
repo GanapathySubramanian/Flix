@@ -31,7 +31,7 @@ export class LandingService {
    }
 
   getTopMoviesPosters(){
-      let apiurl=myAppConfig.tmdb.movieBaseUrl+'/discover/movie?sort_by=popularity.desc'+'&'+myAppConfig.tmdb.apikey+'&page='+Math.random()*10;
+      let apiurl=myAppConfig.tmdb.baseUrl+'/discover/movie?sort_by=popularity.desc'+'&'+myAppConfig.tmdb.apikey+'&page='+Math.random()*10;
       this.moviePosters=[];
       this.movieBackdrops=[];
       this.http.get(apiurl).subscribe((res:any)=>{

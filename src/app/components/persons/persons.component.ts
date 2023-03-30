@@ -57,7 +57,7 @@ export class PersonsComponent implements OnInit {
       let Ele2 = window.document.getElementById('search-list-sm');
       Ele2?.classList.remove('d-none');
       let SEA_URL =
-        myAppConfig.tmdb.movieBaseUrl +
+        myAppConfig.tmdb.baseUrl +
         '/search/person?' +
         myAppConfig.tmdb.apikey +
         '&query=' +
@@ -97,7 +97,7 @@ export class PersonsComponent implements OnInit {
     } else {
       this.sortby_value = Search_value;
       this.getPeoplesData(
-        myAppConfig.tmdb.movieBaseUrl +
+        myAppConfig.tmdb.baseUrl +
           '/search/person?' +
           myAppConfig.tmdb.apikey +
           '&query=' +
@@ -114,7 +114,7 @@ export class PersonsComponent implements OnInit {
     if (Search_value) {
       this.sortby_value = Search_value;
       let SEARCH_URL =
-        myAppConfig.tmdb.movieBaseUrl +
+        myAppConfig.tmdb.baseUrl +
         '/search/person?' +
         myAppConfig.tmdb.apikey +
         '&query=' +
@@ -174,7 +174,7 @@ export class PersonsComponent implements OnInit {
         this.page_no = page;
       }
       let SEARCH_URL =
-        myAppConfig.tmdb.movieBaseUrl +
+        myAppConfig.tmdb.baseUrl +
         '/search/person?' +
         myAppConfig.tmdb.apikey +
         '&query=' +
