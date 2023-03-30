@@ -396,6 +396,16 @@
                 </div>
                 WATCH LIST
               </span>
+              <span
+                class="play playBut"
+                [routerLink]="['/moviedetails', data.id]"
+                *ngIf="isCarousel"
+              >
+                <div style="display: inline-block; width: 50p;">
+                  <img src="assets/images/info.svg" alt="" width="90%" />
+                </div>
+                More Details
+              </span>
             </div>
           </div>
         </div>
@@ -652,5 +662,15 @@
         WATCH LIST
       </span>
     </div>
+    <span
+      class="play playBut mt-3"
+      [routerLink]="['/moviedetails', data.id]"
+      *ngIf="isCarousel"
+    >
+      <div style="display: inline-block; width: 50p;">
+        <img src="assets/images/info.svg" alt="" width="90%" />
+      </div>
+      More Details
+    </span>
   </div>
 </section>
