@@ -1,8 +1,16 @@
 <div class="topMovies-container">
   <h4 class="details-header">{{ title }}</h4>
   <ng-container *ngIf="trendingList.length > 0">
+
     <div class="row card-horizontal-scroll">
+    <img data-aos="zoom-in" src="../../../../assets/images/double-right.svg" alt="" style="    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;">
+
       <div
+
         class="carousel-cell video cursor-pointer"
         *ngFor="let trending of trendingList"
         style="cursor: pointer; margin-left: 20px"
