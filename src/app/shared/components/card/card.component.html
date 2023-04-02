@@ -37,20 +37,6 @@
   </figure>
 </ng-template>
 
-<!-- <div class="card-info title" *ngIf="!data.character">
-  <h4 class="card-name" *ngIf="data.title">{{ data.title }}</h4>
-  <span
-    class="card-rating"
-    *ngIf="data.vote_average"
-    [ngClass]="{
-      red: data.vote_average <= 5,
-      orange: data.vote_average > 5 && data.vote_average < 8,
-      green: data.vote_average >= 8
-    }"
-    >{{ float2int((data.vote_average / 10) * 100) + "%" }}</span
-  >
-</div> -->
-
 <div
   *ngIf="!data.character && !data.job"
   class="text-over-card bg-transparent"
@@ -60,7 +46,7 @@
   <span *ngIf="!data.title && data.name" style="font-size: 13px"
     >{{ data.name }}
   </span>
-  <span style="font-size: 13px" *ngIf="data.release_date">{{
+  <span style="font-size: 13px" *ngIf="data.release_date && !data.first_air_date">{{
     data.release_date | date
   }}</span>
   <span style="font-size: 13px" *ngIf="data.first_air_date">{{
@@ -84,28 +70,6 @@
   <span *ngIf="data.title">{{ data.title }}</span>
   <span>AS {{ data.character }}</span>
 </div>
-<!-- <div
-  class="card-info star-rating"
-  *ngIf="data.vote_average && !data.character && !data.job"
->
-  <ngb-rating
-    [max]="10"
-    [(rate)]="data.vote_average"
-    [readonly]="true"
-    [ngClass]="{
-      red: data.vote_average <= 5,
-      orange: data.vote_average > 5 && data.vote_average < 8,
-      green: data.vote_average >= 8
-    }"
-  ></ngb-rating>
-</div> -->
-
-<!-- <div
-  class="card-date"
-  *ngIf="data.release_date && !data.character && !data.job"
->
-  <p>{{ data.release_date | date }}</p>
-</div> -->
 
 <div
   *ngIf="data.job && !data.character"
@@ -116,18 +80,3 @@
   <span>{{ "Job : " + data.job }}</span>
 </div>
 
-<!-- <div class="card-info" *ngIf="data.popularity && !data.character && !data.job">
-  <span
-    >Popularity :
-    <span
-      [ngClass]="{
-        red: data.popularity < 50,
-        orange: data.popularity >= 50 && data.popularity < 80,
-        green: data.popularity >= 80
-      }"
-    >
-      <i class="fa-solid fa-thumbs-up"></i>
-      {{ float2int(data.popularity) }}</span
-    >
-  </span>
-</div> -->
