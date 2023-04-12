@@ -398,7 +398,7 @@
               </span>
               <span
                 class="play playBut"
-                [routerLink]="['/moviedetails', data.id]"
+                [routerLink]="data?.media_type==='movie'?['/moviedetails', data.id]:['/tvshowdetails',data.id]"
                 *ngIf="isCarousel"
               >
                 <div style="display: inline-block; width: 50p;">
@@ -664,7 +664,7 @@
     </div>
     <span
       class="play playBut mt-3"
-      [routerLink]="['/moviedetails', data.id]"
+      [routerLink]="data?.media_type==='movie'?['/moviedetails', data.id]:['/tvshowdetails',data.id]"
       *ngIf="isCarousel"
     >
       <div style="display: inline-block; width: 50p;">
