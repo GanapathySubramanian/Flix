@@ -184,8 +184,8 @@ main {
     width: 100%;
   }
   .movie {
-    width: 165px;
-    margin: 0.4rem;
+    width: 500px;
+    margin: 1rem;
     border-radius: 3px;
     box-shadow: 0.2px 4px 5px rgba(0, 0, 0, 0.1);
     background-color: var(--secondary-color);
