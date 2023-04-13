@@ -148,6 +148,7 @@ path.two {
     width: 100%;
     top: -10px;
     position: relative;
+    transition: 2s ease all;
   }
 
   .header {

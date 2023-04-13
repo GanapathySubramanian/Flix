@@ -102,11 +102,7 @@
           ></div>
 
           <ng-template #thenBlock
-            ><img
-              src="assets/images/no-image.png"
-              alt="figure"
-              class="no-image"
-          /></ng-template>
+            ></ng-template>
           <ng-template #elseBlock
             ><img
               [attr.src]="highQualityImgUrl + data.poster_path"
@@ -209,7 +205,7 @@
                 {{ genre.name }}
               </span>
             </div>
-            <div class="item-overview">
+            <div class="item-overview" style="margin-right: 60px;">
               <p data-aos="fade-down">{{ data.overview }}</p>
             </div>
             <div
