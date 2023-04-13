@@ -197,7 +197,7 @@ main {
   .search-list .search-list-item {
     width: 100%;
   }
-  .movie {
+  /* .movie {
     width: 500px;
     margin: 1rem;
     border-radius: 3px;
@@ -234,7 +234,7 @@ main {
   }
   .lg-search {
     display: none;
-  }
+  } */
   .navbar-nav {
     display: flex;
     justify-content: center;

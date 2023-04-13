@@ -128,22 +128,6 @@ ngb-rating {
   padding: 00.5rem 1rem 1rem;
   letter-spacing: 0.5px;
 }
-
-@media only screen and (max-width: 600px) {
-  .image {
-    width: 100%;
-    height: 100%;
-  }
-  .card-info p {
-    margin-top: 0;
-    width: 80%;
-  }
-  .card-rating {
-    margin: 5px;
-    width: auto;
-  }
-}
-
 .overview {
   position: absolute;
   left: 0;
@@ -165,3 +149,23 @@ figure:hover .overview {
   height: 376px;
   width: 100%;
 }
+@media only screen and (max-width: 600px) {
+  .image {
+    width: 100%;
+    height: 100%;
+  }
+  .card-info p {
+    margin-top: 0;
+    width: 80%;
+  }
+  .card-rating {
+    margin: 5px;
+    width: auto;
+  }
+  .no-image {
+    object-fit: cover;
+    height:250px;
+  }
+}
+
+
