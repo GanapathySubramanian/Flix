@@ -91,7 +91,7 @@ export class TvshowDetailsComponent implements OnInit {
             this._sanitizer.bypassSecurityTrustResourceUrl(
               myAppConfig.tmdb.videoUrl +
                 max.key +
-                '?autoplay=1&controls=0'
+                '?autoplay=1&controls=0&rel=0'
             );
             this.background_video_type=max.type;
         }
