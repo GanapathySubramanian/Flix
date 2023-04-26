@@ -12,6 +12,7 @@ export class VideoHeaderComponent implements OnInit {
   highQualityImgUrl: string = myAppConfig.tmdb.highQualityImgUrl;
   imgUrl: string = myAppConfig.tmdb.imgUrl;
   @Input() background_video: any;
+  @Input() background_video_type: any;
   @Input() isCarousel: boolean = false;
   playVideo: boolean = false;
   inWatchList: boolean = false;

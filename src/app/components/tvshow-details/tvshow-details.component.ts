@@ -20,6 +20,7 @@ export class TvshowDetailsComponent implements OnInit {
 
   windowScrolled: boolean = false;
   background_video: any;
+  background_video_type: any;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -69,37 +70,41 @@ export class TvshowDetailsComponent implements OnInit {
         video.videoThumbnail =
           myAppConfig.tmdb.thumbnailUrl + video.key + '/0.jpg';
       });
+      var max:any = null;
+      var min:any = null;
       for (let i = 0; i < this.tvshowDetails.videoList.length; i++) {
         if (this.tvshowDetails.videoList[i].key) {
-          if ((this.tvshowDetails.videoList[i].type = 'Teaser')) {
-            this.background_video =
-              this._sanitizer.bypassSecurityTrustResourceUrl(
-                myAppConfig.tmdb.videoUrl +
-                  this.tvshowDetails.videoList[i].key +
-                  '?autoplay=1&controls=0'
-                // '?modestbranding=0&controls=0&fs=0&loop=1&showinfo=0&autoplay=1&mute=1&enablejsapi=1'
-              );
-          } else if ((this.tvshowDetails.videoList[i].type = 'Trailer')) {
-            this.background_video =
-              this._sanitizer.bypassSecurityTrustResourceUrl(
-                myAppConfig.tmdb.videoUrl +
-                  this.tvshowDetails.videoList[i].key +
-                  '?autoplay=1&controls=0'
-                // '?modestbranding=0&controls=0&fs=0&loop=1&showinfo=0&autoplay=1&mute=1&enablejsapi=1'
-              );
+          var current = this.tvshowDetails.videoList[i];
+          if (max === null || current.published_at > max.published_at) {
+            max = current;
           }
-          this.tvshowDetails.videoList[i].key =
-            this._sanitizer.bypassSecurityTrustResourceUrl(
-              myAppConfig.tmdb.videoUrl +
-                this.tvshowDetails.videoList[i].key +
-                '?autoplay=1'
-            );
+          if (min === null || current.published_at < min.published_at) {
+            min = current;
+          }
         } else {
           this.tvshowDetails.videoList[i].key = null;
+          this.tvshowDetails.videoList[i].videoThumbnail = null;
         }
       }
-    });
-  }
+       if (max!==null) {
+          this.background_video =
+            this._sanitizer.bypassSecurityTrustResourceUrl(
+              myAppConfig.tmdb.videoUrl +
+                max.key +
+                '?autoplay=1&controls=0'
+            );
+            this.background_video_type=max.type;
+        }
+       
+        this.tvshowDetails.videoList.forEach((video:any) => {
+          video.key= this._sanitizer.bypassSecurityTrustResourceUrl(
+            myAppConfig.tmdb.videoUrl +
+              video.key +
+              '?autoplay=1'
+          );
+        });
+    })
+}
 
   getRectvshows(tvshow_id: number) {
     let rectvshow: any;

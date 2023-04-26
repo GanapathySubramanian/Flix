@@ -19,6 +19,7 @@ export class MovieDetailsComponent implements OnInit {
   background_video: any;
 
   windowScrolled: boolean = false;
+  background_video_type: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -77,42 +78,40 @@ export class MovieDetailsComponent implements OnInit {
             myAppConfig.tmdb.thumbnailUrl + video.key + '/0.jpg';
         });
       }
+      var max:any = null;
+      var min:any = null;
       for (let i = 0; i < this.movieDetails.videoList.length; i++) {
         if (this.movieDetails.videoList[i].key) {
-          if (this.movieDetails.videoList[i].type == 'Trailer') {
-            this.background_video =
-              this._sanitizer.bypassSecurityTrustResourceUrl(
-                myAppConfig.tmdb.videoUrl +
-                  this.movieDetails.videoList[i].key +
-                  '?autoplay=1&controls=0'
-                // '?modestbranding=0&controls=0&fs=0&loop=1&showinfo=0&autoplay=1&mute=1&enablejsapi=1'
-              );
+          var current = this.movieDetails.videoList[i];
+          if (max === null || current.published_at > max.published_at) {
+            max = current;
+          }
+          if (min === null || current.published_at < min.published_at) {
+            min = current;
           }
         } else {
           this.movieDetails.videoList[i].key = null;
           this.movieDetails.videoList[i].videoThumbnail = null;
         }
-
-        if (!this.background_video) {
-          if (this.movieDetails.videoList[i].type == 'Teaser') {
-            this.background_video =
-              this._sanitizer.bypassSecurityTrustResourceUrl(
-                myAppConfig.tmdb.videoUrl +
-                  this.movieDetails.videoList[i].key +
-                  '?autoplay=1&controls=0'
-                // '?modestbranding=0&controls=0&fs=0&loop=1&showinfo=0&autoplay=1&mute=1&enablejsapi=1'
-              );
-          }
+      }
+       if (max!==null) {
+          this.background_video =
+            this._sanitizer.bypassSecurityTrustResourceUrl(
+              myAppConfig.tmdb.videoUrl +
+                max.key +
+                '?autoplay=1&controls=0&rel=0&showinfo=0&title=0'
+            );
+            this.background_video_type=max.type;
         }
-
-        this.movieDetails.videoList[i].key =
-          this._sanitizer.bypassSecurityTrustResourceUrl(
+       
+        this.movieDetails.videoList.forEach((video:any) => {
+          video.key= this._sanitizer.bypassSecurityTrustResourceUrl(
             myAppConfig.tmdb.videoUrl +
-              this.movieDetails.videoList[i].key +
+              video.key +
               '?autoplay=1'
           );
-      }
-    });
+        });
+    })
   }
   getWatchprovider(movie_id: number) {
     let watch: any;
