@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import myAppConfig from 'src/app/core/config/my-app-config';
 
@@ -18,11 +18,24 @@ export class VideoHeaderComponent implements OnInit {
   inWatchList: boolean = false;
   watchList: any[] = [];
   id: number = 0;
+  scrHeight: number=0;
+  scrWidth: number=0;
+  mobiledevice: boolean=false;
   constructor(private route: ActivatedRoute) {
     this.id = this.route.snapshot?.params['id'];
   }
   @ViewChild('myFrame') myFrame: any;
+  @HostListener('window:resize', ['$event'])
+  getScreenSize() {
+    this.scrHeight = window.innerHeight;
+    this.scrWidth = window.innerWidth;
 
+    if (this.scrWidth <= 820) {
+      this.mobiledevice = true;
+    } else {
+      this.mobiledevice = false;
+    }
+  }
   ngOnInit(): void {
     let result = localStorage.getItem('watchListData');
     if (result) {
@@ -37,6 +50,25 @@ export class VideoHeaderComponent implements OnInit {
         this.inWatchList = true;
       }
     }
+    if(!this.isCarousel && !this.mobiledevice){
+      setTimeout(
+      () =>{  this.playVideo = true;
+        this.myFrame?.nativeElement.contentWindow.postMessage(
+          '{"event":"command","func":"playVideo","args":""}',
+          '*'
+        );
+        console.log('playVideo');
+       },
+       5000
+      );   
+    }
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    if (window.scrollY > 800 && !this.mobiledevice) {
+      this.stopTrailer()
+    }
   }
   playTrailer() {
     this.playVideo = true;
@@ -44,6 +76,7 @@ export class VideoHeaderComponent implements OnInit {
       '{"event":"command","func":"playVideo","args":""}',
       '*'
     );
+    console.log('playing trailer...');
   }
   stopTrailer() {
     this.playVideo = false;
@@ -51,6 +84,8 @@ export class VideoHeaderComponent implements OnInit {
       '{"event":"command","func":"pauseVideo","args":""}',
       '*'
     );
+    console.log('stop trailer...');
+
   }
   addTowatchList(result: any) {
     let movieTvShowDetail = {

@@ -33,7 +33,6 @@ export class NavBarComponent implements OnInit {
 
   
   ngOnInit(): void {
-
     setTimeout(() => {
       this.splashScreen=false;
     }, 3000);
