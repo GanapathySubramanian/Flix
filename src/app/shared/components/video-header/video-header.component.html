@@ -33,7 +33,7 @@
         data-aos="fade-down"
         (click)="stopTrailer()"
       >
-        <div style="display: inline-block; width: 50px">
+        <div style="display: inline-block; width: 35px">
           <svg
             id="playBtn"
             version="1.1"
@@ -267,7 +267,7 @@
                 data-aos="fade-down"
               >
                 <a class="play playBut" (click)="playTrailer()">
-                  <div style="display: inline-block; width: 50px">
+                  <div style="display: inline-block; width: 35px">
                     <svg
                       id="playBtn"
                       version="1.1"
@@ -318,7 +318,7 @@
                 *ngIf="data.watchprovider"
               >
                 <a class="play playBut" [href]="data?.watchprovider">
-                  <div style="display: inline-block; width: 50px">
+                  <div style="display: inline-block; width: 35px">
                     <svg
                       id="playBtn"
                       version="1.1"
@@ -372,7 +372,7 @@
                 *ngIf="inWatchList"
                 (click)="removeFromWatchList(data)"
               >
-                <div style="display: inline-block; width: 50px">
+                <div style="display: inline-block; width: 35px">
                   <!-- <i class="fa-regular fa-circle-check fa-2xl"></i> -->
                   <img
                     src="assets/images/tick-circle.svg"
@@ -387,8 +387,8 @@
                 (click)="addTowatchList(data)"
                 *ngIf="!inWatchList"
               >
-                <div style="display: inline-block; width: 50px">
-                  <img src="assets/images/plus-circle.svg" alt="" width="90%" />
+                <div style="display: inline-block; width: 35px">
+                  <img src="assets/images/plus-circle.svg" alt="" style="width: 40px;" />
                 </div>
                 WATCH LIST
               </span>
@@ -398,7 +398,7 @@
                 *ngIf="isCarousel"
               >
                 <div style="display: inline-block; width: 50p;">
-                  <img src="assets/images/info.svg" alt="" width="90%" />
+                  <img src="assets/images/info.svg" alt="" style="width:40px" />
                 </div>
                 More Details
               </span>
@@ -415,7 +415,7 @@
     <img
       [src]="highQualityImgUrl + data.backdrop_path"
       alt=""
-      style="width: 100%; clip-path: circle(100% at 50% -50%);"
+      style="height:320px;width: 100%; clip-path: circle(100% at 50% -10%);object-fit: cover;"
     />
     <div class="poster-path">
       <img
@@ -424,7 +424,7 @@
         [src]="highQualityImgUrl + data.poster_path"
         alt=""
         style="
-          height: 180px;
+          height: 190px;
           width: 130px;
           border-radius: 30px;
           margin-top: -100px;
@@ -439,13 +439,14 @@
         [src]="highQualityImgUrl + data.poster_path"
         alt=""
         style="     
-          height: 180px;
+          height: 190px;
           width: 140px;
           border-radius: 30px;
           margin-top: -100px;
           display: block;
           margin-left: auto;
           margin-right: auto;
+          object-fit: cover;
         "
       />
     </div>
@@ -453,7 +454,7 @@
   <div class="movie-details" style="margin-top: 10px">
     <h4
       class="d-flex justify-content-center"
-      style="color: red"
+      style="color: red;text-align: center;"
       data-aos="fade-down"
     >
       <span *ngIf="data.original_title">
@@ -465,6 +466,7 @@
       class="header-detail text-danger d-flex justify-content-center"
       *ngIf="data.genre"
       data-aos="fade-down"
+      style="flex-wrap: wrap;"
     >
       <span
         *ngFor="let genre of data.genre; let i = index"
@@ -477,6 +479,8 @@
       class="header-detail text-danger d-flex justify-content-center"
       *ngIf="data.genre_ids"
       data-aos="fade-down"
+      style="flex-wrap: wrap;"
+
     >
       <span
         *ngFor="let genre of data.genre_ids; let i = index"
@@ -557,7 +561,7 @@
 
     <div class="overview m-2 text-white text-center" data-aos="fade-down">
       <h5 style="color: red">Overview</h5>
-      <span class="">{{ data.overview }}</span>
+      <span style="font-size: 13px;">{{ data.overview }}</span>
     </div>
     <div
       class="overview m-2 text-white text-center"
@@ -589,7 +593,7 @@
       *ngIf="data.watchprovider"
     >
       <a class="play playBut" [href]="data?.watchprovider">
-        <div style="display: inline-block; width: 50px">
+        <div style="display: inline-block; width: 35px">
           <svg
             id="playBtn"
             version="1.1"
@@ -643,7 +647,7 @@
         *ngIf="inWatchList"
         (click)="removeFromWatchList(data)"
       >
-        <div style="display: inline-block; width: 50px">
+        <div style="display: inline-block; width: 35px">
           <!-- <i class="fa-regular fa-circle-check fa-2xl"></i> -->
           <img src="assets/images/tick-circle.svg" alt="" width="100%" />
         </div>
@@ -654,8 +658,8 @@
         (click)="addTowatchList(data)"
         *ngIf="!inWatchList"
       >
-        <div style="display: inline-block; width: 50px">
-          <img src="assets/images/plus-circle.svg" alt="" width="90%" />
+        <div style="display: inline-block; width: 35px">
+          <img src="assets/images/plus-circle.svg" alt="" style="width:40px" />
         </div>
         WATCH LIST
       </span>
@@ -666,7 +670,7 @@
       *ngIf="isCarousel"
     >
       <div style="display: inline-block; width: 50p;">
-        <img src="assets/images/info.svg" alt="" width="90%" />
+        <img src="assets/images/info.svg" alt="" style="width:40px" />
       </div>
       More Details
     </span>

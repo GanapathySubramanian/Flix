@@ -1,5 +1,5 @@
 <h4 class="movie-heading mt-5">
-  REVIEWS FOR {{ "(" + data.original_title + ")" }}
+  PUBLIC REVIEWS
 </h4>
  <div
   *ngIf="data.reviewList?.length <= 0; then noreviewBlock; else reviewBlock"
