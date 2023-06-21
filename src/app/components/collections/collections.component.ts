@@ -34,16 +34,16 @@ export class CollectionsComponent implements OnInit {
   searchForm!: FormGroup;
   isdisableprev: boolean = false;
   isdisablenext: boolean = false;
-  ishidedrop: boolean = false;
+  isHideDrop: boolean = false;
   collectionData: any[] = COLLECTIONS;
   constructor(private movieservice: MoviesService) {
     this.searchForm = new FormGroup({
       movieName: new FormControl(''),
     });
     if (Search_value == '') {
-      this.ishidedrop = false;
+      this.isHideDrop = false;
     } else {
-      this.ishidedrop = true;
+      this.isHideDrop = true;
     }
     this.getScreenSize();
   }
@@ -125,9 +125,9 @@ export class CollectionsComponent implements OnInit {
         page;
       this.getMoviesData(SEARCH_URL);
       this.findthismovie = '';
-      this.ishidedrop = true;
+      this.isHideDrop = true;
     } else {
-      this.ishidedrop = false;
+      this.isHideDrop = false;
       sort_by_desc = 'popularity.desc';
       this.sortby_value = 'Trending Now';
       this.country_value = '';
