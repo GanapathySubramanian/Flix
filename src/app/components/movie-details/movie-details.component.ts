@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MovieDetails } from 'src/app/core/interface/movie-details';
 import myAppConfig from 'src/app/core/config/my-app-config';
 import { MoviesService } from 'src/app/core/services/movies.service';
+import { forkJoin } from 'rxjs';
 
 var movie_id = 0;
 @Component({
@@ -20,7 +21,7 @@ export class MovieDetailsComponent implements OnInit {
 
   windowScrolled: boolean = false;
   background_video_type: any;
-
+  isLoading: boolean = true;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -34,151 +35,247 @@ export class MovieDetailsComponent implements OnInit {
     this.router?.navigateByUrl('/moviedetails/' + movie_id);
     this.getMovieDetails(movie_id);
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const id = this.route.snapshot?.params['id'];
+    this.getMovieDetails(id);
+  }
 
-  ngDestroy() {
+  ngOnDestroy(): void {
     this.movieDetails = {} as MovieDetails;
   }
 
   getMovieDetails(id: number) {
-    // To get the movie details
+    this.isLoading = true;
 
-    this.getMovieDetailsData(id);
+    forkJoin([
+      this.movieservice.getMovieDetails(id),
+      this.movieservice.getVideos(id),
+      this.movieservice.getAllImages(id),
+      this.movieservice.getWatchProviders(id),
+      this.movieservice.getMovieCredits(id),
+      this.movieservice.getRecommendedMovies(id),
+      this.movieservice.getSimilarMovies(id),
+      this.movieservice.getMovieReviews(id),
+    ]).subscribe(
+      ([
+        movieDetails,
+        videos,
+        allImages,
+        watchProviders,
+        movieCredits,
+        recommendedMovies,
+        similarMovies,
+        movieReviews,
+      ]) => {
+        if (movieDetails !== null) {
+          this.setMovieDetails(movieDetails);
+        }
+        if (videos.results.length > 0) {
+          this.setVideoDetails(videos);
+        }
+        if (
+          allImages.backdrops.length > 0 ||
+          allImages.logos.length > 0 ||
+          allImages.posters.length > 0
+        ) {
+          this.setImages(allImages);
+        }
 
-    //To get the movie images
+        if (movieCredits.cast.length > 0 || movieCredits.crew.length > 0) {
+          this.setMovieCredits(movieCredits);
+        }
+        if (recommendedMovies.results.length > 0) {
+          this.setRecommendedMovies(recommendedMovies);
+        }
 
-    this.getMovieImages(id);
+        if (similarMovies.results.length > 0) {
+          this.setSimilarMovies(similarMovies);
+        }
+        if (movieReviews.results.length > 0) {
+          this.setReviewDetails(movieReviews);
+        }
+        this.isLoading = false;
+      },
+      (error) => {
+        console.error('An error occurred while loading data:', error);
+        this.isLoading = false; // Set isLoading to false if an error occurs during loading
+      }
+    );
+  }
+  setImages(allImages: any) {
+    if (allImages.backdrops.length == '0') {
+      this.movieDetails.background_image = null;
+    } else {
+      this.movieDetails.backdropList = allImages.backdrops;
 
-    //To get the reviews
-    this.getReviews(id);
+      this.movieDetails.background_image =
+        this.highqualityImgUrl + allImages.backdrops[0].file_path;
 
-    //To get the crew and cast details
-    this.getCredits(id);
+      setInterval(() => {
+        const random = Math.floor(Math.random() * allImages.backdrops.length);
+        this.movieDetails.background_image =
+          this.highqualityImgUrl + allImages.backdrops[random].file_path;
+      }, 5000);
+    }
 
-    //To get the similar movies details
-    this.getSimilarMovie(id);
+    //Movie Posters Images
 
-    //To get the Recommended movies details
-    this.getRecMovies(id);
+    this.movieDetails.posterList = allImages.posters;
 
-    //To get the videos;
-    this.getvideo(id);
+    let englishLogos: any[] = [];
+    if (allImages.logos.length > 0) {
+      allImages?.logos.forEach((logo: any) => {
+        if (logo.iso_639_1 == 'en') {
+          englishLogos.push(logo);
+        }
+      });
+    }
+
+    if (englishLogos.length > 0) {
+      this.movieDetails.logoList = englishLogos[0];
+    }
+  }
+  setReviewDetails(movieReviews: any) {
+    movieReviews.results.forEach((review: any) => {
+      if (review.author_details.avatar_path) {
+        if (
+          review.author_details.avatar_path[0] == '/' &&
+          review.author_details.avatar_path[1] == 'h' &&
+          review.author_details.avatar_path[2] == 't' &&
+          review.author_details.avatar_path[3] == 't' &&
+          review.author_details.avatar_path[4] == 'p'
+        ) {
+          let avatar_path = review.author_details.avatar_path.substring(1);
+          review.author_details.avatar_path = avatar_path;
+        } else if (
+          review.author_details.avatar_path[0] !== 'h' &&
+          review.author_details.avatar_path[1] !== 't' &&
+          review.author_details.avatar_path[2] !== 't' &&
+          review.author_details.avatar_path[3] !== 'p'
+        ) {
+          let avatar_path = this.imgUrl + review.author_details.avatar_path;
+          review.author_details.avatar_path = avatar_path;
+        }
+      }
+    });
+    this.movieDetails.reviewList = movieReviews.results;
+  }
+  setMovieCredits(movieCredits: any) {
+    let castList = movieCredits.cast;
+    this.movieDetails.castList = castList;
+
+    for (let i = 0; i < castList.length; i++) {
+      this.movieDetails.castList[i].id = castList[i].id;
+      this.movieDetails.castList[i].title = castList[i].name;
+      this.movieDetails.castList[i].popularity = castList[i].popularity;
+      this.movieDetails.castList[i].poster_path = castList[i].profile_path;
+      this.movieDetails.castList[i].job = castList[i].known_for_department;
+      this.movieDetails.castList[i].character = castList[i].character;
+    }
+
+    let c_data = this.filterCrewData(movieCredits.crew);
+
+    this.movieDetails.crewList = c_data;
+
+    for (let i = 0; i < c_data.length; i++) {
+      this.movieDetails.crewList[i].id = c_data[i].id;
+      this.movieDetails.crewList[i].title = c_data[i].name;
+      this.movieDetails.crewList[i].popularity = c_data[i].popularity;
+      this.movieDetails.crewList[i].poster_path = c_data[i].profile_path;
+      this.movieDetails.crewList[i].job = c_data[i].known_for_department;
+    }
+  }
+  setSimilarMovies(similarMovies: any) {
+    for (let i = 0; i < similarMovies.results.length; i++) {
+      if (similarMovies.results[i].poster_path == null) {
+        similarMovies.results[i].poster_path = null;
+      }
+    }
+
+    this.movieDetails.similarmovieList = similarMovies.results;
+  }
+  setRecommendedMovies(recommendedMovies: any) {
+    for (let i = 0; i < recommendedMovies.length; i++) {
+      if (recommendedMovies[i].poster_path == null) {
+        recommendedMovies[i].poster_path = null;
+      }
+    }
+
+    this.movieDetails.recmovieList = recommendedMovies;
   }
 
-  getvideo(movie_id: number) {
-    let videos: any;
-    this.movieservice.getVideos(movie_id).subscribe((data) => {
-      videos = data;
-      this.movieDetails.videoList = [];
-      this.movieDetails.videoList = videos.results;
+  setMovieDetails(movieDetails: any) {
+    this.movieDetails.backdrop_path = movieDetails.backdrop_path;
+    this.movieDetails.backdrop_path = movieDetails.backdrop_path;
+    this.movieDetails.budget = movieDetails.budget;
+    this.movieDetails.homepage = movieDetails.homepage;
+    this.movieDetails.id = movieDetails.id;
+    this.movieDetails.imdb_id = movieDetails.imdb_id;
+    this.movieDetails.original_lan = movieDetails.original_language;
+    this.movieDetails.original_title = movieDetails.original_title;
+    this.movieDetails.overview = movieDetails.overview;
+    this.movieDetails.popularity = movieDetails.popularity;
+    this.movieDetails.poster_path = movieDetails.poster_path;
+    this.movieDetails.production_companies = movieDetails.production_companies;
+    this.movieDetails.production_countries = movieDetails.production_countries;
+    this.movieDetails.runtime = movieDetails.runtime;
+    this.movieDetails.genre = movieDetails.genres;
+    this.movieDetails.release_date = movieDetails.release_date;
+    this.movieDetails.revenue = movieDetails.revenue;
+    this.movieDetails.status = movieDetails.status;
+    this.movieDetails.vote_average = movieDetails.vote_average;
 
-      if (this.movieDetails.videoList.length > 0) {
-        this.movieDetails.videoList.forEach((video: any) => {
-          video.videoThumbnail =
-            myAppConfig.tmdb.thumbnailUrl + video.key + '/0.jpg';
-        });
-      }
-      var max:any = null;
-      var min:any = null;
-      for (let i = 0; i < this.movieDetails.videoList.length; i++) {
-        if (this.movieDetails.videoList[i].key) {
-          var current = this.movieDetails.videoList[i];
-          if (max === null || current.published_at > max.published_at) {
-            max = current;
-          }
-          if (min === null || current.published_at < min.published_at) {
-            min = current;
-          }
-        } else {
-          this.movieDetails.videoList[i].key = null;
-          this.movieDetails.videoList[i].videoThumbnail = null;
+    if (movieDetails.homepage == '') {
+      this.getWatchprovider(movie_id);
+    } else {
+      this.movieDetails.watchprovider = movieDetails.homepage;
+    }
+  }
+
+  setVideoDetails(videos: any) {
+    this.movieDetails.videoList = [];
+    this.movieDetails.videoList = videos.results;
+
+    if (this.movieDetails.videoList.length > 0) {
+      this.movieDetails.videoList.forEach((video: any) => {
+        video.videoThumbnail =
+          myAppConfig.tmdb.thumbnailUrl + video.key + '/0.jpg';
+      });
+    }
+    var max: any = null;
+    var min: any = null;
+    for (let i = 0; i < this.movieDetails.videoList.length; i++) {
+      if (this.movieDetails.videoList[i].key) {
+        var current = this.movieDetails.videoList[i];
+        if (max === null || current.published_at > max.published_at) {
+          max = current;
         }
-      }
-       if (max!==null) {
-          this.background_video =
-            this._sanitizer.bypassSecurityTrustResourceUrl(
-              myAppConfig.tmdb.videoUrl +
-                max.key +
-                '?autoplay=1&controls=0&rel=0'
-            );
-            this.background_video_type=max.type;
+        if (min === null || current.published_at < min.published_at) {
+          min = current;
         }
-       
-        this.movieDetails.videoList.forEach((video:any) => {
-          video.key= this._sanitizer.bypassSecurityTrustResourceUrl(
-            myAppConfig.tmdb.videoUrl +
-              video.key +
-              '?autoplay=1'
-          );
-        });
-    })
+      } else {
+        this.movieDetails.videoList[i].key = null;
+        this.movieDetails.videoList[i].videoThumbnail = null;
+      }
+    }
+    if (max !== null) {
+      this.background_video = this._sanitizer.bypassSecurityTrustResourceUrl(
+        myAppConfig.tmdb.videoUrl + max.key + '?autoplay=1&controls=0&rel=0'
+      );
+      this.background_video_type = max.type;
+    }
+
+    this.movieDetails.videoList.forEach((video: any) => {
+      video.key = this._sanitizer.bypassSecurityTrustResourceUrl(
+        myAppConfig.tmdb.videoUrl + video.key + '?autoplay=1'
+      );
+    });
   }
   getWatchprovider(movie_id: number) {
     let watch: any;
     this.movieservice.getWatchProviders(movie_id).subscribe((data) => {
       watch = data;
       this.movieDetails.watchprovider = watch?.results?.IN[0]?.link;
-    });
-  }
-
-  getRecMovies(movie_id: number) {
-    let recmovie: any;
-    this.movieservice.getRecommendedMovies(movie_id).subscribe((data: any) => {
-      recmovie = data.results;
-
-      for (let i = 0; i < recmovie.length; i++) {
-        if (recmovie[i].poster_path == null) {
-          recmovie[i].poster_path = null;
-        }
-      }
-
-      this.movieDetails.recmovieList = recmovie;
-    });
-  }
-
-  getSimilarMovie(movie_id: number) {
-    let similarmovie: any;
-    this.movieservice.getSimilarMovies(movie_id).subscribe((data) => {
-      similarmovie = data;
-
-      for (let i = 0; i < similarmovie.results.length; i++) {
-        if (similarmovie.results[i].poster_path == null) {
-          similarmovie.results[i].poster_path = null;
-        }
-      }
-
-      this.movieDetails.similarmovieList = similarmovie.results;
-    });
-  }
-
-  getCredits(movie_id: number) {
-    let tempcreditData: any;
-    this.movieservice.getMovieCredits(movie_id).subscribe((data) => {
-      tempcreditData = data;
-
-      let castList = tempcreditData.cast;
-      this.movieDetails.castList = castList;
-
-      for (let i = 0; i < castList.length; i++) {
-        this.movieDetails.castList[i].id = castList[i].id;
-        this.movieDetails.castList[i].title = castList[i].name;
-        this.movieDetails.castList[i].popularity = castList[i].popularity;
-        this.movieDetails.castList[i].poster_path = castList[i].profile_path;
-        this.movieDetails.castList[i].job = castList[i].known_for_department;
-        this.movieDetails.castList[i].character = castList[i].character;
-      }
-
-      let c_data = this.filterCrewData(tempcreditData.crew);
-
-      this.movieDetails.crewList = c_data;
-
-      for (let i = 0; i < c_data.length; i++) {
-        this.movieDetails.crewList[i].id = c_data[i].id;
-        this.movieDetails.crewList[i].title = c_data[i].name;
-        this.movieDetails.crewList[i].popularity = c_data[i].popularity;
-        this.movieDetails.crewList[i].poster_path = c_data[i].profile_path;
-        this.movieDetails.crewList[i].job = c_data[i].known_for_department;
-      }
     });
   }
 
@@ -212,114 +309,6 @@ export class MovieDetailsComponent implements OnInit {
       }
     });
     return c_data;
-  }
-
-  getReviews(movie_id: number) {
-    let tempreviewData: any;
-    this.movieservice.getMovieReviews(movie_id).subscribe((data) => {
-      tempreviewData = data;
-
-      tempreviewData.results.forEach((review: any) => {
-        if (review.author_details.avatar_path) {
-          if (
-            review.author_details.avatar_path[0] == '/' &&
-            review.author_details.avatar_path[1] == 'h' &&
-            review.author_details.avatar_path[2] == 't' &&
-            review.author_details.avatar_path[3] == 't' &&
-            review.author_details.avatar_path[4] == 'p'
-          ) {
-            let avatar_path = review.author_details.avatar_path.substring(1);
-            review.author_details.avatar_path = avatar_path;
-          } else if (
-            review.author_details.avatar_path[0] !== 'h' &&
-            review.author_details.avatar_path[1] !== 't' &&
-            review.author_details.avatar_path[2] !== 't' &&
-            review.author_details.avatar_path[3] !== 'p'
-          ) {
-            let avatar_path = this.imgUrl + review.author_details.avatar_path;
-            review.author_details.avatar_path = avatar_path;
-          }
-        }
-      });
-      this.movieDetails.reviewList = tempreviewData.results;
-    });
-  }
-
-  getMovieImages(movie_id: number) {
-    let tempimagesData: any;
-    this.movieservice.getAllImages(movie_id).subscribe((data) => {
-      tempimagesData = data;
-
-      if (tempimagesData.backdrops.length == '0') {
-        this.movieDetails.background_image = null;
-      } else {
-        this.movieDetails.backdropList = tempimagesData.backdrops;
-
-        this.movieDetails.background_image =
-          this.highqualityImgUrl + tempimagesData.backdrops[0].file_path;
-
-        setInterval(() => {
-          const random = Math.floor(
-            Math.random() * tempimagesData.backdrops.length
-          );
-          this.movieDetails.background_image =
-            this.highqualityImgUrl + tempimagesData.backdrops[random].file_path;
-        }, 5000);
-      }
-
-      //Movie Posters Images
-
-      this.movieDetails.posterList = tempimagesData.posters;
-
-      let englishLogos: any[] = [];
-      if (tempimagesData.logos.length > 0) {
-        tempimagesData?.logos.forEach((logo: any) => {
-          if (logo.iso_639_1 == 'en') {
-            englishLogos.push(logo);
-          }
-        });
-      }
-
-      if (englishLogos.length > 0) {
-        this.movieDetails.logoList = englishLogos[0];
-      }
-    });
-  }
-
-  getMovieDetailsData(id: number) {
-    let tempMovieDetails: any;
-    this.movieservice.getMovieDetails(id).subscribe((data) => {
-      tempMovieDetails = data;
-
-      //Default Movie Details
-      this.movieDetails.backdrop_path = tempMovieDetails.backdrop_path;
-      this.movieDetails.backdrop_path = tempMovieDetails.backdrop_path;
-      this.movieDetails.budget = tempMovieDetails.budget;
-      this.movieDetails.homepage = tempMovieDetails.homepage;
-      this.movieDetails.id = tempMovieDetails.id;
-      this.movieDetails.imdb_id = tempMovieDetails.imdb_id;
-      this.movieDetails.original_lan = tempMovieDetails.original_language;
-      this.movieDetails.original_title = tempMovieDetails.original_title;
-      this.movieDetails.overview = tempMovieDetails.overview;
-      this.movieDetails.popularity = tempMovieDetails.popularity;
-      this.movieDetails.poster_path = tempMovieDetails.poster_path;
-      this.movieDetails.production_companies =
-        tempMovieDetails.production_companies;
-      this.movieDetails.production_countries =
-        tempMovieDetails.production_countries;
-      this.movieDetails.runtime = tempMovieDetails.runtime;
-      this.movieDetails.genre = tempMovieDetails.genres;
-      this.movieDetails.release_date = tempMovieDetails.release_date;
-      this.movieDetails.revenue = tempMovieDetails.revenue;
-      this.movieDetails.status = tempMovieDetails.status;
-      this.movieDetails.vote_average = tempMovieDetails.vote_average;
-
-      if (tempMovieDetails.homepage == '') {
-        this.getWatchprovider(movie_id);
-      } else {
-        this.movieDetails.watchprovider = tempMovieDetails.homepage;
-      }
-    });
   }
 
   float2int(value: any) {

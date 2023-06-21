@@ -3,7 +3,7 @@ import { MoviesService } from 'src/app/core/services/movies.service';
 import myAppConfig from 'src/app/core/config/my-app-config';
 import { FormControl, FormGroup } from '@angular/forms';
 import { common } from 'src/app/core/interface/common';
-
+import { forkJoin } from 'rxjs';
 var sort_by_desc = 'popularity.desc',
   page = 1,
   Search_value = '',
@@ -37,31 +37,28 @@ export class MoviesComponent implements OnInit {
   isdisablenext: boolean = false;
   ishidedrop: boolean = false;
 
-  constructor(private movieservice: MoviesService) {
+  constructor(private movieservice: MoviesService) {}
+
+  ngOnInit(): void {
     this.searchForm = new FormGroup({
       movieName: new FormControl(''),
     });
-    if (Search_value == '') {
-      this.ishidedrop = false;
-    } else {
-      this.ishidedrop = true;
-    }
     this.getScreenSize();
+    this.loadData();
   }
 
-  ngOnInit(): void {
-    this.getGenre();
-    this.getOrder();
-    this.getMovies();
-    this.getCountries();
-  }
-
-  getCountries() {
-    this.movieservice.getCountry().subscribe((data) => {
-      this.countryList = data;
+  loadData(): void {
+    forkJoin([
+      this.movieservice.getCountry(),
+      this.movieservice.getOrderList(),
+      this.movieservice.getGenreList(),
+    ]).subscribe(([countryData, orderData, genreData]) => {
+      this.countryList = countryData;
+      this.orderList = orderData;
+      this.genreList = genreData;
+      this.getMovies();
     });
   }
-
   searchList: any = [];
   findthismovie: string = '';
   findMovies() {
@@ -93,17 +90,6 @@ export class MoviesComponent implements OnInit {
       this.searchList = tempSearchList.results;
     });
   }
-  getOrder() {
-    this.movieservice.getOrderList().subscribe((data) => {
-      this.orderList = data;
-    });
-  }
-  getGenre() {
-    this.movieservice.getGenreList().subscribe((data) => {
-      this.genreList = data;
-    });
-  }
-
   getMovies() {
     page = 1;
     this.page_no = 1;
@@ -306,10 +292,6 @@ export class MoviesComponent implements OnInit {
       this.movieList.forEach((movies: any, index) => {
         movies.background_image = this.highqualityImgUrl + movies.backdrop_path;
         movies.no_animation = true;
-        // if (index < 10) {
-        //   this.getMovieImages(movies.id, index);
-        //   if (movies.backdrop_path) this.topMoviesList.push(movies);
-        // }
       });
 
       if (data.total_pages == page) {

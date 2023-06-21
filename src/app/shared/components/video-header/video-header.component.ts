@@ -50,18 +50,18 @@ export class VideoHeaderComponent implements OnInit {
         this.inWatchList = true;
       }
     }
-    if(!this.isCarousel && !this.mobiledevice){
-      setTimeout(
-      () =>{  this.playVideo = true;
-        this.myFrame?.nativeElement.contentWindow.postMessage(
-          '{"event":"command","func":"playVideo","args":""}',
-          '*'
-        );
-        console.log('playVideo');
-       },
-       5000
-      );   
-    }
+    // if(!this.isCarousel && !this.mobiledevice){
+    //   setTimeout(
+    //   () =>{  this.playVideo = true;
+    //     this.myFrame?.nativeElement.contentWindow.postMessage(
+    //       '{"event":"command","func":"playVideo","args":""}',
+    //       '*'
+    //     );
+    //     console.log('playVideo');
+    //    },
+    //    5000
+    //   );   
+    // }
   }
 
   @HostListener('window:scroll', [])
