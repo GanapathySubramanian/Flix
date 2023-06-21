@@ -42,7 +42,11 @@
   [trendingList]="trendingInPrime"
 ></app-trending-backdrops>
 
-<div *ngIf="topGrossingMoviesList.length > 0">
+<app-trending-backdrops 
+  [title]="topGrossingMovies"
+  [trendingList]="topGrossingMoviesList"
+></app-trending-backdrops>
+<!-- <div *ngIf="topGrossingMoviesList.length > 0">
   <h5 class="details-header">Top Grossing Movies</h5>
   <div class="kodfun-galeri">
     <div
@@ -60,4 +64,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

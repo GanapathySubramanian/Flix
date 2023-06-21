@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   trendingMoviesTitle = 'Upcoming Movies';
   trendingTvshowsTitleInNetflix = 'Trending In Netflix';
   trendingTvshowsTitleInAmazon = 'Trending In Amazon';
+  topGrossingMovies = "Top Grossing Movies"
   topGrossingMoviesList: any[] = [];
   topGrossingTvshowList: any[] = [];
   collections: any = [];
