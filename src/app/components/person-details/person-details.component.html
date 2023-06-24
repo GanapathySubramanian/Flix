@@ -28,36 +28,36 @@
           <td class="colon">:</td>
           <td class="details-value">{{ personDetails.name }}</td>
         </tr>
-        <tr>
-          <td class="details-name">BirthDate</td>
+        <tr *ngIf="personDetails.birthday">
+          <td class="details-name" >BirthDate</td>
           <td class="colon">:</td>
           <td class="details-value">{{ personDetails.birthday | date }}</td>
         </tr>
-        <tr *ngIf="personDetails.deathday !=null">
+        <tr *ngIf="personDetails.deathday">
           <td class="details-name">DeathDate</td>
           <td class="colon">:</td>
           <td class="details-value" >
             {{ personDetails.deathday | date}}
           </td>
         </tr>
-        <tr>
+        <tr *ngIf="personDetails.gender">
           <td class="details-name">Gender</td>
           <td class="colon">:</td>
           <td class="details-value">{{ personDetails.gender }}</td>
         </tr>
-        <tr>
+        <tr *ngIf="personDetails.known_for_department">
           <td class="details-name">Profession</td>
           <td class="colon">:</td>
           <td class="details-value">
             {{ personDetails.known_for_department }}
           </td>
         </tr>
-        <tr>
+        <tr *ngIf="personDetails.place_of_birth">
           <td class="details-name">PlaceOfBirth</td>
           <td class="colon">:</td>
           <td class="details-value">{{ personDetails.place_of_birth }}</td>
         </tr>
-        <tr>
+        <tr *ngIf="personDetails.biography">
           <td class="details-name">Biography</td>
           <td class="colon">:</td>
           <td class="details-value movie-description">

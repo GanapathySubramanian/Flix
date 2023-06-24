@@ -5,6 +5,7 @@ import { TvshowDetails } from 'src/app/core/interface/tvshow-details';
 import myAppConfig from 'src/app/core/config/my-app-config';
 import { TvshowsService } from 'src/app/core/services/tvshows.service';
 import { common } from 'src/app/core/interface/common';
+import { forkJoin } from 'rxjs';
 
 var tvshow_id = 0;
 @Component({
@@ -34,290 +35,290 @@ export class TvshowDetailsComponent implements OnInit {
     this.getTvshowDetails(tvshow_id);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const id = this.route.snapshot?.params['id'];
+    this.getTvshowDetails(id);
+  }
+
+  ngOnDestroy(): void {
+    this.tvshowDetails = {} as TvshowDetails;
+  }
 
   getTvshowDetails(tvshow_id: number) {
-    // To get the Tvshow details
-
-    this.gettvshowDetailsData(tvshow_id);
-
-    //To get the Tvshow images
-    this.gettvshowImages(tvshow_id);
-
-    //To get the reviews
-    this.getReviews(tvshow_id);
-
-    //To get the crew and cast details
-    this.getCredits(tvshow_id);
-
-    //To get the similar tvshows details
-    this.getSimilartvshow(tvshow_id);
-
-    //To get the Recommended tvshows details
-    this.getRectvshows(tvshow_id);
-
-    //To get the videos
-    this.getvideo(tvshow_id);
-  }
-
-  getvideo(tvshow_id: number) {
-    let videos: any;
-    this.tvshowservice.getVideos(tvshow_id).subscribe((data) => {
-      videos = data;
-
-      this.tvshowDetails.videoList = videos.results;
-      this.tvshowDetails.videoList.forEach((video: any) => {
-        video.videoThumbnail =
-          myAppConfig.tmdb.thumbnailUrl + video.key + '/0.jpg';
-      });
-      var max:any = null;
-      var min:any = null;
-      for (let i = 0; i < this.tvshowDetails.videoList.length; i++) {
-        if (this.tvshowDetails.videoList[i].key) {
-          var current = this.tvshowDetails.videoList[i];
-          if (max === null || current.published_at > max.published_at) {
-            max = current;
-          }
-          if (min === null || current.published_at < min.published_at) {
-            min = current;
-          }
-        } else {
-          this.tvshowDetails.videoList[i].key = null;
-          this.tvshowDetails.videoList[i].videoThumbnail = null;
+    forkJoin([
+      this.tvshowservice.gettvshowDetails(tvshow_id),
+      this.tvshowservice.getAllImages(tvshow_id),
+      this.tvshowservice.gettvshowReviews(tvshow_id),
+      this.tvshowservice.gettvshowCredits(tvshow_id),
+      this.tvshowservice.getSimilartvshows(tvshow_id),
+      this.tvshowservice.getRecommendedtvshows(tvshow_id),
+      this.tvshowservice.getVideos(tvshow_id),
+    ]).subscribe(
+      ([
+        tvshowDetails,
+        images,
+        reviews,
+        credits,
+        similarTvShows,
+        recommendedTvShows,
+        videos,
+      ]) => {
+        if (tvshowDetails !== null) {
+          this.setTvshowDetails(tvshowDetails)
         }
-      }
-       if (max!==null) {
-          this.background_video =
-            this._sanitizer.bypassSecurityTrustResourceUrl(
-              myAppConfig.tmdb.videoUrl +
-                max.key +
-                '?autoplay=1&controls=0&rel=0'
-            );
-            this.background_video_type=max.type;
-        }
-       
-        this.tvshowDetails.videoList.forEach((video:any) => {
-          video.key= this._sanitizer.bypassSecurityTrustResourceUrl(
-            myAppConfig.tmdb.videoUrl +
-              video.key +
-              '?autoplay=1'
-          );
-        });
-    })
-}
 
-  getRectvshows(tvshow_id: number) {
-    let rectvshow: any;
-    this.tvshowservice
-      .getRecommendedtvshows(tvshow_id)
-      .subscribe((data) => {
-        rectvshow = data;
-
-        for (let i = 0; i < rectvshow.results.length; i++) {
-          if (rectvshow.results[i].poster_path == null) {
-            rectvshow.results[i].poster_path = 'Empty';
-          }
-        }
-        this.tvshowDetails.rectvshowList = rectvshow.results;
-        let rec_tvshow = rectvshow.results;
-        this.tvshowDetails.similartvshowList = rec_tvshow;
-        for (let i = 0; i < rec_tvshow.length; i++) {
-          this.tvshowDetails.rectvshowList[i].id = rec_tvshow[i].id;
-          this.tvshowDetails.rectvshowList[i].title = rec_tvshow[i].name;
-          this.tvshowDetails.rectvshowList[i].poster_path =
-            rec_tvshow[i].poster_path;
-          this.tvshowDetails.rectvshowList[i].vote_average =
-            rec_tvshow[i].vote_average;
-          this.tvshowDetails.rectvshowList[i].release_date =
-            rec_tvshow[i].first_air_date;
-        }
-      });
-  }
-  getSimilartvshow(tvshow_id: number) {
-    let similartvshow: any;
-    this.tvshowservice.getSimilartvshows(tvshow_id).subscribe((data) => {
-      similartvshow = data;
-      for (let i = 0; i < similartvshow.results.length; i++) {
-        if (similartvshow.results[i].poster_path == null) {
-          similartvshow.results[i].poster_path = 'Empty';
-        }
-      }
-
-      let s_tvshow = similartvshow.results;
-      this.tvshowDetails.similartvshowList = s_tvshow;
-      for (let i = 0; i < s_tvshow.length; i++) {
-        this.tvshowDetails.similartvshowList[i].id = s_tvshow[i].id;
-        this.tvshowDetails.similartvshowList[i].title = s_tvshow[i].name;
-        this.tvshowDetails.similartvshowList[i].poster_path =
-          s_tvshow[i].poster_path;
-        this.tvshowDetails.similartvshowList[i].vote_average =
-          s_tvshow[i].vote_average;
-        this.tvshowDetails.similartvshowList[i].release_date =
-          s_tvshow[i].first_air_date;
-      }
-    });
-  }
-
-  getCredits(tvshow_id: number) {
-    let tempcreditData: any;
-    this.tvshowservice.gettvshowCredits(tvshow_id).subscribe((data) => {
-      tempcreditData = data;
-
-      let castList = tempcreditData.cast;
-      this.tvshowDetails.castList = castList;
-
-      for (let i = 0; i < castList.length; i++) {
-        this.tvshowDetails.castList[i].id = castList[i].id;
-        this.tvshowDetails.castList[i].title = castList[i].name;
-        this.tvshowDetails.castList[i].popularity = castList[i].popularity;
-        this.tvshowDetails.castList[i].poster_path = castList[i].profile_path;
-        this.tvshowDetails.castList[i].job = castList[i].known_for_department;
-        this.tvshowDetails.castList[i].character = castList[i].character;
-      }
-
-      let c_data = this.filterCrewData(tempcreditData.crew);
-      this.tvshowDetails.crewList = c_data;
-
-      for (let i = 0; i < c_data.length; i++) {
-        this.tvshowDetails.crewList[i].id = c_data[i].id;
-        this.tvshowDetails.crewList[i].title = c_data[i].name;
-        this.tvshowDetails.crewList[i].popularity = c_data[i].popularity;
-        this.tvshowDetails.crewList[i].poster_path = c_data[i].profile_path;
-        this.tvshowDetails.crewList[i].job = c_data[i].known_for_department;
-      }
-    });
-  }
-
-  getReviews(tvshow_id: number) {
-    let tempreviewData: any;
-    this.tvshowservice.gettvshowReviews(tvshow_id).subscribe((data) => {
-      tempreviewData = data;
-
-      tempreviewData.results.forEach((review: any) => {
-        if (review.author_details.avatar_path) {
-          if (
-            review.author_details.avatar_path[0] == '/' &&
-            review.author_details.avatar_path[1] == 'h' &&
-            review.author_details.avatar_path[2] == 't' &&
-            review.author_details.avatar_path[3] == 't' &&
-            review.author_details.avatar_path[4] == 'p'
-          ) {
-            let avatar_path = review.author_details.avatar_path.substring(1);
-            review.author_details.avatar_path = avatar_path;
-          } else {
-            let avatar_path = this.imgUrl + review.author_details.avatar_path;
-            review.author_details.avatar_path = avatar_path;
-          }
-        }
-      });
-      this.tvshowDetails.reviewList = tempreviewData.results;
-    });
-  }
-
-  gettvshowImages(tvshow_id: number) {
-    let tempimagesData: any;
-    this.tvshowservice.getAllImages(tvshow_id).subscribe((data) => {
-      tempimagesData = data;
-
-      if (tempimagesData.backdrops.length == '0') {
-        this.tvshowDetails.background_image = null;
-      } else {
-        this.tvshowDetails.backdropList = tempimagesData.backdrops;
-
-        this.tvshowDetails.background_image =
-          this.highqualityImgUrl + tempimagesData.backdrops[0].file_path;
-
-        setInterval(() => {
-          const random = Math.floor(
-            Math.random() * tempimagesData.backdrops.length
-          );
-          this.tvshowDetails.background_image =
-            this.highqualityImgUrl + tempimagesData.backdrops[random].file_path;
-        }, 5000);
-      }
-
-      //Tvshow Posters Images
-
-      this.tvshowDetails.posterList = tempimagesData.posters;
-
-      let englishLogos: any[] = [];
-      if (tempimagesData.logos.length > 0) {
-        tempimagesData?.logos.forEach((logo: any) => {
-          if (logo.iso_639_1 == 'en') {
-            englishLogos.push(logo);
-          }
-        });
-      }
-
-      if (englishLogos.length > 0) {
-        this.tvshowDetails.logoList = englishLogos[0];
-      }
-    });
-  }
-
-  gettvshowDetailsData(id: number) {
-    let tempTvshowDetails: any;
-    this.tvshowservice.gettvshowDetails(id).subscribe((data) => {
-      tempTvshowDetails = data;
-
-      //Default Tvshow Details
-      this.tvshowDetails.backdrop_path = tempTvshowDetails.backdrop_path;
-      this.tvshowDetails.episode_run_time = tempTvshowDetails.episode_run_time;
-      this.tvshowDetails.avg_run_time = this.tvshowDetails.episode_run_time[0];
-      for (let i = 0; i < this.tvshowDetails.episode_run_time.length; i++) {
         if (
-          this.tvshowDetails.avg_run_time <
-          this.tvshowDetails.episode_run_time[i]
+          images.backdrop_path?.length > 0 ||
+          images.logos?.length > 0 ||
+          images.posters?.length > 0
         ) {
-          this.tvshowDetails.avg_run_time =
-            this.tvshowDetails.episode_run_time[i];
+            this.setImages(images);
+        }
+
+        if (reviews.results.length > 0) {
+          this.setReviews(reviews);
+        }
+
+        if (credits?.casts?.length > 0 || credits?.crew?.length > 0) {
+            this.setCreditDetails(credits);
+        }
+
+        if (similarTvShows.results.length > 0) {
+          this.setSimilarTvshowDetails(similarTvShows);
+        }
+
+        if (recommendedTvShows.results.length > 0) {
+          this.setRecommendedTvshowDetails(recommendedTvShows);
+        }
+
+        if (videos.results.length > 0) {
+          this.setVideoDetails(videos);
         }
       }
-      this.tvshowDetails.first_air_date = tempTvshowDetails.first_air_date;
-      this.tvshowDetails.genre = tempTvshowDetails.genres;
-      this.tvshowDetails.homepage = tempTvshowDetails.homepage;
-      this.tvshowDetails.id = tempTvshowDetails.id;
-      this.tvshowDetails.original_lan = tempTvshowDetails.original_language;
-      this.tvshowDetails.last_air_date = tempTvshowDetails.last_air_date;
-      this.tvshowDetails.last_episode_to_air =
-        tempTvshowDetails.last_episode_to_air;
-      this.tvshowDetails.networks = tempTvshowDetails.networks;
-      this.tvshowDetails.no_of_episodes = tempTvshowDetails.number_of_episodes;
-      this.tvshowDetails.no_of_seasons = tempTvshowDetails.number_of_seasons;
-      this.tvshowDetails.original_title = tempTvshowDetails.original_name;
-      this.tvshowDetails.overview = tempTvshowDetails.overview;
-      this.tvshowDetails.popularity = tempTvshowDetails.popularity;
-      this.tvshowDetails.poster_path = tempTvshowDetails.poster_path;
-      this.tvshowDetails.production_companies =
-        tempTvshowDetails.production_companies;
-      this.tvshowDetails.production_countries =
-        tempTvshowDetails.production_countries;
-      this.tvshowDetails.seasons = tempTvshowDetails.seasons;
-      this.tvshowDetails.status = tempTvshowDetails.status;
-      this.tvshowDetails.tagline = tempTvshowDetails.tagline;
-      this.tvshowDetails.vote_average = tempTvshowDetails.vote_average;
-      this.tvshowDetails.vote_count = tempTvshowDetails.vote_count;
+    );
+  }
+  setTvshowDetails(tvshowDetails:any){
+     //Default Tvshow Details
+     this.tvshowDetails.backdrop_path = tvshowDetails.backdrop_path;
+     this.tvshowDetails.episode_run_time =
+     tvshowDetails.episode_run_time;
+     this.tvshowDetails.avg_run_time =
+       this.tvshowDetails.episode_run_time[0];
+     for (let i = 0; i < this.tvshowDetails.episode_run_time.length; i++) {
+       if (
+         this.tvshowDetails.avg_run_time <
+         this.tvshowDetails.episode_run_time[i]
+       ) {
+         this.tvshowDetails.avg_run_time =
+           this.tvshowDetails.episode_run_time[i];
+       }
+     }
+     this.tvshowDetails.first_air_date = tvshowDetails.first_air_date;
+     this.tvshowDetails.genre = tvshowDetails.genres;
+     this.tvshowDetails.homepage = tvshowDetails.homepage;
+     this.tvshowDetails.id = tvshowDetails.id;
+     this.tvshowDetails.original_lan = tvshowDetails.original_language;
+     this.tvshowDetails.last_air_date = tvshowDetails.last_air_date;
+     this.tvshowDetails.last_episode_to_air =
+     tvshowDetails.last_episode_to_air;
+     this.tvshowDetails.networks = tvshowDetails.networks;
+     this.tvshowDetails.no_of_episodes =
+     tvshowDetails.number_of_episodes;
+     this.tvshowDetails.no_of_seasons =
+     tvshowDetails.number_of_seasons;
+     this.tvshowDetails.original_title = tvshowDetails.original_name;
+     this.tvshowDetails.overview = tvshowDetails.overview;
+     this.tvshowDetails.popularity = tvshowDetails.popularity;
+     this.tvshowDetails.poster_path = tvshowDetails.poster_path;
+     this.tvshowDetails.production_companies =
+     tvshowDetails.production_companies;
+     this.tvshowDetails.production_countries =
+     tvshowDetails.production_countries;
+     this.tvshowDetails.seasons = tvshowDetails.seasons;
+     this.tvshowDetails.status = tvshowDetails.status;
+     this.tvshowDetails.tagline = tvshowDetails.tagline;
+     this.tvshowDetails.vote_average = tvshowDetails.vote_average;
+     this.tvshowDetails.vote_count = tvshowDetails.vote_count;
 
-      // To Remove other than seasons
-      // for(let i=0;i<this.tvshowDetails.seasons.length;i++){
-      //   if(this.tvshowDetails.seasons[i].season_number==0){
-      //     this.tvshowDetails.seasons.splice(i, 1);
-      //   }
-      // }
+     // To Remove other than seasons
+     // for(let i=0;i<this.tvshowDetails.seasons.length;i++){
+     //   if(this.tvshowDetails.seasons[i].season_number==0){
+     //     this.tvshowDetails.seasons.splice(i, 1);
+     //   }
+     // }
 
-      if (this.tvshowDetails.homepage == '') {
-        var watch_provider =
-          myAppConfig.tmdb.tvshowDetailsBaseUrl +
-          tvshow_id +
-          '/watch/providers?' +
-          myAppConfig.tmdb.apikey;
-        this.getWatchprovider(watch_provider);
-      } else {
-        this.tvshowDetails.watchprovider = this.tvshowDetails.homepage;
+     if (this.tvshowDetails.homepage == '') {
+       var watch_provider =
+         myAppConfig.tmdb.tvshowDetailsBaseUrl +
+         tvshow_id +
+         '/watch/providers?' +
+         myAppConfig.tmdb.apikey;
+       this.getWatchprovider(watch_provider);
+     } else {
+       this.tvshowDetails.watchprovider = this.tvshowDetails.homepage;
+     }
+  }
+  setImages(images:any){
+    if (images.backdrops.length == '0') {
+      this.tvshowDetails.background_image = null;
+    } else {
+      this.tvshowDetails.backdropList = images.backdrops;
+
+      this.tvshowDetails.background_image =
+        this.highqualityImgUrl + images.backdrops[0].file_path;
+
+      setInterval(() => {
+        const random = Math.floor(
+          Math.random() * images.backdrops.length
+        );
+        this.tvshowDetails.background_image =
+          this.highqualityImgUrl + images.backdrops[random].file_path;
+      }, 5000);
+    }
+
+    //Tvshow Posters Images
+
+    this.tvshowDetails.posterList = images.posters;
+
+    let englishLogos: any[] = [];
+    if (images.logos.length > 0) {
+      images?.logos.forEach((logo: any) => {
+        if (logo.iso_639_1 == 'en') {
+          englishLogos.push(logo);
+        }
+      });
+    }
+
+    if (englishLogos.length > 0) {
+      this.tvshowDetails.logoList = englishLogos[0];
+    }
+  }
+
+  setReviews(reviews:any){
+    reviews.results.forEach((review: any) => {
+      if (review.author_details.avatar_path) {
+        if (
+          review.author_details.avatar_path[0] == '/' &&
+          review.author_details.avatar_path[1] == 'h' &&
+          review.author_details.avatar_path[2] == 't' &&
+          review.author_details.avatar_path[3] == 't' &&
+          review.author_details.avatar_path[4] == 'p'
+        ) {
+          let avatar_path =
+            review.author_details.avatar_path.substring(1);
+          review.author_details.avatar_path = avatar_path;
+        } else {
+          let avatar_path =
+            this.imgUrl + review.author_details.avatar_path;
+          review.author_details.avatar_path = avatar_path;
+        }
       }
+    });
+    this.tvshowDetails.reviewList = reviews.results;
+  }
+  setCreditDetails(credits:any){
+    let castList = credits.cast;
+    this.tvshowDetails.castList = castList;
+
+    for (let i = 0; i < castList.length; i++) {
+      this.tvshowDetails.castList[i].id = castList[i].id;
+      this.tvshowDetails.castList[i].title = castList[i].name;
+      this.tvshowDetails.castList[i].popularity = castList[i].popularity;
+      this.tvshowDetails.castList[i].poster_path =
+        castList[i].profile_path;
+      this.tvshowDetails.castList[i].job =
+        castList[i].known_for_department;
+      this.tvshowDetails.castList[i].character = castList[i].character;
+    }
+
+    let c_data = this.filterCrewData(credits.crew);
+    this.tvshowDetails.crewList = c_data;
+
+    for (let i = 0; i < c_data.length; i++) {
+      this.tvshowDetails.crewList[i].id = c_data[i].id;
+      this.tvshowDetails.crewList[i].title = c_data[i].name;
+      this.tvshowDetails.crewList[i].popularity = c_data[i].popularity;
+      this.tvshowDetails.crewList[i].poster_path = c_data[i].profile_path;
+      this.tvshowDetails.crewList[i].job = c_data[i].known_for_department;
+    }
+  }
+  setVideoDetails(videos: any) {
+    this.tvshowDetails.videoList = videos.results;
+    this.tvshowDetails.videoList.forEach((video: any) => {
+      video.videoThumbnail =
+        myAppConfig.tmdb.thumbnailUrl + video.key + '/0.jpg';
+    });
+    var max: any = null;
+    var min: any = null;
+    for (let i = 0; i < this.tvshowDetails.videoList.length; i++) {
+      if (this.tvshowDetails.videoList[i].key) {
+        var current = this.tvshowDetails.videoList[i];
+        if (max === null || current.published_at > max.published_at) {
+          max = current;
+        }
+        if (min === null || current.published_at < min.published_at) {
+          min = current;
+        }
+      } else {
+        this.tvshowDetails.videoList[i].key = null;
+        this.tvshowDetails.videoList[i].videoThumbnail = null;
+      }
+    }
+    if (max !== null) {
+      this.background_video = this._sanitizer.bypassSecurityTrustResourceUrl(
+        myAppConfig.tmdb.videoUrl + max.key + '?autoplay=1&controls=0&rel=0'
+      );
+      this.background_video_type = max.type;
+    }
+
+    this.tvshowDetails.videoList.forEach((video: any) => {
+      video.key = this._sanitizer.bypassSecurityTrustResourceUrl(
+        myAppConfig.tmdb.videoUrl + video.key + '?autoplay=1'
+      );
     });
   }
 
+  setRecommendedTvshowDetails(recommendedTvShows: any) {
+    for (let i = 0; i < recommendedTvShows.results.length; i++) {
+      if (recommendedTvShows.results[i].poster_path == null) {
+        recommendedTvShows.results[i].poster_path = 'Empty';
+      }
+    }
+    this.tvshowDetails.rectvshowList = recommendedTvShows.results;
+    let rec_tvshow = recommendedTvShows.results;
+    this.tvshowDetails.similartvshowList = rec_tvshow;
+    for (let i = 0; i < rec_tvshow.length; i++) {
+      this.tvshowDetails.rectvshowList[i].id = rec_tvshow[i].id;
+      this.tvshowDetails.rectvshowList[i].title = rec_tvshow[i].name;
+      this.tvshowDetails.rectvshowList[i].poster_path =
+        rec_tvshow[i].poster_path;
+      this.tvshowDetails.rectvshowList[i].vote_average =
+        rec_tvshow[i].vote_average;
+      this.tvshowDetails.rectvshowList[i].release_date =
+        rec_tvshow[i].first_air_date;
+    }
+  }
+
+  setSimilarTvshowDetails(similarTvShows:any){
+    for (let i = 0; i < similarTvShows.results.length; i++) {
+      if (similarTvShows.results[i].poster_path == null) {
+        similarTvShows.results[i].poster_path = 'Empty';
+      }
+    }
+
+    let s_tvshow = similarTvShows.results;
+    this.tvshowDetails.similartvshowList = s_tvshow;
+    for (let i = 0; i < s_tvshow.length; i++) {
+      this.tvshowDetails.similartvshowList[i].id = s_tvshow[i].id;
+      this.tvshowDetails.similartvshowList[i].title = s_tvshow[i].name;
+      this.tvshowDetails.similartvshowList[i].poster_path =
+        s_tvshow[i].poster_path;
+      this.tvshowDetails.similartvshowList[i].vote_average =
+        s_tvshow[i].vote_average;
+      this.tvshowDetails.similartvshowList[i].release_date =
+        s_tvshow[i].first_air_date;
+    }
+  }
   getWatchprovider(watch_provider: string) {
     let watch: any;
     this.tvshowservice.getWatchProviders(watch_provider).subscribe((data) => {

@@ -74,14 +74,14 @@ export class MovieDetailsComponent implements OnInit {
           this.setVideoDetails(videos);
         }
         if (
-          allImages.backdrops.length > 0 ||
-          allImages.logos.length > 0 ||
-          allImages.posters.length > 0
+          allImages.backdrops?.length > 0 ||
+          allImages.logos?.length > 0 ||
+          allImages.posters?.length > 0
         ) {
           this.setImages(allImages);
         }
 
-        if (movieCredits.cast.length > 0 || movieCredits.crew.length > 0) {
+        if (movieCredits.cast?.length > 0 || movieCredits.crew?.length > 0) {
           this.setMovieCredits(movieCredits);
         }
         if (recommendedMovies.results.length > 0) {
