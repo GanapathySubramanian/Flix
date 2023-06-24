@@ -141,57 +141,6 @@ export class CollectionsComponent implements OnInit {
     }
   }
 
-  // handlePagination(val: any) {
-  //   if (Search_value == '') {
-  //     this.ishidedrop = false;
-  //     if (val == 1) {
-  //       page = 1;
-  //       this.page_no = page;
-  //     } else if (val == 2) {
-  //       if (page == 1) {
-  //         this.isdisableprev = true;
-  //       } else {
-  //         page--;
-  //         this.page_no = page;
-  //       }
-  //     } else {
-  //       page++;
-  //       this.page_no = page;
-  //     }
-  //   } else {
-  //     this.ishidedrop = true;
-  //     if (val == 1) {
-  //       page = 1;
-  //       this.page_no = page;
-  //     } else if (val == 2) {
-  //       if (page == 1) {
-  //         this.isdisableprev = true;
-  //       } else {
-  //         page--;
-  //         this.page_no = page;
-  //       }
-  //     } else {
-  //       page++;
-  //       this.page_no = page;
-  //     }
-  //     var page_api_url =
-  //       myAppConfig.tmdb.baseUrl +
-  //       '/search/collection?' +
-  //       myAppConfig.tmdb.apikey +
-  //       '&query=' +
-  //       Search_value +
-  //       '&page=' +
-  //       page;
-  //     this.getMoviesData(page_api_url);
-  //   }
-
-  //   window.scroll({
-  //     top: 0,
-  //     left: 0,
-  //     behavior: 'smooth',
-  //   });
-  // }
-
   getMoviesData(url: any) {
     let tempMoviesList: any;
     this.movieservice.getallMovies(url).subscribe((data: any) => {

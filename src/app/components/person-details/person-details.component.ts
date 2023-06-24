@@ -111,10 +111,10 @@ export class PersonDetailsComponent implements OnInit {
         a.release_date.localeCompare(b.release_date)
       );
       this.crewTvList = this.crewTvList.sort((a: any, b: any) =>
-        a.release_date.localeCompare(b.release_date)
+        a.first_air_date.localeCompare(b.first_air_date)
       );
       this.castTvList = this.castTvList.sort((a: any, b: any) =>
-        a.release_date.localeCompare(b.release_date)
+        a.first_air_date.localeCompare(b.first_air_date)
       );
     });
   }

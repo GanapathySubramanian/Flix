@@ -389,7 +389,7 @@ export class TvshowsComponent implements OnInit {
   getScreenSize() {
     this.scrHeight = window.innerHeight;
     this.scrWidth = window.innerWidth;
-    console.log(this.scrHeight, this.scrWidth);
+    // console.log(this.scrHeight, this.scrWidth);
     if (this.scrWidth <= 500) {
       this.mobiledevice = true;
     } else {
