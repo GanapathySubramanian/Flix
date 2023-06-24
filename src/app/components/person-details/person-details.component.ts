@@ -76,97 +76,78 @@ export class PersonDetailsComponent implements OnInit {
     let tempcredit: any;
     this.peopleservice.getCredits(movie_tvshows_credit).subscribe((data) => {
       tempcredit = data;
+      this.castMovieList = tempcredit.cast.filter(
+        (cast: any) => cast.media_type === 'movie'
+      );
+      this.castTvList = tempcredit.cast
+        .filter((cast: any) => cast.media_type === 'tv')
+        .map((cast: any) => {
+          const { name: title, ...rest } = cast;
+          return { title, ...rest };
+        });
 
-      // this.castMovieList=tempcredit.cast;
-      // this.crewTvList=tempcredit.crew;
+      this.crewMovieList = tempcredit.crew.filter(
+        (crew: any) => crew.media_type === 'movie'
+      );
+      this.crewTvList = tempcredit.crew
+        .filter((crew: any) => crew.media_type === 'tv')
+        .map((crew: any) => {
+          const { name: title, ...rest } = crew;
+          return { title, ...rest };
+        });
 
-      let castMoviecount = 0,
-        castTvcount = 0;
-      let j = 0,
-        k = 0;
-      for (let i = 0; i < tempcredit.cast.length; i++) {
-        if (tempcredit.cast[i].media_type == 'movie') {
-          this.castMovieList[j] = tempcredit.cast[i];
-          j++;
-          castMoviecount++;
-        } else if (tempcredit.cast[i].media_type == 'tv') {
-          this.castTvList[k] = tempcredit.cast[i];
-          k++;
-          castTvcount++;
-        }
-      }
+      this.crewMovieList = this.filterCrewData(this.crewMovieList);
+      this.crewTvList = this.filterCrewData(this.crewTvList);
 
-      for (let i = 0; i < this.castTvList.length; i++) {
-        this.castTvList[i].title = this.castTvList[i].name;
-        delete this.castTvList[i].name;
-      }
+      this.crewTvList = this.crewTvList.map((crew: any) => {
+        const { name: title, ...rest } = crew;
+        return { title, ...rest };
+      });
 
-      let crewMoviecount = 0,
-        crewTvcount = 0;
-      let m = 0,
-        n = 0;
-      for (let i = 0; i < tempcredit.crew.length; i++) {
-        if (tempcredit.crew[i].media_type == 'movie') {
-          this.crewMovieList[m] = tempcredit.crew[i];
-          m++;
-          crewMoviecount++;
-        } else if (tempcredit.crew[i].media_type == 'tv') {
-          this.crewTvList[n] = tempcredit.crew[i];
-          n++;
-          crewTvcount++;
-        }
-      }
-
-      if (crewMoviecount == 0) {
-      } else {
-        let data = this.filterCrewData(this.crewMovieList);
-        this.crewMovieList = data;
-      }
-
-      if (crewTvcount == 0) {
-      } else {
-        let data = this.filterCrewData(this.crewTvList);
-        this.crewTvList = data;
-      }
-
-      for (let i = 0; i < this.crewTvList.length; i++) {
-        this.crewTvList[i].title = this.crewTvList[i].name;
-        delete this.crewTvList[i].name;
-      }
+      this.crewMovieList = this.crewMovieList.sort((a: any, b: any) =>
+        a.release_date.localeCompare(b.release_date)
+      );
+      this.castMovieList = this.castMovieList.sort((a: any, b: any) =>
+        a.release_date.localeCompare(b.release_date)
+      );
+      this.crewTvList = this.crewTvList.sort((a: any, b: any) =>
+        a.release_date.localeCompare(b.release_date)
+      );
+      this.castTvList = this.castTvList.sort((a: any, b: any) =>
+        a.release_date.localeCompare(b.release_date)
+      );
     });
   }
-
   filterCrewData(arr: any): any {
     let clientImages: any = [];
-    var c_data: any = [];
-    c_data = arr;
-    for (var i = 0; i < c_data.length; i++) {
-      if (clientImages[c_data[i].id]) {
-        if (clientImages[c_data[i].id].includes(c_data[i].job)) {
-          continue;
+    let c_data: any = [];
+
+    arr.forEach((data: any) => {
+      const { id, job } = data;
+      if (clientImages[id]) {
+        if (clientImages[id].includes(job)) {
+          return;
         } else {
-          clientImages[c_data[i].id] =
-            clientImages[c_data[i].id] + ', ' + c_data[i].job;
+          clientImages[id] = clientImages[id] + ', ' + job;
         }
       } else {
-        clientImages[c_data[i].id] = c_data[i].job;
+        clientImages[id] = job;
       }
-    }
-
-    //remove duplicate entries
-    c_data = c_data.filter((obj: any, pos: any, arr: any) => {
-      return arr.map((mapObj: any) => mapObj.id).indexOf(obj.id) == pos;
+      c_data.push(data);
     });
 
-    clientImages.forEach((res: any) => {
-      for (let i = 0; i < c_data.length; i++) {
-        if (clientImages[c_data[i].id]) {
-          c_data[i].job = clientImages[c_data[i].id];
-        }
+    c_data = c_data.filter((obj: any, pos: any, arr: any) => {
+      return arr.map((mapObj: any) => mapObj.id).indexOf(obj.id) === pos;
+    });
+
+    c_data.forEach((data: any) => {
+      if (clientImages[data.id]) {
+        data.job = clientImages[data.id];
       }
     });
     return c_data;
   }
+
   getPersonDetailsData(api_url: string) {
     let temppersondetails: any;
     this.peopleservice.getPersonDetails(api_url).subscribe((data) => {
@@ -174,12 +155,6 @@ export class PersonDetailsComponent implements OnInit {
 
       this.personDetails.biography = temppersondetails.biography;
       this.personDetails.birthday = temppersondetails.birthday;
-
-      if (temppersondetails.deathday == null) {
-        this.personDetails.deathday = 'Nil';
-      } else {
-        this.personDetails.deathday = temppersondetails.deathday;
-      }
 
       if (temppersondetails.gender == 2) {
         this.personDetails.gender = 'Male';

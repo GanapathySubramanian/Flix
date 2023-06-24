@@ -24,19 +24,19 @@
     <table class="details-table">
       <tbody>
         <tr>
-          <td class="details-name">Person Name</td>
+          <td class="details-name">PersonName</td>
           <td class="colon">:</td>
           <td class="details-value">{{ personDetails.name }}</td>
         </tr>
         <tr>
-          <td class="details-name">Birth Date</td>
+          <td class="details-name">BirthDate</td>
           <td class="colon">:</td>
           <td class="details-value">{{ personDetails.birthday | date }}</td>
         </tr>
-        <tr>
-          <td class="details-name">Death Date</td>
+        <tr *ngIf="personDetails.deathday !=null">
+          <td class="details-name">DeathDate</td>
           <td class="colon">:</td>
-          <td class="details-value">
+          <td class="details-value" >
             {{ personDetails.deathday | date}}
           </td>
         </tr>
@@ -53,7 +53,7 @@
           </td>
         </tr>
         <tr>
-          <td class="details-name">Place of Birth</td>
+          <td class="details-name">PlaceOfBirth</td>
           <td class="colon">:</td>
           <td class="details-value">{{ personDetails.place_of_birth }}</td>
         </tr>
@@ -65,7 +65,7 @@
           </td>
         </tr>
         <tr>
-          <td class="details-name">Social Media</td>
+          <td class="details-name">SocialMedia</td>
           <td class="colon">:</td>
           <td class="details-value">
             <div
@@ -194,7 +194,7 @@
 
         <div
           class="person"
-          *ngFor="let temp of castMovieList"
+          *ngFor="let temp of castMovieList.slice().reverse() let i = index;"
           [routerLink]="['/moviedetails', temp.id]"
         >
           <app-card [data]="temp"></app-card>
@@ -219,7 +219,7 @@
 
         <div
           class="person"
-          *ngFor="let temp1 of castTvList"
+          *ngFor="let temp1 of castTvList.slice().reverse() let i = index;"
           [routerLink]="['/tvshowdetails', temp1.id]"
         >
           <app-card [data]="temp1"></app-card>
@@ -249,7 +249,7 @@
 
         <div
           class="person crew-tvshow"
-          *ngFor="let crew_data of crewMovieList"
+          *ngFor="let crew_data of crewMovieList.slice().reverse() let i = index;"
           [routerLink]="['/moviedetails', crew_data.id]"
         >
           <app-card [data]="crew_data"></app-card>
@@ -274,7 +274,7 @@
         <main id="main">
             <div
               class="person crew-tvshow"
-              *ngFor="let crew_data of crewTvList"
+              *ngFor="let crew_data of crewTvList.slice().reverse() let i = index;"
               [routerLink]="['/tvshowdetails', crew_data.id]"
             >
               <app-card [data]="crew_data"></app-card>
