@@ -3,10 +3,7 @@ ngb-rating {
   color: var(--base-orange);
   font-size: 20px;
 }
-h4,
-h5 {
-  font-family: Monoton;
-}
+
 .details-table {
   margin-left: 10%;
   margin-right: 5%;

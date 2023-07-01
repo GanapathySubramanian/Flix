@@ -1,14 +1,7 @@
-<section class="lg-video-header">
+<section class="lg-video-header font-kanit">
   <section class="showcase" *ngIf="background_video && playVideo">
     <div class="videoContainer text-white">
-      <!-- <iframe
-        #myFrame
-        class="videoContainer__video"
-        width="1920"
-        height="1080"
-        [src]="background_video"
-        frameborder="0"
-      ></iframe> -->
+
       <iframe
         frameborder="0"
         allowfullscreen="1"
@@ -23,11 +16,10 @@
     <div class="overlay-b"></div>
     <div class="text">
       <a
-        class="play playBut"
+        class="play playBut "
         style="
           background-color: transparent;
           color: white;
-          font-family: Monoton;
           cursor: pointer;
         "
         data-aos="fade-down"
@@ -261,7 +253,7 @@
 
             <div class="watch-now d-flex">
               <div
-                class="wrapper-watchnow"
+                class="wrapper-watchnow "
                 *ngIf="background_video"
                 style="cursor: pointer; margin-right: 25px"
                 data-aos="fade-down"
@@ -312,7 +304,7 @@
               </div>
 
               <div
-                class="wrapper-watchnow"
+                class="wrapper-watchnow "
                 style="cursor: pointer"
                 data-aos="fade-down"
                 *ngIf="data.watchprovider"
@@ -363,7 +355,7 @@
               </div>
             </div>
             <div
-              class="wrapper-watchnow mt-4"
+              class="wrapper-watchnow mt-4 "
               style="cursor: pointer"
               data-aos="fade-down"
             >
@@ -568,7 +560,7 @@
       ></ngb-rating>
     </div>
 
-    <div class=" m-2 text-white text-center" data-aos="fade-down">
+    <div class=" m-2 text-white text-center " data-aos="fade-down">
       <h5 style="color: red">Overview</h5>
       <span style="font-size: 13px;">{{ data.overview }}</span>
     </div>
@@ -596,7 +588,7 @@
     </div>
 
     <div
-      class="wrapper-watchnow"
+      class="wrapper-watchnow "
       style="cursor: pointer; display: flex; justify-content: center"
       data-aos="fade-down"
       *ngIf="data.watchprovider"
@@ -647,7 +639,7 @@
     </div>
 
     <div
-      class="wrapper-watchnow mt-4"
+      class="wrapper-watchnow mt-4 "
       style="cursor: pointer"
       data-aos="fade-down"
     >

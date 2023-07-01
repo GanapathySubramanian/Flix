@@ -7,40 +7,27 @@
     ></app-video-header>
   </section>
 
-  <!-- <main id="main">
-    <div class="movie-poster-img">
-      <div
-        *ngIf="movieDetails.poster_path == null; then thenBlock; else elseBlock"
-      ></div>
-      <ng-template #thenBlock
-        ><img src="assets/images/no-image.png" alt="figure" class="no-image"
-      /></ng-template>
-      <ng-template #elseBlock
-        ><img
-          [attr.src]="highqualityImgUrl + movieDetails.poster_path"
-          alt="{{ movieDetails.original_title }}"
-      /></ng-template>
-    </div>
-  </main> -->
-
   <div class="movie-content">
-    <div class="Backdropimages">
+    <div class="Backdropimages" *ngIf="movieDetails.backdropList?.length > 0">
       <app-backdrop [data]="movieDetails"></app-backdrop>
+      <hr /> 
     </div>
-    <hr />
+    
 
-    <div class="posterImages">
+    <div class="posterImages" *ngIf="movieDetails.posterList?.length > 0">
       <app-poster [data]="movieDetails"></app-poster>
+      <hr />
     </div>
-    <hr />
+   
 
-    <div class="videos">
+    <div class="videos" *ngIf="movieDetails.videoList?.length > 0">
       <app-video [data]="movieDetails"></app-video>
+      <hr />
     </div>
-    <hr />
+    
 
-    <div class="cast-section">
-      <h4 class="movie-heading mt-5">CAST</h4>
+    <div class="cast-section" *ngIf="movieDetails.castList?.length > 0">
+      <h4 class="movie-heading ">CAST</h4>
       <div
         *ngIf="movieDetails.castList?.length <= 0; then nocast; else castdata"
       ></div>
@@ -63,12 +50,14 @@
           </h4>
         </div>
       </ng-template>
+
+      <hr />
     </div>
 
-    <hr />
+   
 
-    <div class="crew-section">
-      <h4 class="movie-heading mt-5">CREW</h4>
+    <div class="crew-section" *ngIf="movieDetails.crewList?.length > 0">
+      <h4 class="movie-heading ">CREW</h4>
       <div
         *ngIf="movieDetails.crewList?.length <= 0; then nocrew; else crewdata"
       ></div>
@@ -92,11 +81,13 @@
           </h4>
         </div>
       </ng-template>
+      <hr />
     </div>
-    <hr />
+  
 
-    <div class="sim_movies">
-      <h4 class="movie-heading mt-5">RECOMMENDED MOVIES</h4>
+    <div class="sim_movies" *ngIf="
+    movieDetails.recmovieList?.length > 0">
+      <h4 class="movie-heading ">RECOMMENDED MOVIES</h4>
       <div
         *ngIf="
           movieDetails.recmovieList?.length <= 0;
@@ -125,11 +116,13 @@
           </h4>
         </div>
       </ng-template>
+      <hr />
     </div>
-    <hr />
+  
 
-    <div class="sim_movies-section">
-      <h4 class="movie-heading mt-5">SIMILAR MOVIES</h4>
+    <div class="sim_movies-section" *ngIf="
+    movieDetails.similarmovieList?.length > 0">
+      <h4 class="movie-heading ">SIMILAR MOVIES</h4>
       <div
         *ngIf="
           movieDetails.similarmovieList?.length <= 0;
@@ -156,9 +149,10 @@
           </h4>
         </div>
       </ng-template>
+      <hr />
     </div>
-    <hr />
-    <div class="reviews-section">
+    
+    <div class="reviews-section" *ngIf="movieDetails.reviewList?.length > 0">
       <app-review [data]="movieDetails"></app-review>
     </div>
   </div>

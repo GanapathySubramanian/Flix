@@ -43,8 +43,8 @@
         >
           <li class="nav-item dropdown">
             <a
-              class="nav-link dropdown-toggle"
-              style="color: #fff; font-family: Monoton"
+              class="nav-link dropdown-toggle font-kanit"
+              style="color: #fff; "
               href="#"
               id="navbarDropdown"
               role="button"
@@ -56,8 +56,8 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li>
                 <a
-                  class="dropdown-item link"
-                  style="color: red; font-family: Monoton"
+                  class="dropdown-item link font-kanit"
+                  style="color: red; "
                   (click)="getGenreContent('', '')"
                   >CLEAR GENRE</a
                 >
@@ -73,8 +73,8 @@
           </li>
           <li class="nav-item dropdown">
             <a
-              class="nav-link dropdown-toggle"
-              style="color: #fff; font-family: Monoton"
+              class="nav-link dropdown-toggle font-kanit"
+              style="color: #fff; "
               href="#"
               id="navbarDropdown"
               role="button"
@@ -86,8 +86,8 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li>
                 <a
-                  class="dropdown-item link"
-                  style="color: red; font-family: Monoton"
+                  class="dropdown-item link font-kanit"
+                  style="color: red; "
                   (click)="getOrderContent('', '')"
                   >CLEAR FILTER</a
                 >
@@ -103,8 +103,8 @@
           </li>
           <li class="nav-item dropdown">
             <a
-              class="nav-link dropdown-toggle"
-              style="color: #fff; font-family: Monoton"
+              class="nav-link dropdown-toggle font-kanit"
+              style="color: #fff; "
               href="#"
               id="navbarDropdown"
               role="button"
@@ -116,8 +116,8 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li>
                 <a
-                  class="dropdown-item link"
-                  style="color: red; font-family: Monoton"
+                  class="dropdown-item link font-kanit"
+                  style="color: red; "
                   (click)="getCountryContent('', '')"
                   >CLEAR COUNTRY</a
                 >
@@ -267,10 +267,10 @@
   </span> -->
 
   <div class="movie-filter-details" *ngIf="movieList.length > 0">
-    <h5 class="text-center filtered-value">{{ sortby_value | titlecase }}</h5>
-    <h5 class="text-center filtered-value">{{ genre_value | titlecase }}</h5>
-    <h5 class="text-center filtered-value" *ngIf="country_value != ''">
-      <span class="filtered-value"> {{ " in " }}</span
+    <h5 class="text-center filtered-value font-kanit">{{ sortby_value | titlecase }}</h5>
+    <h5 class="text-center filtered-value font-kanit">{{ genre_value | titlecase }}</h5>
+    <h5 class="text-center filtered-value font-kanit" *ngIf="country_value != ''">
+      <span class="filtered-value font-kanit"> {{ " in " }}</span
       >{{ country_value | titlecase }}
     </h5>
   </div>
@@ -314,6 +314,6 @@
   </div>
 
   <div *ngIf="movieList.length <= 0" style="height: 80vh">
-    <h5 class="filtered-value text-center">No Movies Found</h5>
+    <h5 class="filtered-value text-center font-kanit">No Movies Found</h5>
   </div>
 </div>

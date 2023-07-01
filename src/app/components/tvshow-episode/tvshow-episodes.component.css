@@ -3,15 +3,6 @@ ngb-rating {
   /* color: var(--base-orange); */
   font-size: 15px;
 }
-.tvshows-heading {
-  color: var(--dark-red);
-  text-align: center;
-  font-family: Monoton;
-}
-
-h4 {
-  font-family: Monoton;
-}
 
 .tvshows-season {
   width: 350px;

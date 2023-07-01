@@ -279,7 +279,6 @@ path.two {
     display: flex;
     margin-top: 20px;
     /* justify-content: center; */
-    font-family: Monoton;
   }
   .watchnow-btn {
     display: none;

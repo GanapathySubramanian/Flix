@@ -52,14 +52,7 @@
   font-size: 20px;
 }
 
-hr {
-  color: var(--base-white);
-  height: 2px;
-}
-ngb-rating {
-  color: var(--base-orange);
-  font-size: 20px;
-}
+
 .tvshow-content {
   margin-left: 2%;
   margin-right: 2%;
@@ -83,13 +76,7 @@ ngb-rating {
   padding: 5px 15px;
 }
 
-.tvshow-heading {
-  display: block;
-  text-transform: uppercase;
-  color: var(--dark-red);
-  text-align: center;
-  font-family: Monoton;
-}
+
 .tvshow {
   width: 250px;
   margin: 0.5rem;
@@ -391,9 +378,4 @@ path.two {
   flex-direction: column;
   text-shadow: -1px 5px 8px black;
 }
-h5 {
-  font-family: Monoton;
-}
-h4 {
-  font-family: Monoton;
-}
+

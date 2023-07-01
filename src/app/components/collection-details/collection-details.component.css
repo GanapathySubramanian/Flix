@@ -48,14 +48,7 @@
   width: 50%;
   font-size: 20px;
 }
-hr {
-  color: var(--base-white);
-  height: 2px;
-}
-ngb-rating {
-  color: var(--base-orange);
-  font-size: 20px;
-}
+
 .tvshow-content {
   margin-left: 2%;
   margin-right: 2%;
@@ -373,12 +366,7 @@ path.two {
   }
 }
 
-h5 {
-  font-family: Monoton;
-}
-h4 {
-  font-family: Monoton;
-}
+
 
 .kodfun-galeri {
   display: flex;

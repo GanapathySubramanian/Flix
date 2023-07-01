@@ -13,10 +13,7 @@
 .person img {
   width: 100%;
 }
-h4,
-h5 {
-  font-family: Monoton;
-}
+
 .person-info {
   color: var(--base-white);
   display: flex;

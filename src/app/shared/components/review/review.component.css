@@ -1,6 +1,6 @@
 .table-review-head {
   color: var(--base-orange);
-  font-family: Monoton;
+  font-family: kanit;
 }
 
 .table-review-head td {
@@ -8,9 +8,7 @@
   /* margin: 1rem; */
   padding: 1.5rem;
 }
-h5 {
-  font-family: Monoton;
-}
+
 .table-review-body {
   font-weight: normal;
   line-height: 1rem;
@@ -26,10 +24,3 @@ h5 {
   padding: 1.5rem;
 }
 
-.movie-heading {
-  display: block;
-  text-transform: uppercase;
-  color: var(--dark-red);
-  text-align: center;
-  font-family: Monoton;
-}

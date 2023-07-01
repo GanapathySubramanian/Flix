@@ -8,16 +8,6 @@
   display: none;
 }
 
-.movie-heading {
-  display: block;
-  text-transform: uppercase;
-  color: var(--dark-red);
-  text-align: center;
-  font-family: Monoton;
-}
-h5 {
-  font-family: Monoton;
-}
 
 /* system and tab */
 @media only screen and (min-width: 600px) {
