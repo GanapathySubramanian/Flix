@@ -1,3 +1,23 @@
-body{
-    background-color: red;
+.font-monoton {
+  font-family: Monoton;
+}
+.font-kanit {
+  font-family: "Kanit", sans-serif;
+}
+
+/* Trending now, sort_by */
+.filtered-value {
+  color: red;
+  font-size: 25px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.movie-heading,
+.tvshow-heading {
+  display: block;
+  text-transform: uppercase;
+  color: var(--dark-red);
+  text-align: center;
+  font-family: kanit;
+  font-size: 25px;
 }
