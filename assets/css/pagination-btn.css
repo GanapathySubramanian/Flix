@@ -1,0 +1,16 @@
+.btn {
+    color: #ffffff;
+    padding: 0.25rem 1.5rem;
+    text-transform: uppercase;
+    margin: 15px;
+    background-color: var(--dark-red);
+  }
+  
+  .btn:hover {
+    background-color: var(--base-orange);
+    transition: 0.3s ease-in-out;
+  }
+
+  .pagination {
+    justify-content: center;
+  }
