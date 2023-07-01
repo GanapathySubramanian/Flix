@@ -1,8 +1,4 @@
-main {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
+
 ngb-rating {
   /* color: var(--base-orange); */
   font-size: 15px;
@@ -16,11 +12,7 @@ ngb-rating {
 h4 {
   font-family: Monoton;
 }
-main {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
+
 .tvshows-season {
   width: 350px;
   margin: 0.5rem;
@@ -78,15 +70,6 @@ main {
   font-weight: bold;
 } */
 
-.green {
-  color: var(--base-green);
-}
-.orange {
-  color: var(--base-orange);
-}
-.red {
-  color: var(--dark-red);
-}
 
 .season-overview {
   position: absolute;

@@ -3,21 +3,12 @@
   margin: 20px;
   font-family: Monoton;
 }
-main {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
+
 .image {
   width: 300px;
   height: 380px;
 }
 
-main {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
 .movie {
   width: 250px;
   margin: 1rem;
@@ -32,36 +23,9 @@ main {
 .movie:hover {
   cursor: pointer;
 }
-/* ======== */
-.green {
-  color: var(--base-green);
-}
-.orange {
-  color: var(--base-orange);
-}
-.red {
-  color: var(--dark-red);
-}
 
-.btn {
-  color: #ffffff;
-  padding: 0.25rem 1.5rem;
-  text-transform: uppercase;
-  margin: 15px;
-  background-color: var(--dark-red);
-}
 
-.btn:hover {
-  background-color: var(--base-orange);
-  transition: 0.3s ease-in-out;
-}
-.pagination {
-  justify-content: center;
-}
 
-.link {
-  cursor: pointer;
-}
 
 .search {
   background-color: transparent;
@@ -148,24 +112,6 @@ main {
 .hide-search-list {
   display: none;
 }
-
-.dropdown-menu {
-  max-height: 400px;
-  max-width: 200px;
-  overflow: scroll;
-  background-color: var(--secondary-color);
-}
-.dropdown-item {
-  /* background-color: var(--primary-color); */
-  color: var(--base-white);
-}
-.dropdown-item:hover {
-  background-color: var(--primary-color);
-}
-.dropdown-menu::-webkit-scrollbar {
-  display: none; /* for Chrome, Safari, and Opera */
-}
-
 @media only screen and (min-width: 600px) {
   .sm-search {
     display: none;
@@ -255,9 +201,7 @@ main {
     margin-bottom: 0;
   }
 }
-.filtered-value {
-  color: red;
-}
+
 
 img {
   -webkit-box-reflect: below 5px

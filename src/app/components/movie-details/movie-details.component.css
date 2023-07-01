@@ -1,8 +1,4 @@
-main {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
+
 hr {
   color: var(--base-white);
   height: 2px;

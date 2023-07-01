@@ -250,15 +250,7 @@ path.two {
     font-size: 1rem;
   }
 
-  .green {
-    color: var(--base-green);
-  }
-  .orange {
-    color: var(--base-orange);
-  }
-  .red {
-    color: var(--dark-red);
-  }
+
   .item-overview {
     font-size: 1rem;
     margin-top: 5px;

@@ -46,22 +46,3 @@
   [title]="topGrossingMovies"
   [trendingList]="topGrossingMoviesList"
 ></app-trending-backdrops>
-<!-- <div *ngIf="topGrossingMoviesList.length > 0">
-  <h5 class="details-header">Top Grossing Movies</h5>
-  <div class="kodfun-galeri">
-    <div
-      *ngFor="let topGross of topGrossingMoviesList"
-      style="
-      background-image: url('{{ highQualityImgUrl + topGross.backdrop_path }}');
-    "
-      [routerLink]="['/moviedetails', topGross.id]"
-      class="cursor-pointer"
-    >
-      <div class="text-center text-white">
-        <p class="title-name mt-2" *ngIf="topGross.title">
-          {{ topGross.title }}
-        </p>
-      </div>
-    </div>
-  </div>
-</div> -->

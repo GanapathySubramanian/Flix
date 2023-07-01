@@ -101,15 +101,6 @@ figure:hover::before {
   }
 }
 
-.green {
-  color: var(--base-green);
-}
-.orange {
-  color: var(--base-orange);
-}
-.red {
-  color: var(--dark-red);
-}
 
 ngb-rating {
   font-size: 15px;
