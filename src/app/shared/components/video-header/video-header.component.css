@@ -219,7 +219,7 @@ path.two {
     margin-left: 50px;
   }
   .right-content {
-    width: 50%;
+    width: 40%;
     display: flex;
     justify-content: center;
     align-items: center;
