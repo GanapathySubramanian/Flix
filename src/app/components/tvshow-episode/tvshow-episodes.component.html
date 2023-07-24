@@ -3,7 +3,7 @@
 
   <h4 class="text-center text-warning mt-5">{{ episodes.name | uppercase }}</h4>
 
-  <h4 class="tvshows-heading mt-5">EPISODE {{episodes.episode_number}}</h4>
+  <h4 class="text-center tvshows-heading mt-5">EPISODE {{episodes.episode_number}}</h4>
   <main>
     <div class="tvshows-season">
       <div *ngIf="episodes.still_path == null; then thenBlock; else elseBlock"></div>
