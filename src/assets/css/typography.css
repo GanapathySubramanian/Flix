@@ -13,7 +13,7 @@
   text-transform: uppercase;
 }
 .movie-heading,
-.tvshow-heading {
+.tvshow-heading,.tvshows-heading {
   display: block;
   text-transform: uppercase;
   color: var(--dark-red);
