@@ -115,17 +115,17 @@
               >
                 <span
                   *ngIf="data.title"
-                  style="font-family: Monoton; color: red; font-size: 30px"
+                  style="font-family: 'Kanit', sans-serif; color: red; font-size: 30px"
                   >{{ data.title }}</span
                 >
                 <span
                   *ngIf="data.name"
-                  style="font-family: Monoton; color: red; font-size: 30px"
+                  style="font-family: 'Kanit', sans-serif; color: red; font-size: 30px"
                   >{{ data.name }}</span
                 >
                 <span
                   *ngIf="!data.name && !data.title && data.original_title"
-                  style="font-family: Monoton; color: red; font-size: 30px"
+                  style="font-family: 'Kanit', sans-serif; color: red; font-size: 30px"
                   >{{ data.original_title }}</span
                 >
               </span>
@@ -380,7 +380,7 @@
                 *ngIf="!inWatchList"
               >
                 <div style="display: inline-block; width: 35px">
-                  <img src="assets/images/plus-circle.svg" alt="" style="width: 40px;" />
+                  <img src="assets/images/plus-circle.svg" alt="" style="width: 35px;" />
                 </div>
                 WATCH LIST
               </span>
@@ -389,8 +389,8 @@
                 [routerLink]="data?.media_type==='movie'?['/moviedetails', data.id]:['/tvshowdetails',data.id]"
                 *ngIf="isCarousel"
               >
-                <div style="display: inline-block; width: 50p;">
-                  <img src="assets/images/info.svg" alt="" style="width:40px" />
+                <div style="display: inline-block; width: 40px;">
+                  <img src="assets/images/info.svg" alt="" style="width:35px;padding: 0px;" />
                 </div>
                 More Details
               </span>
@@ -660,7 +660,7 @@
         *ngIf="!inWatchList"
       >
         <div style="display: inline-block; width: 35px">
-          <img src="assets/images/plus-circle.svg" alt="" style="width:40px" />
+          <img src="assets/images/plus-circle.svg" alt="" style="width:35px" />
         </div>
         WATCH LIST
       </span>
@@ -670,8 +670,8 @@
       [routerLink]="data?.media_type==='movie'?['/moviedetails', data.id]:['/tvshowdetails',data.id]"
       *ngIf="isCarousel"
     >
-      <div style="display: inline-block; width: 50p;">
-        <img src="assets/images/info.svg" alt="" style="width:40px" />
+      <div style="display: inline-block; width: 40px;">
+        <img src="assets/images/info.svg" alt="" style="width:35px;padding: 0px;" />
       </div>
       More Details
     </span>

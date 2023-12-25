@@ -109,7 +109,7 @@ body {
   color: #ffffff;
   margin: 0px 40px;
   font-size: 2rem;
-  font-family: Monoton;
+  font-family: "Kanit", sans-serif;
   transition: all ease 0.3s;
 }
 .menu li a:hover {
@@ -120,8 +120,9 @@ body {
 
 li a {
   color: #ffffff;
-  font-family: Monoton;
+  font-family: "Kanit", sans-serif;
   transition: all ease 0.3s;
+  font-size: 1.2rem;
 }
 li a:hover {
   color: #e70634;
@@ -808,7 +809,7 @@ footer .logo {
 }
 .screenshots strong {
   color: #e70634;
-  font-family: Monoton;
+  font-family: "Kanit", sans-serif;
   font-size: 2rem;
   font-weight: 400;
 }

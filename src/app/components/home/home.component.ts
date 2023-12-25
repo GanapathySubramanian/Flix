@@ -10,7 +10,6 @@ import { forkJoin } from 'rxjs';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  topMoviesList: any[] = [];
   upcomingMovieList: any[] = [];
   trendingTvList: any[] = [];
 
@@ -51,10 +50,10 @@ export class HomeComponent implements OnInit {
       this.getUpcomingMovies();
       this.getTrendingAllByDays();
     }))
- 
+    this.trendingList.sort((a, b) => b.popularity - a.popularity);
   }
   getTrendingAllByDays() {
-  this.movieService.getTrendingALLByDay().subscribe((data)=>{
+  this.movieService.getTrendingALLByDay().subscribe((data)=>{    
     let temptvhsowList = data.results;
       temptvhsowList.forEach((movies: any, index: number) => {
         if (movies.backdrop_path !== null) {
@@ -75,25 +74,50 @@ export class HomeComponent implements OnInit {
   }
 
   getTrendingImages(movie: any) {
-    let tempimagesData: any;
-    this.movieService.getAllImages(movie.id).subscribe((data: any) => {
-      if (data.id === movie.id) {
-        tempimagesData = data;
-        let englishLogos: any[] = [];
-        if (tempimagesData.logos.length > 0) {
-          tempimagesData?.logos.forEach((logo: any) => {
-            if (logo.iso_639_1 == 'en') {
-              englishLogos.push(logo);
-            }
-          });
+    let tempimagesData: any;    
+    if(movie.media_type=='movie'){
+      this.movieService.getAllImages(movie.id).subscribe((data: any) => {
+        if (data.id === movie.id) {
+          tempimagesData = data;
+          let englishLogos: any[] = [];
+          if (tempimagesData.logos.length > 0) {
+            tempimagesData?.logos.forEach((logo: any) => {
+              if (logo.iso_639_1 == 'en') {
+                englishLogos.push(logo);
+              }
+            });
+          }
+          if (englishLogos.length > 0) {
+            movie.logoList = englishLogos[0];
+          }
+          this.trendingList.push(movie);
         }
-        if (englishLogos.length > 0) {
-          movie.logoList = englishLogos[0];
-        }
+      });
+    }else if(movie.media_type=='tv'){
+      this.movieService.getTvshowImages(movie.id).subscribe((data: any) => {
+        if (data.id === movie.id) {
+          tempimagesData = data;
+          let englishLogos: any[] = [];
+          if (tempimagesData.logos.length > 0) {
+            tempimagesData?.logos.forEach((logo: any) => {
+              if (logo.iso_639_1 == 'en') {
+                englishLogos.push(logo);
+              }
+            });
+          }
+          if (englishLogos.length > 0) {
+            movie.logoList = englishLogos[0];
+          }
+          this.trendingList.push(movie);
+          console.log(this.trendingList);
 
-        this.trendingList.push(movie);
-      }
-    });
+        }
+      });
+    }
+
+    
+    // this.trendingList = this.trendingList.sort()
+  
   }
 
   getTrendingShowInPrime() {

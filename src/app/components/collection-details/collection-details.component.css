@@ -77,7 +77,7 @@
   text-transform: uppercase;
   color: var(--dark-red);
   text-align: center;
-  font-family: Monoton;
+  font-family: "Kanit", sans-serif;
 }
 .tvshow {
   width: 300px;
