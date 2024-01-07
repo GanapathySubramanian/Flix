@@ -1,7 +1,6 @@
 <section class="lg-video-header font-kanit">
   <section class="showcase" *ngIf="background_video && playVideo">
     <div class="videoContainer text-white">
-
       <iframe
         frameborder="0"
         allowfullscreen="1"
@@ -82,7 +81,6 @@
   <section *ngIf="!playVideo">
     <div
       class="header"
-      id="i"
       [style.backgroundImage]="'url(' + data.background_image + ')'"
     ></div>
 
@@ -92,7 +90,6 @@
           <div
             *ngIf="data.poster_path == null; then thenBlock; else elseBlock"
           ></div>
-
           <ng-template #thenBlock
             ></ng-template>
           <ng-template #elseBlock
@@ -104,7 +101,7 @@
         </div>
       </div>
       <div class="overlay"></div>
-      <div class="right-content" style="margin-top: 100px">
+      <div class="right-content">
         <div class="home-slide-item-content">
           <div class="items">
             <div class="item-title">
@@ -224,22 +221,6 @@
               data-aos="fade-down"
             >
               <span *ngIf="data?.networks?.length > 0"> Streaming On : </span>
-              <!-- <span
-                *ngFor="let stream of data.networks; let i = index"
-                class="pl-2"
-              >
-                <span *ngIf="stream.logo_path">
-                  <img
-                    src="{{ highQualityImgUrl + stream.logo_path }}"
-                    class="network-img"
-                    style="width: 100px; height: 40px; margin: 10px"
-                  />
-                </span>
-                <span *ngIf="!stream.logo_path">
-                  <span>{{ stream.name }}</span>
-                  <span *ngIf="data.networks.length != i + 1"> , </span>
-                </span>
-              </span> -->
               <span
                 *ngFor="let stream of data.networks; let i = index"
                 class="pl-2"
@@ -358,7 +339,8 @@
               class="wrapper-watchnow mt-4 "
               style="cursor: pointer"
               data-aos="fade-down"
-            >
+              *ngIf="data.name || data.title || data.original_title"
+              >
               <span
                 class="play playBut"
                 *ngIf="inWatchList"
@@ -560,9 +542,9 @@
       ></ngb-rating>
     </div>
 
-    <div class=" m-2 text-white text-center " data-aos="fade-down">
+    <div class="m-2 text-white text-center" data-aos="fade-down">
       <h5 style="color: red">Overview</h5>
-      <span style="font-size: 13px;">{{ data.overview }}</span>
+      <span style="font-size: 13px;text-wrap: balance;">{{ data.overview }}</span>
     </div>
     <div
       class=" m-2 text-white text-center"
@@ -640,9 +622,10 @@
 
     <div
       class="wrapper-watchnow mt-4 "
-      style="cursor: pointer"
+      style="cursor: pointer;display: flex; justify-content: center"
       data-aos="fade-down"
-    >
+      *ngIf="data.name || data.title || data.original_title"
+          >
       <span
         class="play playBut"
         *ngIf="inWatchList"

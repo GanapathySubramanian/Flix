@@ -111,6 +111,7 @@
   pointer-events: none;
   opacity: 1;
   transition: opacity 250ms 700ms ease;
+  z-index: 9999999;
 }
 .modal-btn ~ .modal {
   pointer-events: auto;
