@@ -303,9 +303,14 @@ path.two {
     display: none;
   }
 }
-
+.tvshow-content{
+  margin-top: 120px;
+}
 /* for mobile */
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1050px) {
+  .tvshow-content{
+    margin-top: -100px;
+  }
   .tr-overview {
     display: contents;
   }
@@ -341,9 +346,13 @@ path.two {
   .tvshow-poster-img img:hover {
     transform: scale(1.35) rotateZ(5deg);
   }
+
 }
 
 @media only screen and (max-width: 600px) {
+  .tvshow-content{
+    margin-top: 100px;
+  }
   #tvshow-logo {
     width: 70%;
     height: 100%;
