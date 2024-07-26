@@ -28,8 +28,7 @@ export const URL_CONSTANTS = {
     GET_TVSHOW_VIDEOS_BY_ID: (id: number) => `${TVSHOW_DETAILS_BASE_URL}${id}/videos?${API_KEY}`,
     GET_TVSHOW_IMAGES_BY_SEASON_ID: (tvshowId: number,seasonId:number,episodeId:number) => `${TVSHOW_DETAILS_BASE_URL}${tvshowId}/season/${seasonId}/episode/${episodeId}/images?${API_KEY}`,
     GET_TVSHOW_REVIEWS_BY_ID: (id: number) => `${TVSHOW_DETAILS_BASE_URL}${id}/reviews?${API_KEY}`,
-    GET_TVSHOW_CREDITS_BY_ID: (id: number) => `${TVSHOW_DETAILS_BASE_URL}/${id}/credits?${API_KEY}`,
-    GET_TVSHOW_SIMILAR_BY_ID: (id: number) => `${TVSHOW_DETAILS_BASE_URL}/${id}/similar?${API_KEY}`,
-    GET_TVSHOW_RECOMMENDED_BY_ID: (id: number) => `${TVSHOW_DETAILS_BASE_URL}/${id}/recommendations?${API_KEY}`,
-
+    GET_TVSHOW_CREDITS_BY_ID: (id: number) => `${TVSHOW_DETAILS_BASE_URL}${id}/credits?${API_KEY}`,
+    GET_TVSHOW_SIMILAR_BY_ID: (id: number) => `${TVSHOW_DETAILS_BASE_URL}${id}/similar?${API_KEY}`,
+    GET_TVSHOW_RECOMMENDED_BY_ID: (id: number) => `${TVSHOW_DETAILS_BASE_URL}${id}/recommendations?${API_KEY}`,
 };
