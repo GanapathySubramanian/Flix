@@ -1,51 +1,34 @@
 <h4 class="movie-heading mt-5">
   PUBLIC REVIEWS
 </h4>
- <div
-  *ngIf="data.reviewList?.length <= 0; then noreviewBlock; else reviewBlock"
-></div>
+<div *ngIf="data.reviewList?.length <= 0; then noreviewBlock; else reviewBlock"></div>
 <ng-template #reviewBlock>
-  <section class="review-section" >
-    
-    <div class="review-container mt-4" *ngFor="let rev of data.reviewList; let i = index" style="width: 100%;
-    padding: 20px;
-    border: 1px solid red;
-    border-radius: 8px;">
-        <div class="d-flex">
+  <section class="review-section">
+    <div class="review-container mt-4" *ngFor="let rev of data.reviewList; let i = index">
+      <div class="review-card">
+        <div class="d-flex align-items-start">
           <div class="author-image">
             <span *ngIf="rev.author_details.avatar_path">
-              <img [src]="rev.author_details.avatar_path"  alt=""  style="width:50px;height:50px;border-radius: 100%;">
+              <img [src]="rev.author_details.avatar_path" alt="" class="avatar">
             </span>
             <span *ngIf="!rev.author_details.avatar_path">
-              <div class="circle" style="border-radius: 50%;
-              width: 50px;
-              height: 50px;
-              padding: 10px;
-              
-              border: 3px solid #000;
-              color: #000;
-              text-align: center;"
-              [style.backgroundColor]="bgColor"
-              >{{rev?.author[0]}}</div>
+              <div class="circle" [style.backgroundColor]="bgColor">
+                {{ rev?.author[0] }}
+              </div>
             </span>
           </div>
-          <div class="review-details" style="margin-left:30px">
-            <span>A review by <span style="color:orange">{{rev.author}}</span>
-            <span style="
-            margin-left:10px;
-            background: red;
-            color: #fff;
-            border-radius: 8px;
-            font-size: 10px;
-            padding: 2px;"> 
-            <i class="fa-solid fa-star"></i> {{rev.author_details.rating}}
-
-            </span>
-          </span>
-            <p style="font-size:12px;">Written by {{rev.author}} on {{rev.created_at | date}}</p>
-            <p style="font-size: 13px;">{{rev.content}}</p>
+          <div class="review-details ml-3">
+            <div class="review-header">
+              <span class="review-author">A review by <span class="author-name">{{ rev.author }}</span></span>
+              <span class="review-rating">
+                <i class="fa-solid fa-star"></i> {{ rev.author_details.rating }}
+              </span>
+            </div>
+            <p class="review-date">Written by {{ rev.author }} on {{ rev.created_at | date }}</p>
+            <p class="review-content">{{ rev.content }}</p>
           </div>
         </div>
+      </div>
     </div>
   </section>
 </ng-template>
@@ -55,4 +38,4 @@
       Reviews Not available For {{ data.original_title }}
     </h5>
   </div>
-</ng-template> 
+</ng-template>
