@@ -10,7 +10,7 @@
       </carousel>
   </ng-container>
 </div> -->
-<div class="tvshows-section mt-5">
+<div class="tvshows-section mt-5" >
   <nav
     class="navbar navbar-expand navbar-light"
     aria-label="Second navbar example"
@@ -20,6 +20,7 @@
       margin-right: 20px;
       z-index: 1000000;
     "
+    *ngIf="tvshowList.length > 0"
   >
     <div class="container-fluid">
       <div class="collapse navbar-collapse" id="navbarsExample02">
@@ -185,7 +186,7 @@
     </div>
   </nav>
 
-  <div class="sm-search">
+  <div class="sm-search" *ngIf="tvshowList.length > 0">
     <form
       action=""
       class="search-box"
@@ -237,7 +238,7 @@
     <app-dark-toggle [cmp]="component"></app-dark-toggle>
   </span> -->
 
-  <div class="tvshow-filter-details">
+  <div class="tvshow-filter-details" *ngIf="tvshowList.length > 0">
     <h5 class="text-center filtered-value font-kanit">{{ sortby_value | uppercase }}</h5>
     <h5 class="text-center filtered-value font-kanit">{{ genre_value | uppercase }}</h5>
     <h5 class="text-center filtered-value font-kanit" *ngIf="network_value != ''">
@@ -266,7 +267,7 @@
     </div>
   </main>
 
-  <div class="pagination" id="pagination">
+  <div class="pagination" id="pagination" *ngIf="tvshowList.length > 0">
     <button
       class="btn"
       id="prev"

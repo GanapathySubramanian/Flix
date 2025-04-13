@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import myAppConfig from 'src/app/core/config/my-app-config';
 import { MoviesService } from 'src/app/core/services/movies.service';
 import { TvshowsService } from 'src/app/core/services/tvshows.service';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Observable, of } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -37,87 +38,140 @@ export class HomeComponent implements OnInit {
     forkJoin([
       this.movieService.getGenreList(),
       this.tvshowService.getGenreList()
-    ]).subscribe((([movieGenres, tvshowGenres])=>{
-      genrearr.push(...movieGenres);
-      genrearr.push(...tvshowGenres);
+    ]).subscribe({
+      next: (([movieGenres, tvshowGenres]: [any[], any[]]) => {
+        genrearr.push(...movieGenres);
+        genrearr.push(...tvshowGenres);
 
-      this.genreList = genrearr.filter(
-        (arr, index, self) => index === self.findIndex((t) => t.id === arr.id)
-      );
-      this.getTrendingShowInPrime();
-      this.getTrendingShowInNetflix();
-      this.getTopGrossingMovies();
-      this.getUpcomingMovies();
-      this.getTrendingAllByDays();
-    }))
-    this.trendingList.sort((a, b) => b.popularity - a.popularity);
+        this.genreList = genrearr.filter(
+          (arr, index, self) => index === self.findIndex((t) => t.id === arr.id)
+        );
+        
+        // Load data sequentially to prevent overwhelming the browser
+        this.getTrendingShowInPrime();
+        setTimeout(() => this.getTrendingShowInNetflix(), 100);
+        setTimeout(() => this.getTopGrossingMovies(), 200);
+        setTimeout(() => this.getUpcomingMovies(), 300);
+        setTimeout(() => this.getTrendingAllByDays(), 400);
+      }),
+      error: (err: any) => {
+        console.error('Error fetching genre data:', err);
+      }
+    });
+    
+    // Remove premature sorting - this will be done after data is loaded
   }
   getTrendingAllByDays() {
-  this.movieService.getTrendingALLByDay().subscribe((data)=>{    
-    let temptvhsowList = data.results;
-      temptvhsowList.forEach((movies: any, index: number) => {
-        if (movies.backdrop_path !== null) {
-          movies.background_image =
-            this.highQualityImgUrl + movies.backdrop_path;
-          movies.no_animation = true;
-          let m_genres: any[] = [];
-          movies.genre_ids.forEach((genre: any) => {
-            m_genres.push(this.genreList.find((o) => o.id === genre));
-          });
-          movies.genre_ids = m_genres;
-          if (movies) {
-            this.getTrendingImages(movies)
-          }
+    // Clear the list first to prevent duplicate additions
+    this.trendingList = [];
+    
+    // Create a temporary array for processing
+    let tempTrendingList: any[] = [];
+    
+    // First, get the trending data
+    this.movieService.getTrendingALLByDay().pipe(
+      tap((data: any) => {
+        // Process all items but don't add to trendingList yet
+        tempTrendingList = this.processTrendingDataToArray(data.results);
+      }),
+      switchMap((data: any) => {
+        // Only fetch additional image data for the first 5 items (visible in carousel)
+        const visibleItems = data.results
+          .filter((movie: any) => movie.backdrop_path !== null)
+          .slice(0, 5);
+        
+        // If no items need additional data, return empty array
+        if (visibleItems.length === 0) {
+          return of([]);
         }
-      });
-  })  
+        
+        // Create observables for movie image requests
+        const movieRequests = visibleItems
+          .filter((item: any) => item.media_type === 'movie')
+          .map((movie: any) => this.movieService.getAllImages(movie.id).pipe(
+            map((imageData: any) => ({ movie, imageData }))
+          ));
+        
+        // Create observables for TV show image requests
+        const tvRequests = visibleItems
+          .filter((item: any) => item.media_type === 'tv')
+          .map((tvshow: any) => this.movieService.getTvshowImages(tvshow.id).pipe(
+            map((imageData: any) => ({ movie: tvshow, imageData }))
+          ));
+        
+        // Combine all requests into a single observable that emits when all are complete
+        return forkJoin([...movieRequests, ...tvRequests]);
+      })
+    ).subscribe({
+      next: (results: any[]) => {
+        // Process the batch results
+        results.forEach(({ movie, imageData }: { movie: any, imageData: any }) => {
+          // Find the movie in our temp list and update it
+          const existingMovie = tempTrendingList.find((m: any) => m.id === movie.id);
+          if (existingMovie && imageData && imageData.logos) {
+            this.processImageDataForMovie(existingMovie, imageData);
+          }
+        });
+        
+        // Only now assign to the actual trendingList
+        this.trendingList = [...tempTrendingList];
+        
+        // Sort the list after all items are added
+        this.trendingList.sort((a: any, b: any) => b.popularity - a.popularity);
+      },
+      error: (err: any) => {
+        console.error('Error fetching trending data:', err);
+        // Ensure trendingList has some value even on error
+        if (!this.trendingList.length) {
+          this.trendingList = [];
+        }
+      }
+    });
   }
 
-  getTrendingImages(movie: any) {
-    let tempimagesData: any;    
-    if(movie.media_type=='movie'){
-      this.movieService.getAllImages(movie.id).subscribe((data: any) => {
-        if (data.id === movie.id) {
-          tempimagesData = data;
-          let englishLogos: any[] = [];
-          if (tempimagesData.logos.length > 0) {
-            tempimagesData?.logos.forEach((logo: any) => {
-              if (logo.iso_639_1 == 'en') {
-                englishLogos.push(logo);
-              }
-            });
-          }
-          if (englishLogos.length > 0) {
-            movie.logoList = englishLogos[0];
-          }
-          this.trendingList.push(movie);
+  // New helper method that returns processed data instead of modifying trendingList
+  private processTrendingDataToArray(items: any[]): any[] {
+    const result: any[] = [];
+    
+    items.forEach((movie: any) => {
+      if (movie.backdrop_path !== null) {
+        const processedMovie = { ...movie }; // Create a copy to avoid reference issues
+        processedMovie.background_image = this.highQualityImgUrl + movie.backdrop_path;
+        processedMovie.no_animation = true;
+        
+        // Process genre data
+        let m_genres: any[] = [];
+        if (processedMovie.genre_ids) {
+          processedMovie.genre_ids.forEach((genre: any) => {
+            const foundGenre = this.genreList.find((o) => o.id === genre);
+            if (foundGenre) {
+              m_genres.push(foundGenre);
+            }
+          });
+          processedMovie.genre_ids = m_genres;
         }
-      });
-    }else if(movie.media_type=='tv'){
-      this.movieService.getTvshowImages(movie.id).subscribe((data: any) => {
-        if (data.id === movie.id) {
-          tempimagesData = data;
-          let englishLogos: any[] = [];
-          if (tempimagesData.logos.length > 0) {
-            tempimagesData?.logos.forEach((logo: any) => {
-              if (logo.iso_639_1 == 'en') {
-                englishLogos.push(logo);
-              }
-            });
-          }
-          if (englishLogos.length > 0) {
-            movie.logoList = englishLogos[0];
-          }
-          this.trendingList.push(movie);
-          console.log(this.trendingList);
+        
+        // Add to result array
+        result.push(processedMovie);
+      }
+    });
+    
+    return result;
+  }
 
+  // New helper method to process image data for a specific movie
+  private processImageDataForMovie(movie: any, imageData: any): void {
+    let englishLogos: any[] = [];
+    if (imageData.logos && imageData.logos.length > 0) {
+      imageData.logos.forEach((logo: any) => {
+        if (logo.iso_639_1 === 'en') {
+          englishLogos.push(logo);
         }
       });
     }
-
-    
-    // this.trendingList = this.trendingList.sort()
-  
+    if (englishLogos.length > 0) {
+      movie.logoList = englishLogos[0];
+    }
   }
 
   getTrendingShowInPrime() {

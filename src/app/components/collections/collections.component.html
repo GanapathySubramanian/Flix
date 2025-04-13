@@ -36,7 +36,7 @@
           class="navbar-nav me-auto"
           [ngStyle]="{ visibility: isHideDrop ? 'hidden' : 'visible' }"
         ></ul>
-        <div class="lg-search mt-2">
+        <div class="lg-search mt-2" *ngIf="movieList.length > 0">
           <form
             action=""
             class="search-box"
@@ -92,7 +92,7 @@
     </div>
   </nav>
 
-  <div class="sm-search" style="z-index: 100000000000; position: relative">
+  <div class="sm-search" style="z-index: 100000000000; position: relative" *ngIf="movieList.length > 0">
     <form
       action=""
       class="search-box"

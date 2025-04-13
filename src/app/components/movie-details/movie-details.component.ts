@@ -33,7 +33,7 @@ export class MovieDetailsComponent implements OnInit {
 
     this.movieDetails.crewList = [];
     this.router?.navigateByUrl('/moviedetails/' + movie_id);
-    this.getMovieDetails(movie_id);
+    // Don't call getMovieDetails here - will be called in ngOnInit
   }
   ngOnInit(): void {
     const id = this.route.snapshot?.params['id'];
@@ -115,7 +115,7 @@ export class MovieDetailsComponent implements OnInit {
         const random = Math.floor(Math.random() * allImages.backdrops.length);
         this.movieDetails.background_image =
           this.highqualityImgUrl + allImages.backdrops[random].file_path;
-      }, 5000);
+      }, 30000);
     }
 
     //Movie Posters Images

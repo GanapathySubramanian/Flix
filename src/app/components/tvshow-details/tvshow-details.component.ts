@@ -22,6 +22,7 @@ export class TvshowDetailsComponent implements OnInit {
   windowScrolled: boolean = false;
   background_video: any;
   background_video_type: any;
+  isLoading: boolean = true;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -31,8 +32,7 @@ export class TvshowDetailsComponent implements OnInit {
     let id = this.route.snapshot.params['id'];
     tvshow_id = id;
     this.router.navigateByUrl('/tvshowdetails/' + tvshow_id);
-
-    this.getTvshowDetails(tvshow_id);
+    // Don't call getTvshowDetails here - will be called in ngOnInit
   }
 
   ngOnInit(): void {
@@ -45,6 +45,8 @@ export class TvshowDetailsComponent implements OnInit {
   }
 
   getTvshowDetails(tvshow_id: number) {
+    this.isLoading = true;
+    
     forkJoin([
       this.tvshowservice.gettvshowDetails(tvshow_id),
       this.tvshowservice.getAllImages(tvshow_id),
@@ -53,8 +55,8 @@ export class TvshowDetailsComponent implements OnInit {
       this.tvshowservice.getSimilartvshows(tvshow_id),
       this.tvshowservice.getRecommendedtvshows(tvshow_id),
       this.tvshowservice.getVideos(tvshow_id),
-    ]).subscribe(
-      ([
+    ]).subscribe({
+      next: ([
         tvshowDetails,
         images,
         reviews,
@@ -94,8 +96,14 @@ export class TvshowDetailsComponent implements OnInit {
         if (videos.results.length > 0) {
           this.setVideoDetails(videos);
         }
+        
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error('An error occurred while loading TV show data:', err);
+        this.isLoading = false;
       }
-    );
+    });
   }
   setTvshowDetails(tvshowDetails:any){
      //Default Tvshow Details
@@ -173,7 +181,7 @@ export class TvshowDetailsComponent implements OnInit {
         );
         this.tvshowDetails.background_image =
           this.highqualityImgUrl + images.backdrops[random].file_path;
-      }, 5000);
+      }, 30000);
     }
 
     //Tvshow Posters Images

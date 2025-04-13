@@ -1,98 +1,90 @@
 
+<div class="page-container">
+  <nav
+    class="navigation navbar navbar-expand navbar-dark shadow-5-strong"
+    [attr.style]="lapdevice ? 'margin-top: -40px' : ''"
+  >
+    <!--menu-btn--------------->
+    <ng-container *ngIf="mobiledevice">
+      <input type="checkbox" class="menu-btn" id="menu-btn" />
+      <label for="menu-btn" class="menu-icon">
+        <span class="nav-icon"></span> </label
+    ></ng-container>
 
-<nav
-  class="navigation navbar navbar-expand navbar-dark shadow-5-strong"
-  [attr.style]="lapdevice ? 'margin-top: -40px' : ''"
->
-  <!--menu-btn--------------->
-  <ng-container *ngIf="mobiledevice">
-    <input type="checkbox" class="menu-btn" id="menu-btn" />
-    <label for="menu-btn" class="menu-icon">
-      <span class="nav-icon"></span> </label
-  ></ng-container>
-
-  <!--logo------------------->
-  <a href="index.html" class="logo"> FLIX<span>HD</span> </a>
-  <!--menu------------------->
-  <ul class="menu">
-    <li><a href="">Home</a></li>
-    <li><a routerLink="/movies" routerLinkActive="active">Movies</a></li>
-    <li><a routerLink="/tvshows" routerLinkActive="active">TV Shows</a></li>
-    <li>
-      <a routerLink="/collections" routerLinkActive="active">Collections</a>
-    </li>
-    <li><a routerLink="/peoples" routerLinkActive="active">Peoples</a></li>
-    <li><a routerLink="/mylist" routerLinkActive="active">MyList</a></li>
-  </ul>
-  <div class="container-fluid show-right-nav">
-    <div class="collapse navbar-collapse" id="navbarsExample02">
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="">HOME</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/movies" routerLinkActive="active"
-              >MOVIES</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/tvshows" routerLinkActive="active"
-              >TVSHOWS</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              routerLink="/collections"
-              routerLinkActive="active"
-              >COLLECTIONS</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/peoples" routerLinkActive="active"
-              >PEOPLES</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/mylist" routerLinkActive="active"
-              >MYLIST</a
-            >
-          </li>
-        </ul>
+    <!--logo------------------->
+    <a href="index.html" class="logo"> FLIX<span>HD</span> </a>
+    <!--menu------------------->
+    <ul class="menu">
+      <li><a href="">Home</a></li>
+      <li><a routerLink="/movies" routerLinkActive="active">Movies</a></li>
+      <li><a routerLink="/tvshows" routerLinkActive="active">TV Shows</a></li>
+      <li>
+        <a routerLink="/collections" routerLinkActive="active">Collections</a>
+      </li>
+      <li><a routerLink="/peoples" routerLinkActive="active">Peoples</a></li>
+      <li><a routerLink="/mylist" routerLinkActive="active">MyList</a></li>
+    </ul>
+    <div class="container-fluid show-right-nav">
+      <div class="collapse navbar-collapse" id="navbarsExample02">
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/movies" routerLinkActive="active"
+                >MOVIES</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/tvshows" routerLinkActive="active"
+                >TVSHOWS</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                routerLink="/collections"
+                routerLinkActive="active"
+                >COLLECTIONS</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/peoples" routerLinkActive="active"
+                >PEOPLES</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/mylist" routerLinkActive="active"
+                >MYLIST</a
+              >
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
+  </nav>
+  <div id="progress" style="cursor: pointer">
+    <span id="progress-value" (click)="scrollToTop()" style="color: red">
+      <i class="fa-solid fa-arrow-up"></i>
+    </span>
   </div>
-</nav>
-<div id="progress" style="cursor: pointer">
-  <span id="progress-value" (click)="scrollToTop()" style="color: red">
-    <i class="fa-solid fa-arrow-up"></i>
-  </span>
-</div>
 
+  <div class="content-wrap">
+    <div class="main-content" *ngIf="!splashScreen">
+      <router-outlet (activate)="onActivate($event)"></router-outlet>
+    </div>
 
-
-
-<div class="main-content" *ngIf="!splashScreen">
-  <router-outlet (activate)="onActivate($event)"></router-outlet>
-</div>
-
-<div class="app-loading" *ngIf="splashScreen" style="height:85vh">
-  <div class="logo">
-    <!-- <img src="assets/images/logo.svg" alt=""> -->
+    <app-loader *ngIf="splashScreen" type="spinner" height="85vh"></app-loader>
   </div>
-  <svg class="spinner" viewBox="25 25 50 50" stroke="red">
-    <circle class="path" cx="50" cy="50" r="20" stroke="red" fill="none" stroke-width="1" stroke-miterlimit="10" />
-  </svg>
-</div> 
-<!--==footer==============================-->
-<footer style="margin-top: 30px" *ngIf="!splashScreen">
-  <!--footer-logo--->
-  <a href="index.html" class="logo"> FLIX<span>hd</span> </a>
-  <!--copyright----->
-  <span class="copyright">
-    Copyright 2023 - Done By Ganapathy Subramanian ❤️
-  </span>
-</footer>
-
-
+  
+  <!--==footer==============================-->
+  <footer *ngIf="!splashScreen">
+    <!--footer-logo--->
+    <a href="index.html" class="logo"> FLIX<span>hd</span> </a>
+    <!--copyright----->
+    <span class="copyright">
+      Copyright 2023 - Done By Ganapathy Subramanian ❤️
+    </span>
+  </footer>
+</div>

@@ -1,4 +1,6 @@
-<div class="tvshow-details">
+<app-loader *ngIf="isLoading"></app-loader>
+
+<div class="tvshow-details" *ngIf="!isLoading">
   <section class="header">
     <app-video-header
       [data]="tvshowDetails"

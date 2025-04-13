@@ -76,7 +76,6 @@ export class VideoHeaderComponent implements OnInit {
       '{"event":"command","func":"playVideo","args":""}',
       '*'
     );
-    console.log('playing trailer...');
   }
   stopTrailer() {
     this.playVideo = false;
@@ -84,8 +83,6 @@ export class VideoHeaderComponent implements OnInit {
       '{"event":"command","func":"pauseVideo","args":""}',
       '*'
     );
-    console.log('stop trailer...');
-
   }
   addTowatchList(result: any) {
     let movieTvShowDetail = {

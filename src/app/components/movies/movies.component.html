@@ -34,6 +34,7 @@
       margin-right: 20px;
       z-index: 100000000;
     "
+    *ngIf="movieList.length > 0"
   >
     <div class="container-fluid">
       <div class="collapse navbar-collapse" id="navbarsExample02">
@@ -202,7 +203,7 @@
     </div>
   </nav>
 
-  <div class="sm-search">
+  <div class="sm-search" *ngIf="movieList.length > 0">
     <!-- <form id="form" [formGroup]="searchForm" (ngSubmit)="getSearchContent()">
       <input
         type="text"

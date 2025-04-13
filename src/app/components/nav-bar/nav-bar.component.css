@@ -310,24 +310,12 @@ li a:hover {
   top: 0px;
   transition: all ease 0.3s;
 }
-.swiper-button-next,
-.swiper-button-prev {
-  position: static !important;
-  transform: translate(0, 0);
-  margin: 10px 0px 0px 20px !important;
-}
 .slider-btns {
   display: flex;
   justify-content: flex-end;
   max-width: 1170px;
   width: 100%;
   margin: 10px auto 0px auto;
-}
-.swiper-button-next::after,
-.swiper-button-prev::after {
-  font-size: 25px !important;
-  font-weight: 800;
-  color: #ffffff;
 }
 /*==Latest===================================*/
 #latest {
@@ -404,6 +392,7 @@ footer {
   justify-content: space-between;
   align-items: center;
   padding: 10px 10%;
+  margin-top: 0; /* Ensure no top margin since we're using flexbox for spacing */
 }
 footer .copyright {
   color: #4d4d4d;
@@ -926,7 +915,20 @@ footer .logo {
 
 body, html {
   height: 100%;
+  margin: 0;
 }
+
+/* Sticky footer styles */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Full viewport height */
+}
+
+.content-wrap {
+  flex: 1; /* This will make it expand to fill available space */
+}
+
 .app-loading {
   position: relative;
   display: flex;
