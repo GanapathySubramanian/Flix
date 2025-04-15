@@ -1,0 +1,175 @@
+.latest-trailers-section {
+  margin: 40px 0;
+  padding: 0 20px;
+  color: #fff;
+}
+
+.section-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #e50914; /* Netflix red color */
+}
+
+.category-tabs {
+  display: flex;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  padding-bottom: 15px;
+  -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
+  scrollbar-width: none;  /* Hide scrollbar for Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.category-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.category-tabs button {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  color: #fff;
+  cursor: pointer;
+  margin-right: 15px;
+  padding: 8px 20px;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.category-tabs button.active {
+  background-color: #e50914; /* Netflix red color */
+  border-color: #e50914;
+  color: #fff;
+}
+
+.category-tabs button:hover:not(.active) {
+  background-color: rgba(255, 0, 0, 0.2);
+}
+
+.trailers-container {
+  position: relative;
+  min-height: 200px;
+}
+
+.trailers-list {
+  display: flex;
+  overflow-x: auto;
+  padding: 10px 0;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
+  scrollbar-width: none;  /* Hide scrollbar for Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.trailers-list::-webkit-scrollbar {
+  display: none;
+}
+
+.trailer-item {
+  flex: 0 0 auto;
+  margin-right: 20px;
+  width: 300px;
+  position: relative;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.trailer-thumbnail {
+  width: 100%;
+  height: 169px; /* 16:9 aspect ratio for 300px width */
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.play-button-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.play-button-svg {
+  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.5));
+  transition: transform 0.3s ease;
+  opacity: 0.8;
+}
+
+.play-button-overlay:hover .play-button-svg {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.trailer-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  border-top: 4px solid #e50914; /* Netflix red color */
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.error-text {
+  color: #ff4d4d;
+  text-align: center;
+}
+
+.no-trailers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  width: 100%;
+  color: #999;
+  text-align: center;
+  font-style: italic;
+}
+
+/* Modal styles have been removed as we're using the app-pop-up-modal component */

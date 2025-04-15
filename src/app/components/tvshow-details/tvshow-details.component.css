@@ -57,7 +57,10 @@
   margin-left: 2%;
   margin-right: 2%;
   color: var(--base-white);
-  margin-top: 120px;
+  padding-top: 20px;
+  position: relative;
+  z-index: 2; /* Higher z-index to ensure it appears above the header */
+  background-color: var(--base-black); /* Ensure background color for content */
 }
 .details-table {
   margin-left: 10%;
@@ -263,12 +266,11 @@ path.two {
   /* Banner Section Start */
 
   .header {
-    min-height: 780px;
+    height: 100vh;
     width: 100%;
     top: -10px;
     position: relative;
     transition: 2s ease all;
-
   }
 
   .tvshow-info {
@@ -381,4 +383,3 @@ path.two {
   flex-direction: column;
   text-shadow: -1px 5px 8px black;
 }
-

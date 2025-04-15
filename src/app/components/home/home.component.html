@@ -27,22 +27,49 @@
   </ng-container>
 </div>
 
-<app-trending-backdrops
-  [title]="trendingMoviesTitle"
-  [trendingList]="upcomingMovieList"
-></app-trending-backdrops>
+<!-- Latest Trailers Section -->
+<app-latest-trailers></app-latest-trailers>
 
-<app-trending-backdrops
-  [title]="trendingTvshowsTitleInNetflix"
-  [trendingList]="trendingInNetflix"
-></app-trending-backdrops>
-
-<app-trending-backdrops
-  [title]="trendingTvshowsTitleInAmazon"
-  [trendingList]="trendingInPrime"
-></app-trending-backdrops>
-
-<app-trending-backdrops 
-  [title]="topGrossingMovies"
-  [trendingList]="topGrossingMoviesList"
-></app-trending-backdrops>
+<!-- Trending Categories Section -->
+<div class="trending-categories-section">
+  <h2 class="section-title">Trending Categories</h2>
+  
+  <div class="category-tabs">
+    <button 
+      *ngFor="let category of trendingCategories" 
+      [class.active]="activeTrendingCategory === category.id"
+      (click)="changeTrendingCategory(category.id)">
+      {{ category.name }}
+    </button>
+  </div>
+  
+  <div class="trending-container">
+    <!-- Upcoming Movies section -->
+    <app-trending-backdrops
+      *ngIf="activeTrendingCategory === 'upcoming'"
+      [title]="trendingMoviesTitle"
+      [trendingList]="upcomingMovieList"
+    ></app-trending-backdrops>
+    
+    <!-- Netflix section -->
+    <app-trending-backdrops
+      *ngIf="activeTrendingCategory === 'netflix'"
+      [title]="trendingTvshowsTitleInNetflix"
+      [trendingList]="trendingInNetflix"
+    ></app-trending-backdrops>
+    
+    <!-- Amazon section -->
+    <app-trending-backdrops
+      *ngIf="activeTrendingCategory === 'amazon'"
+      [title]="trendingTvshowsTitleInAmazon"
+      [trendingList]="trendingInPrime"
+    ></app-trending-backdrops>
+    
+    <!-- Top Grossing section -->
+    <app-trending-backdrops 
+      *ngIf="activeTrendingCategory === 'topGrossing'"
+      [title]="topGrossingMovies"
+      [trendingList]="topGrossingMoviesList"
+    ></app-trending-backdrops>
+  </div>
+</div>

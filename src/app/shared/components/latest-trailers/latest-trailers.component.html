@@ -1,0 +1,81 @@
+<div class="latest-trailers-section">
+  <h2 class="section-title">Latest Trailers</h2>
+  
+  <div class="category-tabs">
+    <button 
+      *ngFor="let category of categories" 
+      [class.active]="activeCategory === category.id"
+      (click)="changeCategory(category.id)">
+      {{ category.name }}
+    </button>
+  </div>
+  
+  <div class="trailers-container">
+    <!-- Loading indicator -->
+    <div class="loading-container" *ngIf="loading">
+      <div class="spinner"></div>
+      <p>Loading trailers...</p>
+    </div>
+    
+    <!-- Error message -->
+    <div class="error-container" *ngIf="error">
+      <p class="error-text">{{ error }}</p>
+    </div>
+    
+    <!-- Trailers list -->
+    <div class="trailers-list" *ngIf="!loading && !error">
+      <ng-container *ngIf="trailers.length > 0; else noTrailers">
+        <div *ngFor="let trailer of trailers" class="trailer-item">
+          <div class="video-container">
+            <img [src]="trailer.videoThumbnail" alt="{{trailer.title}}" class="trailer-thumbnail">
+            <div class="play-button-overlay" (click)="openTrailer(trailer)">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="48"
+                height="48"
+                viewBox="0 0 55 55"
+                class="play-button-svg"
+              >
+                <circle
+                  cx="27.5"
+                  cy="27.5"
+                  r="26.75"
+                  fill="none"
+                  stroke="#fff"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                ></circle>
+                <path
+                  fill="none"
+                  stroke="#fff"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M20.97 40.81L40.64 27.5 20.97 14.19v26.62z"
+                ></path>
+              </svg>
+            </div>
+            <div class="trailer-title">{{trailer.title}}</div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #noTrailers>
+        <div class="no-trailers">
+          <p>No trailers available for this category.</p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  
+  <!-- Use the existing pop-up modal component -->
+  <ng-container *ngIf="openPopUp">
+    <app-pop-up-modal
+      [openModal]="openPopUp"
+      [data]="selectedTrailer"
+      [isImage]="false"
+      [isVideo]="true"
+      (resetData)="resetData($event)"
+    ></app-pop-up-modal>
+  </ng-container>
+</div>

@@ -5,6 +5,61 @@
     display: none;
   }
 }
+
+/* Trending Categories Section Styles */
+.trending-categories-section {
+  margin: 40px 0;
+  padding: 0 20px;
+  color: #fff;
+}
+
+.section-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #e50914; /* Netflix red color */
+}
+
+.category-tabs {
+  display: flex;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  padding-bottom: 15px;
+  -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
+  scrollbar-width: none;  /* Hide scrollbar for Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.category-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.category-tabs button {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  color: #fff;
+  cursor: pointer;
+  margin-right: 15px;
+  padding: 8px 20px;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.category-tabs button.active {
+  background-color: #e50914; /* Netflix red color */
+  border-color: #e50914;
+  color: #fff;
+}
+
+.category-tabs button:hover:not(.active) {
+  background-color: rgba(255, 0, 0, 0.2);
+}
+
+.trending-container {
+  min-height: 200px;
+}
 @media only screen and (max-width: 600px) {
   .search-list {
     position: absolute;

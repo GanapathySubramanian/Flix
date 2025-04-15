@@ -133,7 +133,7 @@ path.two {
     right: 0;
     bottom: 0;
     left: 0;
-    height: 890px;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.7);
     transition: background-color 2s;
   }
@@ -141,7 +141,7 @@ path.two {
   /* Banner Section Start */
 
   .header {
-    min-height: 900px;
+    height: 100vh; /* Change from min-height to exact height */
     width: 100%;
     top: -10px;
     position: relative;
@@ -313,14 +313,14 @@ path.two {
     display: none;
   }
   .overlay {
-    display: none;
-  }
-  .watchnow-btn {
-    display: block;
-  }
-  .wrapper-watchnow {
-    display: flex;
-    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100vh; /* Match the header height */
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: background-color 2s;
   }
   .header-poster-img {
     display: block;
@@ -404,7 +404,7 @@ svg#playBtn {
   position: absolute;
   right: 0;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh; /* Ensure exact viewport height */
   padding: 100px;
   display: flex;
   justify-content: space-between;
@@ -524,4 +524,42 @@ iframe {
 
 .color-red {
   color: #e50914;
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 50px;
+  border: 2px solid #fff;
+  border-radius: 15px;
+  z-index: 10;
+  opacity: 0.7;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.scroll-indicator:hover {
+  opacity: 1;
+}
+
+.scroll-indicator::before {
+  content: '';
+  position: absolute;
+  bottom: 8px; /* Changed from top to bottom */
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background: #fff;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  animation: scroll 2s infinite;
+}
+
+@keyframes scroll {
+  0% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-20px); } /* Changed from positive to negative value to reverse direction */
 }

@@ -27,7 +27,16 @@ export class HomeComponent implements OnInit {
   genreList: any[] = [];
   trendingInPrime: any[] = [];
   trendingInNetflix: any[] = [];
-  trendingList: any[]=[];
+  trendingList: any[] = [];
+  
+  // Trending categories section
+  trendingCategories = [
+    { id: 'upcoming', name: 'Upcoming' },
+    { id: 'netflix', name: 'Netflix' },
+    { id: 'amazon', name: 'Amazon Prime' },
+    { id: 'topGrossing', name: 'Top Grossing' }
+  ];
+  activeTrendingCategory: string = 'upcoming';
   constructor(
     private movieService: MoviesService,
     private tvshowService: TvshowsService
@@ -283,5 +292,9 @@ export class HomeComponent implements OnInit {
       });
     });
   }
- 
+  
+  // Method to change active trending category
+  changeTrendingCategory(categoryId: string): void {
+    this.activeTrendingCategory = categoryId;
+  }
 }

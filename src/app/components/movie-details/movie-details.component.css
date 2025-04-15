@@ -4,6 +4,10 @@
   margin-left: 2%;
   margin-right: 2%;
   color: var(--base-white);
+  padding-top: 20px;
+  position: relative;
+  z-index: 2; /* Higher z-index to ensure it appears above the header */
+  background-color: var(--base-black); /* Ensure background color for content */
 }
 .details-table {
   margin-left: 10%;
@@ -206,7 +210,7 @@ path.two {
 
 @media only screen and (min-width: 1100px) {
   .movie-content{
-    margin-top: 120px;
+    margin-top: 0;
   }
 }
 /* system and tab */
@@ -214,7 +218,7 @@ path.two {
   /* Banner Section Start */
 
   .header {
-    min-height: 780px;
+    height: 100vh;
     width: 100%;
     top: -10px;
     position: relative;
@@ -299,9 +303,3 @@ path.two {
     height:250px;
   }
 }
-
-
-
-
-
-

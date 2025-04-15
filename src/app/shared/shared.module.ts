@@ -15,6 +15,8 @@ import { VideoHeaderComponent } from './components/video-header/video-header.com
 import { TrendingBackdropsComponent } from './components/trending-backdrops/trending-backdrops.component';
 import { RouterModule } from '@angular/router';
 import { PopUpModalComponent } from './components/pop-up-modal/pop-up-modal.component';
+import { LatestTrailersComponent } from './components/latest-trailers/latest-trailers.component';
+import { SafePipe } from './pipes/safe.pipe';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { PopUpModalComponent } from './components/pop-up-modal/pop-up-modal.comp
     VideoHeaderComponent,
     TrendingBackdropsComponent,
     PopUpModalComponent,
+    LatestTrailersComponent,
+    SafePipe,
   ],
   imports: [CommonModule, NgbModule, IvyCarouselModule, RouterModule],
   exports: [
@@ -44,6 +48,8 @@ import { PopUpModalComponent } from './components/pop-up-modal/pop-up-modal.comp
     LandingPageComponent,
     VideoHeaderComponent,
     TrendingBackdropsComponent,
+    LatestTrailersComponent,
+    SafePipe,
   ],
 })
 export class SharedModule {}
