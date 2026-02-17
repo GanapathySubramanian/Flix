@@ -46,6 +46,9 @@ export class TvshowsComponent implements OnInit, AfterViewInit, OnDestroy {
   isdisablenext: boolean = false;
   ishidedrop: boolean = false;
   networkName: string = '';
+  totalPages: number = 1;
+  isFetching: boolean = false;
+  isLoadingMore: boolean = false;
   genreQuery: string = '';
   orderQuery: string = '';
   networkQuery: string = '';
@@ -153,13 +156,13 @@ export class TvshowsComponent implements OnInit, AfterViewInit, OnDestroy {
         sort_by_desc +
         '&page=' +
         page;
-      this.gettvshowsData(api_url);
+      this.gettvshowsData(api_url, false);
     } else {
       this.ishidedrop = true;
       this.sortby_value = Search_value;
       this.gettvshowsData(
         SEARCH_URL + '&query=' + Search_value + '&page=' + page
-      );
+      , false);
     }
   }
 
@@ -242,7 +245,10 @@ export class TvshowsComponent implements OnInit, AfterViewInit, OnDestroy {
       this.sortby_value = Search_value;
       this.findthistvshow = '';
       this.network_value = '';
-      this.gettvshowsData(SEARCH_URL + '&query=' + Search_value);
+      this.gettvshowsData(
+        SEARCH_URL + '&query=' + Search_value + '&page=' + page,
+        false
+      );
     } else {
       this.ishidedrop = false;
       this.sortby_value = 'Trending Now';
@@ -253,7 +259,7 @@ export class TvshowsComponent implements OnInit, AfterViewInit, OnDestroy {
         sort_by_desc +
         '&page=' +
         page;
-      this.gettvshowsData(api_url);
+      this.gettvshowsData(api_url, false);
     }
   }
 
@@ -274,7 +280,7 @@ export class TvshowsComponent implements OnInit, AfterViewInit, OnDestroy {
         page++;
         this.page_no = page;
       }
-      this.getFilterContent();
+      this.getFilterContent(false);
     } else {
       this.ishidedrop = true;
       if (val == 1) {
@@ -293,7 +299,7 @@ export class TvshowsComponent implements OnInit, AfterViewInit, OnDestroy {
       }
       var page_api_url =
         SEARCH_URL + '&query=' + Search_value + '&page=' + page;
-      this.gettvshowsData(page_api_url);
+      this.gettvshowsData(page_api_url, false);
     }
 
     window.scroll({
@@ -303,7 +309,7 @@ export class TvshowsComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  getFilterContent() {
+  getFilterContent(append: boolean = false) {
     if (sort_by_desc == 'airingtoday.desc') {
       let api_url =
         myAppConfig.tmdb.tvshowDetailsBaseUrl +
@@ -317,7 +323,7 @@ export class TvshowsComponent implements OnInit, AfterViewInit, OnDestroy {
         region +
         '&with_networks=' +
         network;
-      this.gettvshowsData(api_url);
+      this.gettvshowsData(api_url, append);
     } else if (sort_by_desc == 'ontheair.desc') {
       let api_url =
         myAppConfig.tmdb.tvshowDetailsBaseUrl +
@@ -331,7 +337,7 @@ export class TvshowsComponent implements OnInit, AfterViewInit, OnDestroy {
         region +
         '&with_networks=' +
         network;
-      this.gettvshowsData(api_url);
+      this.gettvshowsData(api_url, append);
     } else {
       let genre_api_url =
         myAppConfig.tmdb.tvshowBaseUrl +
@@ -346,38 +352,52 @@ export class TvshowsComponent implements OnInit, AfterViewInit, OnDestroy {
         region +
         '&with_networks=' +
         network;
-      this.gettvshowsData(genre_api_url);
+      this.gettvshowsData(genre_api_url, append);
     }
   }
 
-  gettvshowsData(api_url: string) {
+  gettvshowsData(api_url: string, append: boolean = false) {
+    if (this.isFetching) {
+      return;
+    }
+    this.isFetching = true;
+    this.isLoadingMore = append;
     let tempTvshowList: any;
-    this.tvshowservice.getallTvshows(api_url).subscribe((data: any) => {
-      tempTvshowList = data.results;
-      this.tvshowList = [];
-      this.tvshowList = tempTvshowList;
-      this.topTvshowList = [];
+    this.tvshowservice.getallTvshows(api_url).subscribe({
+      next: (data: any) => {
+        tempTvshowList = data.results;
+        const mapped = (tempTvshowList || []).map((movies: any) => {
+          movies.background_image = this.highqualityImgUrl + movies.backdrop_path;
+          movies.no_animation = true;
+          return movies;
+        });
 
-      this.tvshowList.forEach((movies: any, index) => {
-        movies.background_image = this.highqualityImgUrl + movies.backdrop_path;
-        movies.no_animation = true;
-        // if (index < 10) {
-        //   this.getTvshowImages(movies.id, index);
-        //   this.topTvshowList.push(movies);
-        // }
-      });
+        if (append) {
+          this.tvshowList = [...this.tvshowList, ...mapped];
+        } else {
+          this.tvshowList = mapped;
+          this.topTvshowList = [];
+        }
+        this.totalPages = data.total_pages || 1;
 
-      if (data.total_pages == page) {
-        this.isdisablenext = true;
-      } else {
-        this.isdisablenext = false;
-      }
+        if (data.total_pages == page) {
+          this.isdisablenext = true;
+        } else {
+          this.isdisablenext = false;
+        }
 
-      if (page == 1) {
-        this.isdisableprev = true;
-      } else {
-        this.isdisableprev = false;
-      }
+        if (page == 1) {
+          this.isdisableprev = true;
+        } else {
+          this.isdisableprev = false;
+        }
+        this.isFetching = false;
+        this.isLoadingMore = false;
+      },
+      error: () => {
+        this.isFetching = false;
+        this.isLoadingMore = false;
+      },
     });
   }
 
@@ -479,6 +499,34 @@ export class TvshowsComponent implements OnInit, AfterViewInit, OnDestroy {
       this.mobiledevice = true;
     } else {
       this.mobiledevice = false;
+    }
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    if (this.isFetching || page >= this.totalPages || this.tvshowList.length === 0) {
+      return;
+    }
+    const threshold = 450;
+    const position = window.innerHeight + window.scrollY;
+    const height = document.documentElement.scrollHeight;
+    if (height - position < threshold) {
+      this.loadNextPage();
+    }
+  }
+
+  loadNextPage() {
+    if (this.isFetching || page >= this.totalPages) {
+      return;
+    }
+    page += 1;
+    this.page_no = page;
+    if (Search_value == '') {
+      this.getFilterContent(true);
+    } else {
+      const page_api_url =
+        SEARCH_URL + '&query=' + Search_value + '&page=' + page;
+      this.gettvshowsData(page_api_url, true);
     }
   }
 }

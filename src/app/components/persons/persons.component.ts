@@ -21,8 +21,9 @@ export class PersonsComponent implements OnInit {
   sortby_value: string = sorts_by;
   page_no: number = page;
   searchForm!: FormGroup;
-  isdisableprev: boolean = false;
-  isdisablenext: boolean = false;
+  totalPages: number = 1;
+  isFetching: boolean = false;
+  isLoadingMore: boolean = false;
 
   constructor(private peopleservice: PeopleService) {
     this.searchForm = new FormGroup({
@@ -86,14 +87,14 @@ export class PersonsComponent implements OnInit {
   getPeoples() {
     page = 1;
     this.page_no = 1;
-    if (Search_value == ' ' || Search_value == '') {
+    if (Search_value.trim() == '') {
       let api_url =
         myAppConfig.tmdb.personBaseUrl +
         'popular?' +
         myAppConfig.tmdb.apikey +
         '&page=' +
         page;
-      this.getPeoplesData(api_url);
+      this.getPeoplesData(api_url, false);
     } else {
       this.sortby_value = Search_value;
       this.getPeoplesData(
@@ -103,7 +104,8 @@ export class PersonsComponent implements OnInit {
           '&query=' +
           Search_value +
           '&page=' +
-          page
+          page,
+        false
       );
     }
   }
@@ -122,8 +124,9 @@ export class PersonsComponent implements OnInit {
         '&page=' +
         page;
       this.findthispeoples = '';
-      this.getPeoplesData(SEARCH_URL);
+      this.getPeoplesData(SEARCH_URL, false);
     } else {
+      Search_value = '';
       this.sortby_value = 'Popular Peoples';
       let api_url =
         myAppConfig.tmdb.personBaseUrl +
@@ -131,49 +134,75 @@ export class PersonsComponent implements OnInit {
         myAppConfig.tmdb.apikey +
         '&page=' +
         page;
-      this.getPeoplesData(api_url);
+      this.getPeoplesData(api_url, false);
     }
   }
 
-  handlePagination(val: any) {
-    if (Search_value == '') {
-      if (val == 1) {
-        page = 1;
-        this.page_no = page;
-      } else if (val == 2) {
-        if (page == 1) {
-          this.isdisableprev = true;
+  getPeoplesData(apiurl: any, append: boolean = false) {
+    if (this.isFetching) {
+      return;
+    }
+    this.isFetching = true;
+    this.isLoadingMore = append;
+    this.peopleservice.getPopularPeopleDetails(apiurl).subscribe({
+      next: (data: any) => {
+        const temppeopleList = data.results || [];
+        const mappedPeople = temppeopleList.map((person: any) => {
+          const mapped = {} as common;
+          mapped.id = person.id;
+          mapped.title = person.name;
+          mapped.popularity = person.popularity;
+          mapped.poster_path = person.profile_path;
+          mapped.job = person.known_for_department;
+          return mapped;
+        });
+
+        if (append) {
+          this.peopleList = [...this.peopleList, ...mappedPeople];
         } else {
-          page--;
-          this.page_no = page;
+          this.peopleList = mappedPeople;
         }
-      } else {
-        page++;
-        this.page_no = page;
-      }
-      let api_url =
+
+        this.totalPages = data.total_pages || 1;
+        this.isFetching = false;
+        this.isLoadingMore = false;
+      },
+      error: () => {
+        this.isFetching = false;
+        this.isLoadingMore = false;
+      },
+    });
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    if (this.isFetching || page >= this.totalPages || this.peopleList.length === 0) {
+      return;
+    }
+    const threshold = 450;
+    const position = window.innerHeight + window.scrollY;
+    const height = document.documentElement.scrollHeight;
+    if (height - position < threshold) {
+      this.loadNextPage();
+    }
+  }
+
+  loadNextPage() {
+    if (this.isFetching || page >= this.totalPages) {
+      return;
+    }
+    page += 1;
+    this.page_no = page;
+    if (Search_value.trim() == '') {
+      const api_url =
         myAppConfig.tmdb.personBaseUrl +
         'popular?' +
         myAppConfig.tmdb.apikey +
         '&page=' +
         page;
-      this.getPeoplesData(api_url);
+      this.getPeoplesData(api_url, true);
     } else {
-      if (val == 1) {
-        page = 1;
-        this.page_no = page;
-      } else if (val == 2) {
-        if (page == 1) {
-          this.isdisableprev = true;
-        } else {
-          page--;
-          this.page_no = page;
-        }
-      } else {
-        page++;
-        this.page_no = page;
-      }
-      let SEARCH_URL =
+      const SEARCH_URL =
         myAppConfig.tmdb.baseUrl +
         'search/person?' +
         myAppConfig.tmdb.apikey +
@@ -181,44 +210,8 @@ export class PersonsComponent implements OnInit {
         Search_value +
         '&page=' +
         page;
-      this.getPeoplesData(SEARCH_URL);
+      this.getPeoplesData(SEARCH_URL, true);
     }
-
-    window.scroll({
-      top: 0,
-      left: 0,
-      behavior: 'smooth',
-    });
-  }
-
-  getPeoplesData(apiurl: any) {
-    let temppeopleList: any;
-    this.peopleservice
-      .getPopularPeopleDetails(apiurl)
-      .subscribe((data: any) => {
-        temppeopleList = data.results;
-
-        this.peopleList = [];
-        for (let i = 0; i < temppeopleList.length; i++) {
-          this.peopleList[i] = {} as common;
-          this.peopleList[i].id = temppeopleList[i].id;
-          this.peopleList[i].title = temppeopleList[i].name;
-          this.peopleList[i].popularity = temppeopleList[i].popularity;
-          this.peopleList[i].poster_path = temppeopleList[i].profile_path;
-          this.peopleList[i].job = temppeopleList[i].known_for_department;
-        }
-        if (data.total_pages == page) {
-          this.isdisablenext = true;
-        } else {
-          this.isdisablenext = false;
-        }
-
-        if (page == 1) {
-          this.isdisableprev = true;
-        } else {
-          this.isdisableprev = false;
-        }
-      });
   }
 
   float2int(value: any) {

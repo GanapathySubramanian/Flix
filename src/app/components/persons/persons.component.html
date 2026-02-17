@@ -140,31 +140,18 @@
     </div>
   </main>
 
-  <div class="pagination" *ngIf="peopleList.length > 0">
+  <div class="infinite-status" *ngIf="peopleList.length > 0">
+    <p *ngIf="isLoadingMore" class="infinite-text">Loading more people...</p>
     <button
       class="btn"
-      id="prev"
-      [disabled]="isdisableprev"
-      (click)="handlePagination(2)"
+      *ngIf="!isLoadingMore && page_no < totalPages"
+      (click)="loadNextPage()"
     >
-      Prev
+      Load More
     </button>
-    <button
-      class="btn"
-      id="home"
-      (click)="handlePagination(1)"
-      style="border-radius: 100%"
-    >
-      {{ page_no }}
-    </button>
-    <button
-      class="btn"
-      id="next"
-      [disabled]="isdisablenext"
-      (click)="handlePagination(3)"
-    >
-      Next
-    </button>
+    <p *ngIf="!isLoadingMore && page_no >= totalPages" class="infinite-text">
+      You reached the end.
+    </p>
   </div>
   <div *ngIf="peopleList.length <= 0">
     <h5 class="filtered-value text-center font-kanit">No persons Found</h5>

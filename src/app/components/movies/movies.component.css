@@ -13,6 +13,19 @@
   cursor: pointer;
 }
 
+.infinite-status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 12px 0 24px;
+  min-height: 44px;
+}
+
+.infinite-text {
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+
 
 @media only screen and (min-width: 600px) {
   .sm-search {

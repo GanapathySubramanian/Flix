@@ -36,6 +36,9 @@ export class MoviesComponent implements OnInit, AfterViewInit, OnDestroy {
   isdisableprev: boolean = false;
   isdisablenext: boolean = false;
   ishidedrop: boolean = false;
+  totalPages: number = 1;
+  isFetching: boolean = false;
+  isLoadingMore: boolean = false;
   genreQuery: string = '';
   orderQuery: string = '';
   countryQuery: string = '';
@@ -123,7 +126,7 @@ export class MoviesComponent implements OnInit, AfterViewInit, OnDestroy {
       myAppConfig.tmdb.apikey +
       '&page=' +
       page;
-    this.getMoviesData(apiurl);
+    this.getMoviesData(apiurl, false);
   }
 
   getSearchContent() {
@@ -210,7 +213,7 @@ export class MoviesComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  getFilterContent() {
+  getFilterContent(append: boolean = false) {
     if (sort_by_desc == 'upcoming.desc') {
       let api_url =
         myAppConfig.tmdb.baseUrl +
@@ -222,7 +225,7 @@ export class MoviesComponent implements OnInit, AfterViewInit, OnDestroy {
         genre_id +
         '&region=' +
         region;
-      this.getMoviesData(api_url);
+      this.getMoviesData(api_url, append);
     } else if (sort_by_desc == 'nowplaying.desc') {
       let api_url =
         myAppConfig.tmdb.baseUrl +
@@ -234,7 +237,7 @@ export class MoviesComponent implements OnInit, AfterViewInit, OnDestroy {
         genre_id +
         '&region=' +
         region;
-      this.getMoviesData(api_url);
+      this.getMoviesData(api_url, append);
     } else {
       let sort_api_url =
         myAppConfig.tmdb.baseUrl +
@@ -248,7 +251,7 @@ export class MoviesComponent implements OnInit, AfterViewInit, OnDestroy {
         genre_id +
         '&region=' +
         region;
-      this.getMoviesData(sort_api_url);
+      this.getMoviesData(sort_api_url, append);
     }
   }
   handlePagination(val: any) {
@@ -268,7 +271,7 @@ export class MoviesComponent implements OnInit, AfterViewInit, OnDestroy {
         page++;
         this.page_no = page;
       }
-      this.getFilterContent();
+      this.getFilterContent(false);
     } else {
       this.ishidedrop = true;
       if (val == 1) {
@@ -303,29 +306,49 @@ export class MoviesComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  getMoviesData(url: any) {
+  getMoviesData(url: any, append: boolean = false) {
+    if (this.isFetching) {
+      return;
+    }
+    this.isFetching = true;
+    this.isLoadingMore = append;
+
     let tempMoviesList: any;
-    this.movieservice.getallMovies(url).subscribe((data: any) => {
-      tempMoviesList = data.results;
-      this.movieList = [];
-      this.movieList = tempMoviesList;
-      this.topMoviesList = [];
-      this.movieList.forEach((movies: any, index) => {
-        movies.background_image = this.highqualityImgUrl + movies.backdrop_path;
-        movies.no_animation = true;
-      });
+    this.movieservice.getallMovies(url).subscribe({
+      next: (data: any) => {
+        tempMoviesList = data.results;
+        const mappedMovies = (tempMoviesList || []).map((movies: any) => {
+          movies.background_image = this.highqualityImgUrl + movies.backdrop_path;
+          movies.no_animation = true;
+          return movies;
+        });
 
-      if (data.total_pages == page) {
-        this.isdisablenext = true;
-      } else {
-        this.isdisablenext = false;
-      }
+        if (append) {
+          this.movieList = [...this.movieList, ...mappedMovies];
+        } else {
+          this.movieList = mappedMovies;
+          this.topMoviesList = [];
+        }
+        this.totalPages = data.total_pages || 1;
 
-      if (page == 1) {
-        this.isdisableprev = true;
-      } else {
-        this.isdisableprev = false;
-      }
+        if (data.total_pages == page) {
+          this.isdisablenext = true;
+        } else {
+          this.isdisablenext = false;
+        }
+
+        if (page == 1) {
+          this.isdisableprev = true;
+        } else {
+          this.isdisableprev = false;
+        }
+        this.isFetching = false;
+        this.isLoadingMore = false;
+      },
+      error: () => {
+        this.isFetching = false;
+        this.isLoadingMore = false;
+      },
     });
   }
 
@@ -426,6 +449,40 @@ export class MoviesComponent implements OnInit, AfterViewInit, OnDestroy {
       this.mobiledevice = true;
     } else {
       this.mobiledevice = false;
+    }
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    if (this.isFetching || page >= this.totalPages || this.movieList.length === 0) {
+      return;
+    }
+    const threshold = 450;
+    const position = window.innerHeight + window.scrollY;
+    const height = document.documentElement.scrollHeight;
+    if (height - position < threshold) {
+      this.loadNextPage();
+    }
+  }
+
+  loadNextPage() {
+    if (this.isFetching || page >= this.totalPages) {
+      return;
+    }
+    page += 1;
+    this.page_no = page;
+    if (Search_value == '') {
+      this.getFilterContent(true);
+    } else {
+      const page_api_url =
+        myAppConfig.tmdb.baseUrl +
+        'search/movie?' +
+        myAppConfig.tmdb.apikey +
+        '&query=' +
+        Search_value +
+        '&page=' +
+        page;
+      this.getMoviesData(page_api_url, true);
     }
   }
 }

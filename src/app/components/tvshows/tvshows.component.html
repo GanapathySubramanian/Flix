@@ -306,31 +306,18 @@
     </div>
   </main>
 
-  <div class="pagination" id="pagination" *ngIf="tvshowList.length > 0">
+  <div class="infinite-status" *ngIf="tvshowList.length > 0">
+    <p *ngIf="isLoadingMore" class="infinite-text">Loading more tv shows...</p>
     <button
       class="btn"
-      id="prev"
-      [disabled]="isdisableprev"
-      (click)="handlePagination(2)"
+      *ngIf="!isLoadingMore && page_no < totalPages"
+      (click)="loadNextPage()"
     >
-      Prev
+      Load More
     </button>
-    <button
-      class="btn"
-      id="home"
-      (click)="handlePagination(1)"
-      style="border-radius: 100%"
-    >
-      {{ page_no }}
-    </button>
-    <button
-      class="btn"
-      id="next"
-      [disabled]="isdisablenext"
-      (click)="handlePagination(3)"
-    >
-      Next
-    </button>
+    <p *ngIf="!isLoadingMore && page_no >= totalPages" class="infinite-text">
+      You reached the end.
+    </p>
   </div>
   <div *ngIf="tvshowList.length <= 0" style="height: 80vh">
     <h5 class="filtered-value text-center font-kanit">No Tvshows Found</h5>
