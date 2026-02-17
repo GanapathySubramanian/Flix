@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TvshowDetails } from 'src/app/core/interface/tvshow-details';
 import myAppConfig from 'src/app/core/config/my-app-config';
 import { TvshowsService } from 'src/app/core/services/tvshows.service';
-import { common } from 'src/app/core/interface/common';
 import { forkJoin } from 'rxjs';
 
 var tvshow_id = 0;
@@ -23,6 +22,18 @@ export class TvshowDetailsComponent implements OnInit {
   background_video: any;
   background_video_type: any;
   isLoading: boolean = true;
+  activeTab: string = 'seasons';
+  tabConfig = [
+    { id: 'seasons', label: 'Seasons', hasData: () => this.tvshowDetails.seasons?.length > 0 },
+    { id: 'backdrops', label: 'Backdrops', hasData: () => this.tvshowDetails.backdropList?.length > 0 },
+    { id: 'posters', label: 'Posters', hasData: () => this.tvshowDetails.posterList?.length > 0 },
+    { id: 'videos', label: 'Videos', hasData: () => this.tvshowDetails.videoList?.length > 0 },
+    { id: 'cast', label: 'Cast', hasData: () => this.tvshowDetails.castList?.length > 0 },
+    { id: 'crew', label: 'Crew', hasData: () => this.tvshowDetails.crewList?.length > 0 },
+    { id: 'recommended', label: 'Recommended', hasData: () => this.tvshowDetails.rectvshowList?.length > 0 },
+    { id: 'similar', label: 'Similar', hasData: () => this.tvshowDetails.similartvshowList?.length > 0 },
+    { id: 'reviews', label: 'Reviews', hasData: () => this.tvshowDetails.reviewList?.length > 0 },
+  ];
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -55,6 +66,7 @@ export class TvshowDetailsComponent implements OnInit {
       this.tvshowservice.getSimilartvshows(tvshow_id),
       this.tvshowservice.getRecommendedtvshows(tvshow_id),
       this.tvshowservice.getVideos(tvshow_id),
+      this.tvshowservice.getWatchProviders(tvshow_id),
     ]).subscribe({
       next: ([
         tvshowDetails,
@@ -64,13 +76,15 @@ export class TvshowDetailsComponent implements OnInit {
         similarTvShows,
         recommendedTvShows,
         videos,
+        watchProviders,
       ]) => {
         if (tvshowDetails !== null) {
-          this.setTvshowDetails(tvshowDetails)
+          this.setTvshowDetails(tvshowDetails);
+          this.setWatchProvider(watchProviders, tvshowDetails.homepage);
         }
 
         if (
-          images.backdrop_path?.length > 0 ||
+          images.backdrops?.length > 0 ||
           images.logos?.length > 0 ||
           images.posters?.length > 0
         ) {
@@ -81,7 +95,7 @@ export class TvshowDetailsComponent implements OnInit {
           this.setReviews(reviews);
         }
 
-        if (credits?.casts?.length > 0 || credits?.crew?.length > 0) {
+        if (credits?.cast?.length > 0 || credits?.crew?.length > 0) {
             this.setCreditDetails(credits);
         }
 
@@ -96,7 +110,7 @@ export class TvshowDetailsComponent implements OnInit {
         if (videos.results.length > 0) {
           this.setVideoDetails(videos);
         }
-        
+        this.ensureActiveTab();
         this.isLoading = false;
       },
       error: (err) => {
@@ -155,16 +169,6 @@ export class TvshowDetailsComponent implements OnInit {
      //   }
      // }
 
-     if (this.tvshowDetails.homepage == '') {
-       var watch_provider =
-         myAppConfig.tmdb.tvshowDetailsBaseUrl +
-         tvshow_id +
-         '/watch/providers?' +
-         myAppConfig.tmdb.apikey;
-       this.getWatchprovider(watch_provider);
-     } else {
-       this.tvshowDetails.watchprovider = this.tvshowDetails.homepage;
-     }
   }
   setImages(images:any){
     if (images.backdrops.length == '0') {
@@ -327,12 +331,25 @@ export class TvshowDetailsComponent implements OnInit {
         s_tvshow[i].first_air_date;
     }
   }
-  getWatchprovider(watch_provider: string) {
-    let watch: any;
-    this.tvshowservice.getWatchProviders(watch_provider).subscribe((data) => {
-      watch = data;
-      this.tvshowDetails.watchprovider = watch.results.IN.link;
-    });
+  setWatchProvider(watchProviders: any, homepage: string) {
+    const providerLink = this.extractWatchProviderLink(watchProviders);
+    this.tvshowDetails.watchprovider = providerLink || homepage || null;
+  }
+
+  extractWatchProviderLink(watchProviders: any): string | null {
+    const providerResults = watchProviders?.results || {};
+    const preferredRegions = ['IN', 'US'];
+
+    for (const region of preferredRegions) {
+      if (providerResults?.[region]?.link) {
+        return providerResults[region].link;
+      }
+    }
+
+    const firstRegionWithLink = Object.values(providerResults).find(
+      (provider: any) => provider?.link
+    ) as any;
+    return firstRegionWithLink?.link || null;
   }
 
   float2int(value: any) {
@@ -391,5 +408,24 @@ export class TvshowDetailsComponent implements OnInit {
       left: 0,
       behavior: 'smooth',
     });
+  }
+
+  getAvailableTabs() {
+    return this.tabConfig.filter((tab) => tab.hasData());
+  }
+
+  setActiveTab(tabId: string) {
+    this.activeTab = tabId;
+  }
+
+  private ensureActiveTab() {
+    const availableTabs = this.getAvailableTabs();
+    if (!availableTabs.length) {
+      this.activeTab = '';
+      return;
+    }
+    if (!availableTabs.some((tab) => tab.id === this.activeTab)) {
+      this.activeTab = availableTabs[0].id;
+    }
   }
 }

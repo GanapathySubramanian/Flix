@@ -22,6 +22,17 @@ export class MovieDetailsComponent implements OnInit {
   windowScrolled: boolean = false;
   background_video_type: any;
   isLoading: boolean = true;
+  activeTab: string = 'backdrops';
+  tabConfig = [
+    { id: 'backdrops', label: 'Backdrops', hasData: () => this.movieDetails.backdropList?.length > 0 },
+    { id: 'posters', label: 'Posters', hasData: () => this.movieDetails.posterList?.length > 0 },
+    { id: 'videos', label: 'Videos', hasData: () => this.movieDetails.videoList?.length > 0 },
+    { id: 'cast', label: 'Cast', hasData: () => this.movieDetails.castList?.length > 0 },
+    { id: 'crew', label: 'Crew', hasData: () => this.movieDetails.crewList?.length > 0 },
+    { id: 'recommended', label: 'Recommended', hasData: () => this.movieDetails.recmovieList?.length > 0 },
+    { id: 'similar', label: 'Similar', hasData: () => this.movieDetails.similarmovieList?.length > 0 },
+    { id: 'reviews', label: 'Reviews', hasData: () => this.movieDetails.reviewList?.length > 0 },
+  ];
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -69,6 +80,7 @@ export class MovieDetailsComponent implements OnInit {
       ]) => {
         if (movieDetails !== null) {
           this.setMovieDetails(movieDetails);
+          this.setWatchProvider(watchProviders, movieDetails.homepage);
         }
         if (videos.results.length > 0) {
           this.setVideoDetails(videos);
@@ -94,6 +106,7 @@ export class MovieDetailsComponent implements OnInit {
         if (movieReviews.results.length > 0) {
           this.setReviewDetails(movieReviews);
         }
+        this.ensureActiveTab();
         this.isLoading = false;
       },
       (error) => {
@@ -224,12 +237,6 @@ export class MovieDetailsComponent implements OnInit {
     this.movieDetails.revenue = movieDetails.revenue;
     this.movieDetails.status = movieDetails.status;
     this.movieDetails.vote_average = movieDetails.vote_average;
-
-    if (movieDetails.homepage == '') {
-      this.getWatchprovider(movie_id);
-    } else {
-      this.movieDetails.watchprovider = movieDetails.homepage;
-    }
   }
 
   setVideoDetails(videos: any) {
@@ -271,12 +278,25 @@ export class MovieDetailsComponent implements OnInit {
       );
     });
   }
-  getWatchprovider(movie_id: number) {
-    let watch: any;
-    this.movieservice.getWatchProviders(movie_id).subscribe((data) => {
-      watch = data;
-      this.movieDetails.watchprovider = watch?.results?.IN[0]?.link;
-    });
+  setWatchProvider(watchProviders: any, homepage: string) {
+    const providerLink = this.extractWatchProviderLink(watchProviders);
+    this.movieDetails.watchprovider = providerLink || homepage || null;
+  }
+
+  extractWatchProviderLink(watchProviders: any): string | null {
+    const providerResults = watchProviders?.results || {};
+    const preferredRegions = ['IN', 'US'];
+
+    for (const region of preferredRegions) {
+      if (providerResults?.[region]?.link) {
+        return providerResults[region].link;
+      }
+    }
+
+    const firstRegionWithLink = Object.values(providerResults).find(
+      (provider: any) => provider?.link
+    ) as any;
+    return firstRegionWithLink?.link || null;
   }
 
   filterCrewData(arr: any): any {
@@ -334,5 +354,37 @@ export class MovieDetailsComponent implements OnInit {
       left: 0,
       behavior: 'smooth',
     });
+  }
+
+  getMovieId(id: number) {
+    this.router.navigateByUrl('/moviedetails/' + id);
+    this.getMovieDetails(id);
+  }
+
+  getMovieDetailsById(id: number) {
+    this.router.navigateByUrl('/moviedetails/' + id);
+    this.getMovieDetails(id);
+  }
+  
+  getMovieDetailsById1(id: number) {
+  }
+
+  getAvailableTabs() {
+    return this.tabConfig.filter((tab) => tab.hasData());
+  }
+
+  setActiveTab(tabId: string) {
+    this.activeTab = tabId;
+  }
+
+  private ensureActiveTab() {
+    const availableTabs = this.getAvailableTabs();
+    if (!availableTabs.length) {
+      this.activeTab = '';
+      return;
+    }
+    if (!availableTabs.some((tab) => tab.id === this.activeTab)) {
+      this.activeTab = availableTabs[0].id;
+    }
   }
 }

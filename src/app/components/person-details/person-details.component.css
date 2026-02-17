@@ -4,6 +4,30 @@ ngb-rating {
   font-size: 20px;
 }
 
+.detail-tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 8px 0 18px;
+  margin: 0 10% 8px;
+}
+
+.detail-tabs button {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.detail-tabs button.active {
+  background: #e50914;
+  border-color: #e50914;
+}
+
 .details-table {
   margin-left: 10%;
   margin-right: 5%;
@@ -25,6 +49,79 @@ ngb-rating {
 }
 .details-value.person-description {
   line-height: 24px;
+}
+
+.about-panel {
+  margin: 0 10%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  padding: 24px;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.about-item {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.about-label {
+  display: block;
+  color: #ffb000;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+
+.about-value {
+  color: var(--base-white);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.bio-block,
+.social-block {
+  margin-top: 20px;
+}
+
+.about-heading {
+  color: #e50914;
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+.bio-text {
+  color: #f3f3f3;
+  line-height: 1.6;
+  font-size: 16px;
+  max-width: 1100px;
+  margin: 0;
+}
+
+.social-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.social-link {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 .person-img {
   width: 400px;
@@ -82,6 +179,29 @@ hr {
 }
 
 @media only screen and (max-width: 600px) {
+  .about-panel {
+    margin: 0 2%;
+    padding: 14px;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .about-value {
+    font-size: 16px;
+  }
+
+  .about-heading {
+    font-size: 22px;
+  }
+
+  .bio-text {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
   .no-image {
     object-fit: cover;
     height: auto;

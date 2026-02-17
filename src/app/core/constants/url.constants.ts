@@ -31,4 +31,5 @@ export const URL_CONSTANTS = {
     GET_TVSHOW_CREDITS_BY_ID: (id: number) => `${TVSHOW_DETAILS_BASE_URL}${id}/credits?${API_KEY}`,
     GET_TVSHOW_SIMILAR_BY_ID: (id: number) => `${TVSHOW_DETAILS_BASE_URL}${id}/similar?${API_KEY}`,
     GET_TVSHOW_RECOMMENDED_BY_ID: (id: number) => `${TVSHOW_DETAILS_BASE_URL}${id}/recommendations?${API_KEY}`,
+    GET_TVSHOW_WATCH_PROVIDER_BY_ID: (id: number) => `${TVSHOW_DETAILS_BASE_URL}${id}/watch/providers?${API_KEY}`,
 };

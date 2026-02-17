@@ -21,7 +21,6 @@
           color: white;
           cursor: pointer;
         "
-        data-aos="fade-down"
         (click)="stopTrailer()"
       >
         <div style="display: inline-block; width: 35px">
@@ -97,7 +96,6 @@
             ><img
               [attr.src]="highQualityImgUrl + data.poster_path"
               alt="{{ data.original_title }}"
-              data-aos="fade-down"
           /></ng-template>
         </div>
       </div>
@@ -108,8 +106,6 @@
             <div class="item-title">
               <span
                 *ngIf="!data.logoList"
-                data-aos="fade-down"
-                data-aos-easing="linear"
               >
                 <span
                   *ngIf="data.title"
@@ -131,7 +127,6 @@
               <div
                 class="mt-5"
                 *ngIf="data.logoList != null"
-                data-aos="fade-down"
               >
                 <img
                   id="logo-img"
@@ -141,8 +136,6 @@
             </div>
             <div
               class="header-detail"
-              data-aos="fade-down"
-              data-aos-anchor-placement="top-bottom"
             >
               <div class="rating" *ngIf="data.vote_average">
                 <img src="assets/images/IMDb-icon.png" alt="imbd" />
@@ -170,11 +163,22 @@
                 ><img src="assets/images/calendar.png" style="width: 15px; height:15px">
                 {{ data.first_air_date | date }}</span
               >
+              <span *ngIf="data.status" class="text-white badge">
+                {{ getDisplayStatus() }}
+              </span>
+              <span *ngIf="!isCarousel && isTvShowContent() && data.type" class="text-white badge">
+                {{ data.type }}
+              </span>
+              <span *ngIf="!isCarousel && isTvShowContent() && data.no_of_seasons" class="text-white badge">
+                {{ data.no_of_seasons }} Seasons
+              </span>
+              <span *ngIf="!isCarousel && isTvShowContent() && data.no_of_episodes" class="text-white badge">
+                {{ data.no_of_episodes }} Episodes
+              </span>
             </div>
             <div
               class="header-detail text-danger"
               *ngIf="data.genre"
-              data-aos="fade-down"
             >
               <span
                 *ngFor="let genre of data.genre; let i = index"
@@ -196,11 +200,10 @@
               </span>
             </div>
             <div class="item-overview" style="margin-right: 60px;">
-              <p data-aos="fade-down">{{ data.overview }}</p>
+              <p>{{ data.overview }}</p>
             </div>
             <div
               class="production text-white text-wrap mt-2"
-              data-aos="fade-down"
             >
               <span *ngIf="data?.production_companies?.length > 0"
                 >Production :
@@ -219,7 +222,6 @@
 
             <div
               class="streaming text-white text-wrap mt-2"
-              data-aos="fade-down"
             >
               <span *ngIf="data?.networks?.length > 0"> Streaming On : </span>
               <span
@@ -238,7 +240,6 @@
                 class="wrapper-watchnow "
                 *ngIf="background_video"
                 style="cursor: pointer; margin-right: 25px"
-                data-aos="fade-down"
               >
                 <a class="play playBut" (click)="playTrailer()">
                   <div style="display: inline-block; width: 35px">
@@ -288,10 +289,9 @@
               <div
                 class="wrapper-watchnow "
                 style="cursor: pointer"
-                data-aos="fade-down"
                 *ngIf="data.watchprovider"
               >
-                <a class="play playBut" [href]="data?.watchprovider">
+                <a class="play playBut" [href]="data?.watchprovider" target="_blank" rel="noopener noreferrer">
                   <div style="display: inline-block; width: 35px">
                     <svg
                       id="playBtn"
@@ -339,7 +339,6 @@
             <div
               class="wrapper-watchnow mt-4 "
               style="cursor: pointer"
-              data-aos="fade-down"
               *ngIf="data.name || data.title || data.original_title"
               >
               <span
@@ -386,7 +385,7 @@
 </section>
 
 <section class="sm-video-header">
-  <div class="image" data-aos="zoom-in">
+  <div class="image">
     <img
       [src]="highQualityImgUrl + data.backdrop_path"
       alt=""
@@ -401,9 +400,8 @@
 
       style="height:350px;width: 100%; clip-path: circle(100% at 50% -10%);object-fit: cover;"
     />
-    <div class="poster-path">
+    <div class="poster-path" style="position: relative;">
       <img
-        data-aos="zoom-in"
         *ngIf="!isCarousel"
         [src]="highQualityImgUrl + data.poster_path"
         alt=""
@@ -418,7 +416,6 @@
         "
       />
       <img
-        data-aos="zoom-in"
         *ngIf="isCarousel"
         [src]="highQualityImgUrl + data.poster_path"
         alt=""
@@ -439,7 +436,6 @@
     <h4
       class="d-flex justify-content-center"
       style="color: red;text-align: center;"
-      data-aos="fade-down"
     >
       <span *ngIf="data.original_title">
         {{ data.original_title }}
@@ -449,7 +445,6 @@
     <div
       class="header-detail text-danger d-flex justify-content-center"
       *ngIf="data.genre"
-      data-aos="fade-down"
       style="flex-wrap: wrap;"
     >
       <span
@@ -462,7 +457,6 @@
     <div
       class="header-detail text-danger d-flex justify-content-center"
       *ngIf="data.genre_ids"
-      data-aos="fade-down"
       style="flex-wrap: wrap;"
 
     >
@@ -473,66 +467,103 @@
         {{ genre.name }}
       </span>
     </div>
-    <div
-      class="d-flex justify-content-center"
-      style="color: #fff; font-size: 13px"
-    >
+    <div class="mobile-meta-grid">
       <div
-        class="release_date d-flex justify-content-center"
-        style="flex-direction: column; margin-right: 20px"
-        data-aos="fade-down"
+        class="mobile-meta-item"
         *ngIf="data.first_air_date || data.release_date"
       >
-        <span>Release Date</span>
-        <span *ngIf="data.first_air_date">{{
-          data.first_air_date | date
+        <span class="mobile-meta-label">Release Date</span>
+        <span class="mobile-meta-value mobile-meta-value-sm">{{
+          (data.first_air_date || data.release_date) | date
         }}</span>
-        <span *ngIf="data.release_date">{{ data.release_date | date }}</span>
       </div>
       <div
-        class="release_date d-flex justify-content-center"
-        style="flex-direction: column; margin-right: 20px"
-        data-aos="fade-down"
+        class="mobile-meta-item"
         *ngIf="data.runtime || data.avg_run_time"
       >
-        <span>Duration</span>
-        <span *ngIf="data.runtime">{{ data.runtime + " min(s)" }}</span>
-        <span *ngIf="data.avg_run_time">{{
-          data.avg_run_time + " min(s)"
+        <span class="mobile-meta-label">Duration</span>
+        <span class="mobile-meta-value mobile-meta-value-sm">{{
+          (data.runtime || data.avg_run_time) + " min(s)"
         }}</span>
       </div>
       <div
-        class="release_date d-flex justify-content-center"
-        style="flex-direction: column; margin-right: 20px"
-        data-aos="fade-down"
+        class="mobile-meta-item"
         *ngIf="data.vote_average"
       >
-        <span>Vote Avg</span>
-        <span>{{ data.vote_average }}</span>
+        <span class="mobile-meta-label">Vote Avg</span>
+        <span class="mobile-meta-value">{{ data.vote_average }}</span>
       </div>
       <div
-        class="release_date d-flex justify-content-center"
-        style="flex-direction: column; margin-right: 20px"
-        data-aos="fade-down"
+        class="mobile-meta-item"
         *ngIf="data.vote_count"
       >
-        <span>Votes</span>
-        <span>{{ data.vote_count }}</span>
+        <span class="mobile-meta-label">Votes</span>
+        <span class="mobile-meta-value">{{ data.vote_count }}</span>
       </div>
       <div
-        class="release_date d-flex justify-content-center"
-        style="flex-direction: column; margin-right: 20px"
-        data-aos="fade-down"
-        *ngIf="!data.vote_count && data.status"
+        class="mobile-meta-item"
+        *ngIf="!isCarousel && isTvShowContent() && data.status"
       >
-        <span>Status</span>
-        <span>{{ data.status }}</span>
+        <span class="mobile-meta-label">Status</span>
+        <span class="mobile-meta-value mobile-meta-value-sm">{{ getDisplayStatus() }}</span>
       </div>
+      <div
+        class="mobile-meta-item"
+        *ngIf="!isCarousel && isTvShowContent() && data.type"
+      >
+        <span class="mobile-meta-label">Type</span>
+        <span class="mobile-meta-value mobile-meta-value-sm">{{ data.type }}</span>
+      </div>
+      <div
+        class="mobile-meta-item"
+        *ngIf="!isCarousel && isTvShowContent() && data.no_of_seasons"
+      >
+        <span class="mobile-meta-label">Seasons</span>
+        <span class="mobile-meta-value">{{ data.no_of_seasons }}</span>
+      </div>
+      <div
+        class="mobile-meta-item"
+        *ngIf="!isCarousel && isTvShowContent() && data.no_of_episodes"
+      >
+        <span class="mobile-meta-label">Episodes</span>
+        <span class="mobile-meta-value">{{ data.no_of_episodes }}</span>
+      </div>
+    </div>
+
+    <div class="mobile-carousel-actions" *ngIf="isCarousel">
+      <span
+        class="play playBut"
+        [routerLink]="data?.media_type==='movie'?['/moviedetails', data.id]:['/tvshowdetails',data.id]"
+      >
+        <div style="display: inline-block; width: 35px;">
+          <img src="assets/images/info.svg" alt="" style="width:30px;padding: 0px;" />
+        </div>
+        More Details
+      </span>
+      <span
+        class="play playBut"
+        *ngIf="inWatchList"
+        (click)="removeFromWatchList(data)"
+      >
+        <div style="display: inline-block; width: 35px">
+          <img src="assets/images/tick-circle.svg" alt="" width="100%" />
+        </div>
+        Added To Watch List
+      </span>
+      <span
+        class="play playBut"
+        (click)="addTowatchList(data)"
+        *ngIf="!inWatchList"
+      >
+        <div style="display: inline-block; width: 35px">
+          <img src="assets/images/plus-circle.svg" alt="" style="width:35px" />
+        </div>
+        Watch List
+      </span>
     </div>
 
     <div
       class="rating d-flex justify-content-center mt-1"
-      data-aos="fade-down"
       style="color: red"
       *ngIf="data.vote_average"
     >
@@ -543,17 +574,16 @@
       ></ngb-rating>
     </div>
 
-    <div class="m-2 text-white text-center" data-aos="fade-down">
+    <div class="m-2 text-white text-center">
       <h5 style="color: red">Overview</h5>
-      <span style="font-size: 13px;text-wrap: balance;">{{ data.overview }}</span>
+      <span style="font-size: 13px;text-wrap: balance;">{{ getOverviewText() }}</span>
     </div>
     <div
       class=" m-2 text-white text-center"
-      data-aos="fade-down"
       *ngIf="data?.networks?.length > 0"
     >
       <h5 style="color: red" class="text-center">Streaming On</h5>
-      <div class="streaming text-white text-wrap mt-2" data-aos="fade-down">
+      <div class="streaming text-white text-wrap mt-2">
         <span *ngFor="let stream of data.networks; let i = index" class="pl-2">
           <!-- <span *ngIf="stream.logo_path">
             <img
@@ -573,10 +603,9 @@
     <div
       class="wrapper-watchnow "
       style="cursor: pointer; display: flex; justify-content: center"
-      data-aos="fade-down"
       *ngIf="data.watchprovider"
     >
-      <a class="play playBut" [href]="data?.watchprovider">
+      <a class="play playBut" [href]="data?.watchprovider" target="_blank" rel="noopener noreferrer">
         <div style="display: inline-block; width: 35px">
           <svg
             id="playBtn"
@@ -624,8 +653,7 @@
     <div
       class="wrapper-watchnow mt-4 "
       style="cursor: pointer;display: flex; justify-content: center"
-      data-aos="fade-down"
-      *ngIf="data.name || data.title || data.original_title"
+      *ngIf="!isCarousel && (data.name || data.title || data.original_title)"
           >
       <span
         class="play playBut"
@@ -649,15 +677,5 @@
         WATCH LIST
       </span>
     </div>
-    <span
-      class="play playBut mt-3"
-      [routerLink]="data?.media_type==='movie'?['/moviedetails', data.id]:['/tvshowdetails',data.id]"
-      *ngIf="isCarousel"
-    >
-      <div style="display: inline-block; width: 40px;">
-        <img src="assets/images/info.svg" alt="" style="width:35px;padding: 0px;" />
-      </div>
-      More Details
-    </span>
   </div>
 </section>

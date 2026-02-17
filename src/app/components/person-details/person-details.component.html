@@ -21,169 +21,90 @@
   </main>
 
   <div class="person-content">
-    <table class="details-table">
-      <tbody>
-        <tr>
-          <td class="details-name">PersonName</td>
-          <td class="colon">:</td>
-          <td class="details-value">{{ personDetails.name }}</td>
-        </tr>
-        <tr *ngIf="personDetails.birthday">
-          <td class="details-name" >BirthDate</td>
-          <td class="colon">:</td>
-          <td class="details-value">{{ personDetails.birthday | date }}</td>
-        </tr>
-        <tr *ngIf="personDetails.deathday">
-          <td class="details-name">DeathDate</td>
-          <td class="colon">:</td>
-          <td class="details-value" >
-            {{ personDetails.deathday | date}}
-          </td>
-        </tr>
-        <tr *ngIf="personDetails.gender">
-          <td class="details-name">Gender</td>
-          <td class="colon">:</td>
-          <td class="details-value">{{ personDetails.gender }}</td>
-        </tr>
-        <tr *ngIf="personDetails.known_for_department">
-          <td class="details-name">Profession</td>
-          <td class="colon">:</td>
-          <td class="details-value">
-            {{ personDetails.known_for_department }}
-          </td>
-        </tr>
-        <tr *ngIf="personDetails.place_of_birth">
-          <td class="details-name">PlaceOfBirth</td>
-          <td class="colon">:</td>
-          <td class="details-value">{{ personDetails.place_of_birth }}</td>
-        </tr>
-        <tr *ngIf="personDetails.biography">
-          <td class="details-name">Biography</td>
-          <td class="colon">:</td>
-          <td class="details-value movie-description">
-            {{ personDetails.biography }}
-          </td>
-        </tr>
-        <tr>
-          <td class="details-name">SocialMedia</td>
-          <td class="colon">:</td>
-          <td class="details-value">
-            <div
-              *ngIf="
-                personDetails.facebook_id == null ||
-                  personDetails.facebook_id == '';
-                then noface;
-                else face
-              "
-            ></div>
-            <ng-template #face>
-              <a
-                class="p-2"
-                href="https://www.facebook.com/{{ personDetails.facebook_id }}"
-                ><img
-                  src="assets/images/Facebook.png"
-                  width="40px"
-                  height="40px"
-              /></a>
-            </ng-template>
-            <ng-template #noface>
-              <a
-                class="p-2"
-                href="https://www.facebook.com/{{ personDetails.name }}"
-                ><img
-                  src="assets/images/Facebook.png"
-                  width="40px"
-                  height="40px"
-              /></a>
-            </ng-template>
+    <div class="detail-tabs" *ngIf="getAvailableTabs().length > 1">
+      <button
+        *ngFor="let tab of getAvailableTabs()"
+        [class.active]="activeTab === tab.id"
+        (click)="setActiveTab(tab.id)"
+      >
+        {{ tab.label }}
+      </button>
+    </div>
 
-            <div
-              *ngIf="
-                personDetails.instagram_id == null ||
-                  personDetails.instagram_id == '';
-                then noinsta;
-                else insta
-              "
-            ></div>
-            <ng-template #insta>
-              <a
-                class="p-2"
-                href="https://www.instagram.com/{{
-                  personDetails.instagram_id
-                }}"
-                ><img
-                  src="assets/images/Instagram.png"
-                  width="40px"
-                  height="40px"
-              /></a>
-            </ng-template>
-            <ng-template #noinsta>
-              <a
-                class="p-2"
-                href="https://www.instagram.com/{{ personDetails.name }}"
-                ><img
-                  src="assets/images/Instagram.png"
-                  width="40px"
-                  height="40px"
-              /></a>
-            </ng-template>
+    <div class="about-panel" *ngIf="activeTab === 'about'">
+      <div class="about-grid">
+        <div class="about-item" *ngIf="personDetails.name">
+          <span class="about-label">Name</span>
+          <span class="about-value">{{ personDetails.name }}</span>
+        </div>
+        <div class="about-item" *ngIf="personDetails.birthday">
+          <span class="about-label">Birth Date</span>
+          <span class="about-value">{{ personDetails.birthday | date }}</span>
+        </div>
+        <div class="about-item" *ngIf="personDetails.deathday">
+          <span class="about-label">Death Date</span>
+          <span class="about-value">{{ personDetails.deathday | date }}</span>
+        </div>
+        <div class="about-item" *ngIf="personDetails.gender">
+          <span class="about-label">Gender</span>
+          <span class="about-value">{{ personDetails.gender }}</span>
+        </div>
+        <div class="about-item" *ngIf="personDetails.known_for_department">
+          <span class="about-label">Profession</span>
+          <span class="about-value">{{ personDetails.known_for_department }}</span>
+        </div>
+        <div class="about-item" *ngIf="personDetails.place_of_birth">
+          <span class="about-label">Place of Birth</span>
+          <span class="about-value">{{ personDetails.place_of_birth }}</span>
+        </div>
+      </div>
 
-            <div
-              *ngIf="
-                personDetails.twitter_id == null ||
-                  personDetails.twitter_id == '';
-                then notwit;
-                else twit
-              "
-            ></div>
-            <ng-template #twit>
-              <a
-                class="p-2"
-                href="https://www.twitter.com/{{ personDetails.twitter_id }}"
-                ><img
-                  src="assets/images/Twitter.png"
-                  width="40px"
-                  height="40px"
-              /></a>
-            </ng-template>
-            <ng-template #notwit>
-              <a
-                class="p-2"
-                href="https://www.twitter.com/{{ personDetails.name }}"
-                ><img
-                  src="assets/images/Twitter.png"
-                  width="40px"
-                  height="40px"
-              /></a>
-            </ng-template>
+      <div class="bio-block" *ngIf="personDetails.biography">
+        <h5 class="about-heading">Biography</h5>
+        <p class="bio-text">{{ personDetails.biography }}</p>
+      </div>
 
-            <div
-              *ngIf="
-                personDetails.imdb_id == null || personDetails.imdb_id == '';
-                then noimdb;
-                else imdb
-              "
-            ></div>
-            <ng-template #imdb>
-              <a
-                class="p-2"
-                href="https://www.imdb.com/name/{{ personDetails.imdb_id }}"
-                ><img src="assets/images/Imdb.png" width="40px" height="40px"
-              /></a>
-            </ng-template>
-            <ng-template #noimdb>
-              <a
-                class="p-2"
-                href="https://www.imdb.com/name/{{ personDetails.name }}"
-                ><img src="assets/images/Imdb.png" width="40px" height="40px"
-              /></a>
-            </ng-template>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <hr />
-    <h5 class="text-center" style="color: red">Movies Acted</h5>
+      <div class="social-block">
+        <h5 class="about-heading">Social Media</h5>
+        <div class="social-links">
+          <a
+            class="social-link"
+            [href]="'https://www.facebook.com/' + (personDetails.facebook_id || personDetails.name)"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="assets/images/Facebook.png" width="40" height="40" />
+          </a>
+          <a
+            class="social-link"
+            [href]="'https://www.instagram.com/' + (personDetails.instagram_id || personDetails.name)"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="assets/images/Instagram.png" width="40" height="40" />
+          </a>
+          <a
+            class="social-link"
+            [href]="'https://www.twitter.com/' + (personDetails.twitter_id || personDetails.name)"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="assets/images/Twitter.png" width="40" height="40" />
+          </a>
+          <a
+            class="social-link"
+            [href]="'https://www.imdb.com/name/' + (personDetails.imdb_id || personDetails.name)"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="assets/images/Imdb.png" width="40" height="40" />
+          </a>
+        </div>
+      </div>
+    </div>
+    <hr *ngIf="activeTab === 'about'" />
+    <div *ngIf="activeTab === 'acted-movies'">
+      <h5 class="text-center" style="color: red">Movies Acted</h5>
 
       <div
         *ngIf="castMovieList.length <= 0; then nocastmovie; else castmoviedata"
@@ -208,9 +129,10 @@
           </h5>
         </div>
       </ng-template>
-    <hr />
+    </div>
 
-    <h5 class="text-center" style="color: red">Tvshows Acted</h5>
+    <div *ngIf="activeTab === 'acted-tv'">
+      <h5 class="text-center" style="color: red">Tvshows Acted</h5>
 
       <div *ngIf="castTvList.length <= 0; then nocasttv; else casttvdata"></div>
       <ng-template #casttvdata>
@@ -234,13 +156,14 @@
           </h5>
         </div>
       </ng-template>
-    <hr />
+    </div>
 
-    <h4 class="text-center" style="color: red">As Crew in Movies</h4>
+    <div *ngIf="activeTab === 'crew-movies'">
+      <h4 class="text-center" style="color: red">As Crew in Movies</h4>
 
-    <div
-    *ngIf="crewMovieList.length <= 0; then nocrewmovie; else crewmoviedata"
-  ></div>
+      <div
+      *ngIf="crewMovieList.length <= 0; then nocrewmovie; else crewmoviedata"
+    ></div>
 
     
       <ng-template #crewmoviedata>
@@ -264,10 +187,11 @@
           </h5>
         </div>
       </ng-template>
-    <hr />
+    </div>
 
-    <h5 class="text-center" style="color: red">As Crew in Tvshows</h5>
-    <div *ngIf="crewTvList.length <= 0; then nocrewtv; else crewtvdata"></div>
+    <div *ngIf="activeTab === 'crew-tv'">
+      <h5 class="text-center" style="color: red">As Crew in Tvshows</h5>
+      <div *ngIf="crewTvList.length <= 0; then nocrewtv; else crewtvdata"></div>
 
       <ng-template #crewtvdata>
     <p class="h5 text-center text-white"  >Click the tvshows to know more</p>
@@ -289,5 +213,6 @@
           </h5>
         </div>
       </ng-template>
+    </div>
   </div>
 </div>

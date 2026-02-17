@@ -39,20 +39,18 @@
             <img
               [attr.src]="highQualityImgUrl + trending.backdrop_path"
               alt="{{ trending.original_title }}"
-              data-aos="zoom-in"
               style="height: 200px"
           /></ng-template>
           <div
             class="title position-relative text-white"
             style="margin-top: -30px; margin-left: 20px"
           >
-            <div class="title-name" *ngIf="trending.name" data-aos="fade-left">
+            <div class="title-name" *ngIf="trending.name">
               {{ trending.name }}
             </div>
             <div
               class="title-name"
               *ngIf="trending.title"
-              data-aos="fade-right"
             >
               {{ trending.title }}
             </div>

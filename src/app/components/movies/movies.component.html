@@ -42,7 +42,7 @@
           class="navbar-nav me-auto"
           [ngStyle]="{ visibility: ishidedrop ? 'hidden' : 'visible' }"
         >
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown" data-bs-auto-close="outside">
             <a
               class="nav-link dropdown-toggle font-kanit"
               style="color: #fff; "
@@ -55,6 +55,16 @@
               GENRE
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li class="dropdown-search p-2">
+                <input
+                  type="text"
+                  class="form-control dropdown-search-input"
+                  placeholder="Search genre"
+                  [value]="genreQuery"
+                  (input)="genreQuery = $any($event.target).value"
+                  (click)="$event.stopPropagation()"
+                />
+              </li>
               <li>
                 <a
                   class="dropdown-item link font-kanit"
@@ -63,16 +73,19 @@
                   >CLEAR GENRE</a
                 >
               </li>
-              <li *ngFor="let genre of genreList">
+              <li *ngFor="let genre of getFilteredGenreList()">
                 <a
                   class="dropdown-item link"
                   (click)="getGenreContent(genre.id, genre.name)"
                   >{{ genre.name }}</a
                 >
               </li>
+              <li *ngIf="getFilteredGenreList().length === 0" class="dropdown-empty px-3 py-2">
+                No results
+              </li>
             </ul>
           </li>
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown" data-bs-auto-close="outside">
             <a
               class="nav-link dropdown-toggle font-kanit"
               style="color: #fff; "
@@ -85,6 +98,16 @@
               FILTER
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li class="dropdown-search p-2">
+                <input
+                  type="text"
+                  class="form-control dropdown-search-input"
+                  placeholder="Search filter"
+                  [value]="orderQuery"
+                  (input)="orderQuery = $any($event.target).value"
+                  (click)="$event.stopPropagation()"
+                />
+              </li>
               <li>
                 <a
                   class="dropdown-item link font-kanit"
@@ -93,16 +116,19 @@
                   >CLEAR FILTER</a
                 >
               </li>
-              <li *ngFor="let order of orderList">
+              <li *ngFor="let order of getFilteredOrderList()">
                 <a
                   class="dropdown-item link"
                   (click)="getOrderContent(order.order, order.desc)"
                   >{{ order.desc }}</a
                 >
               </li>
+              <li *ngIf="getFilteredOrderList().length === 0" class="dropdown-empty px-3 py-2">
+                No results
+              </li>
             </ul>
           </li>
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown" data-bs-auto-close="outside">
             <a
               class="nav-link dropdown-toggle font-kanit"
               style="color: #fff; "
@@ -115,6 +141,16 @@
               COUNTRY
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li class="dropdown-search p-2">
+                <input
+                  type="text"
+                  class="form-control dropdown-search-input"
+                  placeholder="Search country"
+                  [value]="countryQuery"
+                  (input)="countryQuery = $any($event.target).value"
+                  (click)="$event.stopPropagation()"
+                />
+              </li>
               <li>
                 <a
                   class="dropdown-item link font-kanit"
@@ -123,7 +159,7 @@
                   >CLEAR COUNTRY</a
                 >
               </li>
-              <li *ngFor="let country of countryList">
+              <li *ngFor="let country of getFilteredCountryList()">
                 <a
                   class="dropdown-item link"
                   (click)="
@@ -131,6 +167,9 @@
                   "
                   >{{ country.english_name }}</a
                 >
+              </li>
+              <li *ngIf="getFilteredCountryList().length === 0" class="dropdown-empty px-3 py-2">
+                No results
               </li>
             </ul>
           </li>

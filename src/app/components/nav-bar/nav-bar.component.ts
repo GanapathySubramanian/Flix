@@ -77,7 +77,7 @@ export class NavBarComponent implements OnInit {
   scrWidth: any;
 
   @HostListener('window:resize', ['$event'])
-  getScreenSize() {
+  getScreenSize(event?: any) {
     this.scrHeight = window.innerHeight;
     this.scrWidth = window.innerWidth;
     if (this.scrWidth >= 900) {
@@ -89,6 +89,13 @@ export class NavBarComponent implements OnInit {
       this.mobiledevice = true;
     } else {
       this.mobiledevice = false;
+    }
+  }
+
+  closeMenu() {
+    const menuCheckbox = document.getElementById('menu-btn') as HTMLInputElement;
+    if (menuCheckbox) {
+      menuCheckbox.checked = false;
     }
   }
 }

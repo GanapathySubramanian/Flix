@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import myAppConfig from 'src/app/core/config/my-app-config';
 import { common } from 'src/app/core/interface/common';
@@ -21,7 +21,7 @@ const SEARCH_URL =
   templateUrl: './tvshows.component.html',
   styleUrls: ['./tvshows.component.css'],
 })
-export class TvshowsComponent implements OnInit {
+export class TvshowsComponent implements OnInit, AfterViewInit, OnDestroy {
   mobiledevice: boolean = false;
   component: string = 'tvshow';
   imgUrl: string = myAppConfig.tmdb.imgUrl;
@@ -46,6 +46,13 @@ export class TvshowsComponent implements OnInit {
   isdisablenext: boolean = false;
   ishidedrop: boolean = false;
   networkName: string = '';
+  genreQuery: string = '';
+  orderQuery: string = '';
+  networkQuery: string = '';
+  private activeDropdowns: number = 0;
+  private previousBodyOverflow: string = '';
+  private dropdownShownHandler = (event: Event) => this.onDropdownShown(event);
+  private dropdownHiddenHandler = (event: Event) => this.onDropdownHidden(event);
   constructor(
     private tvshowservice: TvshowsService,
     private movieservice: MoviesService
@@ -67,6 +74,17 @@ export class TvshowsComponent implements OnInit {
     this.getNetwork();
     this.gettvshows();
     // this.getCountries();
+  }
+
+  ngAfterViewInit(): void {
+    document.addEventListener('shown.bs.dropdown', this.dropdownShownHandler as EventListener);
+    document.addEventListener('hidden.bs.dropdown', this.dropdownHiddenHandler as EventListener);
+  }
+
+  ngOnDestroy(): void {
+    document.removeEventListener('shown.bs.dropdown', this.dropdownShownHandler as EventListener);
+    document.removeEventListener('hidden.bs.dropdown', this.dropdownHiddenHandler as EventListener);
+    this.unlockBodyScroll(true);
   }
 
   getOrder() {
@@ -169,6 +187,7 @@ export class TvshowsComponent implements OnInit {
       genre_id = id;
       this.genre_value = name + ' Tvshows';
     }
+    this.genreQuery = '';
     if (Search_value == '') {
       page = 1;
       this.ishidedrop = false;
@@ -187,6 +206,7 @@ export class TvshowsComponent implements OnInit {
       this.networkName = name;
       this.network_homepage = homepage;
     }
+    this.networkQuery = '';
     if (Search_value == '') {
       page = 1;
       this.ishidedrop = false;
@@ -203,6 +223,7 @@ export class TvshowsComponent implements OnInit {
       sort_by_desc = sortBy;
       this.sortby_value = name;
     }
+    this.orderQuery = '';
     if (Search_value == '') {
       page = 1;
       this.page_no = page;
@@ -358,6 +379,70 @@ export class TvshowsComponent implements OnInit {
         this.isdisableprev = false;
       }
     });
+  }
+
+  getFilteredGenreList() {
+    const query = this.genreQuery.trim().toLowerCase();
+    if (!query) {
+      return this.genreList || [];
+    }
+    return (this.genreList || []).filter((genre: any) =>
+      `${genre?.name || ''}`.toLowerCase().includes(query)
+    );
+  }
+
+  getFilteredOrderList() {
+    const query = this.orderQuery.trim().toLowerCase();
+    if (!query) {
+      return this.orderList || [];
+    }
+    return (this.orderList || []).filter((order: any) =>
+      `${order?.desc || ''}`.toLowerCase().includes(query)
+    );
+  }
+
+  getFilteredNetworkList() {
+    const query = this.networkQuery.trim().toLowerCase();
+    if (!query) {
+      return this.networkList || [];
+    }
+    return (this.networkList || []).filter((item: any) =>
+      `${item?.name || ''}`.toLowerCase().includes(query)
+    );
+  }
+
+  private onDropdownShown(event: Event) {
+    const target = event.target as HTMLElement;
+    if (!target?.closest('.tvshows-section')) {
+      return;
+    }
+    this.activeDropdowns += 1;
+    this.lockBodyScroll();
+  }
+
+  private onDropdownHidden(event: Event) {
+    const target = event.target as HTMLElement;
+    if (!target?.closest('.tvshows-section')) {
+      return;
+    }
+    this.activeDropdowns = Math.max(0, this.activeDropdowns - 1);
+    if (this.activeDropdowns === 0) {
+      this.unlockBodyScroll();
+    }
+  }
+
+  private lockBodyScroll() {
+    if (!this.previousBodyOverflow) {
+      this.previousBodyOverflow = document.body.style.overflow || '';
+    }
+    document.body.style.overflow = 'hidden';
+  }
+
+  private unlockBodyScroll(force: boolean = false) {
+    if (force || this.activeDropdowns === 0) {
+      document.body.style.overflow = this.previousBodyOverflow;
+      this.previousBodyOverflow = '';
+    }
   }
 
   getTvshowImages(id: number, index: number) {

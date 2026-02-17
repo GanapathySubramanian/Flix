@@ -9,7 +9,19 @@ import myAppConfig from 'src/app/core/config/my-app-config';
 export class PosterComponent implements OnInit {
   imgUrl: string = myAppConfig.tmdb.highQualityImgUrl;
   @Input() data: any;
+  selectedImage: any;
+  openPopUp: boolean = false;
   constructor() {}
 
   ngOnInit(): void {}
+
+  openModal(poster: any) {
+    this.openPopUp = true;
+    this.selectedImage = poster;
+  }
+
+  resetData(event: boolean) {
+    this.selectedImage = {};
+    this.openPopUp = !event;
+  }
 }

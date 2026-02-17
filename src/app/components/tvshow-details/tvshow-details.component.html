@@ -10,7 +10,17 @@
   </section>
 
   <div class="tvshow-content">
-    <div class="seasons-section">
+    <div class="detail-tabs" *ngIf="getAvailableTabs().length > 1">
+      <button
+        *ngFor="let tab of getAvailableTabs()"
+        [class.active]="activeTab === tab.id"
+        (click)="setActiveTab(tab.id)"
+      >
+        {{ tab.label }}
+      </button>
+    </div>
+
+    <div class="seasons-section" *ngIf="activeTab === 'seasons' && tvshowDetails.seasons?.length > 0">
       <h4 class="tvshow-heading">
         {{ tvshowDetails.original_title }} SEASONS
       </h4>
@@ -58,25 +68,21 @@
           </div>
         </div>
       </main>
-      <hr />
     </div>
 
-    <div class="Backdropimages" *ngIf="tvshowDetails.backdropList?.length > 0">
+    <div class="Backdropimages" *ngIf="activeTab === 'backdrops' && tvshowDetails.backdropList?.length > 0">
       <app-backdrop [data]="tvshowDetails"></app-backdrop>
-      <hr />
     </div>
 
-    <div class="posterImages" *ngIf="tvshowDetails.posterList?.length > 0">
+    <div class="posterImages" *ngIf="activeTab === 'posters' && tvshowDetails.posterList?.length > 0">
       <app-poster [data]="tvshowDetails"></app-poster>
-      <hr />
     </div>
 
-    <div class="videos" *ngIf="tvshowDetails.videoList?.length > 0">
+    <div class="videos" *ngIf="activeTab === 'videos' && tvshowDetails.videoList?.length > 0">
       <app-video [data]="tvshowDetails"></app-video>
-      <hr />
     </div>
 
-    <div class="cast-section" *ngIf="tvshowDetails.castList?.length > 0">
+    <div class="cast-section" *ngIf="activeTab === 'cast' && tvshowDetails.castList?.length > 0">
       <h4 class="tvshow-heading mt-5">CAST</h4>
       <div
         *ngIf="tvshowDetails.castList?.length <= 0; then nocast; else castdata"
@@ -100,10 +106,9 @@
           </h5>
         </div>
       </ng-template>
-      <hr />
     </div>
 
-    <div class="crew-section" *ngIf="tvshowDetails.crewList?.length > 0">
+    <div class="crew-section" *ngIf="activeTab === 'crew' && tvshowDetails.crewList?.length > 0">
       <h4 class="tvshow-heading mt-5">CREW</h4>
       <div
         *ngIf="tvshowDetails.crewList?.length <= 0; then nocrew; else crewdata"
@@ -127,10 +132,9 @@
           </h4>
         </div>
       </ng-template>
-      <hr />
     </div>
 
-    <div class="sim_tvshow" *ngIf="tvshowDetails.rectvshowList?.length > 0">
+    <div class="sim_tvshow" *ngIf="activeTab === 'recommended' && tvshowDetails.rectvshowList?.length > 0">
       <h4 class="tvshow-heading mt-5">RECOMMENDED TVSHOW</h4>
       <div
         *ngIf="
@@ -159,12 +163,11 @@
           </h5>
         </div>
       </ng-template>
-      <hr />
     </div>
 
     <div
       class="sim_tvshow-section"
-      *ngIf="tvshowDetails.similartvshowList?.length > 0"
+      *ngIf="activeTab === 'similar' && tvshowDetails.similartvshowList?.length > 0"
     >
       <h4 class="tvshow-heading mt-5">SIMILAR TVSHOW</h4>
 
@@ -194,10 +197,9 @@
           </h5>
         </div>
       </ng-template>
-      <hr />
     </div>
 
-    <div class="reviews-section" *ngIf="tvshowDetails.reviewList?.length > 0">
+    <div class="reviews-section" *ngIf="activeTab === 'reviews' && tvshowDetails.reviewList?.length > 0">
       <app-review [data]="tvshowDetails"></app-review>
     </div>
   </div>

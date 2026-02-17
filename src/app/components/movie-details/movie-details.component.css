@@ -9,6 +9,30 @@
   z-index: 2; /* Higher z-index to ensure it appears above the header */
   background-color: var(--base-black); /* Ensure background color for content */
 }
+
+.detail-tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 8px 0 18px;
+  margin-bottom: 12px;
+}
+
+.detail-tabs button {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.detail-tabs button.active {
+  background: #e50914;
+  border-color: #e50914;
+}
 .details-table {
   margin-left: 10%;
   margin-right: 5%;

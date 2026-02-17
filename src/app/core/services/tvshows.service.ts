@@ -314,8 +314,8 @@ export class TvshowsService {
     return this.http.get(URL_CONSTANTS.GET_TVSHOW_VIDEOS_BY_ID(tvshow_id));
   }
 
-  getWatchProviders(url: any): Observable<any> {
-    return this.http.get(url);
+  getWatchProviders(tvshow_id: number): Observable<any> {
+    return this.http.get(URL_CONSTANTS.GET_TVSHOW_WATCH_PROVIDER_BY_ID(tvshow_id));
   }
 
   getEpisodes(url: any): Observable<any> {

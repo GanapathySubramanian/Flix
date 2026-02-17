@@ -526,6 +526,62 @@ iframe {
   color: #e50914;
 }
 
+.mobile-meta-grid {
+  color: #fff;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  width: 100%;
+  margin-top: 10px;
+  padding: 0 10px;
+}
+
+.mobile-meta-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 8px 6px;
+  min-height: 64px;
+  text-align: center;
+  min-width: 0;
+}
+
+.mobile-meta-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #e5e5e5;
+  line-height: 1.1;
+}
+
+.mobile-meta-value {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.mobile-meta-value-sm {
+  font-size: 14px;
+}
+
+.mobile-carousel-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.mobile-carousel-actions .play {
+  font-size: 0.9em;
+  letter-spacing: 1px;
+}
+
 /* Scroll indicator */
 .scroll-indicator {
   position: absolute;
@@ -562,4 +618,25 @@ iframe {
 @keyframes scroll {
   0% { opacity: 1; transform: translateX(-50%) translateY(0); }
   100% { opacity: 0; transform: translateX(-50%) translateY(-20px); } /* Changed from positive to negative value to reverse direction */
+}
+
+@media only screen and (max-width: 420px) {
+  .mobile-meta-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px 8px;
+    padding: 0 8px;
+  }
+
+  .mobile-meta-item {
+    min-height: 60px;
+    padding: 7px 5px;
+  }
+
+  .mobile-meta-label {
+    font-size: 11px;
+  }
+
+  .mobile-meta-value {
+    font-size: 18px;
+  }
 }

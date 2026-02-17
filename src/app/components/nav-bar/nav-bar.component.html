@@ -15,14 +15,14 @@
     <a href="index.html" class="logo"> FLIX<span>HD</span> </a>
     <!--menu------------------->
     <ul class="menu">
-      <li><a href="">Home</a></li>
-      <li><a routerLink="/movies" routerLinkActive="active">Movies</a></li>
-      <li><a routerLink="/tvshows" routerLinkActive="active">TV Shows</a></li>
+      <li><a href="" (click)="closeMenu()">Home</a></li>
+      <li><a routerLink="/movies" routerLinkActive="active" (click)="closeMenu()">Movies</a></li>
+      <li><a routerLink="/tvshows" routerLinkActive="active" (click)="closeMenu()">TV Shows</a></li>
       <li>
-        <a routerLink="/collections" routerLinkActive="active">Collections</a>
+        <a routerLink="/collections" routerLinkActive="active" (click)="closeMenu()">Collections</a>
       </li>
-      <li><a routerLink="/peoples" routerLinkActive="active">Peoples</a></li>
-      <li><a routerLink="/mylist" routerLinkActive="active">MyList</a></li>
+      <li><a routerLink="/peoples" routerLinkActive="active" (click)="closeMenu()">Peoples</a></li>
+      <li><a routerLink="/mylist" routerLinkActive="active" (click)="closeMenu()">MyList</a></li>
     </ul>
     <div class="container-fluid show-right-nav">
       <div class="collapse navbar-collapse" id="navbarsExample02">

@@ -10,25 +10,32 @@
   </section>
 
   <div class="movie-content">
-    <div class="Backdropimages" *ngIf="movieDetails.backdropList?.length > 0">
+    <div class="detail-tabs" *ngIf="getAvailableTabs().length > 1">
+      <button
+        *ngFor="let tab of getAvailableTabs()"
+        [class.active]="activeTab === tab.id"
+        (click)="setActiveTab(tab.id)"
+      >
+        {{ tab.label }}
+      </button>
+    </div>
+
+    <div class="Backdropimages" *ngIf="activeTab === 'backdrops' && movieDetails.backdropList?.length > 0">
       <app-backdrop [data]="movieDetails"></app-backdrop>
-      <hr /> 
     </div>
     
 
-    <div class="posterImages" *ngIf="movieDetails.posterList?.length > 0">
+    <div class="posterImages" *ngIf="activeTab === 'posters' && movieDetails.posterList?.length > 0">
       <app-poster [data]="movieDetails"></app-poster>
-      <hr />
     </div>
    
 
-    <div class="videos" *ngIf="movieDetails.videoList?.length > 0">
+    <div class="videos" *ngIf="activeTab === 'videos' && movieDetails.videoList?.length > 0">
       <app-video [data]="movieDetails"></app-video>
-      <hr />
     </div>
     
 
-    <div class="cast-section" *ngIf="movieDetails.castList?.length > 0">
+    <div class="cast-section" *ngIf="activeTab === 'cast' && movieDetails.castList?.length > 0">
       <h4 class="movie-heading ">CAST</h4>
       <div
         *ngIf="movieDetails.castList?.length <= 0; then nocast; else castdata"
@@ -53,12 +60,11 @@
         </div>
       </ng-template>
 
-      <hr />
     </div>
 
    
 
-    <div class="crew-section" *ngIf="movieDetails.crewList?.length > 0">
+    <div class="crew-section" *ngIf="activeTab === 'crew' && movieDetails.crewList?.length > 0">
       <h4 class="movie-heading ">CREW</h4>
       <div
         *ngIf="movieDetails.crewList?.length <= 0; then nocrew; else crewdata"
@@ -83,12 +89,11 @@
           </h4>
         </div>
       </ng-template>
-      <hr />
     </div>
   
 
     <div class="sim_movies" *ngIf="
-    movieDetails.recmovieList?.length > 0">
+    activeTab === 'recommended' && movieDetails.recmovieList?.length > 0">
       <h4 class="movie-heading ">RECOMMENDED MOVIES</h4>
       <div
         *ngIf="
@@ -118,12 +123,11 @@
           </h4>
         </div>
       </ng-template>
-      <hr />
     </div>
   
 
     <div class="sim_movies-section" *ngIf="
-    movieDetails.similarmovieList?.length > 0">
+    activeTab === 'similar' && movieDetails.similarmovieList?.length > 0">
       <h4 class="movie-heading ">SIMILAR MOVIES</h4>
       <div
         *ngIf="
@@ -151,10 +155,9 @@
           </h4>
         </div>
       </ng-template>
-      <hr />
     </div>
     
-    <div class="reviews-section" *ngIf="movieDetails.reviewList?.length > 0">
+    <div class="reviews-section" *ngIf="activeTab === 'reviews' && movieDetails.reviewList?.length > 0">
       <app-review [data]="movieDetails"></app-review>
     </div>
   </div>

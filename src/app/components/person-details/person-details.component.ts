@@ -21,6 +21,14 @@ export class PersonDetailsComponent implements OnInit {
   crewMovieList: any = [];
 
   windowScrolled: boolean = false;
+  activeTab: string = 'about';
+  tabConfig = [
+    { id: 'about', label: 'About', hasData: () => true },
+    { id: 'acted-movies', label: 'Movies Acted', hasData: () => this.castMovieList?.length > 0 },
+    { id: 'acted-tv', label: 'TV Shows Acted', hasData: () => this.castTvList?.length > 0 },
+    { id: 'crew-movies', label: 'Crew Movies', hasData: () => this.crewMovieList?.length > 0 },
+    { id: 'crew-tv', label: 'Crew TV Shows', hasData: () => this.crewTvList?.length > 0 },
+  ];
 
   constructor(
     private route: ActivatedRoute,
@@ -199,5 +207,13 @@ export class PersonDetailsComponent implements OnInit {
       left: 0,
       behavior: 'smooth',
     });
+  }
+
+  getAvailableTabs() {
+    return this.tabConfig.filter((tab) => tab.hasData());
+  }
+
+  setActiveTab(tabId: string) {
+    this.activeTab = tabId;
   }
 }

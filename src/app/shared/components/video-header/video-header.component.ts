@@ -37,6 +37,7 @@ export class VideoHeaderComponent implements OnInit {
     }
   }
   ngOnInit(): void {
+    this.getScreenSize();
     let result = localStorage.getItem('watchListData');
     if (result) {
       this.watchList = [];
@@ -136,5 +137,43 @@ export class VideoHeaderComponent implements OnInit {
     }
     localStorage.setItem('watchListData', JSON.stringify(this.watchList));
     this.inWatchList = false;
+  }
+
+  isTvShowContent(): boolean {
+    return !!(this.data?.first_air_date || this.data?.no_of_seasons);
+  }
+
+  getDisplayStatus(): string {
+    const status = this.data?.status;
+    if (!status) {
+      return '';
+    }
+    if (!this.isTvShowContent()) {
+      return status;
+    }
+
+    const normalizedStatus = status.toLowerCase();
+    if (normalizedStatus === 'ended') {
+      return 'Ended';
+    }
+    if (
+      normalizedStatus === 'returning series' ||
+      normalizedStatus === 'in production' ||
+      normalizedStatus === 'planned'
+    ) {
+      return 'In Progress';
+    }
+    if (normalizedStatus === 'canceled') {
+      return 'Canceled';
+    }
+    return status;
+  }
+
+  getOverviewText(): string {
+    const overview = this.data?.overview || '';
+    if (!this.isCarousel || !this.mobiledevice) {
+      return overview;
+    }
+    return overview.length > 300 ? `${overview.substring(0, 300)}...` : overview;
   }
 }

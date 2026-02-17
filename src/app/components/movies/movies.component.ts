@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { MoviesService } from 'src/app/core/services/movies.service';
 import myAppConfig from 'src/app/core/config/my-app-config';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -16,7 +16,7 @@ var sorts_by = 'Trending Now',
   templateUrl: './movies.component.html',
   styleUrls: ['./movies.component.css'],
 })
-export class MoviesComponent implements OnInit {
+export class MoviesComponent implements OnInit, AfterViewInit, OnDestroy {
   mobiledevice: boolean = false;
   component: string = 'movie';
   imgUrl: string = myAppConfig.tmdb.imgUrl;
@@ -36,6 +36,13 @@ export class MoviesComponent implements OnInit {
   isdisableprev: boolean = false;
   isdisablenext: boolean = false;
   ishidedrop: boolean = false;
+  genreQuery: string = '';
+  orderQuery: string = '';
+  countryQuery: string = '';
+  private activeDropdowns: number = 0;
+  private previousBodyOverflow: string = '';
+  private dropdownShownHandler = (event: Event) => this.onDropdownShown(event);
+  private dropdownHiddenHandler = (event: Event) => this.onDropdownHidden(event);
 
   constructor(private movieservice: MoviesService) {}
 
@@ -45,6 +52,17 @@ export class MoviesComponent implements OnInit {
     });
     this.getScreenSize();
     this.loadData();
+  }
+
+  ngAfterViewInit(): void {
+    document.addEventListener('shown.bs.dropdown', this.dropdownShownHandler as EventListener);
+    document.addEventListener('hidden.bs.dropdown', this.dropdownHiddenHandler as EventListener);
+  }
+
+  ngOnDestroy(): void {
+    document.removeEventListener('shown.bs.dropdown', this.dropdownShownHandler as EventListener);
+    document.removeEventListener('hidden.bs.dropdown', this.dropdownHiddenHandler as EventListener);
+    this.unlockBodyScroll(true);
   }
 
   loadData(): void {
@@ -151,6 +169,7 @@ export class MoviesComponent implements OnInit {
     } else {
       this.country_value = name;
     }
+    this.countryQuery = '';
     if (Search_value == '') {
       this.ishidedrop = false;
       page = 1;
@@ -171,6 +190,7 @@ export class MoviesComponent implements OnInit {
       this.page_no = page;
       this.getFilterContent();
     }
+    this.genreQuery = '';
   }
 
   getOrderContent(sortBy: string, name: string) {
@@ -181,6 +201,7 @@ export class MoviesComponent implements OnInit {
     } else {
       this.sortby_value = name;
     }
+    this.orderQuery = '';
     if (Search_value == '') {
       page = 1;
       this.ishidedrop = false;
@@ -306,6 +327,70 @@ export class MoviesComponent implements OnInit {
         this.isdisableprev = false;
       }
     });
+  }
+
+  getFilteredGenreList() {
+    const query = this.genreQuery.trim().toLowerCase();
+    if (!query) {
+      return this.genreList || [];
+    }
+    return (this.genreList || []).filter((genre: any) =>
+      `${genre?.name || ''}`.toLowerCase().includes(query)
+    );
+  }
+
+  getFilteredOrderList() {
+    const query = this.orderQuery.trim().toLowerCase();
+    if (!query) {
+      return this.orderList || [];
+    }
+    return (this.orderList || []).filter((order: any) =>
+      `${order?.desc || ''}`.toLowerCase().includes(query)
+    );
+  }
+
+  getFilteredCountryList() {
+    const query = this.countryQuery.trim().toLowerCase();
+    if (!query) {
+      return this.countryList || [];
+    }
+    return (this.countryList || []).filter((country: any) =>
+      `${country?.english_name || ''}`.toLowerCase().includes(query)
+    );
+  }
+
+  private onDropdownShown(event: Event) {
+    const target = event.target as HTMLElement;
+    if (!target?.closest('.movies-section')) {
+      return;
+    }
+    this.activeDropdowns += 1;
+    this.lockBodyScroll();
+  }
+
+  private onDropdownHidden(event: Event) {
+    const target = event.target as HTMLElement;
+    if (!target?.closest('.movies-section')) {
+      return;
+    }
+    this.activeDropdowns = Math.max(0, this.activeDropdowns - 1);
+    if (this.activeDropdowns === 0) {
+      this.unlockBodyScroll();
+    }
+  }
+
+  private lockBodyScroll() {
+    if (!this.previousBodyOverflow) {
+      this.previousBodyOverflow = document.body.style.overflow || '';
+    }
+    document.body.style.overflow = 'hidden';
+  }
+
+  private unlockBodyScroll(force: boolean = false) {
+    if (force || this.activeDropdowns === 0) {
+      document.body.style.overflow = this.previousBodyOverflow;
+      this.previousBodyOverflow = '';
+    }
   }
 
   getMovieImages(id: number, index: number) {

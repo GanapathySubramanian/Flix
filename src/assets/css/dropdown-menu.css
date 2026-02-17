@@ -1,16 +1,60 @@
 .dropdown-menu {
-    max-height: 400px;
-    max-width: 200px;
-    overflow: scroll;
-    background-color: #ae0f0fae;
-  }
-  .dropdown-item {
-    /* background-color: var(--primary-color); */
-    color: var(--base-white);
-  }
-  .dropdown-item:hover {
-    background-color: #a4a2a25d;
-  }
-  .dropdown-menu::-webkit-scrollbar {
-    display: none; /* for Chrome, Safari, and Opera */
-  }
+  max-height: 55vh;
+  min-width: 220px;
+  max-width: min(88vw, 320px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: rgba(30, 30, 30, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  z-index: 1200;
+  overscroll-behavior: contain;
+}
+
+.dropdown-item {
+  color: var(--base-white);
+  white-space: normal;
+  line-height: 1.35;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.dropdown-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+}
+
+.dropdown-search {
+  position: sticky;
+  top: 0;
+  background: rgba(30, 30, 30, 0.98);
+  z-index: 2;
+}
+
+.dropdown-search-input {
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dropdown-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.dropdown-search-input:focus {
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border-color: rgba(229, 9, 20, 0.7);
+  box-shadow: 0 0 0 0.1rem rgba(229, 9, 20, 0.25);
+}
+
+.dropdown-empty {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 13px;
+}
