@@ -39,14 +39,14 @@
   *ngIf="!data.character && !data.job"
   class="text-over-card bg-transparent"
 >
-  <span *ngIf="data.title" style="font-size: 13px">{{ data.title }} </span>
-  <span *ngIf="!data.title && data.name" style="font-size: 13px"
+  <span *ngIf="data.title" class="card-title">{{ data.title }} </span>
+  <span *ngIf="!data.title && data.name" class="card-title"
     >{{ data.name }}
   </span>
-  <span style="font-size: 13px" *ngIf="data.release_date && !data.first_air_date">{{
+  <span class="card-date" *ngIf="data.release_date && !data.first_air_date">{{
     data.release_date | date
   }}</span>
-  <span style="font-size: 13px" *ngIf="data.first_air_date">{{
+  <span class="card-date" *ngIf="data.first_air_date">{{
     data.first_air_date | date
   }}</span>
   <div class="rating" *ngIf="data.vote_average">
@@ -58,7 +58,7 @@
         green: data.vote_average >= 8
       }"
     >
-      {{ data.vote_average }}</span
+      {{ data.vote_average | number : "1.1-1" }}</span
     >
     <img src="assets/images/IMDb-icon.png" alt="imbd" />
   </div>
