@@ -7,10 +7,8 @@ Live Demo : [Flix](https://ganapathysubramanian.github.io/Flix/) New Version
 Demo Video : [Click Here](https://www.linkedin.com/feed/update/urn:li:activity:6889587893023711232/)
 
 ## Preview
+https://github.com/user-attachments/assets/eb422ae7-a9d9-482a-a7cb-0ac80e5717a0
 
-<video src="FlixHD.mp4" controls width="100%">
-  Your browser does not support the video tag.
-</video>
 
 ## Prerequisites
 1. Install Nodejs [(Guide)](https://nodejs.org/en/download/) and Angular cli [(Guide)](https://angular.io/cli)
